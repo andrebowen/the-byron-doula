@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Byron Doula — Web Strategy</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    :root {
+      --primary:                  #88511D;
+      --on-primary:               #FFFFFF;
+      --primary-container:        #FFDCC2;
+      --on-primary-container:     #2E1500;
+      --secondary:                #745944;
+      --on-secondary:             #FFFFFF;
+      --secondary-container:      #EDD5C5;
+      --on-secondary-container:   #2A1707;
+      --tertiary:                 #7E6100;
+      --on-tertiary:              #FFFFFF;
+      --tertiary-container:       #FFDF5F;
+      --on-tertiary-container:    #261C00;
+      --error:                    #BA1A1A;
+      --background:               #FFF8F5;
+      --on-background:            #201B17;
+      --surface:                  #FFF8F5;
+      --on-surface:               #201B17;
+      --surface-variant:          #F3DFD2;
+      --on-surface-variant:       #51443B;
+      --outline:                  #847469;
+      --outline-variant:          #D6C3B6;
+      --surface-container-low:    #FDF1EB;
+      --surface-container:        #F7ECE5;
+      --surface-container-high:   #F2E6DF;
+      --surface-container-highest:#ECE0DA;
+
+      --serif: 'Cormorant Garamond', Georgia, serif;
+      --sans:  'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+      --shape-xs:  4px;
+      --shape-sm:  8px;
+      --shape-md:  12px;
+      --shape-lg:  16px;
+      --shape-xl:  28px;
+      --shape-full:9999px;
+
+      --elev-1: 0 1px 2px rgba(0,0,0,.30), 0 1px 3px 1px rgba(0,0,0,.15);
+    }
+
+    body {
+      font-family: var(--sans);
+      font-size: 14px;
+      line-height: 1.6;
+      background: var(--background);
+      color: var(--on-surface);
+      display: flex;
+      min-height: 100vh;
+    }
+
+    /* ── SIDEBAR ───────────────────────────────────────── */
+    .sidebar {
+      width: 220px;
+      flex-shrink: 0;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow-y: auto;
+      background: var(--surface-container-low);
+      border-right: 1px solid var(--outline-variant);
+      padding: 32px 0;
+      display: flex;
+      flex-direction: column;
+    }
+    .sidebar-logo {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--on-surface);
+      padding: 0 20px 24px;
+      border-bottom: 1px solid var(--outline-variant);
+      margin-bottom: 16px;
+      line-height: 1.3;
+    }
+    .sidebar-logo span {
+      display: block;
+      font-family: var(--sans);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--primary);
+      margin-top: 4px;
+    }
+    .nav-section {
+      font-family: var(--sans);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--outline);
+      padding: 16px 20px 6px;
+    }
+    .sidebar a {
+      display: block;
+      padding: 8px 20px;
+      font-size: 13px;
+      color: var(--on-surface-variant);
+      text-decoration: none;
+      border-radius: 0 var(--shape-full) var(--shape-full) 0;
+      margin-right: 12px;
+      transition: background 0.15s, color 0.15s;
+    }
+    .sidebar a:hover, .sidebar a.active {
+      background: color-mix(in srgb, var(--primary) 12%, transparent);
+      color: var(--primary);
+      font-weight: 500;
+    }
+    .sidebar-footer {
+      margin-top: auto;
+      padding: 20px;
+      font-size: 11px;
+      color: var(--outline);
+    }
+    .sidebar-footer a {
+      display: inline;
+      padding: 0;
+      font-size: 11px;
+      margin-right: 0;
+      border-radius: 0;
+    }
+
+    /* ── MAIN ──────────────────────────────────────────── */
+    .main {
+      flex: 1;
+      padding: 60px 56px;
+      max-width: 960px;
+      min-width: 0;
+    }
+
+    /* ── PAGE HERO ─────────────────────────────────────── */
+    .page-hero {
+      margin-bottom: 72px;
+      padding-bottom: 48px;
+      border-bottom: 1px solid var(--outline-variant);
+    }
+    .eyebrow {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--primary);
+      margin-bottom: 12px;
+    }
+    .page-hero h1 {
+      font-size: 36px;
+      font-weight: 700;
+      line-height: 1.15;
+      color: var(--on-surface);
+      margin-bottom: 16px;
+    }
+    .page-hero p {
+      font-size: 16px;
+      color: var(--on-surface-variant);
+      max-width: 560px;
+      line-height: 1.7;
+    }
+
+    /* ── STEP SECTIONS ─────────────────────────────────── */
+    .step {
+      margin-bottom: 72px;
+      scroll-margin-top: 32px;
+    }
+    .step-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+    .step-number {
+      width: 36px;
+      height: 36px;
+      border-radius: var(--shape-full);
+      background: var(--primary);
+      color: var(--on-primary);
+      font-size: 14px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .step-header h2 {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--on-surface);
+      line-height: 1.2;
+    }
+    .step-header .step-tag {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--secondary);
+      background: var(--secondary-container);
+      padding: 3px 10px;
+      border-radius: var(--shape-full);
+      white-space: nowrap;
+    }
+
+    /* ── TWO-COLUMN SPLIT ──────────────────────────────── */
+    .split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-top: 16px;
+    }
+    .split-card {
+      border-radius: var(--shape-xl);
+      padding: 24px;
+    }
+    .split-card.principle {
+      background: var(--surface-container);
+    }
+    .split-card.implementation {
+      background: var(--primary-container);
+    }
+    .split-card-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .split-card.principle .split-card-label { color: var(--outline); }
+    .split-card.implementation .split-card-label { color: var(--primary); }
+    .split-card p {
+      font-size: 14px;
+      line-height: 1.75;
+      color: var(--on-surface-variant);
+    }
+    .split-card.implementation p { color: var(--on-primary-container); }
+    .split-card ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .split-card ul li {
+      font-size: 14px;
+      line-height: 1.6;
+      color: var(--on-surface-variant);
+      padding-left: 16px;
+      position: relative;
+    }
+    .split-card.implementation ul li { color: var(--on-primary-container); }
+    .split-card ul li::before {
+      content: '–';
+      position: absolute;
+      left: 0;
+      color: var(--outline);
+    }
+    .split-card.implementation ul li::before { color: var(--primary); }
+
+    /* ── PRINCIPLE MINI-CARDS ──────────────────────────── */
+    .principle-cards {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .principle-card {
+      background: var(--surface-container-high);
+      border-radius: var(--shape-md);
+      padding: 14px 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .principle-q {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--on-surface);
+      line-height: 1.4;
+    }
+    .principle-a {
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--on-surface-variant);
+      line-height: 1.6;
+    }
+
+    /* ── HIGHLIGHT QUOTE ───────────────────────────────── */
+    .highlight-quote {
+      background: var(--secondary-container);
+      border-radius: var(--shape-xl);
+      padding: 20px 24px;
+      margin-top: 16px;
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--on-secondary-container);
+      line-height: 1.6;
+    }
+    .highlight-quote strong {
+      font-weight: 700;
+    }
+
+    /* ── STATUS CHIPS ──────────────────────────────────── */
+    .status-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 20px;
+    }
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-weight: 500;
+      padding: 6px 14px;
+      border-radius: var(--shape-full);
+    }
+    .chip-done {
+      background: color-mix(in srgb, #386A20 15%, transparent);
+      color: #386A20;
+    }
+    .chip-progress {
+      background: var(--tertiary-container);
+      color: var(--on-tertiary-container);
+    }
+    .chip-todo {
+      background: var(--surface-container-high);
+      color: var(--on-surface-variant);
+    }
+    .chip::before {
+      font-size: 10px;
+    }
+    .chip-done::before { content: '✓'; }
+    .chip-progress::before { content: '◑'; }
+    .chip-todo::before { content: '○'; }
+
+    /* ── DIVIDER ───────────────────────────────────────── */
+    .divider {
+      height: 1px;
+      background: var(--outline-variant);
+      margin: 16px 0 56px;
+    }
+
+    /* ── KEY TAKEAWAY ──────────────────────────────────── */
+    .takeaway {
+      background: var(--surface-container-high);
+      border-radius: var(--shape-xl);
+      padding: 36px 40px;
+      margin-bottom: 80px;
+    }
+    .takeaway .eyebrow { margin-bottom: 16px; }
+    .takeaway p {
+      font-size: 16px;
+      font-weight: 500;
+      line-height: 1.7;
+      color: var(--on-surface);
+      max-width: 640px;
+    }
+
+    @media (max-width: 900px) {
+      .sidebar { display: none; }
+      .main { padding: 40px 24px; }
+      .split { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Sidebar -->
+  <nav class="sidebar">
+    <div class="sidebar-logo">
+      The Byron Doula
+      <span>Web Strategy</span>
+    </div>
+    <div class="nav-section">5-Step Process</div>
+    <a href="#step-1">1. Strategy First</a>
+    <a href="#step-2">2. Structure &amp; Sitemap</a>
+    <a href="#step-3">3. Design That Converts</a>
+    <a href="#step-4">4. Build &amp; Maintainability</a>
+    <a href="#step-5">5. Launch &amp; SEO</a>
+    <div class="nav-section">Reference</div>
+    <a href="design-system.html">Design System</a>
+    <a href="index.html">Live Site</a>
+    <div class="sidebar-footer">The Byron Doula · 2026</div>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="main">
+
+    <div class="page-hero">
+      <p class="eyebrow">Web Strategy · 2026</p>
+      <h1>The 5-Step Process</h1>
+      <p>How The Byron Doula website is built — and why each decision was made. Based on the 2026 web design framework for sites that convert visitors into clients.</p>
+    </div>
+
+    <!-- Step 1 -->
+    <section class="step" id="step-1">
+      <div class="step-header">
+        <div class="step-number">1</div>
+        <h2>Strategy First</h2>
+        <span class="step-tag">Foundation</span>
+      </div>
+      <p style="color: var(--on-surface-variant); line-height: 1.75; max-width: 640px; margin-bottom: 16px;">Define who the site is for, what visitors already know, and what you want them to do. Everything else flows from a single primary goal.</p>
+
+      <div class="highlight-quote">
+        The one thing a visitor should do: <strong>contact Nathalie for a free initial consultation.</strong>
+      </div>
+
+      <div class="split">
+        <div class="split-card principle">
+          <div class="split-card-label">The Principle</div>
+          <div class="principle-cards">
+            <div class="principle-card">
+              <div class="principle-q">Who is the site for?</div>
+              <div class="principle-a">Expectant mothers and their partners already considering doula support. They can be located in Byron Bay and surrounding areas, or globally via virtual sessions.</div>
+            </div>
+            <div class="principle-card">
+              <div class="principle-q">What do they already know?</div>
+              <div class="principle-a">They arrive knowing what a doula is — copy skips the basics and speaks to the emotional outcome. Show strong credentials to build trust and remove any doubts.</div>
+            </div>
+            <div class="principle-card">
+              <div class="principle-q">What is the single primary goal?</div>
+              <div class="principle-a">Contact Nathalie for a free initial consultation. Every family is different — Nathalie tailors a plan after the first conversation.</div>
+            </div>
+            <div class="principle-card">
+              <div class="principle-q">Everything else flows from this.</div>
+            </div>
+          </div>
+        </div>
+        <div class="split-card implementation">
+          <div class="split-card-label">How We've Implemented It</div>
+          <ul>
+            <li>Single CTA throughout: "Get in touch" — drives to a contact form, no payment friction</li>
+            <li>Services section uses information cards (no pricing) to inform, not transact</li>
+            <li>Free initial consultation badge and trust signals lower the barrier to contact</li>
+            <li>Every page either answers a trust question or routes to the contact section</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- Step 2 -->
+    <section class="step" id="step-2">
+      <div class="step-header">
+        <div class="step-number">2</div>
+        <h2>Structure, Sitemap &amp; Wireframes</h2>
+        <span class="step-tag">Architecture</span>
+      </div>
+      <p style="color: var(--on-surface-variant); line-height: 1.75; max-width: 640px; margin-bottom: 16px;">A clear sitemap and wireframes establish hierarchy and user flow before any visual design — preventing tangled sites and guiding visitors toward the goal.</p>
+
+      <div class="split">
+        <div class="split-card principle">
+          <div class="split-card-label">The Principle</div>
+          <ul>
+            <li>Map all pages and how they connect</li>
+            <li>Build wireframes before visual design</li>
+            <li>Establish hierarchy and user flow</li>
+            <li>Every path leads to the goal</li>
+          </ul>
+        </div>
+        <div class="split-card implementation">
+          <div class="split-card-label">How We've Implemented It</div>
+          <ul>
+            <li>Three core pages: Home/Services, About, Reviews</li>
+            <li>Every page ends at the same destination: the contact/booking section</li>
+            <li>Navigation is minimal and familiar — no unexpected labels</li>
+            <li>Legal pages (privacy, terms, cookies) exist but are not surfaced in the primary nav</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="status-row">
+        <span class="chip chip-done">Sitemap defined</span>
+        <span class="chip chip-done">Wireframes built</span>
+        <span class="chip chip-done">User flow validated</span>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- Step 3 -->
+    <section class="step" id="step-3">
+      <div class="step-header">
+        <div class="step-number">3</div>
+        <h2>Design That Converts</h2>
+        <span class="step-tag">Visual Design</span>
+      </div>
+      <p style="color: var(--on-surface-variant); line-height: 1.75; max-width: 640px; margin-bottom: 16px;">Clarity over flashy effects. Every design decision — font, colour, space, CTA — serves the visitor and the business goal.</p>
+
+      <div class="split">
+        <div class="split-card principle">
+          <div class="split-card-label">The Principle</div>
+          <ul>
+            <li>Typography that improves legibility and signals quality</li>
+            <li>A tight palette of 2–3 colours, each with a job</li>
+            <li>White space — let content breathe</li>
+            <li>One primary CTA, repeated consistently</li>
+          </ul>
+        </div>
+        <div class="split-card implementation">
+          <div class="split-card-label">How We've Implemented It</div>
+          <ul>
+            <li>Cormorant Garamond (serif) for headings — warmth and premium feel; Inter (sans) for body — legible at any size</li>
+            <li>Primary sienna (#88511D), secondary muted sienna, tertiary golden yellow — three roles, no filler colours</li>
+            <li>MD3 spacing scale enforced globally — generous padding, no crowded sections</li>
+            <li>"Book a session" is the only primary button; secondary links support but don't compete</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="status-row">
+        <span class="chip chip-done">Type system</span>
+        <span class="chip chip-done">Colour palette</span>
+        <span class="chip chip-done">MD3 spacing</span>
+        <span class="chip chip-done">Single CTA</span>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- Step 4 -->
+    <section class="step" id="step-4">
+      <div class="step-header">
+        <div class="step-number">4</div>
+        <h2>Build for Usability &amp; Maintainability</h2>
+        <span class="step-tag">Build</span>
+      </div>
+      <p style="color: var(--on-surface-variant); line-height: 1.75; max-width: 640px; margin-bottom: 16px;">Built on a platform the owner can actually manage. Logical, editable structures — not clever code that breaks the moment someone touches it.</p>
+
+      <div class="split">
+        <div class="split-card principle">
+          <div class="split-card-label">The Principle</div>
+          <ul>
+            <li>Platform the owner can manage themselves</li>
+            <li>Logical, editable structures</li>
+            <li>Avoid overly complex "clever" code</li>
+            <li>Proper training and ongoing support</li>
+          </ul>
+        </div>
+        <div class="split-card implementation">
+          <div class="split-card-label">How We've Implemented It</div>
+          <ul>
+            <li>Pure HTML/CSS/JS — no CMS dependency, no build tools, opens in any browser</li>
+            <li>MD3 design tokens mean global changes (colour, type, shape) happen in one place</li>
+            <li>Consistent naming conventions and file structure across all pages</li>
+            <li>Copy lives directly in HTML — no database, no login required to edit text</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="status-row">
+        <span class="chip chip-done">No-framework build</span>
+        <span class="chip chip-done">Token-driven design</span>
+        <span class="chip chip-todo">Owner training</span>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- Step 5 -->
+    <section class="step" id="step-5">
+      <div class="step-header">
+        <div class="step-number">5</div>
+        <h2>Launch, SEO &amp; Optimisation</h2>
+        <span class="step-tag">Launch</span>
+      </div>
+      <p style="color: var(--on-surface-variant); line-height: 1.75; max-width: 640px; margin-bottom: 16px;">Launch is the beginning, not the end. SEO built in from the start. Analytics tracking behaviour. Multiple contact options to reduce drop-offs.</p>
+
+      <div class="split">
+        <div class="split-card principle">
+          <div class="split-card-label">The Principle</div>
+          <ul>
+            <li>Treat launch as the beginning</li>
+            <li>SEO built in from the start (structure, copy, sitemap)</li>
+            <li>Analytics to track real behaviour</li>
+            <li>Multiple contact options to reduce drop-offs</li>
+          </ul>
+        </div>
+        <div class="split-card implementation">
+          <div class="split-card-label">How We've Implemented It</div>
+          <ul>
+            <li>Semantic HTML throughout — nav, main, section, article, footer — correct document structure for crawlers</li>
+            <li>Meta titles and descriptions on every page; Open Graph tags for social sharing</li>
+            <li>Copy written for the search terms Nathalie's clients actually use</li>
+            <li>Contact form + direct email as fallback; analytics and sitemap.xml to be added at launch</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="status-row">
+        <span class="chip chip-done">Semantic HTML</span>
+        <span class="chip chip-done">Meta &amp; OG tags</span>
+        <span class="chip chip-todo">sitemap.xml</span>
+        <span class="chip chip-todo">Analytics</span>
+        <span class="chip chip-todo">Deploy</span>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- Key Takeaway -->
+    <div class="takeaway">
+      <p class="eyebrow">Key Takeaway</p>
+      <p>Design should serve the visitor and the business goal first. A great site guides people clearly, stays easy to update, and continues improving over time through data and optimisation.</p>
+    </div>
+
+  </main>
+</body>
+</html>

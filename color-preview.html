@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Color Palette Preview — The Byron Doula</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    /* ── New palette: Algorithmic MD3 Tonal Spot ──────────────────── */
+    /* Primary:   hue 58.8° (warm sienna)   – source color            */
+    /* Secondary: hue 58.8°, chroma 16      – muted taupe             */
+    /* Tertiary:  hue 118.8° (+60°)         – olive / sage            */
+
+    :root {
+      --md-sys-color-primary: rgb(136 81 29);
+      --md-sys-color-surface-tint: rgb(136 81 29);
+      --md-sys-color-on-primary: rgb(255 255 255);
+      --md-sys-color-primary-container: rgb(255 220 194);
+      --md-sys-color-on-primary-container: rgb(46 21 0);
+      --md-sys-color-secondary: rgb(116 89 68);
+      --md-sys-color-on-secondary: rgb(255 255 255);
+      --md-sys-color-secondary-container: rgb(255 220 194);
+      --md-sys-color-on-secondary-container: rgb(42 23 7);
+      --md-sys-color-tertiary: rgb(93 97 69);
+      --md-sys-color-on-tertiary: rgb(255 255 255);
+      --md-sys-color-tertiary-container: rgb(226 229 194);
+      --md-sys-color-on-tertiary-container: rgb(26 29 7);
+      --md-sys-color-error: rgb(186 26 26);
+      --md-sys-color-on-error: rgb(255 255 255);
+      --md-sys-color-error-container: rgb(255 218 214);
+      --md-sys-color-on-error-container: rgb(65 0 2);
+      --md-sys-color-background: rgb(255 248 245);
+      --md-sys-color-on-background: rgb(32 27 23);
+      --md-sys-color-surface: rgb(255 248 245);
+      --md-sys-color-on-surface: rgb(32 27 23);
+      --md-sys-color-surface-variant: rgb(243 223 210);
+      --md-sys-color-on-surface-variant: rgb(81 68 59);
+      --md-sys-color-outline: rgb(132 116 105);
+      --md-sys-color-outline-variant: rgb(214 195 182);
+      --md-sys-color-shadow: rgb(0 0 0);
+      --md-sys-color-scrim: rgb(0 0 0);
+      --md-sys-color-inverse-surface: rgb(53 47 43);
+      --md-sys-color-inverse-on-surface: rgb(250 238 232);
+      --md-sys-color-inverse-primary: rgb(255 183 124);
+      --md-sys-color-primary-fixed: rgb(255 220 194);
+      --md-sys-color-on-primary-fixed: rgb(46 21 0);
+      --md-sys-color-primary-fixed-dim: rgb(255 183 124);
+      --md-sys-color-on-primary-fixed-variant: rgb(108 58 6);
+      --md-sys-color-secondary-fixed: rgb(255 220 194);
+      --md-sys-color-on-secondary-fixed: rgb(42 23 7);
+      --md-sys-color-secondary-fixed-dim: rgb(227 192 166);
+      --md-sys-color-on-secondary-fixed-variant: rgb(90 66 46);
+      --md-sys-color-tertiary-fixed: rgb(226 229 194);
+      --md-sys-color-on-tertiary-fixed: rgb(26 29 7);
+      --md-sys-color-tertiary-fixed-dim: rgb(198 201 167);
+      --md-sys-color-on-tertiary-fixed-variant: rgb(69 73 47);
+      --md-sys-color-surface-dim: rgb(227 216 209);
+      --md-sys-color-surface-bright: rgb(255 248 245);
+      --md-sys-color-surface-container-lowest: rgb(255 255 255);
+      --md-sys-color-surface-container-low: rgb(253 241 235);
+      --md-sys-color-surface-container: rgb(247 236 229);
+      --md-sys-color-surface-container-high: rgb(242 230 223);
+      --md-sys-color-surface-container-highest: rgb(236 224 218);
+    }
+
+    .dark-mode {
+      --md-sys-color-primary: rgb(255 183 124);
+      --md-sys-color-surface-tint: rgb(255 183 124);
+      --md-sys-color-on-primary: rgb(77 39 0);
+      --md-sys-color-primary-container: rgb(108 58 6);
+      --md-sys-color-on-primary-container: rgb(255 220 194);
+      --md-sys-color-secondary: rgb(227 192 166);
+      --md-sys-color-on-secondary: rgb(65 44 25);
+      --md-sys-color-secondary-container: rgb(90 66 46);
+      --md-sys-color-on-secondary-container: rgb(255 220 194);
+      --md-sys-color-tertiary: rgb(198 201 167);
+      --md-sys-color-on-tertiary: rgb(47 50 26);
+      --md-sys-color-tertiary-container: rgb(69 73 47);
+      --md-sys-color-on-tertiary-container: rgb(226 229 194);
+      --md-sys-color-error: rgb(255 180 171);
+      --md-sys-color-on-error: rgb(105 0 5);
+      --md-sys-color-error-container: rgb(147 0 10);
+      --md-sys-color-on-error-container: rgb(255 218 214);
+      --md-sys-color-background: rgb(23 18 15);
+      --md-sys-color-on-background: rgb(236 224 218);
+      --md-sys-color-surface: rgb(23 18 15);
+      --md-sys-color-on-surface: rgb(236 224 218);
+      --md-sys-color-surface-variant: rgb(81 68 59);
+      --md-sys-color-on-surface-variant: rgb(214 195 182);
+      --md-sys-color-outline: rgb(158 142 130);
+      --md-sys-color-outline-variant: rgb(81 68 59);
+      --md-sys-color-shadow: rgb(0 0 0);
+      --md-sys-color-scrim: rgb(0 0 0);
+      --md-sys-color-inverse-surface: rgb(236 224 218);
+      --md-sys-color-inverse-on-surface: rgb(53 47 43);
+      --md-sys-color-inverse-primary: rgb(136 81 29);
+      --md-sys-color-primary-fixed: rgb(255 220 194);
+      --md-sys-color-on-primary-fixed: rgb(46 21 0);
+      --md-sys-color-primary-fixed-dim: rgb(255 183 124);
+      --md-sys-color-on-primary-fixed-variant: rgb(108 58 6);
+      --md-sys-color-secondary-fixed: rgb(255 220 194);
+      --md-sys-color-on-secondary-fixed: rgb(42 23 7);
+      --md-sys-color-secondary-fixed-dim: rgb(227 192 166);
+      --md-sys-color-on-secondary-fixed-variant: rgb(90 66 46);
+      --md-sys-color-tertiary-fixed: rgb(226 229 194);
+      --md-sys-color-on-tertiary-fixed: rgb(26 29 7);
+      --md-sys-color-tertiary-fixed-dim: rgb(198 201 167);
+      --md-sys-color-on-tertiary-fixed-variant: rgb(69 73 47);
+      --md-sys-color-surface-dim: rgb(23 18 15);
+      --md-sys-color-surface-bright: rgb(62 56 51);
+      --md-sys-color-surface-container-lowest: rgb(18 13 10);
+      --md-sys-color-surface-container-low: rgb(32 27 23);
+      --md-sys-color-surface-container: rgb(36 31 27);
+      --md-sys-color-surface-container-high: rgb(47 41 37);
+      --md-sys-color-surface-container-highest: rgb(58 52 47);
+    }
+
+    /* ── Base ───────────────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background-color: var(--md-sys-color-background);
+      color: var(--md-sys-color-on-background);
+      transition: background-color 0.3s, color 0.3s;
+      min-height: 100vh;
+    }
+
+    /* ── Layout ─────────────────────────────────────────────────────── */
+    .page { max-width: 900px; margin: 0 auto; padding: 40px 24px 80px; }
+
+    /* ── Toggle ─────────────────────────────────────────────────────── */
+    .toggle-bar {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 48px;
+    }
+    .toggle-bar h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px; font-weight: 400; letter-spacing: 0.02em;
+      color: var(--md-sys-color-on-surface);
+    }
+    .toggle-bar span { font-size: 13px; color: var(--md-sys-color-on-surface-variant); }
+    .toggle-btn {
+      background: var(--md-sys-color-secondary-container);
+      color: var(--md-sys-color-on-secondary-container);
+      border: none; border-radius: 100px;
+      padding: 8px 20px; font-family: 'DM Sans', sans-serif;
+      font-size: 13px; font-weight: 500; cursor: pointer;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    /* ── Section headers ────────────────────────────────────────────── */
+    .section-label {
+      font-size: 11px; font-weight: 500; letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--md-sys-color-on-surface-variant);
+      margin-bottom: 16px; margin-top: 48px;
+    }
+    .section-label:first-of-type { margin-top: 0; }
+
+    /* ── Palette ramps ──────────────────────────────────────────────── */
+    .ramp-grid { display: flex; flex-direction: column; gap: 12px; }
+    .ramp { display: flex; gap: 0; border-radius: 12px; overflow: hidden; }
+    .ramp-label {
+      font-size: 12px; font-weight: 500;
+      color: var(--md-sys-color-on-surface-variant);
+      margin-bottom: 6px;
+    }
+    .tone {
+      flex: 1; height: 56px;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: flex-end;
+      padding-bottom: 5px;
+      font-size: 9px; font-weight: 500;
+      opacity: 0.7;
+    }
+
+    /* Primary ramp tones */
+    .p0   { background: #000000; color: #fff; }
+    .p10  { background: #2e1500; color: #fff; }
+    .p20  { background: #4e2700; color: #fff; }
+    .p30  { background: #6c3a06; color: #fff; }
+    .p40  { background: #88511d; color: #fff; }
+    .p50  { background: #a66934; color: #fff; }
+    .p60  { background: #c4824d; color: #000; }
+    .p70  { background: #e29b67; color: #000; }
+    .p80  { background: #ffb77c; color: #000; }
+    .p90  { background: #ffdcc2; color: #000; }
+    .p95  { background: #ffede1; color: #000; }
+    .p99  { background: #fffbff; color: #000; }
+    .p100 { background: #ffffff; color: #000; }
+
+    /* Secondary ramp tones */
+    .s0   { background: #000000; color: #fff; }
+    .s10  { background: #2a1707; color: #fff; }
+    .s20  { background: #412e18; color: #fff; }
+    .s30  { background: #5a422c; color: #fff; }
+    .s40  { background: #745944; color: #fff; }
+    .s50  { background: #8e725b; color: #fff; }
+    .s60  { background: #a98c74; color: #000; }
+    .s70  { background: #c4a68d; color: #000; }
+    .s80  { background: #e3c0a6; color: #000; }
+    .s90  { background: #ffdcc2; color: #000; }
+    .s95  { background: #ffede0; color: #000; }
+    .s99  { background: #fffbff; color: #000; }
+    .s100 { background: #ffffff; color: #000; }
+
+    /* Tertiary ramp tones (sage, chroma 16) */
+    .t0   { background: #000000; color: #fff; }
+    .t10  { background: #1a1d07; color: #fff; }
+    .t20  { background: #2f3219; color: #fff; }
+    .t30  { background: #45492d; color: #fff; }
+    .t40  { background: #5d6145; color: #fff; }
+    .t50  { background: #767a5c; color: #fff; }
+    .t60  { background: #909474; color: #000; }
+    .t70  { background: #abaf8e; color: #000; }
+    .t80  { background: #c6c9a7; color: #000; }
+    .t90  { background: #e2e5c2; color: #000; }
+    .t95  { background: #f0f3d0; color: #000; }
+    .t99  { background: #fdfee5; color: #000; }
+    .t100 { background: #ffffff; color: #000; }
+
+    /* ── Color roles grid ───────────────────────────────────────────── */
+    .roles-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2px;
+    }
+    .role-pair { display: contents; }
+    .role-swatch {
+      height: 64px;
+      display: flex; flex-direction: column;
+      justify-content: flex-end; padding: 8px;
+      font-size: 10px; font-weight: 500; line-height: 1.3;
+    }
+    .role-swatch.span2 { grid-column: span 2; }
+
+    /* ── UI preview ─────────────────────────────────────────────────── */
+    .ui-preview {
+      background: var(--md-sys-color-surface);
+      border-radius: 24px;
+      overflow: hidden;
+    }
+
+    /* Hero */
+    .hero {
+      background: var(--md-sys-color-primary-container);
+      color: var(--md-sys-color-on-primary-container);
+      padding: 48px 40px 40px;
+    }
+    .hero-eyebrow {
+      font-size: 11px; font-weight: 500; letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--md-sys-color-primary);
+      margin-bottom: 12px;
+    }
+    .hero h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 42px; font-weight: 300; line-height: 1.1;
+      letter-spacing: -0.01em;
+      margin-bottom: 16px;
+    }
+    .hero p {
+      font-size: 15px; line-height: 1.6; max-width: 480px;
+      opacity: 0.85; margin-bottom: 28px;
+    }
+    .btn-row { display: flex; gap: 12px; flex-wrap: wrap; }
+    .btn-filled {
+      background: var(--md-sys-color-primary);
+      color: var(--md-sys-color-on-primary);
+      border: none; border-radius: 100px;
+      padding: 12px 28px; font-family: 'DM Sans', sans-serif;
+      font-size: 14px; font-weight: 500; cursor: pointer;
+    }
+    .btn-tonal {
+      background: var(--md-sys-color-secondary-container);
+      color: var(--md-sys-color-on-secondary-container);
+      border: none; border-radius: 100px;
+      padding: 12px 28px; font-family: 'DM Sans', sans-serif;
+      font-size: 14px; font-weight: 500; cursor: pointer;
+    }
+
+    /* Cards row */
+    .cards-row {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px;
+      background: var(--md-sys-color-surface-container-highest);
+    }
+    .card {
+      background: var(--md-sys-color-surface-container-low);
+      padding: 24px;
+    }
+    .card-icon {
+      width: 40px; height: 40px; border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px; margin-bottom: 16px;
+    }
+    .card-icon.primary { background: var(--md-sys-color-primary-container); }
+    .card-icon.secondary { background: var(--md-sys-color-secondary-container); }
+    .card-icon.tertiary { background: var(--md-sys-color-tertiary-container); }
+    .card h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 18px; font-weight: 400;
+      color: var(--md-sys-color-on-surface);
+      margin-bottom: 8px;
+    }
+    .card p {
+      font-size: 13px; line-height: 1.6;
+      color: var(--md-sys-color-on-surface-variant);
+    }
+
+    /* Testimonial strip */
+    .testimonial {
+      background: var(--md-sys-color-tertiary-container);
+      color: var(--md-sys-color-on-tertiary-container);
+      padding: 32px 40px;
+      display: flex; gap: 24px; align-items: flex-start;
+    }
+    .testimonial-quote {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 28px; color: var(--md-sys-color-tertiary);
+      line-height: 1; flex-shrink: 0;
+    }
+    .testimonial blockquote {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 20px; font-style: italic; font-weight: 300;
+      line-height: 1.5; margin-bottom: 10px;
+    }
+    .testimonial cite {
+      font-size: 12px; font-weight: 500; letter-spacing: 0.08em;
+      text-transform: uppercase; font-style: normal;
+      opacity: 0.7;
+    }
+
+    /* CTA strip */
+    .cta-strip {
+      background: var(--md-sys-color-inverse-surface);
+      color: var(--md-sys-color-inverse-on-surface);
+      padding: 32px 40px;
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 24px; flex-wrap: wrap;
+    }
+    .cta-strip p {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px; font-weight: 300;
+    }
+    .btn-inverse {
+      background: var(--md-sys-color-inverse-primary);
+      color: var(--md-sys-color-on-primary);
+      border: none; border-radius: 100px;
+      padding: 12px 28px; font-family: 'DM Sans', sans-serif;
+      font-size: 14px; font-weight: 500; cursor: pointer; white-space: nowrap;
+    }
+
+    /* ── Notes ──────────────────────────────────────────────────────── */
+    .notes {
+      background: var(--md-sys-color-surface-container);
+      border-radius: 16px; padding: 24px 28px; margin-top: 12px;
+    }
+    .notes h4 {
+      font-size: 12px; font-weight: 500; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--md-sys-color-primary);
+      margin-bottom: 12px;
+    }
+    .notes ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+    .notes li {
+      font-size: 13px; line-height: 1.5;
+      color: var(--md-sys-color-on-surface-variant);
+      padding-left: 16px; position: relative;
+    }
+    .notes li::before {
+      content: '–'; position: absolute; left: 0;
+      color: var(--md-sys-color-outline);
+    }
+
+    @media (max-width: 600px) {
+      .cards-row { grid-template-columns: 1fr; }
+      .roles-grid { grid-template-columns: repeat(2, 1fr); }
+      .hero h2 { font-size: 30px; }
+      .cta-strip { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+
+    <div class="toggle-bar">
+      <div>
+        <h1>The Byron Doula — Color Preview</h1>
+        <span>Algorithmic MD3 Tonal Spot · Primary 58.8° · Tertiary 118.8°, chroma 16 (sage)</span>
+      </div>
+      <button class="toggle-btn" onclick="document.body.classList.toggle('dark-mode'); this.textContent = document.body.classList.contains('dark-mode') ? '☀ Light mode' : '☾ Dark mode'">☾ Dark mode</button>
+    </div>
+
+    <!-- Tonal Ramps -->
+    <p class="section-label">Tonal Palettes</p>
+    <div class="ramp-grid">
+      <div>
+        <div class="ramp-label">Primary — Sienna · hue 58.8°</div>
+        <div class="ramp">
+          <div class="tone p0">0</div><div class="tone p10">10</div>
+          <div class="tone p20">20</div><div class="tone p30">30</div>
+          <div class="tone p40">40</div><div class="tone p50">50</div>
+          <div class="tone p60">60</div><div class="tone p70">70</div>
+          <div class="tone p80">80</div><div class="tone p90">90</div>
+          <div class="tone p95">95</div><div class="tone p99">99</div>
+          <div class="tone p100">100</div>
+        </div>
+      </div>
+      <div>
+        <div class="ramp-label">Secondary — Muted Taupe · hue 58.8°, chroma 16</div>
+        <div class="ramp">
+          <div class="tone s0">0</div><div class="tone s10">10</div>
+          <div class="tone s20">20</div><div class="tone s30">30</div>
+          <div class="tone s40">40</div><div class="tone s50">50</div>
+          <div class="tone s60">60</div><div class="tone s70">70</div>
+          <div class="tone s80">80</div><div class="tone s90">90</div>
+          <div class="tone s95">95</div><div class="tone s99">99</div>
+          <div class="tone s100">100</div>
+        </div>
+      </div>
+      <div>
+        <div class="ramp-label">Tertiary — Sage · hue 118.8°, chroma 16</div>
+        <div class="ramp">
+          <div class="tone t0">0</div><div class="tone t10">10</div>
+          <div class="tone t20">20</div><div class="tone t30">30</div>
+          <div class="tone t40">40</div><div class="tone t50">50</div>
+          <div class="tone t60">60</div><div class="tone t70">70</div>
+          <div class="tone t80">80</div><div class="tone t90">90</div>
+          <div class="tone t95">95</div><div class="tone t99">99</div>
+          <div class="tone t100">100</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Color roles -->
+    <p class="section-label">Color Roles — Light Mode</p>
+    <div class="roles-grid">
+      <!-- Primary pair -->
+      <div class="role-swatch" style="background:var(--md-sys-color-primary);color:var(--md-sys-color-on-primary)">Primary</div>
+      <div class="role-swatch" style="background:var(--md-sys-color-on-primary);color:var(--md-sys-color-primary)">On-Primary</div>
+      <div class="role-swatch" style="background:var(--md-sys-color-primary-container);color:var(--md-sys-color-on-primary-container)">Primary Container</div>
+      <div class="role-swatch" style="background:var(--md-sys-color-on-primary-container);color:var(--md-sys-color-primary-container)">On-Primary Container</div>
+      <!-- Secondary pair -->
+      <div class="role-swatch" style="background:var(--md-sys-color-secondary);color:var(--md-sys-color-on-secondary)">Secondary</div>
+      <div class="role-swatch" style="background:var(--md-sys-color-on-secondary);color:var(--md-sys-color-secondary)">On-Secondary</div>
+      <div class="role-swatch" style="background:var(--md-sys-color-secondary-container);color:var(--md-sys-color-on-secondary-container)">Secondary Container</div>
+      <div class="role-swatch" style="background:var(--md-sys-color-on-secondary-container);color:var(--md-sys-color-secondary-container)">On-Secondary Container</div>
+      <!-- Tertiary pair -->
+      <div class="role-swatch" style="background:var(--md-sys-color-tertiary);color:var(--md-sys-color-on-tertiary)">Tertiary</div>
+      <div class="role-swatch" style="background:var(--md-sys-color-on-tertiary);color:var(--md-sys-color-tertiary)">On-Tertiary</div>
+      <div class="role-swatch" style="background:var(--md-sys-color-tertiary-container);color:var(--md-sys-color-on-tertiary-container)">Tertiary Container</div>
+      <div class="role-swatch" style="background:var(--md-sys-color-on-tertiary-container);color:var(--md-sys-color-tertiary-container)">On-Tertiary Container</div>
+      <!-- Surface family -->
+      <div class="role-swatch" style="background:var(--md-sys-color-surface-container-lowest);color:var(--md-sys-color-on-surface)">Surface Lowest</div>
+      <div class="role-swatch" style="background:var(--md-sys-color-surface-container-low);color:var(--md-sys-color-on-surface)">Surface Low</div>
+      <div class="role-swatch" style="background:var(--md-sys-color-surface-container);color:var(--md-sys-color-on-surface)">Surface</div>
+      <div class="role-swatch" style="background:var(--md-sys-color-surface-container-highest);color:var(--md-sys-color-on-surface)">Surface Highest</div>
+    </div>
+
+    <!-- UI Preview -->
+    <p class="section-label">UI Preview</p>
+    <div class="ui-preview">
+
+      <div class="hero">
+        <div class="hero-eyebrow">Byron Bay · Northern Rivers NSW</div>
+        <h2>Birth support<br>rooted in trust</h2>
+        <p>Nathalie offers continuous care before, during, and after birth — so you can move through one of life's most profound moments feeling held.</p>
+        <div class="btn-row">
+          <button class="btn-filled">Book a consultation</button>
+          <button class="btn-tonal">Learn about services</button>
+        </div>
+      </div>
+
+      <div class="cards-row">
+        <div class="card">
+          <div class="card-icon primary">🌿</div>
+          <h3>Prenatal support</h3>
+          <p>Regular visits to prepare your body, mind, and home for birth.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon secondary">🤝</div>
+          <h3>Birth attendance</h3>
+          <p>Continuous physical and emotional presence throughout labour.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon tertiary">✦</div>
+          <h3>Postpartum care</h3>
+          <p>Practical support in the tender weeks after your baby arrives.</p>
+        </div>
+      </div>
+
+      <div class="testimonial">
+        <div class="testimonial-quote">"</div>
+        <div>
+          <blockquote>Nathalie held space for us in a way I didn't know I needed. Her presence transformed our birth experience entirely.</blockquote>
+          <cite>— Sarah M., Byron Bay</cite>
+        </div>
+      </div>
+
+      <div class="cta-strip">
+        <p>Ready to begin? Initial consultations are $150.</p>
+        <button class="btn-inverse">Get in touch</button>
+      </div>
+
+    </div>
+
+    <!-- Notes -->
+    <p class="section-label">Design Notes</p>
+    <div class="notes">
+      <h4>What changed from the current palette</h4>
+      <ul>
+        <li><strong>Secondary</strong> was amber gold (different hue). Now it's muted taupe — same hue as primary, chroma dropped from ~36 to 16. More understated, lets primary lead.</li>
+        <li><strong>Tertiary</strong> was near-duplicate of old secondary. Now it's olive/sage (hue 118.8°), generated by +60° rotation from primary. Grounds the warm palette with an earthy, botanical note.</li>
+        <li><strong>Surface family</strong> is essentially unchanged — hue-biased warm neutrals driven by the same source hue.</li>
+        <li>The tertiary-container sage (#e1e7b1) appears in testimonial backgrounds and card accents — the green reads as natural, not clinical.</li>
+      </ul>
+    </div>
+
+  </div>
+
+  <script>
+    // Sync dark-mode class on :root as well for any future CSS vars
+    const btn = document.querySelector('.toggle-btn');
+    btn.addEventListener('click', () => {
+      document.documentElement.classList.toggle('dark-mode');
+    });
+  </script>
+</body>
+</html>

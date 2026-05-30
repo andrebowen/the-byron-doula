@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="color-scheme" content="light">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reviews — The Byron Doula</title>
+    <meta name="description" content="Read 32 five-star reviews from families who worked with Nathalie Solis, The Byron Doula — birth preparation, parent coaching and postpartum support.">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="icon" href="favicon.ico" sizes="32x32">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.thebyrondoula.com/reviews.html">
+    <meta property="og:title" content="Reviews — The Byron Doula">
+    <meta property="og:description" content="32 five-star reviews from families across Byron Bay and beyond. Read what parents say about working with Nathalie Solis.">
+    <meta property="og:image" content="https://www.thebyrondoula.com/images/mama-belly.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/themes/light.css">
+    <link rel="stylesheet" href="css/themes/light-mc.css">
+    <link rel="stylesheet" href="css/themes/light-hc.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        .reviews-page-header {
+            padding: 144px 0 32px;
+            background: var(--md-sys-color-secondary-container);
+        }
+
+        .reviews-page-header h1 {
+            font: var(--md-type-display-small);
+            font-family: var(--sans-font);
+            letter-spacing: -0.5px;
+            color: var(--md-sys-color-on-secondary-container);
+            margin-bottom: 16px;
+        }
+
+        .reviews-page-header .reviews-page-sub {
+            font: var(--md-type-body-large);
+            color: var(--md-sys-color-on-secondary-container);
+            opacity: 0.8;
+            max-width: 520px;
+        }
+
+        .reviews-rating-bar {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-top: 28px;
+        }
+
+        .reviews-rating-score {
+            font: var(--md-type-display-small);
+            font-family: var(--sans-font);
+            color: var(--md-sys-color-on-secondary-container);
+            line-height: 1;
+        }
+
+        .reviews-rating-detail {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 4px;
+        }
+
+        .reviews-rating-stars {
+            color: var(--md-sys-color-tertiary);
+            font-size: 18px;
+            letter-spacing: 2px;
+        }
+
+        .reviews-rating-count {
+            font: var(--md-type-label-medium);
+            color: var(--md-sys-color-on-secondary-container);
+            opacity: 0.75;
+        }
+
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-top: 48px;
+        }
+
+        @media (max-width: 900px) {
+            .reviews-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (max-width: 580px) {
+            .reviews-grid { grid-template-columns: 1fr; }
+            .reviews-page-header { padding: 144px 0 48px; }
+        }
+
+        .review-card {
+            background: var(--md-sys-color-surface-container-low);
+            border-radius: var(--md-sys-shape-extra-large);
+            padding: 28px 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .review-card .stars {
+            color: var(--md-sys-color-tertiary-fixed-dim);
+            font-size: 14px;
+            letter-spacing: 1px;
+        }
+
+        .review-card-text {
+            font: var(--md-type-body-medium);
+            color: var(--md-sys-color-on-surface);
+            line-height: 1.75;
+            flex: 1;
+        }
+
+        .review-card-name {
+            font: var(--md-type-label-large);
+            color: var(--md-sys-color-on-surface);
+            margin-top: 8px;
+        }
+
+        .review-card-subtitle {
+            font: var(--md-type-label-small);
+            color: var(--md-sys-color-on-surface-variant);
+        }
+
+        .review-photo-placeholder {
+            width: 100px;
+            height: 100px;
+            border-radius: var(--md-sys-shape-full);
+            background: var(--md-sys-color-surface-container-highest);
+            margin-bottom: 16px;
+            flex-shrink: 0;
+        }
+
+        .reviews-google-note {
+            margin-top: 48px;
+            padding: 20px 24px;
+            background: var(--md-sys-color-surface-container-highest);
+            border-radius: var(--md-sys-shape-extra-large);
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            font: var(--md-type-label-medium);
+            color: var(--md-sys-color-on-surface-variant);
+        }
+
+        .reviews-google-note a {
+            color: var(--md-sys-color-primary);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .reviews-google-note a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav-solid">
+        <div class="nav-container">
+            <a href="index.html" class="logo">The Byron Doula</a>
+            <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html#services">Services</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="reviews.html" class="active">Reviews</a></li>
+            </ul>
+            <a href="index.html#contact" class="cta-secondary nav-cta">Book a session</a>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <header class="reviews-page-header">
+        <div class="container">
+            <p class="section-eyebrow">Testimonials</p>
+            <h1>What families say</h1>
+        </div>
+    </header>
+
+    <!-- Reviews Grid -->
+    <section class="section" style="background: var(--md-sys-color-surface); padding-top: 32px;">
+        <div class="container">
+            <div class="reviews-grid">
+
+                <article class="review-card">
+                    <div class="testimonial-photo-wrap"><img class="testimonial-photo testimonial-photo--zoom" src="images/testimonials/mums/camilla-white.jpg" alt="Dr Camilla White"></div>
+                    <div class="stars">★★★★★</div>
+                    <p class="review-card-text">"She was calm and professional yet kind and warm. She really helped support my partner so he could support me. I felt truly cared for in a very special way."</p>
+                    <p class="review-card-name">Dr Camilla White</p>
+                    <p class="review-card-subtitle">GP &amp; mother of three</p>
+                </article>
+
+                <article class="review-card">
+                    <img class="testimonial-photo" src="images/testimonials/mums/amy-sinclair.jpg" alt="Amy Sinclair">
+                    <div class="stars">★★★★★</div>
+                    <p class="review-card-text">"Nat has the most divine way of making you feel safe, informed, connected and fully in control. She is a wealth of knowledge, experience and intuition."</p>
+                    <p class="review-card-name">Amy Sinclair</p>
+                    <p class="review-card-subtitle">Mother of two</p>
+                </article>
+
+                <article class="review-card">
+                    <img class="testimonial-photo" src="images/testimonials/mums/cisco-tschurtschenthaler.png" alt="Cisco Tschurtschenthaler">
+                    <div class="stars">★★★★★</div>
+                    <p class="review-card-text">"I felt very safe having her by my side. I was visualising an intimate, drug-free water birth and my wish became a reality with Nathalie's help. This was the best investment."</p>
+                    <p class="review-card-name">Cisco Tschurtschenthaler</p>
+                    <p class="review-card-subtitle">Mother of two</p>
+                </article>
+
+                <article class="review-card">
+                    <img class="testimonial-photo" src="images/testimonials/mums/renee-darcy.png" alt="Renée D'Arcy">
+                    <div class="stars">★★★★★</div>
+                    <p class="review-card-text">"I felt supported in every essence of pregnancy and mothering. You just completely 'got' everything I needed to chat to you about and made me feel calm and confident."</p>
+                    <p class="review-card-name">Renée D'Arcy</p>
+                    <p class="review-card-subtitle">Mother of three</p>
+                </article>
+
+                <article class="review-card">
+                    <img class="testimonial-photo" src="images/testimonials/mums/emma-bellamy.jpg" alt="Emma Bellamy">
+                    <div class="stars">★★★★★</div>
+                    <p class="review-card-text">"Nat has the ability to create the most respectful, beautiful, gentle and sacred space. At my most vulnerable I felt safe and connected."</p>
+                    <p class="review-card-name">Emma Bellamy</p>
+                    <p class="review-card-subtitle">Mother of three</p>
+                </article>
+
+                <article class="review-card">
+                    <img class="testimonial-photo" src="images/testimonials/mums/priscylla-elliott.jpg" alt="Priscylla Elliott">
+                    <div class="stars">★★★★★</div>
+                    <p class="review-card-text">"Nathalie has supported me for the births of two of my children. Her calm and grounded energy coupled with her extensive knowledge gave me such comfort."</p>
+                    <p class="review-card-name">Priscylla Elliott</p>
+                    <p class="review-card-subtitle">Mother of four</p>
+                </article>
+
+                <article class="review-card">
+                    <img class="testimonial-photo" src="images/testimonials/mums/lucy-folk.png" alt="Lucy Folk">
+                    <div class="stars">★★★★★</div>
+                    <p class="review-card-text">"Nathalie was a constant support with the most beautiful nature. We adored her manner, communication and we found all of her teachings highly informative and clear."</p>
+                    <p class="review-card-name">Lucy Folk</p>
+                </article>
+
+                <article class="review-card">
+                    <img class="testimonial-photo" src="images/testimonials/mums/sophie-willing.jpg" alt="Sophie Willing" style="object-position: left top;">
+                    <div class="stars">★★★★★</div>
+                    <p class="review-card-text">"She helped me understand that there really is no need for fear around birthing, to trust my intuition and the importance of the Birthing Field being saturated with Love."</p>
+                    <p class="review-card-name">Sophie Willing</p>
+                    <p class="review-card-subtitle">Mother of two</p>
+                </article>
+
+                <article class="review-card">
+                    <img class="testimonial-photo" src="images/testimonials/mums/bethany-cecins.jpg" alt="Bethany Cecins">
+                    <div class="stars">★★★★★</div>
+                    <p class="review-card-text">"Nathalie provided wonderful support throughout my pregnancy and birth. Her unwavering calmness was so beneficial in such a pivotal event in life."</p>
+                    <p class="review-card-name">Bethany Cecins</p>
+                </article>
+
+                <article class="review-card">
+                    <img class="testimonial-photo" src="images/testimonials/mums/shanay-hall.jpg" alt="Shanay Hall">
+                    <div class="stars">★★★★★</div>
+                    <p class="review-card-text">"Nathalie was a great source of power during my second pregnancy. It was so comforting to know I could message her about anything pregnancy and birth related."</p>
+                    <p class="review-card-name">Shanay Hall</p>
+                </article>
+
+                <article class="review-card">
+                    <img class="testimonial-photo" src="images/testimonials/mums/kaity-fox.png" alt="Kaity Fox">
+                    <div class="stars">★★★★★</div>
+                    <p class="review-card-text">"You encouraged me in every moment where I was beginning to feel like I couldn't do it anymore. You helped me realise that I had all the power I needed."</p>
+                    <p class="review-card-name">Kaity Fox</p>
+                </article>
+
+                <article class="review-card">
+                    <img class="testimonial-photo" src="images/testimonials/mums/karla-hammer.jpg" alt="Karla Hammer">
+                    <div class="stars">★★★★★</div>
+                    <p class="review-card-text">"You made us feel so nurtured, which was such a big part of making this birth experience so joyful. Your support was invaluable."</p>
+                    <p class="review-card-name">Karla Hammer</p>
+                </article>
+
+                <article class="review-card">
+                    <img class="testimonial-photo" src="images/testimonials/mums/techa-noble.png" alt="Técha Noble">
+                    <div class="stars">★★★★★</div>
+                    <p class="review-card-text">"I truly felt more held by the doula than anyone else in the birth process and I literally don't know what we would have done without her."</p>
+                    <p class="review-card-name">Técha Noble</p>
+                </article>
+
+                <article class="review-card">
+                    <img class="testimonial-photo" src="images/testimonials/mums/tania-c.jpg" alt="Tania C">
+                    <div class="stars">★★★★★</div>
+                    <p class="review-card-text">"Her calming presence and gentle nature was invaluable. In the words of my husband, 'just being around her makes you feel calm and relaxed'."</p>
+                    <p class="review-card-name">Tania C</p>
+                </article>
+
+                <article class="review-card">
+                    <img class="testimonial-photo" src="images/testimonials/mums/nerine-m.jpg" alt="Nerine M">
+                    <div class="stars">★★★★★</div>
+                    <p class="review-card-text">"Together we achieved a completely natural vaginal birth after cesarean! Honestly a dream come true. Thank you so much Nathalie."</p>
+                    <p class="review-card-name">Nerine M</p>
+                </article>
+
+                <article class="review-card">
+                    <img class="testimonial-photo" src="images/testimonials/mums/jennifer-pd.jpg" alt="Jennifer PD">
+                    <div class="stars">★★★★★</div>
+                    <p class="review-card-text">"My labor turned out to be a long one with some complications, but it is not a bad memory, thanks in large part to Nathalie's warm support."</p>
+                    <p class="review-card-name">Jennifer PD</p>
+                </article>
+
+                <article class="review-card">
+                    <img class="testimonial-photo" src="images/testimonials/mums/cassandra.jpg" alt="Cassandra">
+                    <div class="stars">★★★★★</div>
+                    <p class="review-card-text">"Nathalie not only exceeded every expectation, she was a pivotal component of my dream birth story. My recommendation of Nathalie could not be higher."</p>
+                    <p class="review-card-name">Cassandra</p>
+                </article>
+
+                <article class="review-card">
+                    <img class="testimonial-photo" src="images/testimonials/mums/kate-b.jpg" alt="Kate B">
+                    <div class="stars">★★★★★</div>
+                    <p class="review-card-text">"Nathalie strikes a perfect balance between being both personal and professional. Having an experienced individual in the birth process who is there for you and only you is an absolute must."</p>
+                    <p class="review-card-name">Kate B</p>
+                </article>
+
+                <article class="review-card">
+                    <img class="testimonial-photo" src="images/testimonials/mums/mai-k.jpg" alt="Mai K">
+                    <div class="stars">★★★★★</div>
+                    <p class="review-card-text">"I believe that thanks to Nathalie I could give birth naturally and have a successful VBAC. Her assistance was invaluable."</p>
+                    <p class="review-card-name">Mai K</p>
+                </article>
+
+                <article class="review-card">
+                    <img class="testimonial-photo" src="images/testimonials/mums/laurie-s.png" alt="Laurie S">
+                    <div class="stars">★★★★★</div>
+                    <p class="review-card-text">"I don't think I could have endured 30 hours of labor without having you there, helping me breathe through contractions, and trying different positions."</p>
+                    <p class="review-card-name">Laurie S</p>
+                </article>
+
+                <article class="review-card">
+                    <img class="testimonial-photo" src="images/testimonials/mums/thea-v.jpg" alt="Thea V" style="object-position: center 55%;">
+                    <div class="stars">★★★★★</div>
+                    <p class="review-card-text">"You helped me feel empowered and positive, and I think this made a huge difference for me. It was really such a wonderful, positive experience overall."</p>
+                    <p class="review-card-name">Thea V</p>
+                </article>
+
+                <article class="review-card">
+                    <img class="testimonial-photo" src="images/testimonials/dads/george-gorrow.jpg" alt="George Gorrow">
+                    <div class="stars">★★★★★</div>
+                    <p class="review-card-text">"The overwhelming calming confidence you gave my wife was what I liked best about your support. Your calm confidence and knowledge allowed her to trust her body."</p>
+                    <p class="review-card-name">George Gorrow</p>
+                </article>
+
+                <article class="review-card">
+                    <img class="testimonial-photo" src="images/testimonials/dads/jan-svarovsky.jpg" alt="Jan Svarovsky">
+                    <div class="stars">★★★★★</div>
+                    <p class="review-card-text">"I highly recommend Nathalie! Warm, kind, thoughtful, calm, witty — we feel very lucky to have her in our lives."</p>
+                    <p class="review-card-name">Jan Svarovsky</p>
+                </article>
+
+                <article class="review-card">
+                    <img class="testimonial-photo" src="images/testimonials/dads/ryan-bienefelt.jpg" alt="Ryan Bienefelt">
+                    <div class="stars">★★★★★</div>
+                    <p class="review-card-text">"Nathalie brought a beautiful calming energy through our journey of being parents. Having her there for our first child was super comforting."</p>
+                    <p class="review-card-name">Ryan Bienefelt</p>
+                </article>
+
+                <article class="review-card">
+                    <img class="testimonial-photo" src="images/testimonials/dads/ryan-allen.jpg" alt="Ryan Allen">
+                    <div class="stars">★★★★★</div>
+                    <p class="review-card-text">"Nat was an amazing support to my wife and I throughout the whole process. Nothing was too much trouble and she was very generous with her time, advice and support."</p>
+                    <p class="review-card-name">Ryan Allen</p>
+                </article>
+
+                <article class="review-card">
+                    <img class="testimonial-photo" src="images/testimonials/dads/nico-georgieff.jpg" alt="Nico Georgieff">
+                    <div class="stars">★★★★★</div>
+                    <p class="review-card-text">"She really was the most important support person during the whole process. Nathalie created a very natural, relaxed and calm atmosphere which had a profound effect on us."</p>
+                    <p class="review-card-name">Nico Georgieff</p>
+                </article>
+
+                <article class="review-card">
+                    <img class="testimonial-photo" src="images/testimonials/dads/rory-k.jpg" alt="Rory K">
+                    <div class="stars">★★★★★</div>
+                    <p class="review-card-text">"I strongly believe Nathalie must be one of the best doulas out there. I can't imagine anything else we could have needed."</p>
+                    <p class="review-card-name">Rory K</p>
+                </article>
+
+                <article class="review-card">
+                    <img class="testimonial-photo" src="images/testimonials/dads/george-popov.jpg" alt="George Popov">
+                    <div class="stars">★★★★★</div>
+                    <p class="review-card-text">"Nathalie was able to support both of us in a way that I knew I couldn't do on my own. Everyone should benefit and have a doula like Nathalie at their birth."</p>
+                    <p class="review-card-name">George Popov</p>
+                </article>
+
+                <article class="review-card">
+                    <img class="testimonial-photo" src="images/testimonials/dads/felix.jpg" alt="Felix">
+                    <div class="stars">★★★★★</div>
+                    <p class="review-card-text">"I actually don't know how you are supposed to do it without one — both as a mother and a father. Thank you Nathalie, you were excellent!"</p>
+                    <p class="review-card-name">Felix</p>
+                </article>
+
+                <article class="review-card">
+                    <img class="testimonial-photo" src="images/testimonials/dads/jamie-baxter.jpg" alt="Jamie Baxter">
+                    <div class="stars">★★★★★</div>
+                    <p class="review-card-text">"Nathalie was able to read the situation well, knowing when and how to offer the right support at the right moment. Her experience was invaluable."</p>
+                    <p class="review-card-name">Jamie Baxter</p>
+                </article>
+
+                <article class="review-card">
+                    <img class="testimonial-photo" src="images/testimonials/mums/ls.jpg" alt="LS">
+                    <div class="stars">★★★★★</div>
+                    <p class="review-card-text">"I felt so comfortable with you that it was well worth the effort. Nathalie was exceptionally understanding and supportive."</p>
+                    <p class="review-card-name">LS</p>
+                </article>
+
+            </div>
+
+            <!-- Google note -->
+            <div class="reviews-google-note">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+                <span>Also rated 5.0 on Google · <a href="#" target="_blank" rel="noopener">See on Google</a></span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-socials">
+                <a href="https://www.facebook.com/thebyrondoula" class="footer-social" aria-label="Facebook" target="_blank" rel="noopener">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073C24 5.446 18.627 0 12 0S0 5.446 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047v-2.66c0-3.025 1.792-4.697 4.533-4.697 1.312 0 2.686.236 2.686.236v2.971h-1.514c-1.491 0-1.956.93-1.956 1.883v2.267h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg>
+                </a>
+                <a href="https://au.pinterest.com/thebyrondoula" class="footer-social" aria-label="Pinterest" target="_blank" rel="noopener">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12c0 5.084 3.163 9.426 7.627 11.174-.105-.949-.2-2.405.042-3.441.218-.937 1.407-5.965 1.407-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738a.36.36 0 0 1 .083.345l-.333 1.36c-.053.22-.174.267-.402.161-1.499-.698-2.436-2.889-2.436-4.649 0-3.785 2.75-7.262 7.929-7.262 4.163 0 7.398 2.967 7.398 6.931 0 4.136-2.607 7.464-6.227 7.464-1.216 0-2.359-.632-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/></svg>
+                </a>
+                <a href="https://www.instagram.com/thebyrondoula" class="footer-social" aria-label="Instagram" target="_blank" rel="noopener">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+                </a>
+            </div>
+            <div class="footer-legal">
+                <span>&copy; 2026 The Byron Doula. All rights reserved.</span>
+                <a href="privacy-policy.html">Privacy Policy</a>
+                <a href="terms.html">Terms of Use</a>
+                <a href="cookies.html">Cookie Preferences</a>
+            </div>
+            <p style="margin-top: 12px; font-size: 14px; color: var(--md-sys-color-on-surface-variant); opacity: 0.7;">I acknowledge the Bundjalung People as the original and true custodians of the land on which I live and work.</p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/dev-bg.js"></script>
+</body>
+</html>

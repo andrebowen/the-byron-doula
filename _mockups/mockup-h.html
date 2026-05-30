@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mockup H — Horizontal Cards · The Byron Doula</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    :root {
+      --primary:                   rgb(136 81 29);
+      --on-primary:                rgb(255 255 255);
+      --primary-container:         rgb(255 220 194);
+      --on-primary-container:      rgb(46 21 0);
+      --secondary:                 rgb(116 89 68);
+      --secondary-container:       rgb(237 213 197);
+      --on-secondary-container:    rgb(42 23 7);
+      --background:                rgb(255 248 245);
+      --on-surface:                rgb(32 27 23);
+      --on-surface-variant:        rgb(81 68 59);
+      --outline:                   rgb(132 116 105);
+      --outline-variant:           rgb(214 195 182);
+      --surface-container-low:     rgb(253 241 235);
+      --surface-container:         rgb(247 236 229);
+      --surface-container-high:    rgb(242 230 223);
+      --surface-container-highest: rgb(236 224 218);
+      --serif: 'Cormorant Garamond', Georgia, serif;
+      --sans:  'Inter', system-ui, sans-serif;
+    }
+
+    body { font-family: var(--sans); background: var(--background); color: var(--on-surface); font-size: 14px; line-height: 1.6; }
+
+    /* ── SCENARIO BAR ── */
+    .scenario-bar { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgb(32 27 23); color: rgb(255 248 245); display: flex; align-items: center; font-size: 11px; font-weight: 500; letter-spacing: 0.5px; height: 36px; overflow-x: auto; }
+    .scenario-bar-label { padding: 0 16px; opacity: 0.5; border-right: 1px solid rgba(255,255,255,0.12); height: 100%; display: flex; align-items: center; white-space: nowrap; flex-shrink: 0; }
+    .scenario-bar a { padding: 0 14px; color: rgba(255,248,245,0.6); text-decoration: none; height: 100%; display: flex; align-items: center; border-right: 1px solid rgba(255,255,255,0.08); transition: color 0.15s, background 0.15s; white-space: nowrap; flex-shrink: 0; }
+    .scenario-bar a:hover { color: rgb(255 248 245); background: rgba(255,255,255,0.06); }
+    .scenario-bar a.active { color: rgb(255 183 124); font-weight: 600; }
+
+    /* ── NAV ── */
+    nav { position: sticky; top: 36px; z-index: 50; background: var(--background); border-bottom: 1px solid var(--outline-variant); padding: 0 48px; display: flex; align-items: center; gap: 32px; height: 60px; }
+    .nav-logo { font-size: 16px; font-weight: 600; text-decoration: none; color: var(--on-surface); }
+    .nav-links { display: flex; gap: 24px; list-style: none; margin-left: auto; }
+    .nav-links a { font-size: 14px; color: var(--on-surface-variant); text-decoration: none; }
+    .nav-cta { background: var(--primary); color: var(--on-primary); border: none; padding: 8px 20px; border-radius: 9999px; font-size: 14px; font-weight: 500; cursor: pointer; text-decoration: none; }
+
+    /* ── PAGE ── */
+    .page { padding: 64px 48px 120px; max-width: 960px; margin: 0 auto; }
+
+    .section-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--primary); margin-bottom: 12px; }
+    .section-title { font-size: 28px; font-weight: 700; line-height: 1.2; margin-bottom: 12px; }
+    .section-lead { font-size: 14px; color: var(--on-surface-variant); line-height: 1.7; max-width: 520px; margin-bottom: 52px; }
+
+    /* ── HORIZONTAL CARD STACK ── */
+    .cards-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .h-card {
+      background: var(--surface-container-low);
+      border-radius: 24px;
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      height: 260px;
+      transition: background 0.2s;
+    }
+    .h-card:hover { background: var(--surface-container); }
+
+    /* Image panel */
+    .h-card-image { overflow: hidden; }
+    .h-card-image img {
+      width: 100%; height: 100%;
+      object-fit: cover; display: block;
+      transition: transform 0.4s ease;
+    }
+    .h-card:hover .h-card-image img { transform: scale(1.04); }
+
+    /* Content panel */
+    .h-card-body {
+      padding: 28px 32px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Top: title + chip */
+    .h-card-top {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .chip {
+      display: inline-flex; align-items: center;
+      font-size: 11px; font-weight: 600; letter-spacing: 0.5px;
+      padding: 4px 12px; border-radius: 9999px;
+      background: var(--secondary-container);
+      color: var(--on-secondary-container);
+      white-space: nowrap;
+    }
+
+    .h-card-title {
+      font-size: 20px; font-weight: 600; line-height: 1.2;
+      color: var(--on-surface);
+    }
+
+    /* Body copy — hours live here */
+    .h-card-copy {
+      font-size: 14px; color: var(--on-surface-variant);
+      line-height: 1.7; margin-bottom: 16px;
+      flex: 1;
+    }
+
+    /* Features — compact inline list */
+    .h-card-features {
+      display: flex; flex-wrap: wrap; gap: 4px 20px;
+      list-style: none;
+      margin-bottom: 20px;
+    }
+    .h-card-features li {
+      font-size: 13px; color: var(--on-surface-variant);
+      padding-left: 14px; position: relative;
+      line-height: 1.5;
+    }
+    .h-card-features li::before {
+      content: '✓'; position: absolute; left: 0;
+      color: var(--primary); font-size: 10px; top: 3px;
+    }
+
+    /* Bottom: price + CTA */
+    .h-card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 20px;
+      border-top: 1px solid var(--outline-variant);
+      margin-top: auto;
+    }
+
+    .price-amount {
+      font-size: 20px; font-weight: 700;
+      color: var(--primary);
+      line-height: 1;
+    }
+
+    .btn-book {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--primary); color: var(--on-primary);
+      border: none; padding: 12px 24px; border-radius: 9999px;
+      font-size: 14px; font-weight: 500;
+      cursor: pointer; text-decoration: none;
+      transition: opacity 0.15s; white-space: nowrap;
+    }
+    .btn-book:hover { opacity: 0.88; }
+    .btn-book svg { transition: transform 0.2s; }
+    .btn-book:hover svg { transform: translateX(3px); }
+
+    /* ── ANNOTATION ── */
+    .annotation {
+      background: rgb(32 27 23); color: rgb(255 248 245);
+      border-radius: 16px; padding: 24px 28px;
+      margin-top: 48px; font-size: 13px; line-height: 1.7;
+    }
+    .annotation strong { color: rgb(255 183 124); }
+    .annotation h3 { font-size: 16px; font-weight: 600; margin-bottom: 12px; }
+    .annotation ul { padding-left: 20px; display: flex; flex-direction: column; gap: 6px; margin-top: 8px; }
+  </style>
+</head>
+<body>
+
+  <div class="scenario-bar">
+    <span class="scenario-bar-label">Booking UX Scenarios</span>
+    <a href="mockup-a.html">A · Card Expands</a>
+    <a href="mockup-b.html">B · Select + Scroll</a>
+    <a href="mockup-c.html">C · Drawer</a>
+    <a href="mockup-d.html">D · Booking Page</a>
+    <a href="mockup-e.html">E · Chip Selector</a>
+    <a href="mockup-f.html">F · Visual Radio</a>
+    <a href="mockup-g.html">G · Just the Form</a>
+    <a href="mockup-h.html" class="active">H · Horizontal Cards</a>
+    <a href="mockup-i.html">I · Free Consult</a>
+  </div>
+
+  <nav style="margin-top:36px">
+    <a href="#" class="nav-logo">The Byron Doula</a>
+    <ul class="nav-links">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#">About</a></li>
+      <li><a href="#">Reviews</a></li>
+    </ul>
+    <a href="#contact" class="nav-cta">Book a session</a>
+  </nav>
+
+  <div class="page" id="services">
+    <p class="section-eyebrow">Services</p>
+    <h2 class="section-title">How I Support You</h2>
+    <p class="section-lead">Personalised support for pregnancy, birth and early parenthood — in person in Byron Bay or online, wherever you are.</p>
+
+    <div class="cards-stack">
+
+      <!-- Card 1: Birth Prep Virtual -->
+      <article class="h-card">
+        <div class="h-card-image">
+          <img src="../images/NATHALIE--55.jpg" alt="Birth Preparation with Nathalie Solis" onerror="this.closest('.h-card-image').style.background='var(--surface-container-highest)'">
+        </div>
+        <div class="h-card-body">
+          <div class="h-card-top">
+            <h3 class="h-card-title">Birth Preparation</h3>
+            <div class="chip">Virtual</div>
+          </div>
+          <p class="h-card-copy">
+            Walk into your birth feeling genuinely ready. This is a 2-hour session — enough time to build a real birth plan, work through your questions, and prepare your partner to support you well. Available online from anywhere in the world.
+          </p>
+          <ul class="h-card-features">
+            <li>A birth plan your care team will respect</li>
+            <li>Comfort techniques for labour</li>
+            <li>Partner preparation</li>
+            <li>Evidence-based guidance at every stage</li>
+          </ul>
+          <div class="h-card-footer">
+            <div class="h-card-price">
+              <span class="price-amount">$250</span>
+            </div>
+            <a href="#contact" class="btn-book">
+              Book Now
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 2: Birth Prep In-Person -->
+      <article class="h-card">
+        <div class="h-card-image">
+          <img src="../images/nathalie-standing.jpg" alt="In-person birth preparation" onerror="this.closest('.h-card-image').style.background='var(--surface-container-highest)'">
+        </div>
+        <div class="h-card-body">
+          <div class="h-card-top">
+            <h3 class="h-card-title">Birth Preparation</h3>
+            <div class="chip">In Person</div>
+          </div>
+          <p class="h-card-copy">
+            The same deep preparation, in the comfort of your home or a space that feels like yours. This is a 2-hour session in person across Byron Bay and the Northern Rivers — for families who want to work through it together, face to face.
+          </p>
+          <ul class="h-card-features">
+            <li>A birth plan your care team will respect</li>
+            <li>Hands-on comfort techniques for labour</li>
+            <li>Partner preparation</li>
+            <li>Byron Bay &amp; Northern Rivers</li>
+          </ul>
+          <div class="h-card-footer">
+            <div class="h-card-price">
+              <span class="price-amount">$300</span>
+            </div>
+            <a href="#contact" class="btn-book">
+              Book Now
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 3: Parent Coaching -->
+      <article class="h-card">
+        <div class="h-card-image">
+          <img src="../images/nathalie-portrait.jpg" alt="Parent Coaching with Nathalie Solis" onerror="this.closest('.h-card-image').style.background='var(--surface-container-highest)'">
+        </div>
+        <div class="h-card-body">
+          <div class="h-card-top">
+            <h3 class="h-card-title">Parent Coaching</h3>
+            <div class="chip">Virtual</div>
+          </div>
+          <p class="h-card-copy">
+            A calm, non-judgmental space to work through whatever you're navigating. This is a 1-hour session, held online so you can connect from wherever you are — whether you're pregnant, freshly postpartum, or finding your feet in the early years.
+          </p>
+          <ul class="h-card-features">
+            <li>1-on-1 session focused entirely on you</li>
+            <li>Birth planning &amp; postpartum support</li>
+            <li>Partner &amp; relationship dynamics</li>
+            <li>Book as a single session or ongoing</li>
+          </ul>
+          <div class="h-card-footer">
+            <div class="h-card-price">
+              <span class="price-amount">$180</span>
+            </div>
+            <a href="#contact" class="btn-book">
+              Book Now
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+          </div>
+        </div>
+      </article>
+
+    </div>
+
+    <div class="annotation">
+      <h3>Scenario H — Horizontal Cards · Sans-Serif Test</h3>
+      <p><strong>Type scale (all Inter):</strong> 11px labels · 13px features · 14px body · 20px card title · 28px section title · 40px price. No serif anywhere.</p>
+      <ul>
+        <li>Price at 40px/700 still dominates the card footer — the weight does the work the serif size was doing before.</li>
+        <li>20px/600 card title is cleaner and reads faster than 30px serif at 400 weight.</li>
+        <li>Body copy and features sit at consistent 14px/13px — easy to scan, nothing competing.</li>
+        <li>Next: decide if this or the serif version feels right for the brand, then pair with a booking section.</li>
+      </ul>
+    </div>
+  </div>
+
+  <script>
+    // Add H to the other scenario bars on first load
+    // (bars already updated in the other files)
+  </script>
+</body>
+</html>

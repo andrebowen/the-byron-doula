@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mockup B — Select + Scroll · The Byron Doula</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    :root {
+      --primary:                   rgb(136 81 29);
+      --on-primary:                rgb(255 255 255);
+      --primary-container:         rgb(255 220 194);
+      --on-primary-container:      rgb(46 21 0);
+      --secondary:                 rgb(116 89 68);
+      --secondary-container:       rgb(237 213 197);
+      --on-secondary-container:    rgb(42 23 7);
+      --background:                rgb(255 248 245);
+      --on-surface:                rgb(32 27 23);
+      --on-surface-variant:        rgb(81 68 59);
+      --outline:                   rgb(132 116 105);
+      --outline-variant:           rgb(214 195 182);
+      --surface-container-low:     rgb(253 241 235);
+      --surface-container:         rgb(247 236 229);
+      --surface-container-high:    rgb(242 230 223);
+      --surface-container-highest: rgb(236 224 218);
+      --serif: 'Cormorant Garamond', Georgia, serif;
+      --sans:  'Inter', system-ui, sans-serif;
+    }
+
+    body { font-family: var(--sans); background: var(--background); color: var(--on-surface); }
+
+    /* ── SCENARIO BAR ── */
+    .scenario-bar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgb(32 27 23); color: rgb(255 248 245);
+      display: flex; align-items: center; font-family: var(--sans);
+      font-size: 11px; font-weight: 500; letter-spacing: 0.5px; height: 36px;
+    }
+    .scenario-bar-label { padding: 0 16px; opacity: 0.5; border-right: 1px solid rgba(255,255,255,0.12); height: 100%; display: flex; align-items: center; white-space: nowrap; }
+    .scenario-bar a { padding: 0 14px; color: rgba(255,248,245,0.6); text-decoration: none; height: 100%; display: flex; align-items: center; border-right: 1px solid rgba(255,255,255,0.08); transition: color 0.15s, background 0.15s; white-space: nowrap; }
+    .scenario-bar a:hover { color: rgb(255 248 245); background: rgba(255,255,255,0.06); }
+    .scenario-bar a.active { color: rgb(255 183 124); font-weight: 600; }
+    .scenario-bar-desc { padding: 0 16px; margin-left: auto; opacity: 0.45; font-style: italic; }
+
+    /* ── NAV ── */
+    nav { position: sticky; top: 36px; z-index: 50; background: var(--background); border-bottom: 1px solid var(--outline-variant); padding: 0 48px; display: flex; align-items: center; gap: 32px; height: 60px; }
+    .nav-logo { font-family: var(--serif); font-size: 20px; font-weight: 400; text-decoration: none; color: var(--on-surface); }
+    .nav-links { display: flex; gap: 24px; list-style: none; margin-left: auto; }
+    .nav-links a { font-size: 13px; color: var(--on-surface-variant); text-decoration: none; }
+    .nav-cta { background: var(--primary); color: var(--on-primary); border: none; padding: 8px 20px; border-radius: 9999px; font-family: var(--sans); font-size: 13px; font-weight: 500; cursor: pointer; text-decoration: none; }
+
+    /* ── PAGE ── */
+    .page { padding: 60px 48px 0; max-width: 1200px; margin: 0 auto; }
+    .section-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--primary); margin-bottom: 12px; }
+    .section-title { font-family: var(--serif); font-size: 48px; font-weight: 400; line-height: 1.1; margin-bottom: 16px; }
+    .section-lead { font-size: 16px; color: var(--on-surface-variant); line-height: 1.7; max-width: 560px; margin-bottom: 48px; }
+
+    /* ── SERVICE CARDS (selection mode) ── */
+    .cards-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+
+    .service-card {
+      background: var(--surface-container-low);
+      border-radius: 28px; overflow: hidden;
+      border: 2px solid transparent;
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .service-card:hover { border-color: var(--outline-variant); }
+    .service-card.selected { border-color: var(--primary); background: var(--surface-container); }
+
+    .card-image { width: 100%; aspect-ratio: 4/3; background: var(--surface-container-highest); overflow: hidden; }
+    .card-image img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s; }
+    .service-card:hover .card-image img { transform: scale(1.02); }
+
+    .card-body { padding: 20px; }
+    .chip { display: inline-flex; align-items: center; font-size: 11px; font-weight: 600; letter-spacing: 0.5px; padding: 4px 12px; border-radius: 9999px; background: var(--secondary-container); color: var(--on-secondary-container); margin-bottom: 12px; }
+    .card-title { font-family: var(--serif); font-size: 24px; font-weight: 400; line-height: 1.2; margin-bottom: 6px; }
+    .card-tagline { font-size: 13px; color: var(--on-surface-variant); line-height: 1.5; margin-bottom: 16px; }
+    .card-features { list-style: none; display: flex; flex-direction: column; gap: 7px; margin-bottom: 16px; }
+    .card-features li { font-size: 12px; color: var(--on-surface-variant); padding-left: 14px; position: relative; line-height: 1.5; }
+    .card-features li::before { content: '✓'; position: absolute; left: 0; color: var(--primary); font-size: 10px; top: 1px; }
+    .card-quote { font-family: var(--serif); font-size: 14px; font-style: italic; color: var(--on-surface-variant); line-height: 1.5; border-left: 2px solid var(--outline-variant); padding-left: 12px; }
+    .card-quote cite { display: block; font-style: normal; font-size: 11px; margin-top: 4px; color: var(--outline); }
+
+    .card-footer {
+      padding: 14px 20px 18px;
+      border-top: 1px solid var(--outline-variant);
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .card-price { font-size: 14px; font-weight: 600; color: var(--on-surface); }
+    .card-price span { font-size: 11px; font-weight: 400; color: var(--on-surface-variant); }
+
+    .btn-select {
+      background: transparent; color: var(--primary);
+      border: 1.5px solid var(--primary); padding: 8px 18px; border-radius: 9999px;
+      font-family: var(--sans); font-size: 12px; font-weight: 600;
+      cursor: pointer; transition: background 0.15s, color 0.15s;
+    }
+    .service-card.selected .btn-select {
+      background: var(--primary); color: var(--on-primary);
+    }
+    .btn-select-label { display: block; }
+    .service-card.selected .btn-select .btn-select-label::before { content: '✓ '; }
+
+    /* ── BOOKING SECTION ── */
+    .booking-section {
+      padding: 80px 0 120px;
+      scroll-margin-top: 80px;
+    }
+
+    .booking-container {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 48px;
+      align-items: start;
+    }
+
+    /* Left: service summary panel */
+    .booking-summary {
+      position: sticky;
+      top: 108px;
+    }
+    .booking-summary-label {
+      font-size: 11px; font-weight: 700; letter-spacing: 2px;
+      text-transform: uppercase; color: var(--outline); margin-bottom: 16px;
+    }
+
+    /* Empty state */
+    .booking-empty {
+      background: var(--surface-container);
+      border-radius: 20px; padding: 32px 24px;
+      display: flex; flex-direction: column; align-items: center;
+      gap: 12px; text-align: center;
+    }
+    .booking-empty .empty-icon { font-size: 32px; opacity: 0.3; }
+    .booking-empty p { font-size: 14px; color: var(--on-surface-variant); line-height: 1.6; }
+
+    /* Active summary card */
+    .booking-summary-card {
+      background: var(--primary-container);
+      border-radius: 20px; overflow: hidden;
+      display: none;
+    }
+    .booking-summary-card.visible { display: block; }
+
+    .bsc-image { width: 100%; aspect-ratio: 16/9; overflow: hidden; }
+    .bsc-image img { width: 100%; height: 100%; object-fit: cover; }
+    .bsc-image-placeholder { width: 100%; aspect-ratio: 16/9; background: var(--surface-container-highest); }
+
+    .bsc-body { padding: 20px 24px 24px; }
+    .bsc-chip { display: inline-flex; font-size: 11px; font-weight: 600; letter-spacing: 0.5px; padding: 4px 12px; border-radius: 9999px; background: rgba(255,255,255,0.5); color: var(--on-primary-container); margin-bottom: 10px; }
+    .bsc-title { font-family: var(--serif); font-size: 26px; font-weight: 400; color: var(--on-primary-container); margin-bottom: 4px; }
+    .bsc-price { font-size: 20px; font-weight: 700; color: var(--primary); margin-bottom: 16px; }
+    .bsc-features { list-style: none; display: flex; flex-direction: column; gap: 7px; margin-bottom: 20px; }
+    .bsc-features li { font-size: 13px; color: var(--on-primary-container); opacity: 0.85; padding-left: 16px; position: relative; }
+    .bsc-features li::before { content: '✓'; position: absolute; left: 0; color: var(--primary); font-size: 10px; }
+    .bsc-change {
+      font-size: 12px; color: var(--primary); background: none; border: none;
+      cursor: pointer; text-decoration: underline; padding: 0; font-family: var(--sans);
+    }
+
+    /* Right: form */
+    .booking-form-panel {
+      background: var(--surface-container-low);
+      border-radius: 28px; padding: 36px;
+    }
+    .booking-form-title { font-family: var(--serif); font-size: 32px; font-weight: 400; margin-bottom: 6px; }
+    .booking-form-subtitle { font-size: 14px; color: var(--on-surface-variant); margin-bottom: 28px; line-height: 1.6; }
+
+    /* No-service state */
+    .form-no-service {
+      display: flex; flex-direction: column; align-items: center; gap: 12px;
+      padding: 32px 0; text-align: center;
+    }
+    .form-no-service p { font-size: 14px; color: var(--on-surface-variant); }
+    .form-no-service .arrow-up { font-size: 28px; color: var(--outline); }
+
+    .form-body { display: none; }
+    .form-body.visible { display: block; }
+    .form-no-service-msg { display: block; }
+    .form-no-service-msg.hidden { display: none; }
+
+    .selected-service-bar {
+      background: var(--primary-container);
+      border-radius: 12px; padding: 14px 18px;
+      display: flex; align-items: center; gap: 12px;
+      margin-bottom: 24px;
+    }
+    .ssb-name { font-size: 14px; font-weight: 600; color: var(--on-primary-container); }
+    .ssb-price { margin-left: auto; font-size: 15px; font-weight: 700; color: var(--primary); }
+
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; }
+    .form-field { display: flex; flex-direction: column; gap: 5px; margin-bottom: 12px; }
+    .form-field label { font-size: 11px; font-weight: 600; color: var(--on-surface-variant); letter-spacing: 0.3px; }
+    .form-field input, .form-field textarea {
+      font-family: var(--sans); font-size: 14px;
+      background: var(--background); border: 1px solid var(--outline-variant);
+      border-radius: 10px; padding: 11px 14px; color: var(--on-surface); outline: none;
+      transition: border-color 0.15s; resize: none;
+    }
+    .form-field input:focus, .form-field textarea:focus { border-color: var(--primary); }
+    .form-field textarea { min-height: 80px; }
+
+    .booking-ctas { display: flex; flex-direction: column; gap: 10px; margin-top: 20px; }
+    .btn-pay {
+      background: var(--primary); color: var(--on-primary);
+      border: none; padding: 15px 24px; border-radius: 9999px;
+      font-family: var(--sans); font-size: 15px; font-weight: 600;
+      cursor: pointer; text-align: center; transition: opacity 0.15s;
+    }
+    .btn-pay:hover { opacity: 0.88; }
+    .btn-invoice {
+      background: transparent; color: var(--primary);
+      border: 1.5px solid var(--outline-variant); padding: 13px 24px; border-radius: 9999px;
+      font-family: var(--sans); font-size: 13px; font-weight: 500;
+      cursor: pointer; text-align: center; transition: border-color 0.15s;
+    }
+    .btn-invoice:hover { border-color: var(--primary); }
+    .pay-note { font-size: 11px; color: var(--outline); text-align: center; margin-top: 8px; }
+
+    /* ── ANNOTATION ── */
+    .annotation {
+      background: rgb(32 27 23); color: rgb(255 248 245);
+      border-radius: 16px; padding: 24px 28px; margin: 0 0 80px;
+      font-size: 13px; line-height: 1.7;
+    }
+    .annotation strong { color: rgb(255 183 124); }
+    .annotation h3 { font-family: var(--serif); font-size: 20px; font-weight: 400; margin-bottom: 12px; }
+    .annotation ul { padding-left: 20px; display: flex; flex-direction: column; gap: 6px; margin-top: 8px; }
+  </style>
+</head>
+<body>
+
+  <div class="scenario-bar">
+    <span class="scenario-bar-label">Booking UX Scenarios</span>
+    <a href="mockup-a.html">A · Card Expands</a>
+    <a href="mockup-b.html" class="active">B · Select + Scroll</a>
+    <a href="mockup-c.html">C · Drawer</a>
+    <a href="mockup-d.html">D · Booking Page</a>
+    <a href="mockup-e.html">E · Chip Selector</a>
+    <a href="mockup-f.html">F · Visual Radio</a>
+    <a href="mockup-g.html">G · Just the Form</a>
+    <a href="mockup-h.html">H · Horizontal Cards</a>
+    <a href="mockup-i.html">I · Free Consult</a>
+    <span class="scenario-bar-desc">The Byron Doula · 2026</span>
+  </div>
+
+  <nav style="margin-top:36px">
+    <a href="#" class="nav-logo">The Byron Doula</a>
+    <ul class="nav-links">
+      <li><a href="#">Services</a></li>
+      <li><a href="#">About</a></li>
+      <li><a href="#">Reviews</a></li>
+    </ul>
+    <a href="#booking" class="nav-cta">Book a session</a>
+  </nav>
+
+  <div class="page">
+
+    <!-- Services Grid -->
+    <p class="section-eyebrow">Services</p>
+    <h2 class="section-title">How I Support You</h2>
+    <p class="section-lead">Choose a service below — the booking form below will update to confirm your selection. No dropdown confusion.</p>
+
+    <div class="cards-grid" id="cardsGrid">
+
+      <article class="service-card" id="card-1" onclick="selectService('card-1')">
+        <div class="card-image">
+          <img src="../images/NATHALIE--55.jpg" alt="" onerror="this.style.display='none'">
+        </div>
+        <div class="card-body">
+          <div class="chip">Virtual</div>
+          <h3 class="card-title">Birth Preparation</h3>
+          <p class="card-tagline">Walk into your birth feeling genuinely ready</p>
+          <ul class="card-features">
+            <li>A birth plan your care team will respect</li>
+            <li>Tools to stay calm through every contraction</li>
+            <li>Your partner confident and by your side</li>
+            <li>Clarity on every decision before you need to make it</li>
+          </ul>
+          <blockquote class="card-quote">"She really helped support my partner so he could support me."<cite>Dr Camilla White · GP &amp; mother of three</cite></blockquote>
+        </div>
+        <div class="card-footer">
+          <div class="card-price">$250 <span>· 2 hrs</span></div>
+          <button class="btn-select"><span class="btn-select-label">Book Now</span></button>
+        </div>
+      </article>
+
+      <article class="service-card" id="card-2" onclick="selectService('card-2')">
+        <div class="card-image">
+          <img src="../images/nathalie-standing.jpg" alt="" onerror="this.style.display='none'">
+        </div>
+        <div class="card-body">
+          <div class="chip">In Person</div>
+          <h3 class="card-title">Birth Preparation</h3>
+          <p class="card-tagline">The same deep preparation, in your home</p>
+          <ul class="card-features">
+            <li>A birth plan your care team will respect</li>
+            <li>Tools to stay calm through every contraction</li>
+            <li>Your partner confident and by your side</li>
+            <li>Clarity on every decision before you need to make it</li>
+          </ul>
+          <blockquote class="card-quote">"I felt very safe. This was the best investment."<cite>Luciana Sanseverino · Mother</cite></blockquote>
+        </div>
+        <div class="card-footer">
+          <div class="card-price">$300 <span>· 2 hrs</span></div>
+          <button class="btn-select"><span class="btn-select-label">Book Now</span></button>
+        </div>
+      </article>
+
+      <article class="service-card" id="card-3" onclick="selectService('card-3')">
+        <div class="card-image">
+          <img src="../images/nathalie-portrait.jpg" alt="" onerror="this.style.display='none'">
+        </div>
+        <div class="card-body">
+          <div class="chip">Virtual</div>
+          <h3 class="card-title">Parent Coaching</h3>
+          <p class="card-tagline">Get clear answers and stop second-guessing</p>
+          <ul class="card-features">
+            <li>1-on-1 session focused entirely on you</li>
+            <li>Birth planning, postpartum questions, and more</li>
+            <li>Relationship &amp; partner dynamics support</li>
+            <li>Tailored to exactly where you are</li>
+          </ul>
+          <blockquote class="card-quote">"Having her by my side during postpartum was so comforting."<cite>Sophie Willing · Mother of two</cite></blockquote>
+        </div>
+        <div class="card-footer">
+          <div class="card-price">$180 <span>· 1 hr</span></div>
+          <button class="btn-select"><span class="btn-select-label">Book Now</span></button>
+        </div>
+      </article>
+
+    </div>
+
+    <!-- Booking Section -->
+    <section class="booking-section" id="booking">
+      <div class="booking-container">
+
+        <!-- Left: service summary -->
+        <div class="booking-summary">
+          <div class="booking-summary-label">You're booking</div>
+
+          <div class="booking-empty" id="bookingEmpty">
+            <div class="empty-icon">↑</div>
+            <p>Select a service above to continue</p>
+          </div>
+
+          <div class="booking-summary-card" id="bookingSummaryCard">
+            <div class="bsc-image">
+              <img id="bscImg" src="" alt="" onerror="this.style.display='none'">
+            </div>
+            <div class="bsc-body">
+              <div class="bsc-chip" id="bscChip"></div>
+              <div class="bsc-title" id="bscTitle"></div>
+              <div class="bsc-price" id="bscPrice"></div>
+              <ul class="bsc-features" id="bscFeatures"></ul>
+              <button class="bsc-change" onclick="clearSelection()">↑ Change selection</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: form -->
+        <div class="booking-form-panel">
+          <h3 class="booking-form-title">Book Your Session</h3>
+          <p class="booking-form-subtitle" id="formSubtitle">Choose a service on the left to get started.</p>
+
+          <div class="form-no-service-msg" id="formNoServiceMsg">
+            <div class="form-no-service">
+              <div class="arrow-up">←</div>
+              <p>Select a service first, then your details will go here.</p>
+            </div>
+          </div>
+
+          <div class="form-body" id="formBody">
+            <div class="selected-service-bar">
+              <div class="ssb-name" id="ssbName"></div>
+              <div class="ssb-price" id="ssbPrice"></div>
+            </div>
+            <div class="form-row">
+              <div class="form-field"><label>Your name</label><input type="text" placeholder="e.g. Sophie"></div>
+              <div class="form-field"><label>Email</label><input type="email" placeholder="you@example.com"></div>
+            </div>
+            <div class="form-field"><label>Anything you'd like Nathalie to know</label><textarea placeholder="Due date, questions, anything at all…"></textarea></div>
+            <div class="booking-ctas">
+              <button class="btn-pay" id="btnPay">Pay &amp; Confirm</button>
+              <button class="btn-invoice">Request an invoice instead</button>
+            </div>
+            <p class="pay-note">Secure payment via Stripe · Full refund if Nathalie isn't available</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="annotation">
+      <h3>Scenario B — Select Card, Booking Section Reacts</h3>
+      <p><strong>How it works:</strong> Clicking "Book Now" marks the card as selected and scrolls to the booking section. The left panel confirms the service. The form knows what's been chosen — no dropdown needed.</p>
+      <ul>
+        <li>Pros: Clear two-step flow. Single-page. The "↑ Change selection" link makes it trivial to switch. Hero CTA can scroll here in a neutral state.</li>
+        <li>Cons: Requires scrolling. On long pages, the gap between cards and booking section can break the mental link between choosing and booking.</li>
+        <li>Best for: Visitors who browse carefully before deciding.</li>
+      </ul>
+    </div>
+
+  </div>
+
+  <script>
+    const services = {
+      'card-1': {
+        chip: 'Virtual', title: 'Birth Preparation', price: '$250', duration: '2 hours',
+        img: '../images/NATHALIE--55.jpg',
+        features: ['A birth plan your care team will respect', 'Tools to stay calm through every contraction', 'Your partner confident and by your side', 'Clarity on every decision before you need to make it']
+      },
+      'card-2': {
+        chip: 'In Person', title: 'Birth Preparation', price: '$300', duration: '2 hours',
+        img: '../images/nathalie-standing.jpg',
+        features: ['A birth plan your care team will respect', 'Tools to stay calm through every contraction', 'Your partner confident and by your side', 'Clarity on every decision before you need to make it']
+      },
+      'card-3': {
+        chip: 'Virtual', title: 'Parent Coaching', price: '$180', duration: '1 hour',
+        img: '../images/nathalie-portrait.jpg',
+        features: ['1-on-1 session focused entirely on you', 'Birth planning, postpartum questions, and more', 'Relationship & partner dynamics support', 'Tailored to exactly where you are']
+      }
+    };
+
+    let selected = null;
+
+    function selectService(id) {
+      selected = id;
+      const svc = services[id];
+
+      // Update cards
+      document.querySelectorAll('.service-card').forEach(c => {
+        c.classList.toggle('selected', c.id === id);
+        c.querySelector('.btn-select-label').textContent = c.id === id ? 'Selected' : 'Book Now';
+      });
+
+      // Update summary panel
+      document.getElementById('bookingEmpty').style.display = 'none';
+      const card = document.getElementById('bookingSummaryCard');
+      card.classList.add('visible');
+      document.getElementById('bscImg').src = svc.img;
+      document.getElementById('bscChip').textContent = svc.chip;
+      document.getElementById('bscTitle').textContent = svc.title;
+      document.getElementById('bscPrice').textContent = svc.price + ' · ' + svc.duration;
+      const featList = document.getElementById('bscFeatures');
+      featList.innerHTML = svc.features.map(f => `<li>${f}</li>`).join('');
+
+      // Update form
+      document.getElementById('formNoServiceMsg').classList.add('hidden');
+      document.getElementById('formBody').classList.add('visible');
+      document.getElementById('ssbName').textContent = svc.title + ' · ' + svc.chip;
+      document.getElementById('ssbPrice').textContent = svc.price;
+      document.getElementById('btnPay').textContent = 'Pay & Confirm · ' + svc.price;
+      document.getElementById('formSubtitle').textContent = 'Fill in your details below and we\'ll confirm your booking.';
+
+      // Scroll to booking section
+      document.getElementById('booking').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function clearSelection() {
+      selected = null;
+      document.querySelectorAll('.service-card').forEach(c => {
+        c.classList.remove('selected');
+        c.querySelector('.btn-select-label').textContent = 'Book Now';
+      });
+      document.getElementById('bookingEmpty').style.display = '';
+      document.getElementById('bookingSummaryCard').classList.remove('visible');
+      document.getElementById('formNoServiceMsg').classList.remove('hidden');
+      document.getElementById('formBody').classList.remove('visible');
+      document.getElementById('formSubtitle').textContent = 'Choose a service on the left to get started.';
+      document.getElementById('cardsGrid').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mockup I — Free Consult · The Byron Doula</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    :root {
+      --primary:                   rgb(136 81 29);
+      --on-primary:                rgb(255 255 255);
+      --primary-container:         rgb(255 220 194);
+      --on-primary-container:      rgb(46 21 0);
+      --secondary:                 rgb(116 89 68);
+      --secondary-container:       rgb(237 213 197);
+      --on-secondary-container:    rgb(42 23 7);
+      --background:                rgb(255 248 245);
+      --on-surface:                rgb(32 27 23);
+      --on-surface-variant:        rgb(81 68 59);
+      --outline:                   rgb(132 116 105);
+      --outline-variant:           rgb(214 195 182);
+      --surface-container-low:     rgb(253 241 235);
+      --surface-container:         rgb(247 236 229);
+      --surface-container-high:    rgb(242 230 223);
+      --surface-container-highest: rgb(236 224 218);
+      --sans: 'Inter', system-ui, sans-serif;
+    }
+
+    body {
+      font-family: var(--sans);
+      font-size: 14px;
+      line-height: 1.6;
+      background: var(--background);
+      color: var(--on-surface);
+    }
+
+    /* ── SCENARIO BAR ── */
+    .scenario-bar { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgb(32 27 23); color: rgb(255 248 245); display: flex; align-items: center; font-size: 11px; font-weight: 500; letter-spacing: 0.5px; height: 36px; overflow-x: auto; }
+    .scenario-bar-label { padding: 0 16px; opacity: 0.5; border-right: 1px solid rgba(255,255,255,0.12); height: 100%; display: flex; align-items: center; white-space: nowrap; flex-shrink: 0; }
+    .scenario-bar a { padding: 0 14px; color: rgba(255,248,245,0.6); text-decoration: none; height: 100%; display: flex; align-items: center; border-right: 1px solid rgba(255,255,255,0.08); transition: color 0.15s, background 0.15s; white-space: nowrap; flex-shrink: 0; }
+    .scenario-bar a:hover { color: rgb(255 248 245); background: rgba(255,255,255,0.06); }
+    .scenario-bar a.active { color: rgb(255 183 124); font-weight: 600; }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky; top: 36px; z-index: 50;
+      background: var(--background);
+      border-bottom: 1px solid var(--outline-variant);
+      padding: 0 48px;
+      display: flex; align-items: center; gap: 32px; height: 60px;
+    }
+    .nav-logo { font-size: 16px; font-weight: 600; text-decoration: none; color: var(--on-surface); }
+    .nav-links { display: flex; gap: 24px; list-style: none; margin-left: auto; }
+    .nav-links a { font-size: 14px; color: var(--on-surface-variant); text-decoration: none; }
+    .nav-cta {
+      background: var(--primary); color: var(--on-primary);
+      border: none; padding: 8px 20px; border-radius: 9999px;
+      font-size: 14px; font-weight: 500; cursor: pointer; text-decoration: none;
+    }
+
+    /* ── PAGE WRAPPER ── */
+    .page { padding: 64px 48px 120px; max-width: 900px; margin: 0 auto; }
+
+    /* ── SECTION HEADER ── */
+    .section-eyebrow {
+      font-size: 11px; font-weight: 700; letter-spacing: 2px;
+      text-transform: uppercase; color: var(--primary); margin-bottom: 10px;
+    }
+    .section-title { font-size: 28px; font-weight: 700; line-height: 1.2; margin-bottom: 8px; }
+    .section-lead { font-size: 14px; color: var(--on-surface-variant); line-height: 1.7; max-width: 520px; margin-bottom: 40px; }
+
+    /* ── INFO CARDS ── */
+    .info-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 56px;
+    }
+
+    .info-card {
+      background: var(--surface-container-low);
+      border-radius: 20px;
+      padding: 28px 28px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .info-card-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .info-card-title { font-size: 20px; font-weight: 600; line-height: 1.2; color: var(--on-surface); }
+
+    .mode-badge {
+      font-size: 11px; font-weight: 600; letter-spacing: 0.5px;
+      padding: 4px 10px; border-radius: 9999px;
+      background: var(--secondary-container);
+      color: var(--on-secondary-container);
+      white-space: nowrap;
+      flex-shrink: 0;
+      margin-top: 3px;
+    }
+
+    .info-card-copy {
+      font-size: 14px; color: var(--on-surface-variant);
+      line-height: 1.7; margin-bottom: 20px;
+    }
+
+    .info-card-divider {
+      height: 1px; background: var(--outline-variant); margin-bottom: 16px;
+    }
+
+    .info-card-features {
+      list-style: none;
+      display: flex; flex-direction: column; gap: 8px;
+      margin-top: auto;
+    }
+    .info-card-features li {
+      font-size: 13px; color: var(--on-surface-variant);
+      padding-left: 18px; position: relative; line-height: 1.5;
+    }
+    .info-card-features li::before {
+      content: '✓'; position: absolute; left: 0;
+      color: var(--primary); font-weight: 600; font-size: 11px; top: 2px;
+    }
+
+    /* ── CONTACT SECTION ── */
+    .contact-section {
+      border-top: 1px solid var(--outline-variant);
+      padding-top: 56px;
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 64px;
+      align-items: start;
+    }
+
+    /* Left: call to action copy */
+    .contact-left { }
+    .contact-title { font-size: 28px; font-weight: 700; line-height: 1.2; margin-bottom: 12px; }
+    .contact-body { font-size: 14px; color: var(--on-surface-variant); line-height: 1.7; margin-bottom: 24px; }
+
+    .free-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: var(--primary-container);
+      color: var(--on-primary-container);
+      font-size: 13px; font-weight: 600;
+      padding: 8px 16px; border-radius: 9999px;
+      margin-bottom: 28px;
+    }
+    .free-badge::before { content: '★'; font-size: 11px; }
+
+    .contact-meta {
+      display: flex; flex-direction: column; gap: 8px;
+    }
+    .contact-meta-item {
+      display: flex; align-items: center; gap: 10px;
+      font-size: 13px; color: var(--on-surface-variant);
+    }
+    .contact-meta-dot {
+      width: 5px; height: 5px; border-radius: 9999px;
+      background: var(--primary); flex-shrink: 0;
+    }
+
+    /* Right: form */
+    .contact-form-wrap {
+      background: var(--surface-container-low);
+      border-radius: 20px;
+      padding: 32px;
+    }
+
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; }
+    .form-field { display: flex; flex-direction: column; gap: 5px; margin-bottom: 12px; }
+    .form-field label { font-size: 11px; font-weight: 600; letter-spacing: 0.3px; color: var(--on-surface-variant); }
+    .form-field input,
+    .form-field textarea {
+      font-family: var(--sans); font-size: 14px;
+      background: var(--background);
+      border: 1px solid var(--outline-variant);
+      border-radius: 10px; padding: 11px 14px;
+      color: var(--on-surface); outline: none;
+      transition: border-color 0.15s; resize: none;
+    }
+    .form-field input:focus,
+    .form-field textarea:focus { border-color: var(--primary); }
+    .form-field textarea { min-height: 96px; }
+
+    .btn-contact {
+      background: var(--primary); color: var(--on-primary);
+      border: none; padding: 14px 28px; border-radius: 9999px;
+      font-family: var(--sans); font-size: 14px; font-weight: 600;
+      cursor: pointer; width: 100%; text-align: center;
+      transition: opacity 0.15s; margin-top: 8px; display: block;
+    }
+    .btn-contact:hover { opacity: 0.88; }
+    .form-note { font-size: 11px; color: var(--outline); text-align: center; margin-top: 10px; }
+  </style>
+</head>
+<body>
+
+  <div class="scenario-bar">
+    <span class="scenario-bar-label">Booking UX Scenarios</span>
+    <a href="mockup-a.html">A</a>
+    <a href="mockup-b.html">B</a>
+    <a href="mockup-c.html">C</a>
+    <a href="mockup-d.html">D</a>
+    <a href="mockup-e.html">E</a>
+    <a href="mockup-f.html">F</a>
+    <a href="mockup-g.html">G</a>
+    <a href="mockup-h.html">H</a>
+    <a href="mockup-i.html" class="active">I · Free Consult</a>
+  </div>
+
+  <nav style="margin-top:36px">
+    <a href="#" class="nav-logo">The Byron Doula</a>
+    <ul class="nav-links">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#">About</a></li>
+      <li><a href="#">Reviews</a></li>
+    </ul>
+    <a href="#contact" class="nav-cta">Get in touch</a>
+  </nav>
+
+  <div class="page">
+
+    <!-- Section header -->
+    <p class="section-eyebrow">Services</p>
+    <h2 class="section-title">How I Support You</h2>
+    <p class="section-lead">Every family is different. These are the two ways I work — read through, then reach out and we'll put together something that's right for you.</p>
+
+    <!-- Two information cards -->
+    <div class="info-cards" id="services">
+
+      <!-- Card 1: Birth Preparation -->
+      <div class="info-card">
+        <div class="info-card-header">
+          <h3 class="info-card-title">Birth Preparation</h3>
+          <span class="mode-badge">Virtual &amp; In-Person</span>
+        </div>
+        <p class="info-card-copy">
+          Dedicated preparation so you and your partner walk into birth feeling informed, calm and ready — whatever direction your birth takes.
+        </p>
+        <div class="info-card-divider"></div>
+        <ul class="info-card-features">
+          <li>A birth plan your care team will respect</li>
+          <li>Breathing, movement and comfort techniques for labour</li>
+          <li>Partner preparation — their role, how to support you</li>
+          <li>Evidence-based guidance at every stage</li>
+          <li>Emotional readiness and fear processing</li>
+          <li>In-person across Byron Bay &amp; Northern Rivers, or online worldwide</li>
+        </ul>
+      </div>
+
+      <!-- Card 2: Parent Coaching -->
+      <div class="info-card">
+        <div class="info-card-header">
+          <h3 class="info-card-title">Parent Coaching</h3>
+          <span class="mode-badge">Virtual only</span>
+        </div>
+        <p class="info-card-copy">
+          A calm, non-judgmental space to work through whatever you're navigating — whether you're pregnant, postpartum, or finding your feet in the early years.
+        </p>
+        <div class="info-card-divider"></div>
+        <ul class="info-card-features">
+          <li>1-on-1 sessions focused entirely on you</li>
+          <li>Birth planning and decision-making support</li>
+          <li>Feeding, sleep and postpartum recovery</li>
+          <li>Partner and relationship dynamics</li>
+          <li>Tailored to exactly where you are right now</li>
+          <li>Single sessions or ongoing support as your journey evolves</li>
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- Contact section -->
+    <div class="contact-section" id="contact">
+
+      <div class="contact-left">
+        <h2 class="contact-title">Contact Nathalie</h2>
+        <p class="contact-body">
+          Not sure which option is right for you, or want to ask a question first? Send a message and Nathalie will get back to you personally.
+        </p>
+        <div class="free-badge">Free initial consultation</div>
+        <div class="contact-meta">
+          <div class="contact-meta-item">
+            <div class="contact-meta-dot"></div>
+            Replies within 1 business day
+          </div>
+          <div class="contact-meta-item">
+            <div class="contact-meta-dot"></div>
+            13 years experience · certified doula &amp; coach
+          </div>
+          <div class="contact-meta-item">
+            <div class="contact-meta-dot"></div>
+            Byron Bay &amp; Northern Rivers · online worldwide
+          </div>
+          <div class="contact-meta-item">
+            <div class="contact-meta-dot"></div>
+            ★★★★★ 5.0 · 32 Google reviews
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-form-wrap">
+        <div class="form-row">
+          <div class="form-field">
+            <label>Your name</label>
+            <input type="text" placeholder="e.g. Sophie">
+          </div>
+          <div class="form-field">
+            <label>Email</label>
+            <input type="email" placeholder="you@example.com">
+          </div>
+        </div>
+        <div class="form-field">
+          <label>What would you like to know?</label>
+          <textarea placeholder="Tell Nathalie what you're looking for — or just say hello."></textarea>
+        </div>
+        <button class="btn-contact">Contact Nathalie</button>
+        <p class="form-note">No commitment. Nathalie will reply personally.</p>
+      </div>
+
+    </div>
+  </div>
+
+</body>
+</html>

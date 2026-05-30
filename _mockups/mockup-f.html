@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mockup F — Visual Radio Cards · The Byron Doula</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    :root {
+      --primary:                   rgb(136 81 29);
+      --on-primary:                rgb(255 255 255);
+      --primary-container:         rgb(255 220 194);
+      --on-primary-container:      rgb(46 21 0);
+      --secondary:                 rgb(116 89 68);
+      --secondary-container:       rgb(237 213 197);
+      --on-secondary-container:    rgb(42 23 7);
+      --background:                rgb(255 248 245);
+      --on-surface:                rgb(32 27 23);
+      --on-surface-variant:        rgb(81 68 59);
+      --outline:                   rgb(132 116 105);
+      --outline-variant:           rgb(214 195 182);
+      --surface-container-low:     rgb(253 241 235);
+      --surface-container:         rgb(247 236 229);
+      --surface-container-high:    rgb(242 230 223);
+      --surface-container-highest: rgb(236 224 218);
+      --serif: 'Cormorant Garamond', Georgia, serif;
+      --sans:  'Inter', system-ui, sans-serif;
+    }
+
+    body { font-family: var(--sans); background: var(--background); color: var(--on-surface); }
+
+    .scenario-bar { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgb(32 27 23); color: rgb(255 248 245); display: flex; align-items: center; font-family: var(--sans); font-size: 11px; font-weight: 500; letter-spacing: 0.5px; height: 36px; }
+    .scenario-bar-label { padding: 0 16px; opacity: 0.5; border-right: 1px solid rgba(255,255,255,0.12); height: 100%; display: flex; align-items: center; white-space: nowrap; }
+    .scenario-bar a { padding: 0 14px; color: rgba(255,248,245,0.6); text-decoration: none; height: 100%; display: flex; align-items: center; border-right: 1px solid rgba(255,255,255,0.08); transition: color 0.15s, background 0.15s; white-space: nowrap; }
+    .scenario-bar a:hover { color: rgb(255 248 245); background: rgba(255,255,255,0.06); }
+    .scenario-bar a.active { color: rgb(255 183 124); font-weight: 600; }
+    .scenario-bar-desc { padding: 0 16px; margin-left: auto; opacity: 0.45; font-style: italic; }
+
+    nav { position: sticky; top: 36px; z-index: 50; background: var(--background); border-bottom: 1px solid var(--outline-variant); padding: 0 48px; display: flex; align-items: center; gap: 32px; height: 60px; }
+    .nav-logo { font-family: var(--serif); font-size: 20px; font-weight: 400; text-decoration: none; color: var(--on-surface); }
+    .nav-links { display: flex; gap: 24px; list-style: none; margin-left: auto; }
+    .nav-links a { font-size: 13px; color: var(--on-surface-variant); text-decoration: none; }
+    .nav-cta { background: var(--primary); color: var(--on-primary); border: none; padding: 8px 20px; border-radius: 9999px; font-family: var(--sans); font-size: 13px; font-weight: 500; cursor: pointer; text-decoration: none; }
+
+    /* ── CONTACT / BOOKING SECTION ── */
+    .contact-section {
+      max-width: 960px; margin: 0 auto;
+      padding: 80px 48px 120px;
+      display: grid;
+      grid-template-columns: 1fr 1.1fr;
+      gap: 72px;
+      align-items: start;
+    }
+
+    /* Left col */
+    .contact-left { position: sticky; top: 108px; }
+    .eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--primary); margin-bottom: 12px; }
+    .contact-heading { font-family: var(--serif); font-size: 44px; font-weight: 400; line-height: 1.1; margin-bottom: 16px; }
+    .contact-body { font-size: 15px; color: var(--on-surface-variant); line-height: 1.7; margin-bottom: 32px; }
+    .price-callout {
+      display: inline-flex; align-items: baseline; gap: 6px;
+      padding: 14px 20px; border-radius: 14px;
+      background: var(--primary-container);
+      margin-bottom: 28px;
+    }
+    .price-num { font-family: var(--serif); font-size: 32px; font-weight: 400; color: var(--primary); }
+    .price-label { font-size: 14px; color: var(--on-primary-container); }
+
+    .meta-list { display: flex; flex-direction: column; gap: 10px; }
+    .meta-item { display: flex; align-items: center; gap: 10px; font-size: 13px; color: var(--on-surface-variant); }
+    .meta-dot { width: 6px; height: 6px; border-radius: 9999px; background: var(--primary); flex-shrink: 0; }
+
+    /* Right col: the form */
+    .booking-form {
+      background: var(--surface-container-low);
+      border-radius: 28px; padding: 36px;
+    }
+
+    /* ── VISUAL RADIO SERVICE SELECTOR ── */
+    .radio-label { font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--outline); margin-bottom: 14px; }
+
+    .radio-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 28px;
+    }
+
+    .radio-card {
+      position: relative; cursor: pointer;
+      border: 1.5px solid var(--outline-variant);
+      border-radius: 16px;
+      padding: 0;
+      overflow: hidden;
+      transition: border-color 0.15s;
+      background: var(--background);
+    }
+    .radio-card:hover { border-color: var(--primary); }
+    .radio-card.selected { border-color: var(--primary); background: var(--primary-container); }
+    .radio-card input { position: absolute; opacity: 0; width: 0; height: 0; }
+
+    .radio-card-image {
+      width: 100%; aspect-ratio: 3/2;
+      overflow: hidden; background: var(--surface-container-highest);
+    }
+    .radio-card-image img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.3s; }
+    .radio-card:hover .radio-card-image img { transform: scale(1.04); }
+
+    .radio-card-body { padding: 12px 14px 14px; }
+    .radio-card-mode {
+      font-size: 10px; font-weight: 600; letter-spacing: 0.5px;
+      text-transform: uppercase; color: var(--outline); margin-bottom: 4px;
+    }
+    .radio-card.selected .radio-card-mode { color: var(--primary); }
+    .radio-card-name { font-size: 14px; font-weight: 500; color: var(--on-surface); line-height: 1.3; }
+    .radio-card.selected .radio-card-name { color: var(--on-primary-container); }
+
+    .radio-card-check {
+      position: absolute; top: 8px; right: 8px;
+      width: 22px; height: 22px; border-radius: 9999px;
+      background: var(--primary); color: var(--on-primary);
+      font-size: 11px; display: none;
+      align-items: center; justify-content: center;
+    }
+    .radio-card.selected .radio-card-check { display: flex; }
+
+    /* Span-full "not sure" card */
+    .radio-card.span-full { grid-column: 1 / -1; }
+    .radio-card.span-full .radio-card-image { display: none; }
+    .radio-card.span-full .radio-card-body {
+      padding: 14px 18px;
+      display: flex; align-items: center; gap: 12px;
+    }
+    .radio-card.span-full .radio-card-name { font-size: 13px; font-weight: 500; }
+    .radio-card.span-full .radio-card-mode { margin: 0; }
+
+    /* Form fields */
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; }
+    .form-field { display: flex; flex-direction: column; gap: 5px; margin-bottom: 12px; }
+    .form-field label { font-size: 11px; font-weight: 600; color: var(--on-surface-variant); letter-spacing: 0.3px; }
+    .form-field input, .form-field textarea { font-family: var(--sans); font-size: 14px; background: var(--background); border: 1px solid var(--outline-variant); border-radius: 10px; padding: 12px 14px; color: var(--on-surface); outline: none; transition: border-color 0.15s; resize: none; }
+    .form-field input:focus, .form-field textarea:focus { border-color: var(--primary); }
+    .form-field textarea { min-height: 80px; }
+
+    .btn-submit { background: var(--primary); color: var(--on-primary); border: none; padding: 15px 28px; border-radius: 9999px; font-family: var(--sans); font-size: 15px; font-weight: 600; cursor: pointer; width: 100%; text-align: center; transition: opacity 0.15s; margin-top: 8px; display: block; }
+    .btn-submit:hover { opacity: 0.88; }
+    .form-note { font-size: 11px; color: var(--outline); text-align: center; margin-top: 10px; line-height: 1.6; }
+
+    /* Annotation */
+    .annotation-wrap { padding: 0 48px 80px; max-width: 960px; margin: 0 auto; }
+    .annotation { background: rgb(32 27 23); color: rgb(255 248 245); border-radius: 16px; padding: 24px 28px; font-size: 13px; line-height: 1.7; }
+    .annotation strong { color: rgb(255 183 124); }
+    .annotation h3 { font-family: var(--serif); font-size: 20px; font-weight: 400; margin-bottom: 12px; }
+    .annotation ul { padding-left: 20px; display: flex; flex-direction: column; gap: 6px; margin-top: 8px; }
+  </style>
+</head>
+<body>
+
+  <div class="scenario-bar">
+    <span class="scenario-bar-label">Booking UX Scenarios</span>
+    <a href="mockup-a.html">A · Card Expands</a>
+    <a href="mockup-b.html">B · Select + Scroll</a>
+    <a href="mockup-c.html">C · Drawer</a>
+    <a href="mockup-d.html">D · Booking Page</a>
+    <a href="mockup-e.html">E · Chip Selector</a>
+    <a href="mockup-f.html" class="active">F · Visual Radio</a>
+    <a href="mockup-g.html">G · Just the Form</a>
+    <a href="mockup-h.html">H · Horizontal Cards</a>
+    <a href="mockup-i.html">I · Free Consult</a>
+    <span class="scenario-bar-desc">The Byron Doula · 2026</span>
+  </div>
+
+  <nav style="margin-top:36px">
+    <a href="#" class="nav-logo">The Byron Doula</a>
+    <ul class="nav-links">
+      <li><a href="#">Services</a></li>
+      <li><a href="#">About</a></li>
+      <li><a href="#">Reviews</a></li>
+    </ul>
+    <a href="#" class="nav-cta">Book a session</a>
+  </nav>
+
+  <div class="contact-section" id="book">
+
+    <!-- Left: copy -->
+    <div class="contact-left">
+      <p class="eyebrow">Book a Session</p>
+      <h2 class="contact-heading">Let's get started</h2>
+      <p class="contact-body">Choose your service and leave your details. Nathalie will be in touch within one business day to confirm and arrange payment.</p>
+
+      <div class="price-callout">
+        <span class="price-num">$150</span>
+        <span class="price-label">/ hour · all services</span>
+      </div>
+
+      <div class="meta-list">
+        <div class="meta-item"><div class="meta-dot"></div>Virtual &amp; in-person sessions available</div>
+        <div class="meta-item"><div class="meta-dot"></div>Byron Bay, Northern Rivers &amp; worldwide online</div>
+        <div class="meta-item"><div class="meta-dot"></div>13 years experience · certified doula &amp; coach</div>
+        <div class="meta-item"><div class="meta-dot"></div>★★★★★ 5.0 · 32 Google reviews</div>
+      </div>
+    </div>
+
+    <!-- Right: form -->
+    <div class="booking-form">
+
+      <p class="radio-label">Choose a service</p>
+      <div class="radio-grid" id="radioGrid">
+
+        <label class="radio-card" id="rc-bp-virtual" onclick="pickCard('bp-virtual')">
+          <input type="radio" name="service" value="bp-virtual">
+          <div class="radio-card-image"><img src="../images/NATHALIE--55.jpg" alt="" onerror="this.style.display='none'"></div>
+          <div class="radio-card-body">
+            <div class="radio-card-mode">Virtual</div>
+            <div class="radio-card-name">Birth Preparation</div>
+          </div>
+          <div class="radio-card-check">✓</div>
+        </label>
+
+        <label class="radio-card" id="rc-bp-inperson" onclick="pickCard('bp-inperson')">
+          <input type="radio" name="service" value="bp-inperson">
+          <div class="radio-card-image"><img src="../images/nathalie-standing.jpg" alt="" onerror="this.style.display='none'"></div>
+          <div class="radio-card-body">
+            <div class="radio-card-mode">In Person</div>
+            <div class="radio-card-name">Birth Preparation</div>
+          </div>
+          <div class="radio-card-check">✓</div>
+        </label>
+
+        <label class="radio-card" id="rc-coaching" onclick="pickCard('coaching')">
+          <input type="radio" name="service" value="coaching">
+          <div class="radio-card-image"><img src="../images/nathalie-portrait.jpg" alt="" onerror="this.style.display='none'"></div>
+          <div class="radio-card-body">
+            <div class="radio-card-mode">Virtual</div>
+            <div class="radio-card-name">Parent Coaching</div>
+          </div>
+          <div class="radio-card-check">✓</div>
+        </label>
+
+        <label class="radio-card" id="rc-other" onclick="pickCard('other')">
+          <input type="radio" name="service" value="other">
+          <div class="radio-card-body" style="padding: 14px 16px;">
+            <div class="radio-card-mode">Any service</div>
+            <div class="radio-card-name">Not sure yet — let's talk</div>
+          </div>
+          <div class="radio-card-check">✓</div>
+        </label>
+
+      </div>
+
+      <div class="form-row">
+        <div class="form-field"><label>Your name *</label><input type="text" placeholder="e.g. Sophie"></div>
+        <div class="form-field"><label>Email *</label><input type="email" placeholder="you@example.com"></div>
+      </div>
+      <div class="form-field">
+        <label>Anything you'd like Nathalie to know</label>
+        <textarea placeholder="Due date, questions, anything at all…"></textarea>
+      </div>
+
+      <button class="btn-submit">Send Enquiry</button>
+      <p class="form-note">Nathalie replies within 1 business day.</p>
+    </div>
+  </div>
+
+  <div class="annotation-wrap">
+    <div class="annotation">
+      <h3>Scenario F — Visual Radio Cards</h3>
+      <p><strong>How it works:</strong> Same flow as E but the service selector uses image cards instead of list chips — 2×2 grid with photos, making the choice feel more tactile and visual. The ✓ badge snaps onto the selected card. The last card ("Not sure yet") spans both columns.</p>
+      <ul>
+        <li>Pros: Photos make the services feel real and personal. More visually engaging than a chip list. Works especially well if each service has a distinct image.</li>
+        <li>Cons: Takes up more vertical space than chips. Images must be good — placeholder boxes look bad.</li>
+        <li>Best for: Visitors who respond to visual cues over text-only options.</li>
+      </ul>
+    </div>
+  </div>
+
+  <script>
+    function pickCard(id) {
+      document.querySelectorAll('.radio-card').forEach(c => c.classList.remove('selected'));
+      document.getElementById('rc-' + id).classList.add('selected');
+    }
+  </script>
+</body>
+</html>

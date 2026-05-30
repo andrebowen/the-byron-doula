@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mockup G — Just the Form · The Byron Doula</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --primary:                   rgb(136 81 29);
+      --on-primary:                rgb(255 255 255);
+      --primary-container:         rgb(255 220 194);
+      --on-primary-container:      rgb(46 21 0);
+      --secondary:                 rgb(116 89 68);
+      --secondary-container:       rgb(237 213 197);
+      --on-secondary-container:    rgb(42 23 7);
+      --background:                rgb(255 248 245);
+      --on-surface:                rgb(32 27 23);
+      --on-surface-variant:        rgb(81 68 59);
+      --outline:                   rgb(132 116 105);
+      --outline-variant:           rgb(214 195 182);
+      --surface-container-low:     rgb(253 241 235);
+      --surface-container:         rgb(247 236 229);
+      --surface-container-high:    rgb(242 230 223);
+      --surface-container-highest: rgb(236 224 218);
+      --serif: 'Cormorant Garamond', Georgia, serif;
+      --sans:  'Inter', system-ui, sans-serif;
+    }
+
+    body { font-family: var(--sans); background: var(--background); color: var(--on-surface); }
+
+    .scenario-bar { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgb(32 27 23); color: rgb(255 248 245); display: flex; align-items: center; font-family: var(--sans); font-size: 11px; font-weight: 500; letter-spacing: 0.5px; height: 36px; }
+    .scenario-bar-label { padding: 0 16px; opacity: 0.5; border-right: 1px solid rgba(255,255,255,0.12); height: 100%; display: flex; align-items: center; white-space: nowrap; }
+    .scenario-bar a { padding: 0 14px; color: rgba(255,248,245,0.6); text-decoration: none; height: 100%; display: flex; align-items: center; border-right: 1px solid rgba(255,255,255,0.08); transition: color 0.15s, background 0.15s; white-space: nowrap; }
+    .scenario-bar a:hover { color: rgb(255 248 245); background: rgba(255,255,255,0.06); }
+    .scenario-bar a.active { color: rgb(255 183 124); font-weight: 600; }
+    .scenario-bar-desc { padding: 0 16px; margin-left: auto; opacity: 0.45; font-style: italic; }
+
+    nav { position: sticky; top: 36px; z-index: 50; background: var(--background); border-bottom: 1px solid var(--outline-variant); padding: 0 48px; display: flex; align-items: center; gap: 32px; height: 60px; }
+    .nav-logo { font-family: var(--serif); font-size: 20px; font-weight: 400; text-decoration: none; color: var(--on-surface); }
+    .nav-links { display: flex; gap: 24px; list-style: none; margin-left: auto; }
+    .nav-links a { font-size: 13px; color: var(--on-surface-variant); text-decoration: none; }
+    .nav-cta { background: var(--primary); color: var(--on-primary); border: none; padding: 8px 20px; border-radius: 9999px; font-family: var(--sans); font-size: 13px; font-weight: 500; cursor: pointer; text-decoration: none; }
+
+    /* ── CONTACT SECTION ── */
+    .contact-section {
+      max-width: 960px; margin: 0 auto;
+      padding: 80px 48px 120px;
+      display: grid;
+      grid-template-columns: 1fr 1.1fr;
+      gap: 72px;
+      align-items: center;
+    }
+
+    /* Left */
+    .contact-left { }
+    .eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--primary); margin-bottom: 14px; }
+    .contact-heading { font-family: var(--serif); font-size: 52px; font-weight: 400; line-height: 1.05; margin-bottom: 20px; }
+    .contact-body { font-size: 15px; color: var(--on-surface-variant); line-height: 1.75; margin-bottom: 32px; }
+
+    .price-pill {
+      display: inline-flex; align-items: baseline; gap: 5px;
+      padding: 10px 18px; border-radius: 9999px;
+      background: var(--primary-container);
+      margin-bottom: 32px;
+    }
+    .price-pill-num { font-family: var(--serif); font-size: 26px; font-weight: 400; color: var(--primary); }
+    .price-pill-label { font-size: 13px; color: var(--on-primary-container); }
+
+    .contact-portrait {
+      width: 100%; border-radius: 20px; overflow: hidden;
+      aspect-ratio: 4/5;
+    }
+    .contact-portrait img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+    /* Right: form — the whole thing */
+    .form-wrap {
+      background: var(--surface-container-low);
+      border-radius: 28px; padding: 40px;
+    }
+
+    .form-title { font-family: var(--serif); font-size: 32px; font-weight: 400; margin-bottom: 6px; }
+    .form-sub { font-size: 14px; color: var(--on-surface-variant); line-height: 1.6; margin-bottom: 32px; }
+
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; }
+    .form-field { display: flex; flex-direction: column; gap: 6px; margin-bottom: 12px; }
+    .form-field label { font-size: 11px; font-weight: 600; color: var(--on-surface-variant); letter-spacing: 0.3px; }
+    .form-field input, .form-field textarea {
+      font-family: var(--sans); font-size: 14px;
+      background: var(--background); border: 1px solid var(--outline-variant);
+      border-radius: 10px; padding: 13px 16px; color: var(--on-surface);
+      outline: none; transition: border-color 0.15s; resize: none;
+    }
+    .form-field input:focus, .form-field textarea:focus { border-color: var(--primary); }
+    .form-field textarea { min-height: 100px; }
+    .field-hint { font-size: 11px; color: var(--outline); }
+
+    .btn-submit {
+      background: var(--primary); color: var(--on-primary);
+      border: none; padding: 16px 28px; border-radius: 9999px;
+      font-family: var(--sans); font-size: 16px; font-weight: 600;
+      cursor: pointer; width: 100%; text-align: center;
+      transition: opacity 0.15s; margin-top: 8px; display: block;
+    }
+    .btn-submit:hover { opacity: 0.88; }
+    .form-note { font-size: 12px; color: var(--outline); text-align: center; margin-top: 12px; line-height: 1.6; }
+
+    /* Annotation */
+    .annotation-wrap { padding: 0 48px 80px; max-width: 960px; margin: 0 auto; }
+    .annotation { background: rgb(32 27 23); color: rgb(255 248 245); border-radius: 16px; padding: 24px 28px; font-size: 13px; line-height: 1.7; }
+    .annotation strong { color: rgb(255 183 124); }
+    .annotation h3 { font-family: var(--serif); font-size: 20px; font-weight: 400; margin-bottom: 12px; }
+    .annotation ul { padding-left: 20px; display: flex; flex-direction: column; gap: 6px; margin-top: 8px; }
+    .annotation code { background: rgba(255,255,255,0.1); padding: 1px 6px; border-radius: 4px; font-size: 12px; }
+  </style>
+</head>
+<body>
+
+  <div class="scenario-bar">
+    <span class="scenario-bar-label">Booking UX Scenarios</span>
+    <a href="mockup-a.html">A · Card Expands</a>
+    <a href="mockup-b.html">B · Select + Scroll</a>
+    <a href="mockup-c.html">C · Drawer</a>
+    <a href="mockup-d.html">D · Booking Page</a>
+    <a href="mockup-e.html">E · Chip Selector</a>
+    <a href="mockup-f.html">F · Visual Radio</a>
+    <a href="mockup-g.html" class="active">G · Just the Form</a>
+    <a href="mockup-h.html">H · Horizontal Cards</a>
+    <a href="mockup-i.html">I · Free Consult</a>
+    <span class="scenario-bar-desc">The Byron Doula · 2026</span>
+  </div>
+
+  <nav style="margin-top:36px">
+    <a href="#" class="nav-logo">The Byron Doula</a>
+    <ul class="nav-links">
+      <li><a href="#">Services</a></li>
+      <li><a href="#">About</a></li>
+      <li><a href="#">Reviews</a></li>
+    </ul>
+    <a href="#" class="nav-cta">Book a session</a>
+  </nav>
+
+  <div class="contact-section" id="book">
+
+    <!-- Left -->
+    <div class="contact-left">
+      <p class="eyebrow">Book a Session</p>
+      <h2 class="contact-heading">Let's talk</h2>
+      <p class="contact-body">Send a message and Nathalie will reply within one business day to discuss what you need and arrange your session.</p>
+
+      <div class="price-pill">
+        <span class="price-pill-num">$150</span>
+        <span class="price-pill-label">/ hour · all services</span>
+      </div>
+
+      <div class="contact-portrait">
+        <img src="../images/nathalie-portrait.jpg" alt="Nathalie Solis, The Byron Doula" onerror="this.closest('.contact-portrait').style.background='var(--surface-container-highest)'">
+      </div>
+    </div>
+
+    <!-- Right: the form, nothing else -->
+    <div class="form-wrap">
+      <h3 class="form-title">Get in touch</h3>
+      <p class="form-sub">Name, email, and a short message is all Nathalie needs to get back to you.</p>
+
+      <div class="form-row">
+        <div class="form-field">
+          <label>Your name *</label>
+          <input type="text" placeholder="e.g. Sophie Willing">
+        </div>
+        <div class="form-field">
+          <label>Email *</label>
+          <input type="email" placeholder="you@example.com">
+        </div>
+      </div>
+
+      <div class="form-field">
+        <label>Your message *</label>
+        <textarea placeholder="Tell Nathalie what you're looking for — service, due date, questions, anything at all."></textarea>
+        <span class="field-hint">This goes directly to Nathalie's inbox.</span>
+      </div>
+
+      <button class="btn-submit">Send Message</button>
+      <p class="form-note">
+        Nathalie replies within 1 business day.<br>
+        Or email directly: <strong>hello@thebyrondoula.com</strong>
+      </p>
+    </div>
+
+  </div>
+
+  <div class="annotation-wrap">
+    <div class="annotation">
+      <h3>Scenario G — Just the Form</h3>
+      <p><strong>The idea:</strong> Remove the service choice from the form entirely. The visitor already knows what they want from the service cards above — they don't need to confirm it again. Name, email, message. That's it. Nathalie can clarify the service in her reply.</p>
+      <ul>
+        <li>Pros: Absolute minimum fields. No friction at all. Anyone can fill this in. Works identically whether they came from a specific card or the hero CTA.</li>
+        <li>Pros: Treats the form as a conversation starter, not a transaction — which matches how Nathalie actually works.</li>
+        <li>Cons: Nathalie has to ask "which service?" in every reply if the visitor doesn't mention it — one extra back-and-forth.</li>
+        <li>Verdict: Works well if the free-text message field gets used. Works badly if people just write "hi" and nothing else.</li>
+      </ul>
+    </div>
+  </div>
+
+</body>
+</html>

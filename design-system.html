@@ -1,0 +1,1891 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Byron Doula — Design System</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    /* ── RESET ─────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    /* ── BRAND TOKENS ──────────────────────────────────── */
+    :root {
+      /* MD3 system tokens — light mode (source: css/themes/light.css) */
+      --primary:                  #805610;
+      --on-primary:               #FFFFFF;
+      --primary-container:        #FFDDB4;
+      --on-primary-container:     #633F00;
+      --secondary:                #705B40;
+      --on-secondary:             #FFFFFF;
+      --secondary-container:      #FBDEBC;
+      --on-secondary-container:   #56432B;
+      --tertiary:                 #52643F;
+      --on-tertiary:              #FFFFFF;
+      --tertiary-container:       #D4EABB;
+      --on-tertiary-container:    #3B4C29;
+      --error:                    #BA1A1A;
+      --on-error:                 #FFFFFF;
+      --error-container:          #FFDAD6;
+      --on-error-container:       #93000A;
+      --background:               #FFF8F4;
+      --on-background:            #211B13;
+      --surface:                  #FFF8F4;
+      --on-surface:               #211B13;
+      --surface-variant:          #F0E0CF;
+      --on-surface-variant:       #4F4539;
+      --outline:                  #817567;
+      --outline-variant:          #D3C4B4;
+      --inverse-surface:          #362F27;
+      --inverse-on-surface:       #FCEFE2;
+      --inverse-primary:          #F5BC6F;
+      --surface-dim:              #E4D8CC;
+      --surface-bright:           #FFF8F4;
+      --surface-container-lowest: #FFFFFF;
+      --surface-container-low:    #FFF1E5;
+      --surface-container:        #F9ECDF;
+      --surface-container-high:   #F3E6DA;
+      --surface-container-highest:#EDE0D4;
+
+      /* Typography */
+      --serif: 'Cormorant Garamond', Georgia, serif;
+      --sans:  'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+      /* Shape scale */
+      --shape-xs:  4px;
+      --shape-sm:  8px;
+      --shape-md:  12px;
+      --shape-lg:  16px;
+      --shape-xl:  28px;
+      --shape-full:9999px;
+
+      /* Elevation shadows */
+      --elev-0: none;
+      --elev-1: 0 1px 2px rgba(0,0,0,.30), 0 1px 3px 1px rgba(0,0,0,.15);
+      --elev-2: 0 1px 2px rgba(0,0,0,.30), 0 2px 6px 2px rgba(0,0,0,.15);
+      --elev-3: 0 4px 8px 3px rgba(0,0,0,.15), 0 1px 3px rgba(0,0,0,.30);
+      --elev-4: 0 6px 10px 4px rgba(0,0,0,.15), 0 2px 3px rgba(0,0,0,.30);
+      --elev-5: 0 8px 12px 6px rgba(0,0,0,.15), 0 4px 4px rgba(0,0,0,.30);
+    }
+
+    /* ── BASE ──────────────────────────────────────────── */
+    body {
+      font-family: var(--sans);
+      font-size: 14px;
+      line-height: 1.6;
+      background: var(--background);
+      color: var(--on-surface);
+      display: flex;
+      min-height: 100vh;
+    }
+
+    /* ── SIDEBAR ───────────────────────────────────────── */
+    .sidebar {
+      width: 220px;
+      flex-shrink: 0;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow-y: auto;
+      background: var(--surface-container-low);
+      border-right: 1px solid var(--outline-variant);
+      padding: 32px 0;
+      display: flex;
+      flex-direction: column;
+    }
+    .sidebar-logo {
+      font-family: var(--serif);
+      font-size: 20px;
+      font-weight: 400;
+      color: var(--on-surface);
+      padding: 0 20px 24px;
+      border-bottom: 1px solid var(--outline-variant);
+      margin-bottom: 16px;
+      line-height: 1.3;
+    }
+    .sidebar-logo span {
+      display: block;
+      font-family: var(--sans);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--primary);
+      margin-top: 4px;
+    }
+    .nav-section {
+      font-family: var(--sans);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--outline);
+      padding: 16px 20px 6px;
+    }
+    .sidebar a {
+      display: block;
+      padding: 8px 20px;
+      font-size: 13px;
+      color: var(--on-surface-variant);
+      text-decoration: none;
+      border-radius: 0 var(--shape-full) var(--shape-full) 0;
+      margin-right: 12px;
+      transition: background 0.15s, color 0.15s;
+    }
+    .sidebar a:hover, .sidebar a.active {
+      background: color-mix(in srgb, var(--primary) 12%, transparent);
+      color: var(--primary);
+      font-weight: 500;
+    }
+    .sidebar-footer {
+      margin-top: auto;
+      padding: 20px;
+      font-size: 11px;
+      color: var(--outline);
+    }
+
+    /* ── MAIN CONTENT ─────────────────────────────────── */
+    .main {
+      flex: 1;
+      padding: 60px 56px;
+      max-width: 960px;
+      min-width: 0;
+    }
+
+    /* ── PAGE HEADER ──────────────────────────────────── */
+    .page-hero {
+      margin-bottom: 72px;
+      padding-bottom: 48px;
+      border-bottom: 1px solid var(--outline-variant);
+    }
+    .page-hero .eyebrow {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--primary);
+      margin-bottom: 12px;
+    }
+    .page-hero h1 {
+      font-family: var(--serif);
+      font-size: 56px;
+      font-weight: 400;
+      line-height: 1.1;
+      color: var(--on-surface);
+      margin-bottom: 16px;
+    }
+    .page-hero p {
+      font-size: 16px;
+      color: var(--on-surface-variant);
+      max-width: 560px;
+      line-height: 1.7;
+    }
+    .version-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--primary-container);
+      color: var(--on-primary-container);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      padding: 4px 12px;
+      border-radius: var(--shape-full);
+      margin-bottom: 16px;
+    }
+
+    /* ── SECTION LAYOUT ───────────────────────────────── */
+    section {
+      margin-bottom: 80px;
+      scroll-margin-top: 32px;
+    }
+    .section-header {
+      display: flex;
+      align-items: baseline;
+      gap: 16px;
+      margin-bottom: 8px;
+    }
+    .section-header h2 {
+      font-family: var(--serif);
+      font-size: 32px;
+      font-weight: 400;
+      color: var(--on-surface);
+    }
+    .section-tag {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--secondary);
+      background: var(--secondary-container);
+      padding: 3px 10px;
+      border-radius: var(--shape-full);
+    }
+    .section-desc {
+      font-size: 14px;
+      color: var(--on-surface-variant);
+      margin-bottom: 32px;
+      line-height: 1.7;
+    }
+    .divider {
+      height: 1px;
+      background: var(--outline-variant);
+      margin: 48px 0;
+    }
+    .subsection-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--outline);
+      margin-bottom: 16px;
+      margin-top: 36px;
+    }
+
+    /* ── COLOR PALETTE ────────────────────────────────── */
+    .color-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-bottom: 32px;
+    }
+    .color-pair {
+      border-radius: var(--shape-md);
+      overflow: hidden;
+      box-shadow: var(--elev-1);
+    }
+    .color-swatch {
+      height: 80px;
+      display: flex;
+      align-items: flex-end;
+      padding: 10px 14px;
+      position: relative;
+    }
+    .color-swatch .swatch-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.3px;
+    }
+    .color-swatch .swatch-hex {
+      font-size: 11px;
+      opacity: 0.7;
+      position: absolute;
+      top: 10px;
+      right: 14px;
+      font-family: 'Courier New', monospace;
+    }
+    .color-on-swatch {
+      height: 36px;
+      display: flex;
+      align-items: center;
+      padding: 0 14px;
+      font-size: 11px;
+      font-weight: 500;
+    }
+    .role-swatches {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 8px;
+      margin-bottom: 24px;
+    }
+    .role-swatch {
+      border-radius: var(--shape-sm);
+      padding: 14px;
+      box-shadow: var(--elev-1);
+    }
+    .role-swatch .rs-role {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      margin-bottom: 6px;
+      opacity: 0.75;
+    }
+    .role-swatch .rs-hex {
+      font-size: 12px;
+      font-family: 'Courier New', monospace;
+      font-weight: 500;
+    }
+
+    /* Tonal ramp */
+    .tonal-ramp {
+      display: flex;
+      border-radius: var(--shape-sm);
+      overflow: hidden;
+      height: 64px;
+      margin-bottom: 8px;
+      box-shadow: var(--elev-1);
+    }
+    .tonal-step {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      padding-bottom: 6px;
+    }
+    .tonal-step .ts-tone {
+      font-size: 9px;
+      font-weight: 600;
+    }
+    .tonal-ramp-label {
+      font-size: 12px;
+      color: var(--on-surface-variant);
+      margin-bottom: 20px;
+    }
+    .tonal-ramp-label strong { color: var(--on-surface); }
+
+    /* ── TYPOGRAPHY ───────────────────────────────────── */
+    .type-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    .type-table th {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--outline);
+      text-align: left;
+      padding: 8px 16px;
+      border-bottom: 1px solid var(--outline-variant);
+    }
+    .type-table td {
+      padding: 16px;
+      border-bottom: 1px solid var(--outline-variant);
+      vertical-align: middle;
+    }
+    .type-table tr:last-child td { border-bottom: none; }
+    .type-table tr:hover td {
+      background: color-mix(in srgb, var(--primary) 4%, transparent);
+    }
+    .type-role {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      color: var(--primary);
+      background: var(--primary-container);
+      padding: 2px 8px;
+      border-radius: var(--shape-full);
+      white-space: nowrap;
+    }
+    .type-spec {
+      font-size: 12px;
+      color: var(--on-surface-variant);
+      font-family: 'Courier New', monospace;
+    }
+    .type-usage {
+      font-size: 12px;
+      color: var(--on-surface-variant);
+    }
+    .font-specimen {
+      background: var(--surface-container-low);
+      border-radius: var(--shape-lg);
+      padding: 36px;
+      margin-bottom: 24px;
+      border: 1px solid var(--outline-variant);
+    }
+    .font-specimen .specimen-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--outline);
+      margin-bottom: 20px;
+    }
+
+    /* ── SHAPE SCALE ─────────────────────────────────── */
+    .shape-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+    .shape-card {
+      background: var(--surface-container-low);
+      border: 1px solid var(--outline-variant);
+      padding: 28px 20px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+    }
+    .shape-box {
+      width: 80px;
+      height: 80px;
+      background: var(--primary-container);
+      border: 2px solid var(--primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .shape-box .sb-inner {
+      width: 40px;
+      height: 40px;
+      background: var(--primary);
+      opacity: 0.3;
+    }
+    .shape-name {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--on-surface);
+      text-align: center;
+    }
+    .shape-value {
+      font-size: 13px;
+      font-family: 'Courier New', monospace;
+      color: var(--primary);
+      font-weight: 600;
+    }
+    .shape-desc {
+      font-size: 11px;
+      color: var(--on-surface-variant);
+      text-align: center;
+    }
+
+    /* ── ELEVATION ───────────────────────────────────── */
+    .elev-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    .elev-card {
+      background: var(--surface);
+      border-radius: var(--shape-md);
+      padding: 28px 20px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+    .elev-num {
+      font-size: 22px;
+      font-weight: 700;
+      font-family: var(--serif);
+      color: var(--primary);
+    }
+    .elev-name {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      color: var(--on-surface-variant);
+    }
+    .elev-desc {
+      font-size: 11px;
+      color: var(--on-surface-variant);
+      text-align: center;
+      line-height: 1.6;
+    }
+    .elev-tint-demo {
+      width: 100%;
+      height: 40px;
+      border-radius: var(--shape-sm);
+      margin-top: 4px;
+    }
+
+    /* ── COMPONENT EXAMPLES ──────────────────────────── */
+    .comp-section { margin-bottom: 32px; }
+    .comp-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+      background: var(--surface-container-low);
+      border: 1px solid var(--outline-variant);
+      border-radius: var(--shape-lg);
+      padding: 24px;
+      margin-bottom: 8px;
+    }
+    .comp-row.on-dark { background: var(--inverse-surface); }
+    .comp-label {
+      font-size: 11px;
+      color: var(--outline);
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    /* ── BUTTONS ─────────────────────────────────────── */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 40px;
+      padding: 10px 24px;
+      border-radius: var(--shape-full);
+      font-family: var(--sans);
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 0.1px;
+      cursor: pointer;
+      border: none;
+      text-decoration: none;
+      transition: box-shadow 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+    .btn::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: currentColor;
+      opacity: 0;
+      transition: opacity 0.15s;
+      border-radius: inherit;
+      pointer-events: none;
+    }
+    .btn:hover::after { opacity: 0.08; }
+    .btn:active::after { opacity: 0.12; }
+
+    .btn-filled {
+      background: var(--primary);
+      color: var(--on-primary);
+      box-shadow: var(--elev-1);
+    }
+    .btn-filled:hover { box-shadow: var(--elev-3); }
+
+    .btn-filled-tonal {
+      background: var(--primary-container);
+      color: var(--on-primary-container);
+    }
+    .btn-filled-tonal:hover { box-shadow: var(--elev-2); }
+
+    .btn-outlined {
+      background: transparent;
+      color: var(--primary);
+      border: 1px solid var(--outline);
+    }
+
+    .btn-text-btn {
+      background: transparent;
+      color: var(--primary);
+      padding: 10px 12px;
+    }
+
+    .btn-elevated {
+      background: var(--surface-container-low);
+      color: var(--primary);
+      box-shadow: var(--elev-2);
+    }
+    .btn-elevated:hover { box-shadow: var(--elev-3); }
+
+    .btn-danger {
+      background: var(--error);
+      color: var(--on-error);
+      box-shadow: var(--elev-1);
+    }
+
+    .btn-sm { min-height: 32px; padding: 6px 16px; font-size: 12px; }
+    .btn-lg { min-height: 48px; padding: 12px 32px; font-size: 16px; }
+    .btn[disabled] { opacity: 0.38; cursor: not-allowed; box-shadow: none; }
+
+    /* ── CHIPS ───────────────────────────────────────── */
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      height: 32px;
+      padding: 0 16px;
+      border-radius: var(--shape-full);
+      font-family: var(--sans);
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: box-shadow 0.15s;
+    }
+    .chip-assist {
+      background: var(--surface-container-low);
+      color: var(--on-surface-variant);
+      border: 1px solid var(--outline-variant);
+    }
+    .chip-assist:hover { box-shadow: var(--elev-2); }
+    .chip-filter {
+      background: var(--secondary-container);
+      color: var(--on-secondary-container);
+    }
+    .chip-input {
+      background: var(--surface-container-high);
+      color: var(--on-surface-variant);
+      border: 1px solid var(--outline-variant);
+    }
+    .chip-suggestion {
+      background: var(--surface-container-low);
+      color: var(--on-surface-variant);
+      border: 1px solid var(--outline-variant);
+    }
+    .chip-selected {
+      background: var(--primary-container);
+      color: var(--on-primary-container);
+    }
+
+    /* ── CARDS ───────────────────────────────────────── */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-bottom: 8px;
+    }
+    .card {
+      border-radius: var(--shape-xl);
+      overflow: hidden;
+      transition: box-shadow 0.2s;
+      cursor: pointer;
+      position: relative;
+    }
+    .card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: var(--on-surface);
+      opacity: 0;
+      transition: opacity 0.15s;
+      pointer-events: none;
+    }
+    .card:hover::after { opacity: 0.08; }
+    .card-elevated {
+      background: var(--surface-container-low);
+      box-shadow: var(--elev-1);
+    }
+    .card-elevated:hover { box-shadow: var(--elev-3); }
+    .card-filled { background: var(--surface-container-highest); }
+    .card-outlined {
+      background: var(--surface);
+      border: 1px solid var(--outline-variant);
+    }
+    .card-header {
+      height: 100px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+    }
+    .card-elevated .card-header { background: var(--primary-container); }
+    .card-filled .card-header   { background: var(--tertiary-container); }
+    .card-outlined .card-header { background: var(--secondary-container); }
+    .card-body { padding: 16px; }
+    .card-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--on-surface);
+      margin-bottom: 6px;
+    }
+    .card-text {
+      font-size: 13px;
+      color: var(--on-surface-variant);
+      line-height: 1.6;
+    }
+    .card-actions {
+      padding: 8px 8px 12px;
+      display: flex;
+      gap: 8px;
+    }
+
+    /* ── TEXT FIELDS ─────────────────────────────────── */
+    .fields-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      max-width: 600px;
+    }
+    .md-outlined-field {
+      position: relative;
+      height: 56px;
+      margin-bottom: 16px;
+    }
+    .md-outlined-field input {
+      width: 100%;
+      height: 56px;
+      padding: 16px;
+      border: 1px solid var(--outline);
+      border-radius: var(--shape-xs);
+      background: transparent;
+      color: var(--on-surface);
+      font-family: var(--sans);
+      font-size: 16px;
+      outline: none;
+      transition: border-color 0.2s, border-width 0.1s;
+    }
+    .md-outlined-field input:focus {
+      border-color: var(--primary);
+      border-width: 2px;
+    }
+    .md-outlined-field .float-label {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 16px;
+      color: var(--on-surface-variant);
+      background: var(--surface);
+      padding: 0 4px;
+      pointer-events: none;
+      transition: all 0.15s ease;
+      line-height: 1;
+    }
+    .md-outlined-field input:focus + .float-label,
+    .md-outlined-field input:not(:placeholder-shown) + .float-label {
+      top: 0;
+      transform: translateY(-50%);
+      font-size: 12px;
+      color: var(--primary);
+    }
+    .md-filled-field {
+      position: relative;
+      height: 56px;
+      margin-bottom: 16px;
+    }
+    .md-filled-field input {
+      width: 100%;
+      height: 56px;
+      padding: 20px 16px 8px;
+      background: var(--surface-container-highest);
+      border: none;
+      border-bottom: 1px solid var(--outline);
+      border-radius: var(--shape-xs) var(--shape-xs) 0 0;
+      color: var(--on-surface);
+      font-family: var(--sans);
+      font-size: 16px;
+      outline: none;
+      transition: border-bottom-width 0.1s;
+    }
+    .md-filled-field input:focus {
+      border-bottom: 2px solid var(--primary);
+    }
+    .md-filled-field .float-label {
+      position: absolute;
+      left: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 16px;
+      color: var(--on-surface-variant);
+      pointer-events: none;
+      transition: all 0.15s ease;
+      line-height: 1;
+    }
+    .md-filled-field input:focus + .float-label,
+    .md-filled-field input:not(:placeholder-shown) + .float-label {
+      top: 12px;
+      transform: none;
+      font-size: 12px;
+      color: var(--primary);
+    }
+
+    /* ── SPACING ─────────────────────────────────────── */
+    .spacing-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .spacing-row {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    .spacing-token {
+      font-size: 11px;
+      font-weight: 700;
+      font-family: 'Courier New', monospace;
+      color: var(--primary);
+      width: 60px;
+      flex-shrink: 0;
+    }
+    .spacing-bar-wrap {
+      flex: 1;
+      height: 24px;
+      background: var(--surface-container-high);
+      border-radius: var(--shape-xs);
+      overflow: hidden;
+    }
+    .spacing-bar {
+      height: 100%;
+      background: color-mix(in srgb, var(--primary) 60%, transparent);
+      border-radius: var(--shape-xs);
+    }
+    .spacing-value {
+      font-size: 12px;
+      color: var(--on-surface-variant);
+      font-family: 'Courier New', monospace;
+      width: 40px;
+      text-align: right;
+      flex-shrink: 0;
+    }
+    .spacing-usage {
+      font-size: 12px;
+      color: var(--on-surface-variant);
+      width: 200px;
+      flex-shrink: 0;
+    }
+    .grid-demo {
+      background: var(--surface-container-low);
+      border: 1px solid var(--outline-variant);
+      border-radius: var(--shape-md);
+      padding: 32px;
+      margin-top: 32px;
+    }
+    .grid-demo-inner {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+    .grid-col {
+      height: 40px;
+      background: color-mix(in srgb, var(--primary) 20%, transparent);
+      border-radius: 2px;
+      border: 1px solid color-mix(in srgb, var(--primary) 40%, transparent);
+    }
+    .grid-label {
+      font-size: 11px;
+      color: var(--on-surface-variant);
+      text-align: center;
+    }
+
+    /* ── INFO GRID ───────────────────────────────────── */
+    .info-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    .info-card {
+      background: var(--surface-container-low);
+      border: 1px solid var(--outline-variant);
+      border-radius: var(--shape-lg);
+      padding: 24px;
+    }
+    .info-card h4 {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--on-surface);
+      margin-bottom: 12px;
+    }
+    .info-card ul {
+      list-style: none;
+      font-size: 13px;
+      color: var(--on-surface-variant);
+      line-height: 2;
+    }
+    .info-card ul li::before {
+      content: "→ ";
+      color: var(--primary);
+      font-weight: 700;
+    }
+
+    /* ── SCROLLBAR ─────────────────────────────────────── */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb {
+      background: var(--outline-variant);
+      border-radius: 3px;
+    }
+
+    /* ── RESPONSIVE ──────────────────────────────────── */
+    @media (max-width: 900px) {
+      body { flex-direction: column; }
+      .sidebar { width: 100%; height: auto; position: static; padding: 16px 0; }
+      .sidebar-logo { border-bottom: none; }
+      .sidebar a { display: inline-block; margin: 4px; border-radius: var(--shape-full); padding: 6px 14px; }
+      .nav-section { display: none; }
+      .main { padding: 32px 20px; max-width: 100%; }
+      .color-grid { grid-template-columns: 1fr 1fr; }
+      .shape-grid, .elev-grid, .cards-grid { grid-template-columns: 1fr 1fr; }
+      .fields-grid { grid-template-columns: 1fr; }
+      .info-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 600px) {
+      .color-grid { grid-template-columns: 1fr; }
+      .shape-grid, .elev-grid, .cards-grid { grid-template-columns: 1fr; }
+      .role-swatches { grid-template-columns: repeat(2, 1fr) !important; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════ SIDEBAR ═══════════════════════════════ -->
+<nav class="sidebar" aria-label="Design system navigation">
+  <div class="sidebar-logo">
+    The Byron Doula
+    <span>Design System v1.0</span>
+  </div>
+
+  <div class="nav-section">Foundations</div>
+  <a href="#colors">Color Palette</a>
+  <a href="#tonal">Tonal Palettes</a>
+  <a href="#typography">Typography</a>
+  <a href="#shape">Shape Scale</a>
+  <a href="#elevation">Elevation</a>
+  <a href="#spacing">Spacing &amp; Grid</a>
+
+  <div class="nav-section">Components</div>
+  <a href="#buttons">Buttons</a>
+  <a href="#chips">Chips</a>
+  <a href="#cards">Cards</a>
+  <a href="#fields">Text Fields</a>
+
+  <div class="nav-section">Reference</div>
+  <a href="#brand">Brand Principles</a>
+
+  <div class="sidebar-footer">
+    Material Design 3 · May 2026
+  </div>
+</nav>
+
+<!-- ═══════════════════════════════ MAIN ════════════════════════════════ -->
+<main class="main">
+
+  <!-- Page Header -->
+  <div class="page-hero">
+    <div class="version-pill">🌿 v1.0 · Material Design 3</div>
+    <h1>Design System</h1>
+    <p>The visual foundation for The Byron Doula — a warm, earthy Material Design 3 system rooted in nature, trust, and compassionate care for families during the childbearing year.</p>
+  </div>
+
+  <!-- ═══════════ 1. COLOR PALETTE ═══════════ -->
+  <section id="colors">
+    <div class="section-header">
+      <h2>Color Palette</h2>
+      <span class="section-tag">MD3 Roles</span>
+    </div>
+    <p class="section-desc">Three source colors — warm amber (primary), warm brown (secondary), and sage green (tertiary) — generate a full MD3 system. The warm cream background grounds the palette in natural, nurturing warmth.</p>
+
+    <div class="subsection-label">Primary · Warm Amber</div>
+    <div class="color-grid">
+      <div class="color-pair">
+        <div class="color-swatch" style="background:#805610; color:#fff;">
+          <span class="swatch-label">Primary</span>
+          <span class="swatch-hex" style="color:rgba(255,255,255,0.6)">#805610</span>
+        </div>
+        <div class="color-on-swatch" style="background:#fff; color:#805610;">On Primary · #FFFFFF</div>
+      </div>
+      <div class="color-pair">
+        <div class="color-swatch" style="background:#FFDDB4; color:#211B13;">
+          <span class="swatch-label">Primary Container</span>
+          <span class="swatch-hex">#FFDDB4</span>
+        </div>
+        <div class="color-on-swatch" style="background:#633F00; color:#FFDDB4;">On Primary Container · #633F00</div>
+      </div>
+      <div class="color-pair">
+        <div class="color-swatch" style="background:#F5BC6F; color:#211B13;">
+          <span class="swatch-label">Inverse Primary</span>
+          <span class="swatch-hex">#F5BC6F</span>
+        </div>
+        <div class="color-on-swatch" style="background:#FFF1E5; color:#805610;">Primary Fixed · #FFDDB4</div>
+      </div>
+      <div class="color-pair">
+        <div class="color-swatch" style="background:#633F00; color:#FFDDB4;">
+          <span class="swatch-label">On Primary Container</span>
+          <span class="swatch-hex" style="color:rgba(255,221,180,0.6)">#633F00</span>
+        </div>
+        <div class="color-on-swatch" style="background:#633F00; color:#F5BC6F;">Primary Fixed Dim · #F5BC6F</div>
+      </div>
+    </div>
+
+    <div class="subsection-label">Secondary · Warm Brown</div>
+    <div class="color-grid">
+      <div class="color-pair">
+        <div class="color-swatch" style="background:#705B40; color:#fff;">
+          <span class="swatch-label">Secondary</span>
+          <span class="swatch-hex" style="color:rgba(255,255,255,0.6)">#705B40</span>
+        </div>
+        <div class="color-on-swatch" style="background:#fff; color:#705B40;">On Secondary · #FFFFFF</div>
+      </div>
+      <div class="color-pair">
+        <div class="color-swatch" style="background:#FBDEBC; color:#211B13;">
+          <span class="swatch-label">Secondary Container</span>
+          <span class="swatch-hex">#FBDEBC</span>
+        </div>
+        <div class="color-on-swatch" style="background:#56432B; color:#FBDEBC;">On Secondary Container · #56432B</div>
+      </div>
+      <div class="color-pair">
+        <div class="color-swatch" style="background:#DDC2A1; color:#211B13;">
+          <span class="swatch-label">Secondary Fixed Dim</span>
+          <span class="swatch-hex">#DDC2A1</span>
+        </div>
+        <div class="color-on-swatch" style="background:#FBDEBC; color:#56432B;">Secondary Fixed · #FBDEBC</div>
+      </div>
+      <div class="color-pair">
+        <div class="color-swatch" style="background:#56432B; color:#FBDEBC;">
+          <span class="swatch-label">On Secondary Container</span>
+          <span class="swatch-hex" style="color:rgba(251,222,188,0.6)">#56432B</span>
+        </div>
+        <div class="color-on-swatch" style="background:#FBDEBC; color:#56432B;">Secondary Container · #FBDEBC</div>
+      </div>
+    </div>
+
+    <div class="subsection-label">Tertiary · Sage Green</div>
+    <div class="color-grid">
+      <div class="color-pair">
+        <div class="color-swatch" style="background:#52643F; color:#fff;">
+          <span class="swatch-label">Tertiary</span>
+          <span class="swatch-hex" style="color:rgba(255,255,255,0.6)">#52643F</span>
+        </div>
+        <div class="color-on-swatch" style="background:#fff; color:#52643F;">On Tertiary · #FFFFFF</div>
+      </div>
+      <div class="color-pair">
+        <div class="color-swatch" style="background:#D4EABB; color:#211B13;">
+          <span class="swatch-label">Tertiary Container</span>
+          <span class="swatch-hex">#D4EABB</span>
+        </div>
+        <div class="color-on-swatch" style="background:#3B4C29; color:#D4EABB;">On Tertiary Container · #3B4C29</div>
+      </div>
+      <div class="color-pair">
+        <div class="color-swatch" style="background:#B9CDA0; color:#211B13;">
+          <span class="swatch-label">Tertiary Fixed Dim</span>
+          <span class="swatch-hex">#B9CDA0</span>
+        </div>
+        <div class="color-on-swatch" style="background:#D4EABB; color:#3B4C29;">Tertiary Fixed · #D4EABB</div>
+      </div>
+      <div class="color-pair">
+        <div class="color-swatch" style="background:#3B4C29; color:#D4EABB;">
+          <span class="swatch-label">On Tertiary Container</span>
+          <span class="swatch-hex" style="color:rgba(212,234,187,0.6)">#3B4C29</span>
+        </div>
+        <div class="color-on-swatch" style="background:#D4EABB; color:#3B4C29;">Tertiary Container · #D4EABB</div>
+      </div>
+    </div>
+
+    <div class="subsection-label">Custom · Dusty Rose</div>
+    <div class="color-grid">
+      <div class="color-pair">
+        <div class="color-swatch" style="background:#7B5153; color:#fff;">
+          <span class="swatch-label">Custom Color</span>
+          <span class="swatch-hex" style="color:rgba(255,255,255,0.6)">#7B5153</span>
+        </div>
+        <div class="color-on-swatch" style="background:#fff; color:#7B5153;">On Custom Color · #FFFFFF</div>
+      </div>
+      <div class="color-pair">
+        <div class="color-swatch" style="background:#EBE0E1; color:#211B13;">
+          <span class="swatch-label">Custom Container</span>
+          <span class="swatch-hex">#EBE0E1</span>
+        </div>
+        <div class="color-on-swatch" style="background:#1F1415; color:#EBE0E1;">On Custom Container · #1F1415</div>
+      </div>
+      <div class="color-pair">
+        <div class="color-swatch" style="background:#D7C1C3; color:#211B13;">
+          <span class="swatch-label">Custom Color (Dark)</span>
+          <span class="swatch-hex">#D7C1C3</span>
+        </div>
+        <div class="color-on-swatch" style="background:#3E2829; color:#D7C1C3;">On Custom Color Dark · #3E2829</div>
+      </div>
+      <div class="color-pair">
+        <div class="color-swatch" style="background:#5D3C3F; color:#EBE0E1;">
+          <span class="swatch-label">Custom Container (Dark)</span>
+          <span class="swatch-hex" style="color:rgba(235,224,225,0.7)">#5D3C3F</span>
+        </div>
+        <div class="color-on-swatch" style="background:#EBE0E1; color:#1F1415;">On Custom Container Dark · #EBE0E1</div>
+      </div>
+    </div>
+
+    <div class="subsection-label">Surface &amp; Neutral</div>
+    <div class="role-swatches">
+      <div class="role-swatch" style="background:#FFF8F4; border:1px solid #D3C4B4; color:#211B13;">
+        <div class="rs-role">Background</div>
+        <div class="rs-hex">#FFF8F4</div>
+      </div>
+      <div class="role-swatch" style="background:#FFFFFF; border:1px solid #D3C4B4; color:#211B13;">
+        <div class="rs-role">Surface Lowest</div>
+        <div class="rs-hex">#FFFFFF</div>
+      </div>
+      <div class="role-swatch" style="background:#FFF1E5; color:#211B13;">
+        <div class="rs-role">Surface Low</div>
+        <div class="rs-hex">#FFF1E5</div>
+      </div>
+      <div class="role-swatch" style="background:#F9ECDF; color:#211B13;">
+        <div class="rs-role">Surface</div>
+        <div class="rs-hex">#F9ECDF</div>
+      </div>
+      <div class="role-swatch" style="background:#F3E6DA; color:#211B13;">
+        <div class="rs-role">Surface High</div>
+        <div class="rs-hex">#F3E6DA</div>
+      </div>
+    </div>
+    <div class="role-swatches" style="margin-top:8px;">
+      <div class="role-swatch" style="background:#EDE0D4; color:#211B13;">
+        <div class="rs-role">Surface Highest</div>
+        <div class="rs-hex">#EDE0D4</div>
+      </div>
+      <div class="role-swatch" style="background:#F0E0CF; border:1px solid #D3C4B4; color:#211B13;">
+        <div class="rs-role">Surface Variant</div>
+        <div class="rs-hex">#F0E0CF</div>
+      </div>
+      <div class="role-swatch" style="background:#817567; color:#fff;">
+        <div class="rs-role">Outline</div>
+        <div class="rs-hex">#817567</div>
+      </div>
+      <div class="role-swatch" style="background:#D3C4B4; color:#211B13;">
+        <div class="rs-role">Outline Variant</div>
+        <div class="rs-hex">#D3C4B4</div>
+      </div>
+      <div class="role-swatch" style="background:#362F27; color:#FCEFE2;">
+        <div class="rs-role">Inverse Surface</div>
+        <div class="rs-hex">#362F27</div>
+      </div>
+    </div>
+
+    <div class="subsection-label">Text Colors</div>
+    <div class="role-swatches" style="grid-template-columns: repeat(4, 1fr);">
+      <div class="role-swatch" style="background:#211B13; color:#FCEFE2;">
+        <div class="rs-role">On Surface</div>
+        <div class="rs-hex">#211B13</div>
+      </div>
+      <div class="role-swatch" style="background:#4F4539; color:#EDE0D4;">
+        <div class="rs-role">On Surface Variant</div>
+        <div class="rs-hex">#4F4539</div>
+      </div>
+      <div class="role-swatch" style="background:#817567; color:#fff;">
+        <div class="rs-role">Outline (Muted)</div>
+        <div class="rs-hex">#817567</div>
+      </div>
+      <div class="role-swatch" style="background:#BA1A1A; color:#fff;">
+        <div class="rs-role">Error</div>
+        <div class="rs-hex">#BA1A1A</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ 2. TONAL PALETTES ═══════════ -->
+  <section id="tonal">
+    <div class="section-header">
+      <h2>Tonal Palettes</h2>
+      <span class="section-tag">Ramps</span>
+    </div>
+    <p class="section-desc">Each source color generates a tonal ramp from 0 (black) to 100 (white). MD3 roles are assigned at specific tone values — marked with ★ below.</p>
+
+    <div class="subsection-label">Primary Ramp — Warm Amber</div>
+    <div class="tonal-ramp">
+      <div class="tonal-step" style="background:#000000;"><span class="ts-tone" style="color:#805610">0</span></div>
+      <div class="tonal-step" style="background:#291800;"><span class="ts-tone" style="color:#F5BC6F">10</span></div>
+      <div class="tonal-step" style="background:#452B00;"><span class="ts-tone" style="color:#F5BC6F">20</span></div>
+      <div class="tonal-step" style="background:#633F00;"><span class="ts-tone" style="color:#FFDDB4">30</span></div>
+      <div class="tonal-step" style="background:#805610; outline:3px solid #fff; outline-offset:-3px; z-index:1;"><span class="ts-tone" style="color:#FFDDB4">40★</span></div>
+      <div class="tonal-step" style="background:#9D6F28;"><span class="ts-tone" style="color:#211B13">50</span></div>
+      <div class="tonal-step" style="background:#BA893F;"><span class="ts-tone" style="color:#211B13">60</span></div>
+      <div class="tonal-step" style="background:#D8A257;"><span class="ts-tone" style="color:#211B13">70</span></div>
+      <div class="tonal-step" style="background:#F5BC6F; outline:3px solid #805610; outline-offset:-3px; z-index:1;"><span class="ts-tone" style="color:#211B13">80★</span></div>
+      <div class="tonal-step" style="background:#FFDDB4; outline:3px solid #805610; outline-offset:-3px; z-index:1;"><span class="ts-tone" style="color:#211B13">90★</span></div>
+      <div class="tonal-step" style="background:#FFECD9;"><span class="ts-tone" style="color:#211B13">95</span></div>
+      <div class="tonal-step" style="background:#FFFBFF;"><span class="ts-tone" style="color:#211B13">99</span></div>
+      <div class="tonal-step" style="background:#FFFFFF; border-right:1px solid #EDE0D4; border-top:1px solid #EDE0D4; border-bottom:1px solid #EDE0D4;"><span class="ts-tone" style="color:#211B13">100</span></div>
+    </div>
+    <p class="tonal-ramp-label">★ <strong>40</strong> = Primary · <strong>80</strong> = Inverse Primary · <strong>90</strong> = Primary Container</p>
+
+    <div class="subsection-label">Secondary Ramp — Warm Brown</div>
+    <div class="tonal-ramp">
+      <div class="tonal-step" style="background:#000000;"><span class="ts-tone" style="color:#705B40">0</span></div>
+      <div class="tonal-step" style="background:#271904;"><span class="ts-tone" style="color:#FBDEBC">10</span></div>
+      <div class="tonal-step" style="background:#3E2D16;"><span class="ts-tone" style="color:#FBDEBC">20</span></div>
+      <div class="tonal-step" style="background:#56432B;"><span class="ts-tone" style="color:#FBDEBC">30</span></div>
+      <div class="tonal-step" style="background:#705B40; outline:3px solid #fff; outline-offset:-3px; z-index:1;"><span class="ts-tone" style="color:#FBDEBC">40★</span></div>
+      <div class="tonal-step" style="background:#8B7558;"><span class="ts-tone" style="color:#211B13">50</span></div>
+      <div class="tonal-step" style="background:#A68E70;"><span class="ts-tone" style="color:#211B13">60</span></div>
+      <div class="tonal-step" style="background:#C1A888;"><span class="ts-tone" style="color:#211B13">70</span></div>
+      <div class="tonal-step" style="background:#DDC2A1; outline:3px solid #705B40; outline-offset:-3px; z-index:1;"><span class="ts-tone" style="color:#211B13">80★</span></div>
+      <div class="tonal-step" style="background:#FBDEBC; outline:3px solid #705B40; outline-offset:-3px; z-index:1;"><span class="ts-tone" style="color:#211B13">90★</span></div>
+      <div class="tonal-step" style="background:#FFECDD;"><span class="ts-tone" style="color:#211B13">95</span></div>
+      <div class="tonal-step" style="background:#FFFBFF;"><span class="ts-tone" style="color:#211B13">99</span></div>
+      <div class="tonal-step" style="background:#FFFFFF; border-right:1px solid #EDE0D4; border-top:1px solid #EDE0D4; border-bottom:1px solid #EDE0D4;"><span class="ts-tone" style="color:#211B13">100</span></div>
+    </div>
+    <p class="tonal-ramp-label">★ <strong>40</strong> = Secondary · <strong>80</strong> = Secondary Fixed Dim · <strong>90</strong> = Secondary Container</p>
+
+    <div class="subsection-label">Tertiary Ramp — Sage Green</div>
+    <div class="tonal-ramp">
+      <div class="tonal-step" style="background:#000000;"><span class="ts-tone" style="color:#52643F">0</span></div>
+      <div class="tonal-step" style="background:#101F03;"><span class="ts-tone" style="color:#D4EABB">10</span></div>
+      <div class="tonal-step" style="background:#253515;"><span class="ts-tone" style="color:#D4EABB">20</span></div>
+      <div class="tonal-step" style="background:#3B4C29;"><span class="ts-tone" style="color:#D4EABB">30</span></div>
+      <div class="tonal-step" style="background:#52643F; outline:3px solid #fff; outline-offset:-3px; z-index:1;"><span class="ts-tone" style="color:#D4EABB">40★</span></div>
+      <div class="tonal-step" style="background:#6B7E57;"><span class="ts-tone" style="color:#211B13">50</span></div>
+      <div class="tonal-step" style="background:#85986F;"><span class="ts-tone" style="color:#211B13">60</span></div>
+      <div class="tonal-step" style="background:#9FB287;"><span class="ts-tone" style="color:#211B13">70</span></div>
+      <div class="tonal-step" style="background:#B9CDA0; outline:3px solid #52643F; outline-offset:-3px; z-index:1;"><span class="ts-tone" style="color:#211B13">80★</span></div>
+      <div class="tonal-step" style="background:#D4EABB; outline:3px solid #52643F; outline-offset:-3px; z-index:1;"><span class="ts-tone" style="color:#211B13">90★</span></div>
+      <div class="tonal-step" style="background:#E9F2DD;"><span class="ts-tone" style="color:#211B13">95</span></div>
+      <div class="tonal-step" style="background:#F8FFEA;"><span class="ts-tone" style="color:#211B13">99</span></div>
+      <div class="tonal-step" style="background:#FFFFFF; border-right:1px solid #EDE0D4; border-top:1px solid #EDE0D4; border-bottom:1px solid #EDE0D4;"><span class="ts-tone" style="color:#211B13">100</span></div>
+    </div>
+    <p class="tonal-ramp-label">★ <strong>40</strong> = Tertiary · <strong>80</strong> = Tertiary Fixed Dim · <strong>90</strong> = Tertiary Container</p>
+
+    <div class="subsection-label">Neutral Ramp</div>
+    <div class="tonal-ramp">
+      <div class="tonal-step" style="background:#000000;"><span class="ts-tone" style="color:#797676">0</span></div>
+      <div class="tonal-step" style="background:#1C1B1B;"><span class="ts-tone" style="color:#C9C6C5">10</span></div>
+      <div class="tonal-step" style="background:#313030;"><span class="ts-tone" style="color:#C9C6C5">20</span></div>
+      <div class="tonal-step" style="background:#484646;"><span class="ts-tone" style="color:#E6E2E1">30</span></div>
+      <div class="tonal-step" style="background:#605E5D;"><span class="ts-tone" style="color:#E6E2E1">40</span></div>
+      <div class="tonal-step" style="background:#797676;"><span class="ts-tone" style="color:#211B13">50</span></div>
+      <div class="tonal-step" style="background:#93908F;"><span class="ts-tone" style="color:#211B13">60</span></div>
+      <div class="tonal-step" style="background:#AEAAAA;"><span class="ts-tone" style="color:#211B13">70</span></div>
+      <div class="tonal-step" style="background:#C9C6C5;"><span class="ts-tone" style="color:#211B13">80</span></div>
+      <div class="tonal-step" style="background:#E6E2E1;"><span class="ts-tone" style="color:#211B13">90</span></div>
+      <div class="tonal-step" style="background:#F4F0EF;"><span class="ts-tone" style="color:#211B13">95</span></div>
+      <div class="tonal-step" style="background:#FFFBFF;"><span class="ts-tone" style="color:#211B13">99</span></div>
+      <div class="tonal-step" style="background:#FFFFFF; border-right:1px solid #EDE0D4; border-top:1px solid #EDE0D4; border-bottom:1px solid #EDE0D4;"><span class="ts-tone" style="color:#211B13">100</span></div>
+    </div>
+
+    <div class="subsection-label">Custom Ramp — Dusty Rose</div>
+    <div class="tonal-ramp">
+      <div class="tonal-step" style="background:#000000;"><span class="ts-tone" style="color:#7B5153">0</span></div>
+      <div class="tonal-step" style="background:#1F1415;"><span class="ts-tone" style="color:#D7C1C3">10</span></div>
+      <div class="tonal-step" style="background:#3E2829;"><span class="ts-tone" style="color:#D7C1C3">20</span></div>
+      <div class="tonal-step" style="background:#5D3C3F;"><span class="ts-tone" style="color:#EBE0E1">30</span></div>
+      <div class="tonal-step" style="background:#7B5153; outline:3px solid #fff; outline-offset:-3px; z-index:1;"><span class="ts-tone" style="color:#EBE0E1">40★</span></div>
+      <div class="tonal-step" style="background:#9A6568;"><span class="ts-tone" style="color:#211B13">50</span></div>
+      <div class="tonal-step" style="background:#AE8486;"><span class="ts-tone" style="color:#211B13">60</span></div>
+      <div class="tonal-step" style="background:#C3A2A5;"><span class="ts-tone" style="color:#211B13">70</span></div>
+      <div class="tonal-step" style="background:#D7C1C3; outline:3px solid #7B5153; outline-offset:-3px; z-index:1;"><span class="ts-tone" style="color:#211B13">80★</span></div>
+      <div class="tonal-step" style="background:#EBE0E1; outline:3px solid #7B5153; outline-offset:-3px; z-index:1;"><span class="ts-tone" style="color:#211B13">90★</span></div>
+      <div class="tonal-step" style="background:#F5EFF0;"><span class="ts-tone" style="color:#211B13">95</span></div>
+      <div class="tonal-step" style="background:#FDFCFC;"><span class="ts-tone" style="color:#211B13">99</span></div>
+      <div class="tonal-step" style="background:#FFFFFF; border-right:1px solid #EDE0D4; border-top:1px solid #EDE0D4; border-bottom:1px solid #EDE0D4;"><span class="ts-tone" style="color:#211B13">100</span></div>
+    </div>
+    <p class="tonal-ramp-label">★ <strong>40</strong> = Custom Color (light) · <strong>80</strong> = Custom Color (dark) · <strong>90</strong> = Custom Container (light)</p>
+    <p class="tonal-ramp-label">Source: <strong>#503436</strong> · harmonized: false · tokens: <code style="font-family:monospace;font-size:11px;">--md-custom-color</code>, <code style="font-family:monospace;font-size:11px;">--md-custom-color-container</code></p>
+  </section>
+
+  <!-- ═══════════ 3. TYPOGRAPHY ═══════════ -->
+  <section id="typography">
+    <div class="section-header">
+      <h2>Typography</h2>
+      <span class="section-tag">MD3 Type Scale</span>
+    </div>
+    <p class="section-desc">Two typefaces define the brand: <strong>Cormorant Garamond</strong> for display roles — warm, editorial, timeless — and <strong>Inter</strong> for all headline and UI text — clean and highly legible.</p>
+
+    <div class="font-specimen">
+      <div class="specimen-label">Cormorant Garamond — Serif Display Only</div>
+      <div style="font-family:'Cormorant Garamond',serif; font-size:52px; font-weight:400; color:var(--on-surface); line-height:1.1; margin-bottom:12px;">Birth is a powerful journey.</div>
+      <div style="font-family:'Cormorant Garamond',serif; font-size:36px; font-weight:400; color:var(--on-surface-variant); line-height:1.22; margin-bottom:12px;">Supporting you every step of the way.</div>
+      <div style="font-family:'Cormorant Garamond',serif; font-size:20px; font-weight:400; color:var(--outline); font-style:italic; line-height:1.5;">Aa Bb Cc Dd Ee Ff Gg Hh Ii Jj Kk Ll Mm Nn Oo Pp Qq Rr Ss Tt Uu Vv Ww Xx Yy Zz</div>
+    </div>
+
+    <div class="font-specimen">
+      <div class="specimen-label">Inter — Sans-Serif Headlines, UI &amp; Body Text</div>
+      <div style="font-family:'Inter',sans-serif; font-size:32px; font-weight:400; color:var(--on-surface); line-height:1.25; margin-bottom:8px;">Birth is a journey.</div>
+      <div style="font-family:'Inter',sans-serif; font-size:28px; font-weight:400; color:var(--on-surface-variant); line-height:1.29; margin-bottom:12px;">Services we offer</div>
+      <div style="font-family:'Inter',sans-serif; font-size:20px; font-weight:600; color:var(--on-surface); margin-bottom:8px;">Compassionate doula care for your family.</div>
+      <div style="font-family:'Inter',sans-serif; font-size:16px; font-weight:400; color:var(--on-surface-variant); margin-bottom:8px; line-height:1.6;">Providing professional, evidence-based support during pregnancy, birth, and the postpartum period. Every family deserves a doula.</div>
+      <div style="font-family:'Inter',sans-serif; font-size:13px; font-weight:400; color:var(--outline);">Aa Bb Cc Dd Ee Ff Gg 0 1 2 3 4 5 6 7 8 9 · Regular 400 · Medium 500 · SemiBold 600 · Bold 700</div>
+    </div>
+
+    <table class="type-table">
+      <thead>
+        <tr>
+          <th style="width:120px;">Role</th>
+          <th>Rendered Example</th>
+          <th style="width:180px;">Specs</th>
+          <th style="width:160px;">Usage</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="type-role">Display L</span></td>
+          <td><div style="font-family:'Cormorant Garamond',serif; font-size:57px; font-weight:400; line-height:1.12; color:var(--on-surface);">Birth</div></td>
+          <td class="type-spec">57px / wt 400 / lh 1.12<br>Cormorant Garamond</td>
+          <td class="type-usage">Hero heading</td>
+        </tr>
+        <tr>
+          <td><span class="type-role">Display M</span></td>
+          <td><div style="font-family:'Cormorant Garamond',serif; font-size:45px; font-weight:400; line-height:1.16; color:var(--on-surface);">Doula</div></td>
+          <td class="type-spec">45px / wt 400 / lh 1.16<br>Cormorant Garamond</td>
+          <td class="type-usage">Large section headers</td>
+        </tr>
+        <tr>
+          <td><span class="type-role">Display S</span></td>
+          <td><div style="font-family:'Cormorant Garamond',serif; font-size:36px; font-weight:400; line-height:1.22; color:var(--on-surface);">Support</div></td>
+          <td class="type-spec">36px / wt 400 / lh 1.22<br>Cormorant Garamond</td>
+          <td class="type-usage">Pull quotes</td>
+        </tr>
+        <tr>
+          <td><span class="type-role">Headline L</span></td>
+          <td><div style="font-family:'Inter',sans-serif; font-size:32px; font-weight:400; line-height:1.25; color:var(--on-surface);">Birth is a journey.</div></td>
+          <td class="type-spec">32px / wt 400 / lh 1.25<br>Inter</td>
+          <td class="type-usage">Section titles (H2)</td>
+        </tr>
+        <tr>
+          <td><span class="type-role">Headline M</span></td>
+          <td><div style="font-family:'Inter',sans-serif; font-size:28px; font-weight:400; line-height:1.29; color:var(--on-surface);">Services we offer</div></td>
+          <td class="type-spec">28px / wt 400 / lh 1.29<br>Inter</td>
+          <td class="type-usage">Sub-section titles</td>
+        </tr>
+        <tr>
+          <td><span class="type-role">Title L</span></td>
+          <td><div style="font-family:'Inter',sans-serif; font-size:22px; font-weight:400; line-height:1.27; color:var(--on-surface);">Birth Doula Support</div></td>
+          <td class="type-spec">22px / wt 400 / lh 1.27<br>Inter</td>
+          <td class="type-usage">Card titles, dialogs</td>
+        </tr>
+        <tr>
+          <td><span class="type-role">Title M</span></td>
+          <td><div style="font-family:'Inter',sans-serif; font-size:16px; font-weight:500; line-height:1.5; color:var(--on-surface);">Prenatal Consultations</div></td>
+          <td class="type-spec">16px / wt 500 / lh 1.50<br>Inter</td>
+          <td class="type-usage">List headers, labels</td>
+        </tr>
+        <tr>
+          <td><span class="type-role">Body L</span></td>
+          <td><div style="font-family:'Inter',sans-serif; font-size:16px; font-weight:400; line-height:1.5; color:var(--on-surface-variant); max-width:360px;">Your comfort and confidence during birth is my priority.</div></td>
+          <td class="type-spec">16px / wt 400 / lh 1.50<br>Inter</td>
+          <td class="type-usage">Primary body text</td>
+        </tr>
+        <tr>
+          <td><span class="type-role">Body M</span></td>
+          <td><div style="font-family:'Inter',sans-serif; font-size:14px; font-weight:400; line-height:1.43; color:var(--on-surface-variant); max-width:360px;">Evidence-based support for families during the childbearing year.</div></td>
+          <td class="type-spec">14px / wt 400 / lh 1.43<br>Inter</td>
+          <td class="type-usage">Card descriptions</td>
+        </tr>
+        <tr>
+          <td><span class="type-role">Label L</span></td>
+          <td><div style="font-family:'Inter',sans-serif; font-size:14px; font-weight:500; line-height:1.43; color:var(--on-surface);">Book a Consultation</div></td>
+          <td class="type-spec">14px / wt 500 / lh 1.43<br>Inter</td>
+          <td class="type-usage">Button labels</td>
+        </tr>
+        <tr>
+          <td><span class="type-role">Label M</span></td>
+          <td><div style="font-family:'Inter',sans-serif; font-size:12px; font-weight:500; line-height:1.33; color:var(--on-surface);">BIRTH DOULA</div></td>
+          <td class="type-spec">12px / wt 500 / lh 1.33<br>Inter</td>
+          <td class="type-usage">Chips, tabs, nav</td>
+        </tr>
+        <tr>
+          <td><span class="type-role">Label S</span></td>
+          <td><div style="font-family:'Inter',sans-serif; font-size:11px; font-weight:500; line-height:1.45; color:var(--outline);">POSTPARTUM CARE · TORONTO</div></td>
+          <td class="type-spec">11px / wt 500 / lh 1.45<br>Inter</td>
+          <td class="type-usage">Overlines, metadata</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- ═══════════ 4. SHAPE SCALE ═══════════ -->
+  <section id="shape">
+    <div class="section-header">
+      <h2>Shape Scale</h2>
+      <span class="section-tag">6 Levels</span>
+    </div>
+    <p class="section-desc">MD3 defines six shape levels. The Byron Doula favours softer shapes (Large → Full) across most UI elements to reinforce warmth and approachability — consistent with the brand's nurturing character.</p>
+
+    <div class="shape-grid">
+      <div class="shape-card" style="border-radius: 4px;">
+        <div class="shape-box" style="border-radius: 4px;"><div class="sb-inner" style="border-radius:2px;"></div></div>
+        <div style="text-align:center;">
+          <div class="shape-name">Extra Small</div>
+          <div class="shape-value">4px</div>
+          <div class="shape-desc">Text fields, small UI elements</div>
+        </div>
+      </div>
+      <div class="shape-card" style="border-radius: 8px;">
+        <div class="shape-box" style="border-radius: 8px;"><div class="sb-inner" style="border-radius:4px;"></div></div>
+        <div style="text-align:center;">
+          <div class="shape-name">Small</div>
+          <div class="shape-value">8px</div>
+          <div class="shape-desc">Snackbars, small surfaces</div>
+        </div>
+      </div>
+      <div class="shape-card" style="border-radius: 12px;">
+        <div class="shape-box" style="border-radius: 12px;"><div class="sb-inner" style="border-radius:6px;"></div></div>
+        <div style="text-align:center;">
+          <div class="shape-name">Medium</div>
+          <div class="shape-value">12px</div>
+          <div class="shape-desc">Menus, navigation drawers</div>
+        </div>
+      </div>
+      <div class="shape-card" style="border-radius: 16px;">
+        <div class="shape-box" style="border-radius: 16px;"><div class="sb-inner" style="border-radius:8px;"></div></div>
+        <div style="text-align:center;">
+          <div class="shape-name">Large</div>
+          <div class="shape-value">16px</div>
+          <div class="shape-desc">Bottom sheets, pricing boxes</div>
+        </div>
+      </div>
+      <div class="shape-card" style="border-radius: 28px;">
+        <div class="shape-box" style="border-radius: 28px;"><div class="sb-inner" style="border-radius:14px;"></div></div>
+        <div style="text-align:center;">
+          <div class="shape-name">Extra Large</div>
+          <div class="shape-value">28px</div>
+          <div class="shape-desc">Cards, hero panels ← primary</div>
+        </div>
+      </div>
+      <div class="shape-card" style="border-radius: 9999px;">
+        <div class="shape-box" style="border-radius:9999px;"><div class="sb-inner" style="border-radius:9999px;"></div></div>
+        <div style="text-align:center;">
+          <div class="shape-name">Full</div>
+          <div class="shape-value">9999px</div>
+          <div class="shape-desc">Buttons, chips, badges</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ 5. ELEVATION ═══════════ -->
+  <section id="elevation">
+    <div class="section-header">
+      <h2>Elevation</h2>
+      <span class="section-tag">6 Levels · 0–5</span>
+    </div>
+    <p class="section-desc">MD3 elevation uses drop shadows <em>plus</em> a primary-color surface tint overlay at increasing opacity. The tint swatch below each card shows how the surface appears at that level.</p>
+
+    <div class="elev-grid">
+      <div class="elev-card" style="box-shadow:none; border:1px solid var(--outline-variant);">
+        <div class="elev-num">0</div>
+        <div class="elev-name">Level 0</div>
+        <div class="elev-tint-demo" style="background:var(--surface); border:1px solid var(--outline-variant);"></div>
+        <div class="elev-desc">No shadow. Flat background surfaces.</div>
+      </div>
+      <div class="elev-card" style="box-shadow:var(--elev-1);">
+        <div class="elev-num">1</div>
+        <div class="elev-name">Level 1</div>
+        <div class="elev-tint-demo" style="background:color-mix(in srgb,#805610 5%,#FFF8F4);"></div>
+        <div class="elev-desc">Cards at rest, navigation rail. Tint 5%.</div>
+      </div>
+      <div class="elev-card" style="box-shadow:var(--elev-2);">
+        <div class="elev-num">2</div>
+        <div class="elev-name">Level 2</div>
+        <div class="elev-tint-demo" style="background:color-mix(in srgb,#805610 8%,#FFF8F4);"></div>
+        <div class="elev-desc">Filled buttons on hover, FAB. Tint 8%.</div>
+      </div>
+      <div class="elev-card" style="box-shadow:var(--elev-3);">
+        <div class="elev-num">3</div>
+        <div class="elev-name">Level 3</div>
+        <div class="elev-tint-demo" style="background:color-mix(in srgb,#805610 11%,#FFF8F4);"></div>
+        <div class="elev-desc">Dialogs, modal surfaces. Tint 11%.</div>
+      </div>
+      <div class="elev-card" style="box-shadow:var(--elev-4);">
+        <div class="elev-num">4</div>
+        <div class="elev-name">Level 4</div>
+        <div class="elev-tint-demo" style="background:color-mix(in srgb,#805610 12%,#FFF8F4);"></div>
+        <div class="elev-desc">Navigation bar, sheets. Tint 12%.</div>
+      </div>
+      <div class="elev-card" style="box-shadow:var(--elev-5);">
+        <div class="elev-num">5</div>
+        <div class="elev-name">Level 5</div>
+        <div class="elev-tint-demo" style="background:color-mix(in srgb,#805610 14%,#FFF8F4);"></div>
+        <div class="elev-desc">Highest overlays, tooltips. Tint 14%.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ 6. BUTTONS ═══════════ -->
+  <section id="buttons">
+    <div class="section-header">
+      <h2>Buttons</h2>
+      <span class="section-tag">5 MD3 Variants</span>
+    </div>
+    <p class="section-desc">MD3 defines five button variants, ordered by emphasis. All use the Full shape scale (pill) and Label Large typography. A pseudo-element overlay handles the 8% hover / 12% press state layers.</p>
+
+    <div class="comp-section">
+      <div class="comp-label">Filled — Highest emphasis · Primary action</div>
+      <div class="comp-row">
+        <button class="btn btn-filled">Book a Consultation</button>
+        <button class="btn btn-filled btn-sm">Book Now</button>
+        <button class="btn btn-filled btn-lg">Get Started</button>
+        <button class="btn btn-filled" disabled>Unavailable</button>
+      </div>
+    </div>
+
+    <div class="comp-section">
+      <div class="comp-label">Filled Tonal — Medium-high emphasis · Secondary action</div>
+      <div class="comp-row">
+        <button class="btn btn-filled-tonal">Learn More</button>
+        <button class="btn btn-filled-tonal btn-sm">Details</button>
+        <button class="btn btn-filled-tonal">Postpartum Services</button>
+        <button class="btn btn-filled-tonal" disabled>Disabled</button>
+      </div>
+    </div>
+
+    <div class="comp-section">
+      <div class="comp-label">Elevated — Medium emphasis · Less prominent action</div>
+      <div class="comp-row">
+        <button class="btn btn-elevated">View Services</button>
+        <button class="btn btn-elevated btn-sm">Explore</button>
+        <button class="btn btn-elevated">Contact Us</button>
+        <button class="btn btn-elevated" disabled>Disabled</button>
+      </div>
+    </div>
+
+    <div class="comp-section">
+      <div class="comp-label">Outlined — Medium emphasis · Alternative to elevated</div>
+      <div class="comp-row">
+        <button class="btn btn-outlined">View FAQ</button>
+        <button class="btn btn-outlined btn-sm">Skip</button>
+        <button class="btn btn-outlined">Meet Nathalie</button>
+        <button class="btn btn-outlined" disabled>Disabled</button>
+      </div>
+    </div>
+
+    <div class="comp-section">
+      <div class="comp-label">Text — Lowest emphasis · Inline or tertiary actions</div>
+      <div class="comp-row">
+        <button class="btn btn-text-btn">Read More</button>
+        <button class="btn btn-text-btn btn-sm">Skip</button>
+        <button class="btn btn-text-btn">Learn About Birth Plans</button>
+        <button class="btn btn-text-btn" disabled>Disabled</button>
+      </div>
+    </div>
+
+    <div class="comp-section">
+      <div class="comp-label">Buttons on dark surface (inverse-surface background)</div>
+      <div class="comp-row on-dark">
+        <button class="btn" style="background:#F5BC6F; color:#362F27;">Filled (Inverse)</button>
+        <button class="btn" style="background:transparent; color:#F5BC6F; border:1px solid #F5BC6F;">Outlined (Inverse)</button>
+        <button class="btn" style="background:transparent; color:#F5BC6F; padding:10px 12px;">Text (Inverse)</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ 7. CHIPS ═══════════ -->
+  <section id="chips">
+    <div class="section-header">
+      <h2>Chips</h2>
+      <span class="section-tag">4 Types</span>
+    </div>
+    <p class="section-desc">Compact, interactive elements for filtering, input tagging, suggestions, and contextual shortcuts. All use the Full shape scale.</p>
+
+    <div class="comp-section">
+      <div class="comp-label">Assist Chips — Trigger an action or provide shortcuts</div>
+      <div class="comp-row">
+        <span class="chip chip-assist">🌿 Birth Doula</span>
+        <span class="chip chip-assist">🤱 Postpartum</span>
+        <span class="chip chip-assist">💬 Contact</span>
+        <span class="chip chip-assist">📋 Birth Plan</span>
+      </div>
+    </div>
+
+    <div class="comp-section">
+      <div class="comp-label">Filter Chips — Toggle to filter content (selected state shown first)</div>
+      <div class="comp-row">
+        <span class="chip chip-selected">✓ All Services</span>
+        <span class="chip chip-filter">Prenatal</span>
+        <span class="chip chip-filter">Birth Support</span>
+        <span class="chip chip-filter">Postpartum</span>
+        <span class="chip chip-filter">Breastfeeding</span>
+      </div>
+    </div>
+
+    <div class="comp-section">
+      <div class="comp-label">Input Chips — Represent user input (removable tags)</div>
+      <div class="comp-row">
+        <span class="chip chip-input">Toronto, ON ×</span>
+        <span class="chip chip-input">Home Birth ×</span>
+        <span class="chip chip-input">Hospital Birth ×</span>
+      </div>
+    </div>
+
+    <div class="comp-section">
+      <div class="comp-label">Suggestion Chips — Predictive, context-aware</div>
+      <div class="comp-row">
+        <span class="chip chip-suggestion">Book consultation</span>
+        <span class="chip chip-suggestion">View pricing</span>
+        <span class="chip chip-suggestion">Read testimonials</span>
+        <span class="chip chip-suggestion">Download birth plan</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ 8. CARDS ═══════════ -->
+  <section id="cards">
+    <div class="section-header">
+      <h2>Cards</h2>
+      <span class="section-tag">3 Variants</span>
+    </div>
+    <p class="section-desc">MD3 defines three card variants. All use the Extra Large shape scale (28px radius). Cards are interactive surfaces — a hover state layer (8% on-surface overlay) is applied on hover.</p>
+
+    <div class="cards-grid">
+      <div class="card card-elevated">
+        <div class="card-header">🌿</div>
+        <div class="card-body">
+          <div class="card-title">Elevated Card</div>
+          <div class="card-text">Surface-container-low background with Level 1 shadow. Used for service cards and featured content.</div>
+        </div>
+        <div class="card-actions">
+          <button class="btn btn-text-btn btn-sm">Learn More</button>
+        </div>
+      </div>
+      <div class="card card-filled">
+        <div class="card-header">🤱</div>
+        <div class="card-body">
+          <div class="card-title">Filled Card</div>
+          <div class="card-text">Surface-container-highest background, no shadow. Distinguished by color only. Secondary content areas.</div>
+        </div>
+        <div class="card-actions">
+          <button class="btn btn-text-btn btn-sm">Details</button>
+        </div>
+      </div>
+      <div class="card card-outlined">
+        <div class="card-header">💛</div>
+        <div class="card-body">
+          <div class="card-title">Outlined Card</div>
+          <div class="card-text">White/surface background with 1px outline-variant border. Used for testimonials and lower-emphasis content.</div>
+        </div>
+        <div class="card-actions">
+          <button class="btn btn-text-btn btn-sm">Read</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="subsection-label">Service Card — Full Pattern</div>
+    <div style="max-width:340px;">
+      <div class="card card-elevated">
+        <div style="height:160px; background:var(--primary-container); display:flex; align-items:center; justify-content:center; font-size:40px;">🌸</div>
+        <div class="card-body">
+          <div style="display:inline-flex; align-items:center; height:28px; padding:0 12px; border-radius:9999px; background:var(--primary-container); color:var(--on-primary-container); font-size:11px; font-weight:600; margin-bottom:12px; letter-spacing:0.5px;">BIRTH DOULA</div>
+          <div class="card-title">Labour Support</div>
+          <div class="card-text" style="margin-top:8px; margin-bottom:12px;">Continuous physical, emotional, and informational support throughout your labour and birth experience.</div>
+          <ul style="list-style:none; font-size:13px; color:var(--on-surface-variant); line-height:2; margin-bottom:4px;">
+            <li style="padding-left:20px; position:relative;"><span style="position:absolute;left:0;color:var(--secondary);font-weight:700;">✓</span> Prenatal meetings</li>
+            <li style="padding-left:20px; position:relative;"><span style="position:absolute;left:0;color:var(--secondary);font-weight:700;">✓</span> On-call availability</li>
+            <li style="padding-left:20px; position:relative;"><span style="position:absolute;left:0;color:var(--secondary);font-weight:700;">✓</span> Postpartum follow-up</li>
+          </ul>
+        </div>
+        <div class="card-actions" style="padding:0 16px 20px; justify-content:space-between; align-items:center;">
+          <span style="font-size:22px; font-weight:700; color:var(--primary); font-family:var(--serif);">$850</span>
+          <button class="btn btn-filled btn-sm">Book Now</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ 9. TEXT FIELDS ═══════════ -->
+  <section id="fields">
+    <div class="section-header">
+      <h2>Text Fields</h2>
+      <span class="section-tag">2 Variants</span>
+    </div>
+    <p class="section-desc">MD3 text fields come in Outlined and Filled variants, both with animated floating labels. Extra Small shape scale (4px). Focus state: 2px primary-colored border. Click the fields below to interact.</p>
+
+    <div class="subsection-label">Outlined Text Fields</div>
+    <div class="fields-grid">
+      <div>
+        <div class="md-outlined-field">
+          <input type="text" placeholder=" " id="f1" />
+          <label for="f1" class="float-label">Full Name</label>
+        </div>
+      </div>
+      <div>
+        <div class="md-outlined-field">
+          <input type="email" placeholder=" " id="f2" />
+          <label for="f2" class="float-label">Email Address</label>
+        </div>
+      </div>
+      <div>
+        <div class="md-outlined-field">
+          <input type="tel" placeholder=" " id="f3" />
+          <label for="f3" class="float-label">Phone Number</label>
+        </div>
+      </div>
+      <div>
+        <div class="md-outlined-field">
+          <input type="date" placeholder=" " id="f4" />
+          <label for="f4" class="float-label" style="top:0;transform:translateY(-50%);font-size:12px;color:var(--primary);">Due Date</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="subsection-label" style="margin-top:32px;">Filled Text Fields</div>
+    <div class="fields-grid">
+      <div>
+        <div class="md-filled-field">
+          <input type="text" placeholder=" " id="f5" />
+          <label for="f5" class="float-label">First Name</label>
+        </div>
+      </div>
+      <div>
+        <div class="md-filled-field">
+          <input type="email" placeholder=" " id="f6" />
+          <label for="f6" class="float-label">Email</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="subsection-label" style="margin-top:32px;">Contact / Booking Form Pattern</div>
+    <div style="max-width:480px; background:var(--surface-container-lowest); border-radius:var(--shape-xl); padding:32px; border:1px solid var(--outline-variant); box-shadow:var(--elev-1);">
+      <div style="font-family:var(--serif); font-size:28px; font-weight:400; color:var(--on-surface); margin-bottom:24px; line-height:1.2;">Book a Consultation</div>
+      <div class="md-outlined-field">
+        <input type="text" placeholder=" " id="cf1" />
+        <label for="cf1" class="float-label">Your Name</label>
+      </div>
+      <div class="md-outlined-field">
+        <input type="email" placeholder=" " id="cf2" />
+        <label for="cf2" class="float-label">Email Address</label>
+      </div>
+      <div style="position:relative; margin-bottom:16px;">
+        <textarea style="width:100%; min-height:100px; padding:20px 16px 8px; border:1px solid var(--outline); border-radius:var(--shape-xs); background:transparent; color:var(--on-surface); font-family:var(--sans); font-size:16px; outline:none; resize:vertical;" id="cf3" placeholder=" "></textarea>
+        <label for="cf3" style="position:absolute; left:12px; top:0; transform:translateY(-50%); font-size:12px; font-weight:400; color:var(--primary); background:var(--surface-container-lowest); padding:0 4px;">How can I help?</label>
+      </div>
+      <button class="btn btn-filled" style="width:100%;">Send Message</button>
+    </div>
+  </section>
+
+  <!-- ═══════════ 10. SPACING & GRID ═══════════ -->
+  <section id="spacing">
+    <div class="section-header">
+      <h2>Spacing &amp; Grid</h2>
+      <span class="section-tag">4dp Base Unit</span>
+    </div>
+    <p class="section-desc">All spacing is derived from a 4dp base unit. The layout uses a 12-column grid with a 1200px max-width and 20px outer gutters. Using these tokens consistently ensures visual rhythm throughout the site.</p>
+
+    <div class="spacing-grid">
+      <div class="spacing-row">
+        <div class="spacing-token">4px</div>
+        <div class="spacing-bar-wrap"><div class="spacing-bar" style="width:2%;"></div></div>
+        <div class="spacing-value">4px</div>
+        <div class="spacing-usage">Icon gaps, micro spacing</div>
+      </div>
+      <div class="spacing-row">
+        <div class="spacing-token">8px</div>
+        <div class="spacing-bar-wrap"><div class="spacing-bar" style="width:4%;"></div></div>
+        <div class="spacing-value">8px</div>
+        <div class="spacing-usage">Chip padding, tight gaps</div>
+      </div>
+      <div class="spacing-row">
+        <div class="spacing-token">12px</div>
+        <div class="spacing-bar-wrap"><div class="spacing-bar" style="width:6%;"></div></div>
+        <div class="spacing-value">12px</div>
+        <div class="spacing-usage">Compact card padding</div>
+      </div>
+      <div class="spacing-row">
+        <div class="spacing-token">16px</div>
+        <div class="spacing-bar-wrap"><div class="spacing-bar" style="width:8%;"></div></div>
+        <div class="spacing-value">16px</div>
+        <div class="spacing-usage">Paragraph &amp; form field gaps</div>
+      </div>
+      <div class="spacing-row">
+        <div class="spacing-token">24px</div>
+        <div class="spacing-bar-wrap"><div class="spacing-bar" style="width:12%;"></div></div>
+        <div class="spacing-value">24px</div>
+        <div class="spacing-usage">Card padding, grid gaps</div>
+      </div>
+      <div class="spacing-row">
+        <div class="spacing-token">32px</div>
+        <div class="spacing-bar-wrap"><div class="spacing-bar" style="width:16%;"></div></div>
+        <div class="spacing-value">32px</div>
+        <div class="spacing-usage">Section margins, XL card padding</div>
+      </div>
+      <div class="spacing-row">
+        <div class="spacing-token">48px</div>
+        <div class="spacing-bar-wrap"><div class="spacing-bar" style="width:24%;"></div></div>
+        <div class="spacing-value">48px</div>
+        <div class="spacing-usage">Sub-section gaps</div>
+      </div>
+      <div class="spacing-row">
+        <div class="spacing-token">80px</div>
+        <div class="spacing-bar-wrap"><div class="spacing-bar" style="width:40%;"></div></div>
+        <div class="spacing-value">80px</div>
+        <div class="spacing-usage">Section vertical padding</div>
+      </div>
+    </div>
+
+    <div class="grid-demo">
+      <div class="grid-demo-inner">
+        <div class="grid-col"></div><div class="grid-col"></div>
+        <div class="grid-col"></div><div class="grid-col"></div>
+        <div class="grid-col"></div><div class="grid-col"></div>
+        <div class="grid-col"></div><div class="grid-col"></div>
+        <div class="grid-col"></div><div class="grid-col"></div>
+        <div class="grid-col"></div><div class="grid-col"></div>
+      </div>
+      <div class="grid-label">12-column grid · max-width 1200px · 8px column gaps · 20px outer margins</div>
+    </div>
+
+    <div class="subsection-label" style="margin-top:32px;">Responsive Breakpoints</div>
+    <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:12px;">
+      <div style="background:var(--surface-container-low); border:1px solid var(--outline-variant); border-radius:var(--shape-md); padding:20px;">
+        <div style="font-size:11px; font-weight:700; letter-spacing:1px; text-transform:uppercase; color:var(--primary); margin-bottom:8px;">Mobile</div>
+        <div style="font-size:22px; font-weight:700; color:var(--on-surface); margin-bottom:6px; font-family:var(--serif);">≤ 768px</div>
+        <div style="font-size:12px; color:var(--on-surface-variant);">Single column · 16px padding · hamburger nav · stacked hero</div>
+      </div>
+      <div style="background:var(--surface-container-low); border:1px solid var(--outline-variant); border-radius:var(--shape-md); padding:20px;">
+        <div style="font-size:11px; font-weight:700; letter-spacing:1px; text-transform:uppercase; color:var(--secondary); margin-bottom:8px;">Tablet</div>
+        <div style="font-size:22px; font-weight:700; color:var(--on-surface); margin-bottom:6px; font-family:var(--serif);">769–1024px</div>
+        <div style="font-size:12px; color:var(--on-surface-variant);">2-column grid · 20px padding · full nav visible</div>
+      </div>
+      <div style="background:var(--surface-container-low); border:1px solid var(--outline-variant); border-radius:var(--shape-md); padding:20px;">
+        <div style="font-size:11px; font-weight:700; letter-spacing:1px; text-transform:uppercase; color:var(--tertiary); margin-bottom:8px;">Desktop</div>
+        <div style="font-size:22px; font-weight:700; color:var(--on-surface); margin-bottom:6px; font-family:var(--serif);">&gt; 1024px</div>
+        <div style="font-size:12px; color:var(--on-surface-variant);">3-column grid · 1200px container · full layout</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ 11. BRAND PRINCIPLES ═══════════ -->
+  <section id="brand">
+    <div class="section-header">
+      <h2>Brand Principles</h2>
+      <span class="section-tag">Voice &amp; Feel</span>
+    </div>
+    <p class="section-desc">Every visual decision should reinforce the brand's core values: warmth, expertise, and deep care for families during the most profound moments of their lives.</p>
+
+    <div class="info-grid">
+      <div class="info-card">
+        <h4>🌿 Color Personality</h4>
+        <ul>
+          <li>Warm amber → sunlit warmth, harvest, nourishment</li>
+          <li>Warm brown → grounded stability, earthy linen</li>
+          <li>Sage green → calm nature, gentle growth, vitality</li>
+          <li>Warm cream → softness, comfort, intimacy</li>
+        </ul>
+      </div>
+      <div class="info-card">
+        <h4>✍️ Typography Voice</h4>
+        <ul>
+          <li>Cormorant Garamond → editorial, feminine, timeless (display only)</li>
+          <li>Inter → accessible, clear, professional (headlines + UI)</li>
+          <li>Serif for display text creates warmth and gravitas</li>
+          <li>Never use all-caps for body text</li>
+        </ul>
+      </div>
+      <div class="info-card">
+        <h4>📐 Design Principles</h4>
+        <ul>
+          <li>Soft shapes (28px cards) over harsh angles</li>
+          <li>Generous whitespace — breathable, not cluttered</li>
+          <li>Earthy palette — avoid cold blues and grays</li>
+          <li>Photography: authentic, warm light, human</li>
+        </ul>
+      </div>
+      <div class="info-card">
+        <h4>♿ Accessibility</h4>
+        <ul>
+          <li>#211B13 on white → 17.1:1 (AAA)</li>
+          <li>White on #805610 → 6.4:1 (AA)</li>
+          <li>Focus ring: 3px primary, 3px offset</li>
+          <li>All interactive elements keyboard accessible</li>
+        </ul>
+      </div>
+    </div>
+
+    <div style="margin-top:32px; background:var(--primary-container); border-radius:var(--shape-xl); padding:40px;">
+      <div style="font-family:var(--serif); font-size:30px; font-weight:400; color:var(--on-primary-container); margin-bottom:16px; line-height:1.3; font-style:italic;">
+        "Every family deserves compassionate, skilled support during one of life's most profound journeys."
+      </div>
+      <div style="font-size:11px; font-weight:700; color:var(--primary); letter-spacing:1.5px; text-transform:uppercase;">
+        The Byron Doula · Brand Voice
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+  <div style="text-align:center; color:var(--outline); font-size:12px; padding-bottom:48px; line-height:2;">
+    The Byron Doula Design System · Material Design 3 · Updated May 2026<br>
+    <span style="color:var(--primary); font-weight:500;">Cormorant Garamond + Inter · Warm Amber × Warm Brown × Sage Green · #805610</span>
+  </div>
+
+</main>
+
+<script>
+  // Active sidebar nav on scroll
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.sidebar a[href^="#"]');
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        navLinks.forEach(l => l.classList.remove('active'));
+        const link = document.querySelector(`.sidebar a[href="#${e.target.id}"]`);
+        if (link) link.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-10% 0px -80% 0px' });
+
+  sections.forEach(s => io.observe(s));
+</script>
+</body>
+</html>

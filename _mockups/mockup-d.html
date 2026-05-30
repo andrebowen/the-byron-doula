@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mockup D — Booking Page · The Byron Doula</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --primary:                   rgb(136 81 29);
+      --on-primary:                rgb(255 255 255);
+      --primary-container:         rgb(255 220 194);
+      --on-primary-container:      rgb(46 21 0);
+      --secondary:                 rgb(116 89 68);
+      --secondary-container:       rgb(237 213 197);
+      --on-secondary-container:    rgb(42 23 7);
+      --background:                rgb(255 248 245);
+      --on-surface:                rgb(32 27 23);
+      --on-surface-variant:        rgb(81 68 59);
+      --outline:                   rgb(132 116 105);
+      --outline-variant:           rgb(214 195 182);
+      --surface-container-low:     rgb(253 241 235);
+      --surface-container:         rgb(247 236 229);
+      --surface-container-high:    rgb(242 230 223);
+      --surface-container-highest: rgb(236 224 218);
+      --serif: 'Cormorant Garamond', Georgia, serif;
+      --sans:  'Inter', system-ui, sans-serif;
+    }
+
+    body { font-family: var(--sans); background: var(--background); color: var(--on-surface); }
+
+    /* ── SCENARIO BAR ── */
+    .scenario-bar { position: fixed; top: 0; left: 0; right: 0; z-index: 200; background: rgb(32 27 23); color: rgb(255 248 245); display: flex; align-items: center; font-family: var(--sans); font-size: 11px; font-weight: 500; letter-spacing: 0.5px; height: 36px; }
+    .scenario-bar-label { padding: 0 16px; opacity: 0.5; border-right: 1px solid rgba(255,255,255,0.12); height: 100%; display: flex; align-items: center; white-space: nowrap; }
+    .scenario-bar a { padding: 0 14px; color: rgba(255,248,245,0.6); text-decoration: none; height: 100%; display: flex; align-items: center; border-right: 1px solid rgba(255,255,255,0.08); transition: color 0.15s, background 0.15s; white-space: nowrap; }
+    .scenario-bar a:hover { color: rgb(255 248 245); background: rgba(255,255,255,0.06); }
+    .scenario-bar a.active { color: rgb(255 183 124); font-weight: 600; }
+    .scenario-bar-desc { padding: 0 16px; margin-left: auto; opacity: 0.45; font-style: italic; }
+
+    /* ── MINIMAL NAV (booking page intentionally minimal) ── */
+    nav {
+      position: sticky; top: 36px; z-index: 50;
+      background: var(--background); border-bottom: 1px solid var(--outline-variant);
+      padding: 0 48px; display: flex; align-items: center; height: 56px;
+    }
+    .nav-logo { font-family: var(--serif); font-size: 20px; font-weight: 400; text-decoration: none; color: var(--on-surface); }
+    .nav-back {
+      margin-left: auto; font-size: 13px; color: var(--on-surface-variant);
+      text-decoration: none; display: flex; align-items: center; gap: 6px;
+    }
+    .nav-back:hover { color: var(--primary); }
+
+    /* ── SERVICE SWITCHER (simulates ?service= URL param) ── */
+    .switcher-bar {
+      background: var(--surface-container-high);
+      border-bottom: 1px solid var(--outline-variant);
+      padding: 10px 48px;
+      display: flex; align-items: center; gap: 12px;
+    }
+    .switcher-label { font-size: 11px; font-weight: 600; color: var(--outline); letter-spacing: 0.5px; text-transform: uppercase; white-space: nowrap; }
+    .switcher-btns { display: flex; gap: 8px; flex-wrap: wrap; }
+    .switcher-btn {
+      font-family: var(--sans); font-size: 12px; font-weight: 500;
+      padding: 6px 14px; border-radius: 9999px; cursor: pointer;
+      border: 1.5px solid var(--outline-variant);
+      background: transparent; color: var(--on-surface-variant);
+      transition: all 0.15s;
+    }
+    .switcher-btn:hover { border-color: var(--primary); color: var(--primary); }
+    .switcher-btn.active {
+      background: var(--primary); color: var(--on-primary); border-color: var(--primary);
+    }
+
+    /* ── BOOKING PAGE LAYOUT ── */
+    .booking-page {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 64px 48px 120px;
+      display: grid;
+      grid-template-columns: 1fr 1.1fr;
+      gap: 56px;
+      align-items: start;
+    }
+
+    /* ── LEFT: SERVICE CONFIRMED PANEL ── */
+    .service-panel { position: sticky; top: calc(36px + 56px + 20px); }
+
+    .back-link {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 12px; color: var(--on-surface-variant);
+      text-decoration: none; margin-bottom: 28px;
+      transition: color 0.15s;
+    }
+    .back-link:hover { color: var(--primary); }
+
+    .service-confirmed-card {
+      background: var(--surface-container-low);
+      border-radius: 24px; overflow: hidden;
+      border: 2px solid var(--primary);
+    }
+
+    .scc-image { width: 100%; aspect-ratio: 4/3; overflow: hidden; }
+    .scc-image img { width: 100%; height: 100%; object-fit: cover; }
+    .scc-image-placeholder { width: 100%; aspect-ratio: 4/3; background: var(--surface-container-highest); }
+
+    .scc-body { padding: 20px 24px 24px; }
+    .scc-chip { display: inline-flex; font-size: 11px; font-weight: 600; letter-spacing: 0.5px; padding: 4px 12px; border-radius: 9999px; background: var(--secondary-container); color: var(--on-secondary-container); margin-bottom: 10px; }
+    .scc-title { font-family: var(--serif); font-size: 28px; font-weight: 400; color: var(--on-surface); margin-bottom: 2px; }
+    .scc-duration { font-size: 13px; color: var(--on-surface-variant); margin-bottom: 14px; }
+    .scc-price { font-size: 32px; font-weight: 700; color: var(--primary); margin-bottom: 18px; font-family: var(--serif); }
+
+    .scc-features { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+    .scc-features li { font-size: 13px; color: var(--on-surface-variant); padding-left: 18px; position: relative; line-height: 1.5; }
+    .scc-features li::before { content: '✓'; position: absolute; left: 0; color: var(--primary); font-size: 11px; top: 1px; }
+
+    .scc-quote {
+      margin-top: 20px;
+      font-family: var(--serif); font-size: 15px; font-style: italic;
+      color: var(--on-surface-variant); line-height: 1.6;
+      border-top: 1px solid var(--outline-variant);
+      padding-top: 16px;
+    }
+    .scc-quote cite { display: block; font-style: normal; font-size: 11px; margin-top: 5px; color: var(--outline); }
+
+    /* ── RIGHT: BOOKING FORM ── */
+    .booking-form-panel { }
+
+    .form-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--primary); margin-bottom: 10px; }
+    .form-heading { font-family: var(--serif); font-size: 40px; font-weight: 400; line-height: 1.1; margin-bottom: 8px; }
+    .form-subheading { font-size: 14px; color: var(--on-surface-variant); line-height: 1.6; margin-bottom: 36px; }
+
+    /* Step indicators */
+    .steps { display: flex; gap: 0; margin-bottom: 36px; }
+    .step-item {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 12px; font-weight: 500; color: var(--outline);
+    }
+    .step-item.done { color: var(--primary); }
+    .step-item.active { color: var(--on-surface); font-weight: 600; }
+    .step-num {
+      width: 22px; height: 22px; border-radius: 9999px; border: 1.5px solid currentColor;
+      display: flex; align-items: center; justify-content: center; font-size: 11px; flex-shrink: 0;
+    }
+    .step-item.done .step-num { background: var(--primary); border-color: var(--primary); color: var(--on-primary); }
+    .step-sep { width: 24px; height: 1px; background: var(--outline-variant); margin: 0 8px; align-self: center; }
+
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; }
+    .form-field { display: flex; flex-direction: column; gap: 6px; margin-bottom: 12px; }
+    .form-field label { font-size: 11px; font-weight: 600; color: var(--on-surface-variant); letter-spacing: 0.3px; }
+    .form-field input, .form-field select, .form-field textarea {
+      font-family: var(--sans); font-size: 14px;
+      background: var(--surface-container-low); border: 1px solid var(--outline-variant);
+      border-radius: 12px; padding: 13px 16px; color: var(--on-surface); outline: none;
+      transition: border-color 0.15s; resize: none; appearance: none;
+    }
+    .form-field input:focus, .form-field select:focus, .form-field textarea:focus { border-color: var(--primary); }
+    .form-field textarea { min-height: 88px; }
+    .field-hint { font-size: 11px; color: var(--outline); line-height: 1.5; }
+
+    /* Divider */
+    .form-divider { height: 1px; background: var(--outline-variant); margin: 24px 0; }
+
+    /* Payment method choice */
+    .payment-section-label { font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--outline); margin-bottom: 14px; }
+    .payment-options { display: flex; flex-direction: column; gap: 10px; margin-bottom: 24px; }
+    .payment-option {
+      display: flex; align-items: center; gap: 14px;
+      padding: 16px 18px; border-radius: 14px;
+      border: 1.5px solid var(--outline-variant);
+      cursor: pointer; transition: border-color 0.15s, background 0.15s;
+    }
+    .payment-option:hover { border-color: var(--primary); }
+    .payment-option.selected { border-color: var(--primary); background: var(--primary-container); }
+    .payment-option input[type="radio"] { display: none; }
+    .payment-radio-dot {
+      width: 18px; height: 18px; border-radius: 9999px;
+      border: 1.5px solid var(--outline-variant); flex-shrink: 0;
+      transition: border-color 0.15s, background 0.15s;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .payment-option.selected .payment-radio-dot { border-color: var(--primary); background: var(--primary); }
+    .payment-radio-dot::after { content: ''; width: 6px; height: 6px; border-radius: 9999px; background: white; opacity: 0; transition: opacity 0.15s; }
+    .payment-option.selected .payment-radio-dot::after { opacity: 1; }
+    .payment-option-label { font-size: 14px; font-weight: 500; color: var(--on-surface); }
+    .payment-option-desc { font-size: 12px; color: var(--on-surface-variant); margin-top: 2px; }
+    .payment-option-price { margin-left: auto; font-size: 16px; font-weight: 700; color: var(--primary); white-space: nowrap; }
+
+    /* CTAs */
+    .btn-confirm {
+      background: var(--primary); color: var(--on-primary);
+      border: none; padding: 16px 28px; border-radius: 9999px;
+      font-family: var(--sans); font-size: 16px; font-weight: 600;
+      cursor: pointer; width: 100%; text-align: center; transition: opacity 0.15s;
+      display: block; text-decoration: none;
+    }
+    .btn-confirm:hover { opacity: 0.88; }
+    .confirm-subtext { font-size: 12px; color: var(--outline); text-align: center; margin-top: 10px; line-height: 1.6; }
+
+    /* ── ANNOTATION ── */
+    .annotation-wrap { max-width: 920px; margin: 0 auto; padding: 0 48px 80px; }
+    .annotation { background: rgb(32 27 23); color: rgb(255 248 245); border-radius: 16px; padding: 24px 28px; font-size: 13px; line-height: 1.7; }
+    .annotation strong { color: rgb(255 183 124); }
+    .annotation h3 { font-family: var(--serif); font-size: 20px; font-weight: 400; margin-bottom: 12px; }
+    .annotation ul { padding-left: 20px; display: flex; flex-direction: column; gap: 6px; margin-top: 8px; }
+  </style>
+</head>
+<body>
+
+  <div class="scenario-bar">
+    <span class="scenario-bar-label">Booking UX Scenarios</span>
+    <a href="mockup-a.html">A · Card Expands</a>
+    <a href="mockup-b.html">B · Select + Scroll</a>
+    <a href="mockup-c.html">C · Drawer</a>
+    <a href="mockup-d.html" class="active">D · Booking Page</a>
+    <a href="mockup-e.html">E · Chip Selector</a>
+    <a href="mockup-f.html">F · Visual Radio</a>
+    <a href="mockup-g.html">G · Just the Form</a>
+    <a href="mockup-h.html">H · Horizontal Cards</a>
+    <a href="mockup-i.html">I · Free Consult</a>
+    <span class="scenario-bar-desc">The Byron Doula · 2026</span>
+  </div>
+
+  <nav style="margin-top:36px">
+    <a href="#" class="nav-logo">The Byron Doula</a>
+    <a href="../index.html" class="nav-back">← Back to Services</a>
+  </nav>
+
+  <!-- Simulated URL param switcher (for prototype only) -->
+  <div class="switcher-bar">
+    <span class="switcher-label">Simulating ?service=</span>
+    <div class="switcher-btns">
+      <button class="switcher-btn active" onclick="setService('bp-virtual')">Birth Prep · Virtual</button>
+      <button class="switcher-btn" onclick="setService('bp-inperson')">Birth Prep · In-Person</button>
+      <button class="switcher-btn" onclick="setService('coaching')">Parent Coaching</button>
+    </div>
+  </div>
+
+  <!-- Booking page -->
+  <div class="booking-page">
+
+    <!-- Left: confirmed service -->
+    <div class="service-panel">
+      <a href="../index.html#services" class="back-link">← See all services</a>
+
+      <div class="service-confirmed-card">
+        <div class="scc-image">
+          <img id="sccImg" src="../images/NATHALIE--55.jpg" alt="" onerror="this.style.display='none'">
+        </div>
+        <div class="scc-body">
+          <div class="scc-chip" id="sccChip">Virtual</div>
+          <div class="scc-title" id="sccTitle">Birth Preparation</div>
+          <div class="scc-duration" id="sccDuration">2-hour session</div>
+          <div class="scc-price" id="sccPrice">$250</div>
+          <ul class="scc-features" id="sccFeatures">
+            <li>A birth plan your care team will respect</li>
+            <li>Tools to stay calm through every contraction</li>
+            <li>Your partner confident and by your side</li>
+            <li>Clarity on every decision before you need to make it</li>
+          </ul>
+          <div class="scc-quote" id="sccQuote">
+            "She really helped support my partner so he could support me."
+            <cite>Dr Camilla White · GP &amp; mother of three</cite>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right: booking form -->
+    <div class="booking-form-panel">
+      <p class="form-eyebrow">Step 1 of 2</p>
+      <h1 class="form-heading">Complete Your Booking</h1>
+      <p class="form-subheading">A few details and you're done. Nathalie will confirm within one business day.</p>
+
+      <div class="steps">
+        <div class="step-item active"><div class="step-num">1</div> Your Details</div>
+        <div class="step-sep"></div>
+        <div class="step-item"><div class="step-num">2</div> Payment</div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-field"><label>Your name *</label><input type="text" placeholder="e.g. Sophie Willing"></div>
+        <div class="form-field"><label>Email *</label><input type="email" placeholder="you@example.com"></div>
+      </div>
+      <div class="form-field">
+        <label>Your due date (or approximate)</label>
+        <input type="text" placeholder="e.g. August 2026 or 15 August 2026">
+        <span class="field-hint">Optional but helps Nathalie prepare.</span>
+      </div>
+      <div class="form-field">
+        <label>Anything you'd like Nathalie to know</label>
+        <textarea placeholder="Questions, concerns, anything at all — this goes directly to Nathalie."></textarea>
+      </div>
+
+      <div class="form-divider"></div>
+
+      <p class="payment-section-label">How would you like to pay?</p>
+      <div class="payment-options" id="paymentOptions">
+        <label class="payment-option selected" id="opt-stripe" onclick="selectPayment('stripe')">
+          <div class="payment-radio-dot"></div>
+          <div>
+            <div class="payment-option-label">Pay now · Stripe</div>
+            <div class="payment-option-desc">Secure card payment. Confirmation immediately.</div>
+          </div>
+          <div class="payment-option-price" id="stripePrice">$250</div>
+        </label>
+        <label class="payment-option" id="opt-invoice" onclick="selectPayment('invoice')">
+          <div class="payment-radio-dot"></div>
+          <div>
+            <div class="payment-option-label">Request an invoice</div>
+            <div class="payment-option-desc">Nathalie will send a payment link within 24 hours.</div>
+          </div>
+          <div class="payment-option-price" style="color: var(--outline); font-size:13px; font-weight:400;">Free to request</div>
+        </label>
+      </div>
+
+      <button class="btn-confirm" id="btnConfirm">Pay &amp; Confirm · $250</button>
+      <p class="confirm-subtext">Full refund if Nathalie isn't available for your dates.<br>Questions? Email <strong>hello@thebyrondoula.com</strong></p>
+    </div>
+  </div>
+
+  <div class="annotation-wrap">
+    <div class="annotation">
+      <h3>Scenario D — Dedicated Booking Page</h3>
+      <p><strong>How it works:</strong> Service cards on the homepage link to <code>booking.html?service=birth-prep-virtual</code>. This page reads the URL param, locks in the service, and presents a clean two-column form with no distractions. The switcher bar at the top simulates different URL params for the prototype.</p>
+      <ul>
+        <li>Pros: Maximum focus at the moment of conversion. No competing elements. Shareable URL — Nathalie can send people directly to book a specific service. Bookmarkable.</li>
+        <li>Cons: Navigates away from the homepage. Introduces a second page to maintain. Without URL params, "Book a session" from hero needs a service picker step first.</li>
+        <li>Best for: Direct links from Instagram bio, email campaigns, referrals. Strong complement to any of the other scenarios.</li>
+      </ul>
+    </div>
+  </div>
+
+  <script>
+    const services = {
+      'bp-virtual': {
+        chip: 'Virtual', title: 'Birth Preparation', duration: '2-hour session', price: '$250',
+        img: '../images/NATHALIE--55.jpg',
+        features: ['A birth plan your care team will respect', 'Tools to stay calm through every contraction', 'Your partner confident and by your side', 'Clarity on every decision before you need to make it'],
+        quote: '"She really helped support my partner so he could support me."',
+        quotecite: 'Dr Camilla White · GP &amp; mother of three'
+      },
+      'bp-inperson': {
+        chip: 'In Person', title: 'Birth Preparation', duration: '2-hour session', price: '$300',
+        img: '../images/nathalie-standing.jpg',
+        features: ['A birth plan your care team will respect', 'Tools to stay calm through every contraction', 'Your partner confident and by your side', 'Clarity on every decision before you need to make it'],
+        quote: '"I felt very safe having her by my side. This was the best investment."',
+        quotecite: 'Luciana Sanseverino · Mother'
+      },
+      'coaching': {
+        chip: 'Virtual', title: 'Parent Coaching', duration: '1-hour session', price: '$180',
+        img: '../images/nathalie-portrait.jpg',
+        features: ['1-on-1 session focused entirely on you', 'Birth planning, postpartum questions, and more', 'Relationship &amp; partner dynamics support', 'Tailored to exactly where you are'],
+        quote: '"Having her by my side during postpartum was so comforting."',
+        quotecite: 'Sophie Willing · Mother of two'
+      }
+    };
+
+    let currentPrice = '$250';
+    let currentPayment = 'stripe';
+
+    function setService(id) {
+      const svc = services[id];
+      document.getElementById('sccImg').src = svc.img;
+      document.getElementById('sccChip').textContent = svc.chip;
+      document.getElementById('sccTitle').textContent = svc.title;
+      document.getElementById('sccDuration').textContent = svc.duration;
+      document.getElementById('sccPrice').textContent = svc.price;
+      document.getElementById('sccFeatures').innerHTML = svc.features.map(f => `<li>${f}</li>`).join('');
+      document.getElementById('sccQuote').innerHTML = svc.quote + `<cite>${svc.quotecite}</cite>`;
+      document.getElementById('stripePrice').textContent = svc.price;
+
+      currentPrice = svc.price;
+      updateConfirmBtn();
+
+      // Update switcher buttons
+      document.querySelectorAll('.switcher-btn').forEach((b, i) => {
+        b.classList.toggle('active', ['bp-virtual','bp-inperson','coaching'][i] === id);
+      });
+    }
+
+    function selectPayment(type) {
+      currentPayment = type;
+      document.getElementById('opt-stripe').classList.toggle('selected', type === 'stripe');
+      document.getElementById('opt-invoice').classList.toggle('selected', type === 'invoice');
+      updateConfirmBtn();
+    }
+
+    function updateConfirmBtn() {
+      const btn = document.getElementById('btnConfirm');
+      if (currentPayment === 'stripe') {
+        btn.textContent = 'Pay & Confirm · ' + currentPrice;
+      } else {
+        btn.textContent = 'Submit & Request Invoice';
+      }
+    }
+  </script>
+</body>
+</html>

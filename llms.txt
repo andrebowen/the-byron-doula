@@ -1,0 +1,33 @@
+# The Byron Doula
+
+> Certified birth and postpartum doula based in Byron Bay and the Northern Rivers, NSW, Australia.
+
+Nathalie is a certified birth and postpartum doula offering continuous emotional, educational, and practical support during pregnancy, birth, and postpartum. She works with families across Byron Bay and the Northern Rivers of New South Wales, supporting hospital, birth centre, and home births.
+
+## Full content
+
+[domain]/llms-full.txt
+
+## Sitemap
+
+[domain]/sitemap.xml
+
+## Pages
+
+- [Home]([domain]/): Doula services, about Nathalie, testimonials, and booking.
+- [About]([domain]/about): Nathalie's background, training, certifications, and birth philosophy.
+- [Services]([domain]/services): Birth support, postpartum support, and consultations.
+- [Testimonials]([domain]/testimonials): Reviews from families Nathalie has supported.
+- [FAQ]([domain]/faq): Common questions about doula support, insurance, and what to expect.
+- [Contact]([domain]/contact): Book a consultation or get in touch.
+
+## Services
+
+- Birth Support: Comprehensive doula care — prenatal visits, continuous labour support, postpartum visits, and 24/7 text support. Currently booking for 2027.
+- Postpartum Support: In-home visits, newborn care guidance, emotional recovery support, and breastfeeding assistance. $85/hr.
+- Consultation: 1-on-1 personalised guidance and birth planning session via Zoom. $150/hr.
+
+## Contact
+
+[email placeholder]
+Byron Bay, NSW, Australia

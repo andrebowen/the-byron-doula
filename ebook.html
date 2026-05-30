@@ -1,0 +1,993 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ebook Wireframe — The Byron Doula</title>
+
+  <style>
+    /* ── Shell ───────────────────────────────────────────────── */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #e0e0e0;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 11px;
+      color: #222;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 32px 16px;
+      gap: 32px;
+    }
+
+    /* ── Page ────────────────────────────────────────────────── */
+    .page {
+      width: 210mm;
+      height: 297mm;
+      background: #fff;
+      border: 2px solid #333;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* ── Page label (top-right corner) ──────────────────────── */
+    .page-label {
+      position: absolute;
+      top: 6px;
+      right: 10px;
+      font-size: 9px;
+      color: #999;
+      letter-spacing: 0.05em;
+    }
+
+    /* ── Generic zone box ────────────────────────────────────── */
+    .zone {
+      border: 1px dashed #aaa;
+      background: #f5f5f5;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: #666;
+      font-size: 10px;
+      line-height: 1.4;
+    }
+
+    .zone--image {
+      background: #ddd;
+      color: #888;
+      font-size: 10px;
+    }
+
+    .zone--solid {
+      background: #ccc;
+      border: 1px solid #999;
+    }
+
+    .zone--dark {
+      background: #555;
+      color: #fff;
+      border: 1px solid #333;
+    }
+
+    /* ── Cover page layout ───────────────────────────────────── */
+    .cover__title-strip {
+      border-bottom: 2px solid #333;
+      padding: 18px 24px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .cover__main-title {
+      font-size: 22px;
+      font-weight: bold;
+      color: #222;
+    }
+
+    .cover__tag-line {
+      font-size: 9px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #888;
+    }
+
+    .cover__body {
+      flex: 1;
+      padding: 18px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .cover__intro-row {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+
+    .cover__photo {
+      width: 72px;
+      height: 72px;
+      flex-shrink: 0;
+      border-radius: 50%;
+      border: 1px dashed #aaa;
+      background: #ddd;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 9px;
+      color: #888;
+      text-align: center;
+    }
+
+    .cover__intro-text {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .cover__greeting {
+      font-size: 16px;
+      color: #222;
+    }
+
+    .cover__bio {
+      border: 1px dashed #bbb;
+      background: #f5f5f5;
+      padding: 8px 10px;
+      font-size: 10px;
+      color: #666;
+      line-height: 1.5;
+    }
+
+    .cover__section-block {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .cover__section-block-label {
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #888;
+      border-left: 3px solid #bbb;
+      padding-left: 8px;
+    }
+
+    .cover__section-block-body {
+      border: 1px dashed #bbb;
+      background: #f5f5f5;
+      padding: 8px 10px;
+      font-size: 10px;
+      color: #666;
+      line-height: 1.5;
+    }
+
+    .cover__structure {
+      border-top: 1px solid #ccc;
+      padding-top: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .cover__structure-label {
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #aaa;
+      margin-bottom: 2px;
+    }
+
+    .cover__section-item {
+      display: flex;
+      gap: 8px;
+      font-size: 10px;
+      color: #444;
+    }
+
+    .cover__section-item span {
+      color: #999;
+      font-size: 9px;
+      width: 16px;
+      flex-shrink: 0;
+    }
+
+    /* ── Content page layout ─────────────────────────────────── */
+    .page__header {
+      border-left: 3px solid #aaa;
+      margin: 20px 20px 0;
+      padding: 0 0 0 10px;
+    }
+
+    .page__section-tag {
+      font-size: 9px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #888;
+    }
+
+    .page__title {
+      font-size: 22px;
+      color: #222;
+      margin: 3px 0 2px;
+    }
+
+    .page__subtitle {
+      font-size: 10px;
+      color: #666;
+    }
+
+    .page__divider {
+      height: 1px;
+      background: #ccc;
+      margin: 12px 20px;
+    }
+
+    .page__body {
+      flex: 1;
+      padding: 0 20px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    /* ── Section divider page ────────────────────────────────── */
+    .page--divider {
+      justify-content: center;
+      align-items: center;
+      background: #f5f5f5;
+    }
+
+    .divider__inner {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 14px;
+      padding: 40px;
+    }
+
+    .divider__number {
+      font-size: 72px;
+      font-weight: bold;
+      color: #ddd;
+      line-height: 1;
+    }
+
+    .divider__title {
+      font-size: 32px;
+      color: #222;
+      font-weight: bold;
+      letter-spacing: 0.02em;
+    }
+
+    .divider__rule {
+      width: 48px;
+      height: 2px;
+      background: #aaa;
+    }
+
+    .divider__description {
+      font-size: 11px;
+      color: #666;
+      max-width: 280px;
+      line-height: 1.5;
+    }
+
+    .divider__pages {
+      border: 1px dashed #bbb;
+      background: #ececec;
+      padding: 6px 16px;
+      font-size: 9px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #888;
+      border-radius: 999px;
+    }
+
+    /* ── Two-column layout ───────────────────────────────────── */
+    .page__columns {
+      display: flex;
+      gap: 12px;
+      flex: 1;
+    }
+
+    .page__col {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      min-width: 0;
+    }
+
+    .page__col-label {
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #aaa;
+      padding-bottom: 5px;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .page__col--partner .page__col-label {
+      border-bottom-style: dashed;
+    }
+
+    .page__col--partner .checklist {
+      background: #f0f0f0;
+      border-style: dashed;
+    }
+
+    /* ── Checklist group ─────────────────────────────────────── */
+    .checklist-group__label {
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #888;
+      margin-bottom: 5px;
+    }
+
+    .checklist {
+      list-style: none;
+      border: 1px dashed #bbb;
+      background: #f8f8f8;
+      padding: 8px 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .checklist li {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      font-size: 10px;
+      color: #333;
+      line-height: 1.4;
+    }
+
+    .checklist li::before {
+      content: '○';
+      flex-shrink: 0;
+      font-size: 11px;
+      color: #aaa;
+      margin-top: -1px;
+    }
+
+    /* ── Callout card ────────────────────────────────────────── */
+    .callout {
+      border: 1px dashed #aaa;
+      background: #f0f0f0;
+      border-left: 3px solid #999;
+      padding: 10px 12px;
+    }
+
+    .callout__label {
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #777;
+      margin-bottom: 4px;
+    }
+
+    .callout__body {
+      font-size: 10px;
+      color: #444;
+      font-style: italic;
+      line-height: 1.5;
+    }
+
+    /* ── Page footer ─────────────────────────────────────────── */
+    .page__footer {
+      padding: 8px 20px 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .page__footer-line {
+      flex: 1;
+      height: 1px;
+      background: #ddd;
+    }
+
+    .page__folio {
+      font-size: 9px;
+      color: #aaa;
+      letter-spacing: 0.08em;
+    }
+
+    /* ── Back cover ──────────────────────────────────────────── */
+    .back__top {
+      padding: 28px 24px 0;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .back__portrait {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      border: 1px dashed #aaa;
+      background: #ddd;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 9px;
+      color: #888;
+    }
+
+    .back__cta {
+      margin: 20px;
+      border: 1px dashed #888;
+      background: #ddd;
+      padding: 20px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .back__contact {
+      padding: 0 24px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      margin-top: auto;
+    }
+
+    .back__contact-divider {
+      height: 1px;
+      background: #ddd;
+      margin-bottom: 8px;
+    }
+
+    /* ── Print ───────────────────────────────────────────────── */
+    @media print {
+      @page { size: A4 portrait; margin: 0; }
+      body { background: none; padding: 0; gap: 0; }
+      .page {
+        width: 210mm;
+        height: 297mm;
+        border: none;
+        page-break-after: always;
+        break-after: page;
+      }
+      .page:last-child { page-break-after: avoid; break-after: avoid; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- PAGE 1 — COVER -->
+  <section class="page">
+    <span class="page-label">PAGE 1 / COVER</span>
+
+    <!-- Title strip -->
+    <div class="cover__title-strip">
+      <div class="cover__main-title">Your Complete Birth Prep Checklist</div>
+      <div class="cover__tag-line">Pregnancy &nbsp;·&nbsp; Birth &nbsp;·&nbsp; Postpartum</div>
+    </div>
+
+    <div class="cover__body">
+
+      <!-- Photo + greeting + bio -->
+      <div class="cover__intro-row">
+        <div class="cover__photo">Photo</div>
+        <div class="cover__intro-text">
+          <div class="cover__greeting">Hi, I'm Nathalie,</div>
+          <div class="cover__bio">
+            Bio paragraph — who she is, doula, location (Byron Bay &amp; Northern Rivers NSW), what she offers, how she supports families through pregnancy, birth, and postpartum.
+          </div>
+        </div>
+      </div>
+
+      <!-- Why I wrote this -->
+      <div class="cover__section-block">
+        <div class="cover__section-block-label">Why I wrote this</div>
+        <div class="cover__section-block-body">
+          Explanation of the motivation — what she saw families struggling with, why having a clear checklist matters, and how feeling prepared changes the birth experience.
+        </div>
+      </div>
+
+      <!-- Who it is for -->
+      <div class="cover__section-block">
+        <div class="cover__section-block-label">Who it is for</div>
+        <div class="cover__section-block-body">
+          Description of the intended reader — expectant mothers, partners, families preparing for birth, first-timers and those who want to feel more organised and confident this time around.
+        </div>
+      </div>
+
+      <!-- How to use this -->
+      <div class="cover__section-block">
+        <div class="cover__section-block-label">How to use this</div>
+        <div class="cover__section-block-body">
+          <div style="font-size:9px; text-transform:uppercase; letter-spacing:0.1em; color:#888; margin-bottom:8px;">How this guide is structured</div>
+          <div class="cover__section-item"><span>01</span> Pregnancy — what to do across all three trimesters</div>
+          <div class="cover__section-item" style="margin-top:5px;"><span>02</span> Birth — how to prepare and what to expect on the day</div>
+          <div class="cover__section-item" style="margin-top:5px;"><span>03</span> Postpartum — caring for yourself and your baby after birth</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- PAGE 2 — PREGNANCY DIVIDER -->
+  <section class="page page--divider">
+    <span class="page-label">PAGE 2 / SECTION DIVIDER</span>
+    <div class="divider__inner">
+      <div class="divider__number">01</div>
+      <div class="divider__title">Pregnancy</div>
+      <div class="divider__rule"></div>
+      <div class="divider__description">What to do across all three trimesters — from your first appointment to packing your hospital bag.</div>
+      <div class="divider__pages">Pages 3 – 4</div>
+    </div>
+  </section>
+
+  <!-- PAGE 3 — PREGNANCY PT 1 -->
+  <section class="page">
+    <span class="page-label">PAGE 3 / PREGNANCY PT 1</span>
+    <div class="page__header">
+      <p class="page__section-tag">Section 1 of 3 · Pregnancy</p>
+      <h2 class="page__title">Pregnancy</h2>
+      <p class="page__subtitle">What do I need to do?</p>
+    </div>
+    <div class="page__divider"></div>
+    <div class="page__body">
+      <div class="page__columns">
+
+        <div class="page__col">
+          <div class="page__col-label">You</div>
+          <div class="checklist-group">
+            <p class="checklist-group__label">Trimester 1 · Weeks 1–13</p>
+            <ul class="checklist">
+              <li>Book your first midwife or OB appointment</li>
+              <li>Start prenatal vitamins (folate, iodine, iron)</li>
+              <li>Confirm your due date</li>
+              <li>Discuss birth setting options</li>
+              <li>Reduce alcohol &amp; caffeine</li>
+              <li>Check Medicare / private health cover</li>
+              <li>Share news with your support people</li>
+            </ul>
+          </div>
+          <div class="checklist-group">
+            <p class="checklist-group__label">Trimester 2 · Weeks 14–27</p>
+            <ul class="checklist">
+              <li>Anatomy scan at 18–20 weeks</li>
+              <li>Notify your employer, plan leave</li>
+              <li>Begin a birth preferences document</li>
+              <li>Research and book doula support</li>
+              <li>Start pelvic floor exercises</li>
+              <li>Consider antenatal yoga or hypnobirthing</li>
+              <li>Arrange dental check-up</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="page__col page__col--partner">
+          <div class="page__col-label">Your Partner</div>
+          <div class="checklist-group">
+            <p class="checklist-group__label">Trimester 1 · Weeks 1–13</p>
+            <ul class="checklist">
+              <li>Attend the first OB / midwife appointment</li>
+              <li>Read about early pregnancy stages</li>
+              <li>Research paternity / partner leave options</li>
+              <li>Take on extra household tasks</li>
+              <li>Reduce alcohol in solidarity</li>
+              <li>Talk openly about feelings and fears</li>
+            </ul>
+          </div>
+          <div class="checklist-group">
+            <p class="checklist-group__label">Trimester 2 · Weeks 14–27</p>
+            <ul class="checklist">
+              <li>Attend the anatomy scan</li>
+              <li>Research prams, car seats, nursery</li>
+              <li>Attend antenatal classes together</li>
+              <li>Help draft the birth plan</li>
+              <li>Confirm your leave dates with employer</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div class="page__footer">
+      <div class="page__footer-line"></div>
+      <span class="page__folio">3 / 11</span>
+      <div class="page__footer-line"></div>
+    </div>
+  </section>
+
+  <!-- PAGE 4 — PREGNANCY PT 2 -->
+  <section class="page">
+    <span class="page-label">PAGE 4 / PREGNANCY PT 2</span>
+    <div class="page__header">
+      <p class="page__section-tag">Section 1 of 3 · Pregnancy (continued)</p>
+      <h2 class="page__title">Pregnancy</h2>
+      <p class="page__subtitle">Getting ready for birth</p>
+    </div>
+    <div class="page__divider"></div>
+    <div class="page__body">
+      <div class="page__columns">
+
+        <div class="page__col">
+          <div class="page__col-label">You</div>
+          <div class="checklist-group">
+            <p class="checklist-group__label">Trimester 3 · Weeks 28–40</p>
+            <ul class="checklist">
+              <li>Tour your birth facility</li>
+              <li>Write your birth plan</li>
+              <li>Pack your hospital bag by 36 weeks</li>
+              <li>Install the baby capsule &amp; get it checked</li>
+              <li>Set up the nursery &amp; safe sleep space</li>
+              <li>Attend a birth or hypnobirthing class</li>
+              <li>Discuss pain relief options</li>
+              <li>Freeze meals or organise a meal train</li>
+              <li>Arrange care for older children &amp; pets</li>
+              <li>Confirm your doula is on call from 37 weeks</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="page__col page__col--partner">
+          <div class="page__col-label">Your Partner</div>
+          <div class="checklist-group">
+            <p class="checklist-group__label">Trimester 3 · Weeks 28–40</p>
+            <ul class="checklist">
+              <li>Know the route to the hospital</li>
+              <li>Read the birth plan — know it well</li>
+              <li>Pack your own bag (snacks, charger, change of clothes)</li>
+              <li>Install and check the baby capsule</li>
+              <li>Learn comfort &amp; support techniques for labour</li>
+              <li>Save the hospital's number in your phone</li>
+              <li>Know the "when to go in" signs</li>
+              <li>Confirm your leave start date</li>
+              <li>Be on call from 37 weeks</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+      <div class="callout">
+        <p class="callout__label">Tip callout — Nathalie's tip</p>
+        <p class="callout__body">"A birth plan is less about a fixed outcome and more about knowing your options. The more informed you are, the more empowered you'll feel — whatever unfolds."</p>
+      </div>
+    </div>
+    <div class="page__footer">
+      <div class="page__footer-line"></div>
+      <span class="page__folio">4 / 11</span>
+      <div class="page__footer-line"></div>
+    </div>
+  </section>
+
+  <!-- PAGE 5 — BIRTH DIVIDER -->
+  <section class="page page--divider">
+    <span class="page-label">PAGE 5 / SECTION DIVIDER</span>
+    <div class="divider__inner">
+      <div class="divider__number">02</div>
+      <div class="divider__title">Birth</div>
+      <div class="divider__rule"></div>
+      <div class="divider__description">How to prepare your bag, your mindset, and your support team — and what to do when labour begins.</div>
+      <div class="divider__pages">Pages 6 – 7</div>
+    </div>
+  </section>
+
+  <!-- PAGE 6 — BIRTH PT 1 -->
+  <section class="page">
+    <span class="page-label">PAGE 6 / BIRTH PT 1</span>
+    <div class="page__header">
+      <p class="page__section-tag">Section 2 of 3 · Birth</p>
+      <h2 class="page__title">Birth</h2>
+      <p class="page__subtitle">What do I need to prepare?</p>
+    </div>
+    <div class="page__divider"></div>
+    <div class="page__body">
+      <div class="page__columns">
+
+        <div class="page__col">
+          <div class="page__col-label">You</div>
+          <div class="checklist-group">
+            <p class="checklist-group__label">Your hospital bag</p>
+            <ul class="checklist">
+              <li>Birth plan — print 2–3 copies</li>
+              <li>Medicare card, ID, health fund details</li>
+              <li>Snacks &amp; electrolyte drink for labour</li>
+              <li>Your own pillow from home</li>
+              <li>Loose, comfortable clothes to labour in</li>
+              <li>Maternity pads &amp; comfortable underwear</li>
+              <li>Phone charger &amp; a comforting playlist</li>
+              <li>Baby's first outfit, nappies &amp; swaddle wraps</li>
+              <li>Going-home outfit for you</li>
+            </ul>
+          </div>
+          <div class="checklist-group">
+            <p class="checklist-group__label">Logistics</p>
+            <ul class="checklist">
+              <li>Save the hospital's direct number</li>
+              <li>Know your "when to come in" guidelines</li>
+              <li>Confirm your doula's on-call details</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="page__col page__col--partner">
+          <div class="page__col-label">Your Partner</div>
+          <div class="checklist-group">
+            <p class="checklist-group__label">Partner's bag</p>
+            <ul class="checklist">
+              <li>Snacks and water for a long labour</li>
+              <li>Change of clothes</li>
+              <li>Phone charger &amp; portable battery</li>
+              <li>Cash or card for parking</li>
+              <li>Something to do during early labour</li>
+            </ul>
+          </div>
+          <div class="checklist-group">
+            <p class="checklist-group__label">Logistics</p>
+            <ul class="checklist">
+              <li>Fuel the car and know the route</li>
+              <li>Arrange backup for pets &amp; older children</li>
+              <li>Have leave approved and ready to start</li>
+              <li>Know who to notify when baby arrives</li>
+              <li>Keep your phone on at all times</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div class="page__footer">
+      <div class="page__footer-line"></div>
+      <span class="page__folio">6 / 11</span>
+      <div class="page__footer-line"></div>
+    </div>
+  </section>
+
+  <!-- PAGE 7 — BIRTH PT 2 -->
+  <section class="page">
+    <span class="page-label">PAGE 7 / BIRTH PT 2</span>
+    <div class="page__header">
+      <p class="page__section-tag">Section 2 of 3 · Birth (continued)</p>
+      <h2 class="page__title">Birth</h2>
+      <p class="page__subtitle">During labour</p>
+    </div>
+    <div class="page__divider"></div>
+    <div class="page__body">
+      <div class="page__columns">
+
+        <div class="page__col">
+          <div class="page__col-label">You</div>
+          <div class="checklist-group">
+            <p class="checklist-group__label">Early labour · At home</p>
+            <ul class="checklist">
+              <li>Rest and conserve your energy</li>
+              <li>Stay hydrated and eat a light meal</li>
+              <li>Time contractions using an app</li>
+              <li>Use heat, a shower, or bath</li>
+              <li>Call your doula when contractions are regular</li>
+            </ul>
+          </div>
+          <div class="checklist-group">
+            <p class="checklist-group__label">Active labour · At your birth place</p>
+            <ul class="checklist">
+              <li>Hand your birth plan to the midwife</li>
+              <li>Ask questions before agreeing to interventions</li>
+              <li>Change positions regularly</li>
+              <li>Use breathing, sound, and movement</li>
+              <li>Lean on your doula and support person</li>
+              <li>You can always ask for more time to decide</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="page__col page__col--partner">
+          <div class="page__col-label">Your Partner</div>
+          <div class="checklist-group">
+            <p class="checklist-group__label">Early labour · At home</p>
+            <ul class="checklist">
+              <li>Time contractions together</li>
+              <li>Offer heat, water, and food</li>
+              <li>Stay calm and present</li>
+              <li>Contact the doula when needed</li>
+              <li>Load the car and be ready to go</li>
+            </ul>
+          </div>
+          <div class="checklist-group">
+            <p class="checklist-group__label">Active labour · At your birth place</p>
+            <ul class="checklist">
+              <li>Be the voice for the birth plan</li>
+              <li>Offer physical comfort — pressure, movement</li>
+              <li>Keep the environment calm and positive</li>
+              <li>Eat and stay hydrated yourself</li>
+              <li>Trust the team — and your partner</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+      <div class="callout">
+        <p class="callout__label">The BRAINS tool — use it for any decision</p>
+        <p class="callout__body">Benefits · Risks · Alternatives · Intuition · Nothing (wait) · Support</p>
+      </div>
+    </div>
+    <div class="page__footer">
+      <div class="page__footer-line"></div>
+      <span class="page__folio">7 / 11</span>
+      <div class="page__footer-line"></div>
+    </div>
+  </section>
+
+  <!-- PAGE 8 — POSTPARTUM DIVIDER -->
+  <section class="page page--divider">
+    <span class="page-label">PAGE 8 / SECTION DIVIDER</span>
+    <div class="divider__inner">
+      <div class="divider__number">03</div>
+      <div class="divider__title">Postpartum</div>
+      <div class="divider__rule"></div>
+      <div class="divider__description">Caring for yourself and your baby in the days and weeks after birth — emotionally, physically, and practically.</div>
+      <div class="divider__pages">Pages 9 – 10</div>
+    </div>
+  </section>
+
+  <!-- PAGE 9 — POSTPARTUM PT 1 -->
+  <section class="page">
+    <span class="page-label">PAGE 9 / POSTPARTUM PT 1</span>
+    <div class="page__header">
+      <p class="page__section-tag">Section 3 of 3 · Postpartum</p>
+      <h2 class="page__title">Postpartum</h2>
+      <p class="page__subtitle">What do I need to do?</p>
+    </div>
+    <div class="page__divider"></div>
+    <div class="page__body">
+      <div class="page__columns">
+
+        <div class="page__col">
+          <div class="page__col-label">You</div>
+          <div class="checklist-group">
+            <p class="checklist-group__label">For you · First days home</p>
+            <ul class="checklist">
+              <li>Rest — sleep when baby sleeps</li>
+              <li>Eat warm, nourishing food and stay hydrated</li>
+              <li>Accept help — say yes to everything offered</li>
+              <li>Book your 6-week postnatal check-up</li>
+              <li>Get feeding support early if you need it</li>
+            </ul>
+          </div>
+          <div class="checklist-group">
+            <p class="checklist-group__label">For baby · First days home</p>
+            <ul class="checklist">
+              <li>Register the birth (within 60 days in NSW)</li>
+              <li>Book the 2-week midwife visit</li>
+              <li>Newborn bloodspot screening test</li>
+              <li>Hearing screen (done in hospital)</li>
+              <li>Safe sleep setup</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="page__col page__col--partner">
+          <div class="page__col-label">Your Partner</div>
+          <div class="checklist-group">
+            <p class="checklist-group__label">First days home</p>
+            <ul class="checklist">
+              <li>Take as much leave as possible</li>
+              <li>Handle all household tasks</li>
+              <li>Manage visitors — protect rest time</li>
+              <li>Learn to settle baby so mum can sleep</li>
+              <li>Do the night feeds where you can</li>
+              <li>Watch for signs of PND in both of you</li>
+              <li>Cook, shop, and keep the home running</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+      <div class="callout" style="border-left-color:#999; background:#eee;">
+        <p class="callout__label">Warning callout — seek help immediately if you notice</p>
+        <p class="callout__body">Heavy bleeding · Fever or chills · Chest pain · Thoughts of harming yourself or your baby · Feeling unable to cope</p>
+      </div>
+    </div>
+    <div class="page__footer">
+      <div class="page__footer-line"></div>
+      <span class="page__folio">9 / 11</span>
+      <div class="page__footer-line"></div>
+    </div>
+  </section>
+
+  <!-- PAGE 10 — POSTPARTUM PT 2 -->
+  <section class="page">
+    <span class="page-label">PAGE 10 / POSTPARTUM PT 2</span>
+    <div class="page__header">
+      <p class="page__section-tag">Section 3 of 3 · Postpartum (continued)</p>
+      <h2 class="page__title">Postpartum</h2>
+      <p class="page__subtitle">Weeks 1–6 &amp; beyond</p>
+    </div>
+    <div class="page__divider"></div>
+    <div class="page__body">
+      <div class="page__columns">
+
+        <div class="page__col">
+          <div class="page__col-label">You</div>
+          <div class="checklist-group">
+            <p class="checklist-group__label">Emotional wellbeing</p>
+            <ul class="checklist">
+              <li>Check in with yourself daily</li>
+              <li>Talk to your GP about baby blues or PND</li>
+              <li>Limit visitors if you're overwhelmed</li>
+              <li>Connect with other new mothers</li>
+              <li>Be honest with your partner about how you feel</li>
+            </ul>
+          </div>
+          <div class="checklist-group">
+            <p class="checklist-group__label">Physical recovery</p>
+            <ul class="checklist">
+              <li>See a pelvic floor physiotherapist</li>
+              <li>Begin gentle movement from week 3</li>
+              <li>Scar care if you had a caesarean</li>
+              <li>Recheck iron &amp; vitamins at 6 weeks</li>
+              <li>Discuss contraception with your GP</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="page__col page__col--partner">
+          <div class="page__col-label">Your Partner</div>
+          <div class="checklist-group">
+            <p class="checklist-group__label">Weeks 1–6</p>
+            <ul class="checklist">
+              <li>Check in daily — emotionally, not just practically</li>
+              <li>Encourage rest, not "bouncing back"</li>
+              <li>Attend the 6-week check-up together</li>
+              <li>Organise extra help if family isn't nearby</li>
+              <li>Make space for connection as a couple</li>
+              <li>Learn the signs of PND — in yourself too</li>
+              <li>Ask how she's really feeling, and listen</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+      <div class="callout">
+        <p class="callout__label">Tip callout — Nathalie's tip</p>
+        <p class="callout__body">"The fourth trimester is real. Healing takes time, and there is no timeline for 'bouncing back.' Prioritise yourself so you can show up for your baby."</p>
+      </div>
+    </div>
+    <div class="page__footer">
+      <div class="page__footer-line"></div>
+      <span class="page__folio">10 / 11</span>
+      <div class="page__footer-line"></div>
+    </div>
+  </section>
+
+  <!-- PAGE 8 — BACK COVER -->
+  <section class="page">
+    <span class="page-label">PAGE 11 / BACK COVER</span>
+    <div class="back__top"></div>
+
+    <div class="back__cta">
+      <div style="font-size:14px; color:#333;">CTA Heading — "Ready to feel supported?"</div>
+      <div style="font-size:10px; color:#666;">Sub line — "Book a free discovery call"</div>
+      <div class="zone zone--solid" style="padding:8px 20px; border-radius:999px; font-size:10px; display:inline-block; width:fit-content; margin:0 auto;">
+        [ Button — website URL ]
+      </div>
+    </div>
+
+    <div class="back__contact">
+      <div class="back__contact-divider"></div>
+      <div style="font-size:10px; color:#666;">✉ Email address</div>
+      <div style="font-size:10px; color:#666;">📷 Instagram handle</div>
+      <div style="font-size:10px; color:#666;">📍 Location</div>
+      <div style="font-size:9px; color:#aaa; margin-top:8px;">© 2026 The Byron Doula</div>
+    </div>
+  </section>
+
+</body>
+</html>
