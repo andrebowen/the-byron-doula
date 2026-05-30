@@ -24,6 +24,8 @@
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/layout.css">
     <style>
+        html, body { background-color: var(--md-sys-color-surface-container-low); }
+
         /* ── Hero ─────────────────────────────────────────── */
         .about-hero {
             display: grid;
@@ -38,6 +40,7 @@
             justify-content: flex-start;
             padding: 80px 64px;
             padding-top: 144px;
+            background: var(--md-sys-color-surface-container-low);
         }
 
         .about-hero-eyebrow {
@@ -84,7 +87,7 @@
 
         /* ── Story ────────────────────────────────────────── */
         .about-story {
-            background: var(--md-sys-color-surface);
+            background: var(--md-sys-color-surface-container-low);
             padding: 96px 24px;
         }
 
@@ -525,7 +528,6 @@
     </footer>
 
     <script src="js/main.js"></script>
-    <script src="js/dev-bg.js"></script>
     <script>
       const toggle = document.getElementById('navToggle');
       const drawer = document.getElementById('navDrawer');

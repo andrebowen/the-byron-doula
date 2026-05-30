@@ -98,7 +98,7 @@ body {
    ===================================================== */
 
 .container {
-    max-width: 980px;
+    max-width: 1200px;
     margin: 0 auto;
     padding: 0 20px;
 }
@@ -193,7 +193,7 @@ nav.nav-solid {
 }
 
 .nav-container {
-    max-width: 980px;
+    max-width: 1200px;
     margin: 0 auto;
     padding: 0 20px;
     display: flex;
@@ -1294,7 +1294,7 @@ html:not(.dark) .theme-toggle .icon-sun { display: none; }
 }
 
 .about-text {
-    background: transparent;
+    background: var(--md-sys-color-surface-container-low);
     text-align: left;
 }
 
@@ -1980,7 +1980,7 @@ footer {
 }
 
 .footer-content {
-    max-width: 980px;
+    max-width: 1200px;
     margin: 0 auto;
 }
 
