@@ -1568,7 +1568,7 @@ html:not(.dark) .theme-toggle .icon-sun { display: none; }
     padding: 16px;
     border: 1px solid var(--md-sys-color-outline);
     border-radius: var(--md-sys-shape-extra-small);
-    background: transparent;
+    background: var(--md-sys-color-surface-container-lowest);
     color: var(--md-sys-color-on-surface);
     font: var(--md-type-body-large);
     outline: none;
@@ -1583,7 +1583,7 @@ html:not(.dark) .theme-toggle .icon-sun { display: none; }
 .text-field input:-webkit-autofill:focus,
 .text-field textarea:-webkit-autofill,
 .text-field textarea:-webkit-autofill:focus {
-    -webkit-box-shadow: 0 0 0px 1000px var(--md-sys-color-surface-container) inset;
+    -webkit-box-shadow: 0 0 0px 1000px var(--md-sys-color-surface-container-lowest) inset;
     -webkit-text-fill-color: var(--md-sys-color-on-surface);
     transition: background-color 5000s ease-in-out 0s;
 }
@@ -1605,7 +1605,7 @@ html:not(.dark) .theme-toggle .icon-sun { display: none; }
     transform: translateY(-50%);
     font: var(--md-type-body-large);
     color: var(--md-sys-color-on-surface-variant);
-    background: var(--md-sys-color-surface);
+    background: var(--md-sys-color-surface-container-lowest);
     padding: 0 4px;
     transition:
         top        var(--md-sys-motion-duration-short3) var(--md-sys-motion-easing-standard),
@@ -1794,7 +1794,7 @@ html:not(.dark) .theme-toggle .icon-sun { display: none; }
     padding: 0 16px;
     border-radius: var(--md-sys-shape-extra-small);
     border: 1px solid var(--md-sys-color-outline);
-    background: transparent;
+    background-color: var(--md-sys-color-surface-container-lowest);
     color: var(--md-sys-color-on-surface);
     font: var(--md-type-body-large);
     appearance: none;
