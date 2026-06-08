@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="theme-color" content="#2d1f16">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reviews — The Byron Doula</title>
+  <meta name="description" content="What families say about working with Nathalie Solis Pérez, certified birth doula in Byron Bay.">
+  <link rel="icon" href="favicon.png" type="image/png">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    .page-hero {
+      background: #d9c2ba;
+      padding-top: var(--nav-h);
+      padding-bottom: var(--sp-12);
+      display: flex; align-items: flex-end;
+      min-height: 52vh;
+    }
+    .page-hero-inner {
+      width: 100%;
+      padding-inline: max(var(--sp-5), calc((100vw - var(--content-max)) / 2 + var(--sp-10)));
+      padding-top: var(--sp-10);
+    }
+    .page-hero-eyebrow {
+      font-size: 12px; font-weight: 600; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--primary);
+      margin-bottom: var(--sp-3);
+    }
+    .page-hero-quote {
+      font-family: var(--font-serif); font-style: italic;
+      font-size: clamp(22px, 3.5vw, 40px);
+      color: var(--on-surface); line-height: 1.4;
+      max-width: 820px; margin-bottom: var(--sp-4);
+    }
+    .page-hero-cite { font-size: 14px; color: var(--on-surface-variant); }
+
+    /* Trust band */
+    .trust-band { background: #efeeea; padding-block: var(--sp-6); }
+    .stats-row {
+      display: grid; grid-template-columns: repeat(3,1fr);
+      gap: var(--sp-8);
+      padding-block: var(--sp-2);
+    }
+    .stat { text-align: center; }
+    .stat-num { font-family: var(--font-serif); font-size: 36px; font-weight: 700; color: var(--primary); line-height: 1; }
+    .stat-label { font-size: 13px; color: var(--on-surface-variant); margin-top: 4px; }
+
+    /* Reviews grid */
+    .reviews-grid {
+      display: grid; gap: var(--sp-3);
+      margin-top: var(--sp-6);
+    }
+    @media (min-width: 640px)  { .reviews-grid { grid-template-columns: repeat(2,1fr); } }
+    @media (min-width: 1024px) { .reviews-grid { grid-template-columns: repeat(3,1fr); } }
+
+    .review-card {
+      background: #efeeea;
+      border-radius: var(--r-xl); padding: var(--sp-4);
+      box-shadow: var(--shadow-card);
+      display: flex; flex-direction: column; gap: var(--sp-2);
+    }
+    .review-card .stars { color: var(--primary); font-size: 14px; letter-spacing: 2px; }
+    .review-card blockquote {
+      font-family: var(--font-serif); font-style: italic;
+      font-size: 15px; line-height: 1.75; color: var(--on-surface); flex: 1;
+    }
+    .reviewer {
+      display: flex; align-items: center; gap: 10px;
+      padding-top: var(--sp-2); border-top: 1px solid var(--outline-variant);
+      margin-top: auto;
+    }
+    .reviewer img { width: 52px; height: 52px; border-radius: 50%; object-fit: cover; flex-shrink: 0; }
+    .reviewer-info strong { display: block; font-size: 14px; font-weight: 600; }
+    .reviewer-info span { font-size: 12px; color: var(--on-surface-variant); }
+
+    /* Featured quote */
+    .featured-quote { text-align: center; }
+    .featured-quote blockquote {
+      font-family: var(--font-serif); font-style: italic;
+      font-size: clamp(18px,2.5vw,24px); color: #1b1c1a;
+      line-height: 1.7; max-width: 700px; margin-inline: auto;
+      margin-bottom: var(--sp-3);
+    }
+    .featured-quote cite { color: #53433d; font-size: 14px; font-style: normal; }
+
+    .cta-strip { background: var(--surface-container-low); padding-block: var(--sp-10); text-align: center; border-top: 1px solid var(--outline-variant); }
+    .cta-strip h2 { margin-bottom: var(--sp-2); }
+    .cta-strip p { color: var(--on-surface-variant); margin-bottom: var(--sp-4); max-width: 440px; margin-inline: auto; }
+  </style>
+</head>
+<body>
+
+  <nav class="nav" aria-label="Main navigation">
+    <div class="container nav-inner">
+      <a href="index.html" class="nav-logo">The Byron Doula</a>
+      <div class="nav-links">
+        <a href="about.html">About</a>
+        <a href="services.html">Services</a>
+        <a href="reviews.html" class="nav-active">Testimonials</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      <button class="hamburger" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+  <div class="nav-drawer" role="dialog" aria-modal="true" aria-label="Navigation menu">
+    <button class="drawer-close" aria-label="Close menu">✕</button>
+    <nav class="drawer-links">
+      <a href="about.html">About</a>
+      <a href="services.html">Services</a>
+      <a href="reviews.html" class="nav-active">Testimonials</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </div>
+
+  <main>
+    <section class="page-hero">
+      <div class="page-hero-inner">
+        <p class="page-hero-eyebrow">Reviews</p>
+        <blockquote class="page-hero-quote">"If you want the best for your birth, choose the wonderful Nathalie. She has the ability to create the most respectful, beautiful, gentle and sacred space. At my most vulnerable I felt safe and connected."</blockquote>
+        <p class="page-hero-cite">— Emma Bellamy, mother of three</p>
+      </div>
+    </section>
+
+    <!-- Trust band: stats + featured quote -->
+    <section class="trust-band">
+      <div class="container">
+        <div class="stats-row">
+          <div class="stat"><div class="stat-num">★ 5.0</div><div class="stat-label">Average rating</div></div>
+          <div class="stat"><div class="stat-num">13+</div><div class="stat-label">Years supporting families</div></div>
+          <div class="stat"><div class="stat-num">100%</div><div class="stat-label">Would recommend</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Reviews grid -->
+    <section class="section">
+      <div class="container">
+        <h2 class="t-headline section-title">From the Families</h2>
+        <span class="divider" aria-hidden="true"></span>
+
+        <div class="reviews-grid">
+
+          <div class="review-card">
+            <div class="stars">★★★★★</div>
+            <blockquote>"Nathalie was a constant support with the most beautiful nature. We adored her manner, communication and we found all of her teachings highly informative and clear. We felt supported all the way."</blockquote>
+            <div class="reviewer"><img src="images/testimonials/mums/lucy-folk.png" alt=""><div class="reviewer-info"><strong>Lucy Folk</strong><span>Mother of two</span></div></div>
+          </div>
+
+          <div class="review-card">
+            <div class="stars">★★★★★</div>
+            <blockquote>"Having her by my side during my pregnancy and postpartum period was so comforting. She helped me to understand that there really is no need for fear around birthing, to trust my intuition."</blockquote>
+            <div class="reviewer"><img src="images/testimonials/mums/sophie-willing.jpg" alt=""><div class="reviewer-info"><strong>Sophie Willing</strong><span>Mother of two</span></div></div>
+          </div>
+
+          <div class="review-card">
+            <div class="stars">★★★★★</div>
+            <blockquote>"She was calm and professional yet kind and warm and really helped support my partner so he could support me. I felt truly cared for in a very special way. As a GP I will be highly recommending Nathalie."</blockquote>
+            <div class="reviewer"><img src="images/testimonials/mums/camilla-white.jpg" alt=""><div class="reviewer-info"><strong>Dr Camilla White</strong><span>Mother of three</span></div></div>
+          </div>
+
+          <div class="review-card">
+            <div class="stars">★★★★★</div>
+            <blockquote>"I felt supported in every essence of pregnancy and mothering. You just completely 'got' everything I needed and made me feel calm and confident whenever I started to doubt myself."</blockquote>
+            <div class="reviewer"><img src="images/testimonials/mums/renee-darcy.png" alt=""><div class="reviewer-info"><strong>Renée D'Arcy</strong><span>Mother of three</span></div></div>
+          </div>
+
+          <div class="review-card">
+            <div class="stars">★★★★★</div>
+            <blockquote>"I was visualising an intimate, drug-free water birth and my wish became a reality with the help of Nathalie. This was the best investment and I can highly recommend having this beautiful woman by your side."</blockquote>
+            <div class="reviewer"><img src="images/testimonials/mums/cisco-tschurtschenthaler.png" alt=""><div class="reviewer-info"><strong>Cisco Tschurtschenthaler</strong><span>Mother of two</span></div></div>
+          </div>
+
+          <div class="review-card">
+            <div class="stars">★★★★★</div>
+            <blockquote>"Nathalie has supported me for the births of two of my children. Her calm and grounded energy coupled with her extensive knowledge gave me such comfort. A supported mother is the best kind of mother."</blockquote>
+            <div class="reviewer"><img src="images/testimonials/mums/priscylla-elliott.jpg" alt=""><div class="reviewer-info"><strong>Priscylla Elliott</strong><span>Mother of four</span></div></div>
+          </div>
+
+          <div class="review-card">
+            <div class="stars">★★★★★</div>
+            <blockquote>"Nathalie provided wonderful support throughout my pregnancy and birth. Her unwavering calmness was so beneficial in such a pivotal event in life."</blockquote>
+            <div class="reviewer"><img src="images/testimonials/mums/bethany-cecins.jpg" alt=""><div class="reviewer-info"><strong>Bethany Cecins</strong><span>Mother of one</span></div></div>
+          </div>
+
+          <div class="review-card">
+            <div class="stars">★★★★★</div>
+            <blockquote>"You made us feel so nurtured — gorgeous smile, calm presence, yummy food, amazing pictures, and you transformed the house into a beautiful sanctuary. Your support was invaluable."</blockquote>
+            <div class="reviewer"><img src="images/testimonials/mums/karla-hammer.jpg" alt=""><div class="reviewer-info"><strong>Karla Hammer</strong><span>Mother of three</span></div></div>
+          </div>
+
+          <div class="review-card">
+            <div class="stars">★★★★★</div>
+            <blockquote>"Knowing that you were going to be by our side during the birth was extremely reassuring. You encouraged me in every moment I was beginning to feel like I couldn't do it anymore."</blockquote>
+            <div class="reviewer"><img src="images/testimonials/mums/kaity-fox.png" alt=""><div class="reviewer-info"><strong>Kaity Fox</strong><span>Mother of two</span></div></div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-strip">
+      <div class="container">
+        <h2 class="t-headline">Ready to write your own story?</h2>
+        <p>Get in touch for a free discovery call — no pressure, just a conversation.</p>
+        <a href="contact.html" class="btn btn-primary">Book a Free Call</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <h2>The Byron Doula</h2>
+          <p>Certified birth doula supporting families across Byron Bay and the Northern Rivers, NSW.</p>
+          <div class="social-row">
+            <a href="https://instagram.com/thebyrondoula" class="social-link" aria-label="Instagram" target="_blank" rel="noopener"><svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
+            <a href="https://facebook.com/thebyrondoula" class="social-link" aria-label="Facebook" target="_blank" rel="noopener"><svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
+            <a href="https://pinterest.com/thebyrondoula" class="social-link" aria-label="Pinterest" target="_blank" rel="noopener"><svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12c0 4.24 2.65 7.86 6.39 9.29-.09-.78-.17-1.98.04-2.83.18-.77 1.24-5.26 1.24-5.26s-.32-.63-.32-1.57c0-1.47.85-2.57 1.91-2.57.9 0 1.34.68 1.34 1.49 0 .91-.58 2.27-.88 3.53-.25 1.05.53 1.91 1.56 1.91 1.87 0 3.13-2.4 3.13-5.25 0-2.17-1.47-3.68-3.57-3.68-2.43 0-3.86 1.82-3.86 3.71 0 .74.28 1.52.64 1.95.07.08.08.16.06.24-.07.27-.21.85-.24.97-.04.16-.13.19-.29.12-1.09-.51-1.77-2.1-1.77-3.38 0-2.74 1.99-5.26 5.74-5.26 3.01 0 5.35 2.15 5.35 5.02 0 2.99-1.88 5.4-4.49 5.4-.88 0-1.7-.46-1.98-.99l-.54 2.02c-.19.75-.72 1.68-1.08 2.25.81.25 1.67.39 2.55.39 5.52 0 10-4.48 10-10S17.52 2 12 2z"/></svg></a>
+          </div>
+        </div>
+        <nav class="footer-nav"><h3>Services</h3><ul><li><a href="services.html#birth-preparation">Birth Preparation</a></li><li><a href="services.html#parent-coaching">Parent Coaching</a></li></ul></nav>
+        <nav class="footer-nav"><h3>More</h3><ul><li><a href="about.html">About Nathalie</a></li><li><a href="reviews.html">Testimonials</a></li><li><a href="contact.html">Contact</a></li></ul></nav>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-copyright">© 2025 Nathalie Solis Pérez · <a href="privacy-policy.html" style="color:inherit">Privacy</a> · <a href="terms.html" style="color:inherit">Terms</a></p>
+        <p class="footer-acknowledgement">I acknowledge the Bundjalung People as the original and true custodians of the land on which I live and work. I pay respect to all of our country's First Nations peoples and their ongoing strength in practising the world's oldest living culture. I pay my respect to their Elders past, present and emerging.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/nav.js"></script>
+</body>
+</html>

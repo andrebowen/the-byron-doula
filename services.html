@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="theme-color" content="#2d1f16">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Services and Pricing — The Byron Doula</title>
+  <meta name="description" content="Birth support, postpartum care and childbirth education with transparent pricing. Byron Bay certified doula Nathalie Solis Pérez.">
+  <link rel="icon" href="favicon.png" type="image/png">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    .page-header {
+      padding-top: calc(var(--nav-h) + var(--sp-12));
+      padding-bottom: var(--sp-8);
+      padding-inline: max(var(--sp-5), calc((100vw - var(--content-max)) / 2 + var(--sp-5)));
+    }
+    .page-header h1 { margin-bottom: var(--sp-2); }
+    .page-header p { color: var(--on-surface-variant); font-size: 17px; max-width: 520px; margin: 0; }
+
+    /* ── Service cards ────────────────────────────────────── */
+    .services-cards {
+      display: grid;
+      gap: var(--sp-5);
+      padding: 0 max(var(--sp-5), calc((100vw - var(--content-max)) / 2 + var(--sp-5))) var(--sp-12);
+    }
+    @media (min-width: 768px) {
+      .services-cards { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    .svc-card {
+      background: var(--surface-container-low);
+      border-radius: var(--r-2xl);
+      overflow: hidden;
+      box-shadow: var(--shadow-card);
+      display: flex;
+      flex-direction: column;
+    }
+    .svc-card-photo {
+      aspect-ratio: 4/3;
+      overflow: hidden;
+    }
+    .svc-card-photo img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+      transition: transform 0.4s ease;
+    }
+    .svc-card:hover .svc-card-photo img { transform: scale(1.03); }
+
+    .svc-card-body {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      padding: var(--sp-6);
+      gap: var(--sp-3);
+    }
+    .svc-card-body h2 { margin: 0; }
+    .svc-card-body > p { color: var(--on-surface-variant); line-height: 1.8; font-size: 15px; margin: 0; }
+
+    .includes-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 9px; }
+    .includes-list li { display: flex; align-items: flex-start; gap: 10px; font-size: 14px; color: var(--on-surface-variant); line-height: 1.5; }
+    .includes-list li::before {
+      content: '✓'; flex-shrink: 0; width: 18px; height: 18px;
+      background: var(--secondary-container); color: var(--primary);
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      font-size: 10px; font-weight: 700; margin-top: 2px;
+    }
+
+    .svc-card-price {
+      font-size: 14px; color: var(--on-surface-variant);
+      padding-top: var(--sp-2);
+      border-top: 1px solid var(--outline-variant);
+      margin-top: auto;
+    }
+
+    /* Approach strip */
+    .approach-section { background: var(--surface-container-low); }
+    .approach-grid { display: grid; gap: var(--sp-3); margin-top: var(--sp-6); }
+    @media (min-width: 560px) { .approach-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (min-width: 960px) { .approach-grid { grid-template-columns: repeat(4, 1fr); } }
+    .approach-item { background: var(--surface); border-radius: var(--r-xl); padding: var(--sp-4); box-shadow: var(--shadow-card); }
+    .approach-item h4 { font-size: 16px; font-weight: 600; margin-bottom: 6px; }
+    .approach-item p { font-size: 14px; color: var(--on-surface-variant); line-height: 1.6; }
+
+    /* CTA */
+    .cta-strip { background: #2d1f16; padding-block: var(--sp-12); text-align: center; }
+    .cta-strip h2 { color: #fbf9f5; margin-bottom: var(--sp-2); }
+    .cta-strip p { color: rgba(251,249,245,0.7); margin-bottom: var(--sp-5); font-size: 17px; max-width: 480px; margin-inline: auto; }
+  </style>
+</head>
+<body>
+
+  <nav class="nav" aria-label="Main navigation">
+    <div class="container nav-inner">
+      <a href="index.html" class="nav-logo">The Byron Doula</a>
+      <div class="nav-links">
+        <a href="about.html">About</a>
+        <a href="services.html" class="nav-active">Services</a>
+        <a href="reviews.html">Testimonials</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      <button class="hamburger" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+  <div class="nav-drawer" role="dialog" aria-modal="true" aria-label="Navigation menu">
+    <button class="drawer-close" aria-label="Close menu">✕</button>
+    <nav class="drawer-links">
+      <a href="about.html">About</a>
+      <a href="services.html" class="nav-active">Services</a>
+      <a href="reviews.html">Testimonials</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </div>
+
+  <main>
+    <header class="page-header">
+      <h1 class="t-display">Services</h1>
+      <p>Personalised support for pregnancy, birth and early parenthood.</p>
+    </header>
+
+    <div class="services-cards">
+
+      <div class="svc-card" id="birth-preparation">
+        <div class="svc-card-photo">
+          <img src="images/mama-belly.jpg" alt="Birth preparation" loading="lazy">
+        </div>
+        <div class="svc-card-body">
+          <h2 class="t-headline">Birth Preparation</h2>
+          <p>Feeling prepared makes all the difference. Whether you're a first-time parent or going into birth again with new questions, my birth preparation support gives you the knowledge, tools and confidence to meet your birth on your own terms.</p>
+          <p style="font-size:14px;color:var(--on-surface-variant);">In-person in Byron Bay and the Northern Rivers, or virtually from anywhere.</p>
+          <ul class="includes-list">
+            <li><strong>Birth Planning:</strong> Build a clear, realistic birth preferences guide</li>
+            <li><strong>Comfort Techniques:</strong> Positions, breathing, movement and coping strategies</li>
+            <li><strong>Partner Preparation:</strong> Help your partner understand their role</li>
+            <li><strong>Information &amp; Education:</strong> Evidence-based guidance at every stage</li>
+            <li><strong>Emotional Readiness:</strong> Process fears and arrive at birth feeling grounded</li>
+            <li><strong>Flexible Format:</strong> Single session or a series</li>
+          </ul>
+          <p class="svc-card-price">$150/hr · Virtual &amp; in-person available</p>
+          <a href="contact.html" class="btn btn-primary" style="align-self:flex-start;">Enquire Now</a>
+        </div>
+      </div>
+
+      <div class="svc-card" id="parent-coaching">
+        <div class="svc-card-photo">
+          <img src="images/image-1.jpg" alt="Parent coaching" loading="lazy">
+        </div>
+        <div class="svc-card-body">
+          <h2 class="t-headline">Parent Coaching</h2>
+          <p>Parenthood raises questions that don't always have easy answers. My coaching sessions offer a calm, non-judgmental space to work through whatever you're navigating — pregnant, postpartum, or early years.</p>
+          <p style="font-size:14px;color:var(--on-surface-variant);">All sessions held virtually — connect from the comfort of your home, wherever you are.</p>
+          <ul class="includes-list">
+            <li><strong>1-on-1 Sessions:</strong> Dedicated time focused entirely on you</li>
+            <li><strong>Birth Planning Support:</strong> Clarify your options and build a plan</li>
+            <li><strong>Postpartum Questions:</strong> Feeding, sleep, recovery and emotional adjustment</li>
+            <li><strong>Relationship &amp; Partner Dynamics:</strong> Support for couples stepping into parenthood</li>
+            <li><strong>Tailored to You:</strong> No generic advice — shaped around what you need</li>
+            <li><strong>Ongoing Support:</strong> Single sessions or a coaching package</li>
+          </ul>
+          <p class="svc-card-price">$150/hr · Virtual only · Single session or package</p>
+          <a href="contact.html" class="btn btn-primary" style="align-self:flex-start;">Enquire Now</a>
+        </div>
+      </div>
+
+    </div>
+
+    <section class="section approach-section">
+      <div class="container">
+        <h2 class="t-headline section-title">What You Can Always Expect</h2>
+        <span class="divider" aria-hidden="true"></span>
+        <div class="approach-grid">
+          <div class="approach-item">
+            <h4>Personalised</h4>
+            <p>Every session is shaped around you — your questions, your pace, your family.</p>
+          </div>
+          <div class="approach-item">
+            <h4>No agenda</h4>
+            <p>Your choices, your vision. I support what matters to you — without judgment.</p>
+          </div>
+          <div class="approach-item">
+            <h4>Evidence-based</h4>
+            <p>Current research, honestly shared — so you can make informed decisions.</p>
+          </div>
+          <div class="approach-item">
+            <h4>Always available</h4>
+            <p>Ongoing support between sessions via phone and message.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-strip">
+      <div class="container">
+        <h2 class="t-headline">Not sure which service is right for you?</h2>
+        <p>Let's have a free 30-minute chat. No pressure — just a conversation.</p>
+        <a href="contact.html" class="btn btn-primary">Book a Free Discovery Call</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <h2>The Byron Doula</h2>
+          <p>Certified birth doula supporting families across Byron Bay and the Northern Rivers, NSW.</p>
+          <div class="social-row">
+            <a href="https://instagram.com/thebyrondoula" class="social-link" aria-label="Instagram" target="_blank" rel="noopener"><svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
+            <a href="https://facebook.com/thebyrondoula" class="social-link" aria-label="Facebook" target="_blank" rel="noopener"><svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
+            <a href="https://pinterest.com/thebyrondoula" class="social-link" aria-label="Pinterest" target="_blank" rel="noopener"><svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12c0 4.24 2.65 7.86 6.39 9.29-.09-.78-.17-1.98.04-2.83.18-.77 1.24-5.26 1.24-5.26s-.32-.63-.32-1.57c0-1.47.85-2.57 1.91-2.57.9 0 1.34.68 1.34 1.49 0 .91-.58 2.27-.88 3.53-.25 1.05.53 1.91 1.56 1.91 1.87 0 3.13-2.4 3.13-5.25 0-2.17-1.47-3.68-3.57-3.68-2.43 0-3.86 1.82-3.86 3.71 0 .74.28 1.52.64 1.95.07.08.08.16.06.24-.07.27-.21.85-.24.97-.04.16-.13.19-.29.12-1.09-.51-1.77-2.1-1.77-3.38 0-2.74 1.99-5.26 5.74-5.26 3.01 0 5.35 2.15 5.35 5.02 0 2.99-1.88 5.4-4.49 5.4-.88 0-1.7-.46-1.98-.99l-.54 2.02c-.19.75-.72 1.68-1.08 2.25.81.25 1.67.39 2.55.39 5.52 0 10-4.48 10-10S17.52 2 12 2z"/></svg></a>
+          </div>
+        </div>
+        <nav class="footer-nav"><h3>Services</h3><ul><li><a href="services.html#birth-preparation">Birth Preparation</a></li><li><a href="services.html#parent-coaching">Parent Coaching</a></li></ul></nav>
+        <nav class="footer-nav"><h3>More</h3><ul><li><a href="about.html">About Nathalie</a></li><li><a href="reviews.html">Testimonials</a></li><li><a href="contact.html">Contact</a></li></ul></nav>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-copyright">© 2025 Nathalie Solis Pérez · <a href="privacy-policy.html" style="color:inherit">Privacy</a> · <a href="terms.html" style="color:inherit">Terms</a></p>
+        <p class="footer-acknowledgement">I acknowledge the Bundjalung People as the original and true custodians of the land on which I live and work. I pay respect to all of our country's First Nations peoples and their ongoing strength in practising the world's oldest living culture. I pay my respect to their Elders past, present and emerging.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/nav.js"></script>
+</body>
+</html>

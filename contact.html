@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="theme-color" content="#2d1f16">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Book a Call — The Byron Doula</title>
+  <meta name="description" content="Get in touch with Nathalie Solis Pérez, certified birth doula in Byron Bay. Book a free 30-minute discovery call.">
+  <link rel="icon" href="favicon.png" type="image/png">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    /* ── Hero ─────────────────────────── */
+    .page-hero {
+      height: 69vh; min-height: 450px;
+      position: relative; overflow: hidden;
+      display: flex; align-items: center;
+      padding-top: var(--nav-h);
+    }
+    .page-hero-bg {
+      position: absolute; inset: 0;
+      background-image: url('images/nathalie-about.jpg');
+      background-size: cover; background-position: center 20%;
+      filter: brightness(1) saturate(0.85);
+    }
+    .page-hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to bottom, rgba(83,67,61,0.25) 0%, rgba(83,67,61,0.80) 100%);
+    }
+    .page-hero-content { position: relative; z-index: 1; width: 100%; }
+    .page-hero-content h1 { color: #fbf9f5; margin-bottom: var(--sp-2); max-width: 560px; }
+    .page-hero-content p  { color: rgba(251,249,245,0.75); font-size: 17px; max-width: 480px; }
+
+    /* ── Steps strip ──────────────────── */
+    .steps-strip {
+      background: var(--dark-nav, #2d1f16);
+      padding-block: var(--sp-6);
+    }
+    .steps-grid {
+      display: grid;
+      gap: var(--sp-4);
+      grid-template-columns: repeat(3,1fr);
+    }
+    @media (max-width: 600px) {
+      .steps-grid { grid-template-columns: 1fr; gap: var(--sp-3); }
+    }
+    .step {
+      display: flex; gap: var(--sp-2); align-items: flex-start;
+    }
+    .step-num {
+      font-family: var(--font-serif); font-size: 36px; font-weight: 500;
+      color: var(--primary); line-height: 1; flex-shrink: 0;
+      opacity: 0.7;
+    }
+    .step-copy strong {
+      display: block; font-size: 14px; font-weight: 600;
+      color: #fbf9f5; margin-bottom: 4px;
+    }
+    .step-copy span {
+      font-size: 13px; color: rgba(251,249,245,0.55); line-height: 1.6;
+    }
+
+    /* ── Form section ─────────────────── */
+    .form-section { padding-block: var(--sp-12); }
+    .form-layout {
+      display: grid; gap: var(--sp-12); align-items: start;
+      max-width: 960px; margin: auto;
+    }
+    @media (min-width: 768px) {
+      .form-layout { grid-template-columns: 1fr 1.4fr; }
+    }
+
+    /* Left — context */
+    .form-context { display: flex; flex-direction: column; gap: var(--sp-5); }
+    .form-context h2 { margin-bottom: var(--sp-1); }
+    .form-context > p { color: var(--on-surface-variant); line-height: 1.8; font-size: 16px; }
+    .divider-sm {
+      width: 40px; height: 2px;
+      background: var(--primary); border-radius: 2px;
+      margin-block: var(--sp-1);
+    }
+    .context-details { display: flex; flex-direction: column; gap: var(--sp-3); }
+    .context-item { display: flex; flex-direction: column; gap: 4px; }
+    .context-item strong { font-size: 13px; font-weight: 600; color: var(--on-surface); }
+    .context-item span  { font-size: 14px; color: var(--on-surface-variant); line-height: 1.6; }
+    .context-item a { color: var(--primary); }
+
+    /* Right — form */
+    .contact-form { display: flex; flex-direction: column; gap: var(--sp-3); }
+    .form-row { display: grid; gap: var(--sp-3); }
+    @media (min-width: 480px) { .form-row { grid-template-columns: 1fr 1fr; } }
+    .submit-btn {
+      width: 100%; justify-content: center;
+      padding: 16px; font-size: 16px; margin-top: var(--sp-1);
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="nav" aria-label="Main navigation">
+    <div class="container nav-inner">
+      <a href="index.html" class="nav-logo">The Byron Doula</a>
+      <div class="nav-links">
+        <a href="about.html">About</a>
+        <a href="services.html">Services</a>
+        <a href="reviews.html">Testimonials</a>
+        <a href="contact.html" class="nav-active">Contact</a>
+      </div>
+      <button class="hamburger" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+  <div class="nav-drawer" role="dialog" aria-modal="true" aria-label="Navigation menu">
+    <button class="drawer-close" aria-label="Close menu">✕</button>
+    <nav class="drawer-links">
+      <a href="about.html">About</a>
+      <a href="services.html">Services</a>
+      <a href="reviews.html">Testimonials</a>
+      <a href="contact.html" class="nav-active">Contact</a>
+    </nav>
+  </div>
+
+  <main>
+
+    <!-- Hero -->
+    <section class="page-hero">
+      <div class="page-hero-bg" aria-hidden="true"></div>
+      <div class="page-hero-overlay" aria-hidden="true"></div>
+      <div class="page-hero-content">
+        <div class="container">
+          <h1 class="t-display">Let's Connect</h1>
+          <p>Send a message and I'll be in touch within 1 business day.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- What happens next -->
+    <div class="steps-strip">
+      <div class="container">
+        <div class="steps-grid">
+          <div class="step">
+            <span class="step-num">01</span>
+            <div class="step-copy">
+              <strong>Send your message</strong>
+              <span>Tell me about your pregnancy and what you're looking for.</span>
+            </div>
+          </div>
+          <div class="step">
+            <span class="step-num">02</span>
+            <div class="step-copy">
+              <strong>Free discovery call</strong>
+              <span>I'll reply within 1 business day to arrange a free 30-minute chat.</span>
+            </div>
+          </div>
+          <div class="step">
+            <span class="step-num">03</span>
+            <div class="step-copy">
+              <strong>Confirm your booking</strong>
+              <span>If we're a good fit, we'll lock in your support package.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Form -->
+    <section class="form-section">
+      <div class="container">
+        <div class="form-layout">
+
+          <!-- Context -->
+          <div class="form-context">
+            <div>
+              <h2 class="t-headline">Get in Touch</h2>
+              <div class="divider-sm"></div>
+              <p>No pressure, no commitment. Just a conversation to see if we're the right fit for your family.</p>
+            </div>
+            <div class="context-details">
+              <div class="context-item">
+                <strong>Based in</strong>
+                <span>Byron Bay &amp; the Northern Rivers, NSW. In-person support available across the region.</span>
+              </div>
+              <div class="context-item">
+                <strong>Response time</strong>
+                <span>I reply to all messages within 48 hours.</span>
+              </div>
+              <div class="context-item">
+                <strong>On Instagram</strong>
+                <span><a href="https://instagram.com/thebyrondoula" target="_blank" rel="noopener">@thebyrondoula</a> — birth education, stories &amp; behind the scenes.</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Form -->
+          <form class="contact-form" action="https://formsubmit.co/hello@thebyrondoula.com" method="POST" novalidate>
+            <input type="hidden" name="_subject" value="New enquiry — The Byron Doula website">
+            <input type="hidden" name="_captcha" value="false">
+            <input type="hidden" name="_next" value="thankyou.html">
+
+            <div class="form-row">
+              <div class="field">
+                <label for="name">Your name</label>
+                <input type="text" id="name" name="name" placeholder="Nathalie" autocomplete="name" required>
+              </div>
+              <div class="field">
+                <label for="email">Email address</label>
+                <input type="email" id="email" name="email" placeholder="hello@email.com" autocomplete="email" required>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="field">
+                <label for="phone">Phone <span style="font-weight:400;color:var(--outline)">(optional)</span></label>
+                <input type="tel" id="phone" name="phone" placeholder="+61 400 000 000" autocomplete="tel">
+              </div>
+              <div class="field">
+                <label for="due-date">Due date <span style="font-weight:400;color:var(--outline)">(if applicable)</span></label>
+                <input type="text" id="due-date" name="due_date" placeholder="e.g. August 2025">
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="service">I'm interested in</label>
+              <select id="service" name="service" required>
+                <option value="" disabled selected>Select a service…</option>
+                <option value="birth-preparation">Birth Preparation</option>
+                <option value="parent-coaching">Parent Coaching</option>
+                <option value="doula-mentoring">Doula Mentoring</option>
+                <option value="not-sure">Not sure yet</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="message">Your message</label>
+              <textarea id="message" name="message" placeholder="Tell me about your pregnancy, what you're hoping for, and any questions you have…" required></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary submit-btn">Send Message</button>
+          </form>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <h2>The Byron Doula</h2>
+          <p>Certified birth doula supporting families across Byron Bay and the Northern Rivers, NSW.</p>
+          <div class="social-row">
+            <a href="https://instagram.com/thebyrondoula" class="social-link" aria-label="Instagram" target="_blank" rel="noopener"><svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
+            <a href="https://facebook.com/thebyrondoula" class="social-link" aria-label="Facebook" target="_blank" rel="noopener"><svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
+            <a href="https://pinterest.com/thebyrondoula" class="social-link" aria-label="Pinterest" target="_blank" rel="noopener"><svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12c0 4.24 2.65 7.86 6.39 9.29-.09-.78-.17-1.98.04-2.83.18-.77 1.24-5.26 1.24-5.26s-.32-.63-.32-1.57c0-1.47.85-2.57 1.91-2.57.9 0 1.34.68 1.34 1.49 0 .91-.58 2.27-.88 3.53-.25 1.05.53 1.91 1.56 1.91 1.87 0 3.13-2.4 3.13-5.25 0-2.17-1.47-3.68-3.57-3.68-2.43 0-3.86 1.82-3.86 3.71 0 .74.28 1.52.64 1.95.07.08.08.16.06.24-.07.27-.21.85-.24.97-.04.16-.13.19-.29.12-1.09-.51-1.77-2.1-1.77-3.38 0-2.74 1.99-5.26 5.74-5.26 3.01 0 5.35 2.15 5.35 5.02 0 2.99-1.88 5.4-4.49 5.4-.88 0-1.7-.46-1.98-.99l-.54 2.02c-.19.75-.72 1.68-1.08 2.25.81.25 1.67.39 2.55.39 5.52 0 10-4.48 10-10S17.52 2 12 2z"/></svg></a>
+          </div>
+        </div>
+        <nav class="footer-nav"><h3>Services</h3><ul><li><a href="services.html#birth-preparation">Birth Preparation</a></li><li><a href="services.html#parent-coaching">Parent Coaching</a></li></ul></nav>
+        <nav class="footer-nav"><h3>More</h3><ul><li><a href="about.html">About Nathalie</a></li><li><a href="reviews.html">Testimonials</a></li><li><a href="contact.html">Contact</a></li></ul></nav>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-copyright">© 2025 Nathalie Solis Pérez · <a href="privacy-policy.html" style="color:inherit">Privacy</a> · <a href="terms.html" style="color:inherit">Terms</a></p>
+        <p class="footer-acknowledgement">I acknowledge the Bundjalung People as the original and true custodians of the land on which I live and work. I pay respect to all of our country's First Nations peoples and their ongoing strength in practising the world's oldest living culture. I pay my respect to their Elders past, present and emerging.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/nav.js"></script>
+</body>
+</html>

@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="theme-color" content="#2d1f16">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Byron Doula — Certified Birth Doula, Byron Bay</title>
+  <meta name="description" content="Compassionate, empowering and personalised birth doula support in Byron Bay and the Northern Rivers. Certified birth doula Nathalie Solis Pérez.">
+  <link rel="icon" href="favicon.png" type="image/png">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    /* ── Hero ──────────────────────────────────────── */
+    .hero {
+      min-height: 100svh;
+      position: relative;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+    }
+    .hero-photo {
+      position: absolute; inset: 0;
+    }
+    .hero-photo img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+    }
+    .hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to right,
+        rgba(45,31,22,0.78) 0%,
+        rgba(45,31,22,0.50) 55%,
+        rgba(45,31,22,0.15) 100%);
+    }
+    .hero-copy {
+      position: relative; z-index: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      width: 100%;
+      padding-top: calc(var(--nav-h) + var(--sp-8));
+      padding-bottom: var(--sp-12);
+      padding-left: max(var(--sp-8), calc((100vw - var(--content-max)) / 2 + var(--sp-10)));
+      padding-right: var(--sp-8);
+    }
+    @media (min-width: 768px) {
+      .hero-copy { max-width: 58vw; }
+    }
+    .hero h1 { margin-bottom: var(--sp-3); color: #fbf9f5; }
+    .hero-sub {
+      color: rgba(251,249,245,0.76);
+      max-width: 440px;
+      margin-bottom: var(--sp-5);
+    }
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--sp-2);
+    }
+
+    /* ── Trust ──────────────────────────────────────── */
+    .trust {
+      padding-block: var(--sp-5);
+      background: var(--surface-container-low);
+      border-top: 1px solid var(--outline-variant);
+      border-bottom: 1px solid var(--outline-variant);
+    }
+    .trust-inner {
+      display: flex;
+      align-items: center;
+      gap: var(--sp-4);
+      flex-wrap: wrap;
+    }
+    .trust-label {
+      color: var(--outline);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+    .trust-divider {
+      width: 1px;
+      height: 20px;
+      background: var(--outline-variant);
+    }
+    .trust-pubs {
+      display: flex;
+      gap: var(--sp-4);
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    .trust-pub {
+      font-family: var(--font-serif);
+      font-size: 14px;
+      font-style: italic;
+      color: var(--on-surface-variant);
+      opacity: 0.7;
+    }
+
+    /* ── Services ───────────────────────────────────── */
+    .services-grid {
+      display: grid;
+      gap: var(--sp-3);
+      margin-top: var(--sp-6);
+    }
+    @media (min-width: 640px) { .services-grid { grid-template-columns: repeat(2, 1fr); } }
+
+    .service-card {
+      background: var(--surface-container-low);
+      border-radius: var(--r-xl);
+      padding: var(--sp-4);
+      box-shadow: var(--shadow-card);
+      display: flex;
+      flex-direction: column;
+      gap: var(--sp-2);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .service-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 32px rgba(140, 74, 47, 0.1);
+    }
+    .service-icon {
+      width: 48px;
+      height: 48px;
+      background: var(--secondary-container);
+      border-radius: var(--r-lg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: var(--sp-1);
+    }
+    .service-icon svg { width: 24px; height: 24px; stroke: var(--primary); }
+    .service-card h3 { font-size: 19px; }
+    .service-card p { color: var(--on-surface-variant); font-size: 15px; flex: 1; }
+
+    /* ── About ──────────────────────────────────────── */
+    .about-section { background: var(--surface-container-low); }
+    .about-grid {
+      display: grid;
+      gap: var(--sp-8);
+      align-items: center;
+      margin-top: var(--sp-2);
+    }
+    @media (min-width: 768px) {
+      .about-grid { grid-template-columns: 1fr 1fr; }
+      .about-img { order: 2; }
+      .about-copy { order: 1; }
+    }
+    .about-img-wrap {
+      aspect-ratio: 4/5;
+      border-radius: var(--r-2xl);
+      overflow: hidden;
+      background: var(--surface-container-high);
+      position: relative;
+    }
+    .about-img-placeholder {
+      inset: 0;
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: var(--sp-2);
+      color: var(--outline);
+    }
+    .about-img-placeholder svg { width: 48px; height: 48px; opacity: 0.4; }
+    .about-img-placeholder span { font-size: 13px; opacity: 0.5; }
+    .about-copy p { color: var(--on-surface-variant); margin-bottom: var(--sp-3); }
+    .about-copy blockquote {
+      border-left: 3px solid var(--primary);
+      padding-left: var(--sp-3);
+      margin-block: var(--sp-4);
+      font-family: var(--font-serif);
+      font-size: 19px;
+      font-style: italic;
+      color: var(--on-surface);
+      line-height: 1.6;
+    }
+
+    /* ── Testimonials ───────────────────────────────── */
+    .testimonials-scroll {
+      display: flex;
+      gap: var(--sp-3);
+      overflow-x: auto;
+      padding-bottom: var(--sp-2);
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      margin-top: var(--sp-6);
+    }
+    .testimonials-scroll::-webkit-scrollbar { display: none; }
+    .testimonial-card {
+      flex: 0 0 min(320px, 85vw);
+      background: var(--secondary-container);
+      border-radius: var(--r-xl);
+      padding: var(--sp-4);
+      scroll-snap-align: start;
+      display: flex;
+      flex-direction: column;
+      gap: var(--sp-2);
+    }
+    .stars { color: var(--primary); font-size: 15px; letter-spacing: 2px; }
+    .testimonial-card blockquote {
+      font-family: var(--font-serif);
+      font-size: 16px;
+      font-style: italic;
+      line-height: 1.7;
+      color: var(--on-surface);
+      flex: 1;
+    }
+    .testimonial-card cite {
+      font-style: normal;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--on-surface-variant);
+    }
+    @media (min-width: 768px) {
+      .testimonials-scroll {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        overflow-x: unset;
+      }
+      .testimonial-card { flex: unset; }
+    }
+
+    /* ── FAQ ────────────────────────────────────────── */
+    .faq-section { background: var(--surface-container-low); }
+    .faq-list { margin-top: var(--sp-6); display: flex; flex-direction: column; gap: var(--sp-2); }
+    .faq-item {
+      background: var(--surface);
+      border-radius: var(--r-lg);
+      overflow: hidden;
+      border: 1px solid var(--outline-variant);
+    }
+    .faq-q {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: var(--sp-3);
+      padding: var(--sp-3) var(--sp-4);
+      font-family: var(--font-sans);
+      font-size: 16px;
+      font-weight: 500;
+      color: var(--on-surface);
+      text-align: left;
+      cursor: pointer;
+      background: none;
+      border: none;
+      transition: background 0.2s;
+    }
+    .faq-q:hover { background: var(--surface-container-low); }
+    .faq-chevron {
+      width: 20px;
+      height: 20px;
+      flex-shrink: 0;
+      transition: transform 0.3s;
+      stroke: var(--outline);
+    }
+    .faq-item.open .faq-chevron { transform: rotate(180deg); }
+    .faq-a {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.35s ease;
+    }
+    .faq-item.open .faq-a { max-height: 400px; }
+    .faq-a-inner {
+      padding: 0 var(--sp-4) var(--sp-4);
+      color: var(--on-surface-variant);
+      line-height: 1.7;
+      font-size: 15px;
+    }
+
+    /* ── Contact ────────────────────────────────────── */
+    .contact-form {
+      max-width: 580px;
+      margin-top: var(--sp-6);
+      display: flex;
+      flex-direction: column;
+      gap: var(--sp-3);
+    }
+    .form-row {
+      display: grid;
+      gap: var(--sp-3);
+    }
+    @media (min-width: 560px) { .form-row { grid-template-columns: 1fr 1fr; } }
+
+  </style>
+</head>
+<body>
+
+  <!-- ── Navigation ──────────────────────────────────────── -->
+  <nav class="nav over-hero" aria-label="Main navigation">
+    <div class="container nav-inner">
+      <a href="index.html" class="nav-logo">The Byron Doula</a>
+      <div class="nav-links">
+        <a href="about.html">About</a>
+        <a href="services.html">Services</a>
+        <a href="reviews.html">Testimonials</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      <button class="hamburger" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile drawer -->
+  <div class="nav-drawer" role="dialog" aria-modal="true" aria-label="Navigation menu">
+    <button class="drawer-close" aria-label="Close menu">✕</button>
+    <nav class="drawer-links">
+      <a href="about.html">About</a>
+      <a href="services.html">Services</a>
+      <a href="reviews.html">Testimonials</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </div>
+
+  <main>
+
+    <!-- ── Hero ──────────────────────────────────────────── -->
+    <section class="hero" aria-label="Hero">
+      <div class="hero-photo">
+        <img src="images/mama-belly.jpg" alt="Nathalie Solis Pérez — certified birth doula, Byron Bay" loading="eager" fetchpriority="high">
+      </div>
+      <div class="hero-overlay" aria-hidden="true"></div>
+      <div class="hero-copy">
+        <h1 class="t-display">Feel Informed, Supported and Empowered.</h1>
+        <p class="t-body-lg hero-sub">Trusted support for pregnancy, birth and parenthood in Byron Bay.</p>
+        <div class="hero-actions">
+          <a href="contact.html" class="btn btn-primary">Contact</a>
+          <a href="services.html" class="btn btn-ghost" style="border-color:rgba(251,249,245,0.4);color:#fbf9f5;">Services</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Trust Strip ────────────────────────────────────── -->
+    <div class="trust" aria-label="As featured in">
+      <div class="container trust-inner">
+        <span class="trust-label">As featured in</span>
+        <div class="trust-divider" aria-hidden="true"></div>
+        <div class="trust-pubs">
+          <img src="images/logo-grace-tales.png"          alt="Grace Tales"          style="height:28px;opacity:0.55;filter:grayscale(1);">
+          <img src="images/logo-rara-new.png"            alt="Rara"                 style="height:28px;opacity:0.55;filter:grayscale(1);">
+          <img src="images/logo-cleo.png"                alt="Cleo"                 style="height:28px;opacity:0.55;filter:grayscale(1);">
+          <img src="images/logo-space-to-flow.png"       alt="Space to Flow"        style="height:28px;opacity:0.55;filter:grayscale(1);">
+          <img src="images/logo-iamibu.png"              alt="Iamibu"               style="height:28px;opacity:0.55;filter:grayscale(1);">
+          <img src="images/logo-dearwork.png"            alt="Dear Work"            style="height:28px;opacity:0.55;filter:grayscale(1);">
+          <img src="images/logo-in-a-day-naturopathy.png" alt="In a Day Naturopathy" style="height:28px;opacity:0.55;filter:grayscale(1);">
+          <img src="images/logo-pbb-media.png" alt="PBB Media" style="height:28px;opacity:0.55;filter:grayscale(1);">
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Services ───────────────────────────────────────── -->
+    <!-- ── About Teaser ───────────────────────────────────── -->
+    <section class="section about-section" id="about" aria-labelledby="about-heading">
+      <div class="container">
+        <div class="about-grid">
+          <div class="about-img">
+            <div class="about-img-wrap">
+              <img src="images/nathalie-about.jpg" alt="Nathalie Solis Pérez, birth doula" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:center top;">
+            </div>
+          </div>
+          <div class="about-copy">
+            <h2 class="t-headline section-title" id="about-heading">A Doula Who Truly Listens</h2>
+            <span class="divider" aria-hidden="true"></span>
+            <blockquote>"Every birth is unique. My role is to help you feel heard, respected and cared for — whatever path your birth takes."</blockquote>
+            <p>Support makes all the difference — for mothers and their partners. With 13 years of experience supporting births across Byron Bay and Berlin, and a deeply personalised approach to every family.</p>
+            <ul style="list-style:none;padding:0;margin:0 0 var(--sp-3);display:flex;flex-direction:column;gap:8px;">
+              <li style="font-size:15px;color:var(--on-surface-variant);">✦ Certified Holistic Birth Doula</li>
+              <li style="font-size:15px;color:var(--on-surface-variant);">✦ Aware Parenting Coach</li>
+              <li style="font-size:15px;color:var(--on-surface-variant);">✦ Based in Byron Bay, Australia — supporting worldwide</li>
+            </ul>
+            <a href="about.html" class="arrow-link">Read my story</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="services" aria-labelledby="services-heading">
+      <div class="container">
+        <h2 class="t-headline section-title" id="services-heading">How I Support You</h2>
+        <span class="divider" aria-hidden="true"></span>
+        <p class="t-body section-sub">Every family deserves personalised, informed support. I work with you through pregnancy, birth preparation, and the transition into parenthood.</p>
+
+        <div class="services-grid">
+          <!-- Birth Preparation -->
+          <div class="service-card">
+            <div class="service-icon" aria-hidden="true">
+              <svg fill="none" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21.5C12 21.5 3.5 16 3.5 9.5a8.5 8.5 0 0117 0c0 6.5-8.5 12-8.5 12z"/></svg>
+            </div>
+            <h3 class="t-title">Birth Preparation</h3>
+            <p>Calm, personalised preparation so you and your partner feel informed, grounded, and ready for birth.</p>
+            <a href="services.html" class="arrow-link">Explore services</a>
+          </div>
+          <!-- Parent Coaching -->
+          <div class="service-card">
+            <div class="service-icon" aria-hidden="true">
+              <svg fill="none" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.5 9.5a3.5 3.5 0 11-7 0 3.5 3.5 0 017 0zM4 20.5a8 8 0 0116 0"/></svg>
+            </div>
+            <h3 class="t-title">Parent Coaching</h3>
+            <p>Gentle guidance for pregnancy, postpartum, and the transition into early parenthood.</p>
+            <a href="services.html" class="arrow-link">Explore services</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Testimonials ───────────────────────────────────── -->
+    <section class="section" id="reviews" aria-labelledby="reviews-heading">
+      <div class="container">
+        <h2 class="t-headline section-title" id="reviews-heading">What Families Say</h2>
+        <span class="divider" aria-hidden="true"></span>
+
+        <div class="testimonials-scroll" role="list">
+          <div class="testimonial-card" role="listitem">
+            <div class="stars" aria-label="5 stars">★★★★★</div>
+            <blockquote>"Nat has the most divine way of making you feel safe, informed, connected and fully in control. She is a wealth of knowledge, experience and intuition."</blockquote>
+            <div style="display:flex;align-items:center;gap:10px;margin-top:auto;padding-top:var(--sp-2)">
+              <img src="images/testimonials/mums/amy-sinclair.jpg" alt="" aria-hidden="true" style="width:36px;height:36px;border-radius:50%;object-fit:cover;flex-shrink:0;">
+              <cite>Amy Sinclair, Mother of two</cite>
+            </div>
+          </div>
+          <div class="testimonial-card" role="listitem">
+            <div class="stars" aria-label="5 stars">★★★★★</div>
+            <blockquote>"Nathalie was a constant support with the most beautiful nature. We adored her manner, communication and we found all of her teachings highly informative and clear."</blockquote>
+            <div style="display:flex;align-items:center;gap:10px;margin-top:auto;padding-top:var(--sp-2)">
+              <img src="images/testimonials/mums/lucy-folk.png" alt="" aria-hidden="true" style="width:36px;height:36px;border-radius:50%;object-fit:cover;flex-shrink:0;">
+              <cite>Lucy Folk, Mother</cite>
+            </div>
+          </div>
+          <div class="testimonial-card" role="listitem">
+            <div class="stars" aria-label="5 stars">★★★★★</div>
+            <blockquote>"She was calm and professional yet kind and warm. She really helped support my partner so he could support me. I felt truly cared for in a very special way."</blockquote>
+            <div style="display:flex;align-items:center;gap:10px;margin-top:auto;padding-top:var(--sp-2)">
+              <img src="images/testimonials/mums/camilla-white.jpg" alt="" aria-hidden="true" style="width:36px;height:36px;border-radius:50%;object-fit:cover;flex-shrink:0;">
+              <cite>Dr Camilla White, GP &amp; mother of three</cite>
+            </div>
+          </div>
+        </div>
+        <div style="margin-top:var(--sp-4)">
+          <a href="reviews.html" class="arrow-link">Read all reviews</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── FAQ ────────────────────────────────────────────── -->
+    <section class="section faq-section" id="faq" aria-labelledby="faq-heading">
+      <div class="container">
+        <h2 class="t-headline section-title" id="faq-heading">Everything You Need to Know</h2>
+        <span class="divider" aria-hidden="true"></span>
+
+        <div class="faq-list" role="list">
+
+          <div class="faq-item" role="listitem">
+            <button class="faq-q" aria-expanded="false">
+              What does a doula actually do?
+              <svg class="faq-chevron" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+            </button>
+            <div class="faq-a" role="region">
+              <p class="faq-a-inner">A doula provides continuous emotional, physical and informational support during pregnancy, birth and the postpartum period. I help you feel prepared and confident, support your partner, and advocate for your birth preferences — so you can focus entirely on your experience.</p>
+            </div>
+          </div>
+
+          <div class="faq-item" role="listitem">
+            <button class="faq-q" aria-expanded="false">
+              Do I still need a doula if I have a midwife or OB?
+              <svg class="faq-chevron" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+            </button>
+            <div class="faq-a" role="region">
+              <p class="faq-a-inner">Absolutely. Midwives and OBs focus on your medical care. A doula's role is entirely different — I'm there for continuous, uninterrupted emotional and practical support, birth preparation, and to help you navigate decisions with clarity. We work alongside your care team, not instead of them.</p>
+            </div>
+          </div>
+
+          <div class="faq-item" role="listitem">
+            <button class="faq-q" aria-expanded="false">
+              Where are you based and what areas do you serve?
+              <svg class="faq-chevron" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+            </button>
+            <div class="faq-a" role="region">
+              <p class="faq-a-inner">I'm based in Byron Bay and serve families across the Northern Rivers region of NSW. I also offer virtual support for birth preparation, parent coaching and postpartum check-ins for families further afield.</p>
+            </div>
+          </div>
+
+          <div class="faq-item" role="listitem">
+            <button class="faq-q" aria-expanded="false">
+              How do I get started?
+              <svg class="faq-chevron" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+            </button>
+            <div class="faq-a" role="region">
+              <p class="faq-a-inner">Use the contact form below. Choose the service you're interested in, tell me a little about your situation, and I'll reply personally within one business day to discuss next steps.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Contact ────────────────────────────────────────── -->
+    <section class="section" id="contact" aria-labelledby="contact-heading">
+      <div class="container">
+        <h2 class="t-headline section-title" id="contact-heading">Let's Connect</h2>
+        <span class="divider" aria-hidden="true"></span>
+        <p class="t-body section-sub" style="margin-bottom:0">Every pregnancy and birth journey is unique. Reach out to begin a conversation about the support that feels right for you and your family. Nathalie will reply personally within 1 business day.</p>
+
+        <form
+          class="contact-form"
+          action="https://formsubmit.co/hello@thebyrondoula.com"
+          method="POST"
+          novalidate
+        >
+          <input type="hidden" name="_subject" value="New enquiry from The Byron Doula website">
+          <input type="hidden" name="_captcha" value="false">
+          <input type="hidden" name="_next" value="https://thebyrondoula.com/thankyou.html">
+
+          <div class="form-row">
+            <div class="field">
+              <label for="name">Your name</label>
+              <input type="text" id="name" name="name" placeholder="Nathalie" autocomplete="name" required>
+            </div>
+            <div class="field">
+              <label for="email">Email address</label>
+              <input type="email" id="email" name="email" placeholder="hello@email.com" autocomplete="email" required>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="service">I'm interested in</label>
+            <select id="service" name="service" required>
+              <option value="" disabled selected>Select a service…</option>
+              <option value="birth-preparation">Birth Preparation</option>
+              <option value="parent-coaching">Parent Coaching</option>
+              <option value="doula-mentoring">Doula Mentoring</option>
+              <option value="not-sure">Not sure yet</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="message">Your message</label>
+            <textarea id="message" name="message" placeholder="Tell me a little about where you are in your pregnancy and what you're looking for…" required></textarea>
+          </div>
+
+          <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;">Send Message</button>
+        </form>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ── Footer ─────────────────────────────────────────── -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <h2>The Byron Doula</h2>
+          <p>Certified birth doula supporting families across Byron Bay and the Northern Rivers, NSW.</p>
+          <div class="social-row" aria-label="Social media">
+            <!-- Instagram -->
+            <a href="https://instagram.com/thebyrondoula" class="social-link" aria-label="Instagram" target="_blank" rel="noopener">
+              <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+            </a>
+            <!-- Facebook -->
+            <a href="https://facebook.com/thebyrondoula" class="social-link" aria-label="Facebook" target="_blank" rel="noopener">
+              <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+            </a>
+            <!-- Pinterest -->
+            <a href="https://pinterest.com/thebyrondoula" class="social-link" aria-label="Pinterest" target="_blank" rel="noopener">
+              <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12c0 4.24 2.65 7.86 6.39 9.29-.09-.78-.17-1.98.04-2.83.18-.77 1.24-5.26 1.24-5.26s-.32-.63-.32-1.57c0-1.47.85-2.57 1.91-2.57.9 0 1.34.68 1.34 1.49 0 .91-.58 2.27-.88 3.53-.25 1.05.53 1.91 1.56 1.91 1.87 0 3.13-2.4 3.13-5.25 0-2.17-1.47-3.68-3.57-3.68-2.43 0-3.86 1.82-3.86 3.71 0 .74.28 1.52.64 1.95.07.08.08.16.06.24-.07.27-.21.85-.24.97-.04.16-.13.19-.29.12-1.09-.51-1.77-2.1-1.77-3.38 0-2.74 1.99-5.26 5.74-5.26 3.01 0 5.35 2.15 5.35 5.02 0 2.99-1.88 5.4-4.49 5.4-.88 0-1.7-.46-1.98-.99l-.54 2.02c-.19.75-.72 1.68-1.08 2.25.81.25 1.67.39 2.55.39 5.52 0 10-4.48 10-10S17.52 2 12 2z"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <nav class="footer-nav" aria-label="Services navigation">
+          <h3>Services</h3>
+          <ul>
+            <li><a href="services.html#birth-preparation">Birth Preparation</a></li>
+            <li><a href="services.html#parent-coaching">Parent Coaching</a></li>
+          </ul>
+        </nav>
+
+        <nav class="footer-nav" aria-label="Site navigation">
+          <h3>More</h3>
+          <ul>
+            <li><a href="about.html">About Nathalie</a></li>
+            <li><a href="reviews.html">Testimonials</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </nav>
+      </div>
+
+      <div class="footer-bottom">
+        <p class="footer-copyright">© 2025 Nathalie Solis Pérez · <a href="privacy-policy.html" style="color:inherit">Privacy</a> · <a href="terms.html" style="color:inherit">Terms</a></p>
+        <p class="footer-acknowledgement">I acknowledge the Bundjalung People as the original and true custodians of the land on which I live and work. I pay respect to all of our country's First Nations peoples and their ongoing strength in practising the world's oldest living culture. I pay my respect to their Elders past, present and emerging.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/nav.js"></script>
+  <script>
+    // FAQ accordion
+    document.querySelectorAll('.faq-q').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const item = btn.closest('.faq-item');
+        const isOpen = item.classList.contains('open');
+        document.querySelectorAll('.faq-item.open').forEach(i => {
+          i.classList.remove('open');
+          i.querySelector('.faq-q').setAttribute('aria-expanded', 'false');
+        });
+        if (!isOpen) {
+          item.classList.add('open');
+          btn.setAttribute('aria-expanded', 'true');
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>

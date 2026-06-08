@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="theme-color" content="#2d1f16">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Nathalie — The Byron Doula</title>
+  <meta name="description" content="Meet Nathalie Solis Pérez — certified birth doula based in Byron Bay. Her story, philosophy, and approach to supporting families through pregnancy, birth and postpartum.">
+  <link rel="icon" href="favicon.png" type="image/png">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+
+    /* ── Intro Banner ───────────────────────────────────────── */
+    .about-banner {
+      padding-top: var(--nav-h);
+      background: #2d1f16;
+      padding-bottom: var(--sp-12);
+    }
+    .about-banner-inner {
+      max-width: var(--content-max);
+      margin-inline: auto;
+      padding-inline: var(--content-pad);
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--sp-8);
+      align-items: end;
+    }
+    @media (min-width: 900px) {
+      .about-banner-inner {
+        grid-template-columns: 5fr 4fr;
+        gap: var(--sp-12);
+      }
+    }
+
+    .about-banner-text {
+      padding-top: var(--sp-10);
+    }
+    .about-banner-eyebrow {
+      display: inline-block;
+      font-family: var(--font-sans);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: rgba(239, 222, 192, 0.6);
+      margin-bottom: var(--sp-3);
+    }
+    .about-banner-text h1 {
+      color: #fbf9f5;
+      margin-bottom: var(--sp-3);
+    }
+    .about-banner-text .about-tagline {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: clamp(18px, 2.4vw, 22px);
+      color: rgba(251, 249, 245, 0.65);
+      line-height: 1.55;
+      max-width: 500px;
+    }
+
+    /* ── Portrait — hangs out of the banner ─────────────────── */
+    .about-portrait-col {
+      display: flex;
+      justify-content: flex-end;
+      align-items: flex-end;
+    }
+    .about-portrait-frame {
+      width: 100%;
+      max-width: 360px;
+      /* frame drops 80px below the dark banner into the cream section */
+      margin-bottom: calc(-1 * var(--sp-12));
+      border-radius: 0;
+      overflow: hidden;
+      aspect-ratio: 3/4;
+      box-shadow: 0 32px 80px rgba(0,0,0,0.28), 0 8px 24px rgba(0,0,0,0.18);
+    }
+    @media (max-width: 899px) {
+      .about-portrait-frame {
+        max-width: 260px;
+        margin-inline: auto;
+        margin-bottom: calc(-1 * var(--sp-10));
+      }
+      .about-portrait-col { justify-content: center; }
+    }
+    .about-portrait-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+    }
+
+    /* ── Story Section ───────────────────────────────────────── */
+    .story-section {
+      background: var(--surface);
+      /* extra top padding accounts for portrait overhang */
+      padding-top: calc(var(--sp-12) + var(--sp-12));
+      padding-bottom: var(--sp-12);
+    }
+    @media (max-width: 899px) {
+      .story-section {
+        padding-top: calc(var(--sp-10) + var(--sp-10));
+      }
+    }
+    .story-inner {
+      max-width: 720px;
+      margin-inline: auto;
+      padding-inline: var(--content-pad);
+    }
+    .story-intro-label {
+      display: inline-block;
+      color: var(--tertiary);
+      margin-bottom: var(--sp-3);
+    }
+    .story-headline {
+      margin-bottom: var(--sp-4);
+    }
+    .story-body p {
+      color: var(--on-surface-variant);
+      font-size: 17px;
+      line-height: 1.85;
+      margin-bottom: var(--sp-4);
+    }
+    .story-body p:last-child {
+      margin-bottom: 0;
+    }
+    .story-pull {
+      border-left: 3px solid var(--primary);
+      padding: var(--sp-3) var(--sp-5);
+      margin-block: var(--sp-6);
+      font-family: var(--font-serif);
+      font-size: clamp(20px, 2.8vw, 26px);
+      font-style: italic;
+      color: var(--on-surface);
+      line-height: 1.5;
+      background: var(--surface-container-low);
+      border-radius: 0 var(--r-lg) var(--r-lg) 0;
+    }
+    .story-sig {
+      margin-top: var(--sp-6);
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: 16px;
+      color: var(--outline);
+    }
+    .story-cta {
+      margin-top: var(--sp-6);
+    }
+
+    /* ── Rule ────────────────────────────────────────────────── */
+    .section-rule {
+      max-width: 720px;
+      margin-inline: auto;
+      padding-inline: var(--content-pad);
+    }
+    .section-rule hr {
+      border: none;
+      border-top: 1px solid var(--outline-variant);
+    }
+
+    /* ── Philosophy ──────────────────────────────────────────── */
+    .philosophy-section {
+      padding-block: var(--sp-12);
+      background: var(--surface);
+    }
+    .philosophy-inner {
+      max-width: 720px;
+      margin-inline: auto;
+      padding-inline: var(--content-pad);
+    }
+    .philosophy-inner .section-title {
+      margin-bottom: var(--sp-2);
+    }
+    .philosophy-list {
+      margin-top: var(--sp-8);
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .philosophy-item {
+      display: grid;
+      grid-template-columns: 52px 1fr;
+      gap: var(--sp-4);
+      align-items: start;
+      padding-block: var(--sp-6);
+      border-top: 1px solid var(--outline-variant);
+    }
+    .philosophy-item:last-child {
+      border-bottom: 1px solid var(--outline-variant);
+    }
+    .philosophy-num {
+      font-family: var(--font-serif);
+      font-size: 13px;
+      font-style: italic;
+      color: var(--primary);
+      padding-top: 4px;
+      letter-spacing: 0.02em;
+    }
+    .philosophy-content h3 {
+      font-family: var(--font-serif);
+      font-size: clamp(20px, 2.6vw, 24px);
+      font-weight: 400;
+      color: var(--on-surface);
+      margin-bottom: var(--sp-2);
+      line-height: 1.25;
+    }
+    .philosophy-content p {
+      color: var(--on-surface-variant);
+      font-size: 16px;
+      line-height: 1.75;
+    }
+
+    /* ── Credentials ─────────────────────────────────────────── */
+    .credentials-section {
+      padding-block: var(--sp-12);
+      background: #2d1f16;
+    }
+    .credentials-inner {
+      max-width: 720px;
+      margin-inline: auto;
+      padding-inline: var(--content-pad);
+    }
+    .credentials-inner .section-title {
+      color: #fbf9f5;
+      margin-bottom: var(--sp-2);
+    }
+    .credentials-inner .divider {
+      background: rgba(239, 222, 192, 0.4);
+    }
+    .credentials-list {
+      margin-top: var(--sp-6);
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .credential-row {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: baseline;
+      gap: var(--sp-4);
+      padding-block: var(--sp-3);
+      border-bottom: 1px solid rgba(251, 249, 245, 0.1);
+    }
+    .credential-row:first-child {
+      border-top: 1px solid rgba(251, 249, 245, 0.1);
+    }
+    .credential-name {
+      font-family: var(--font-serif);
+      font-size: 17px;
+      font-weight: 400;
+      color: #fbf9f5;
+      line-height: 1.4;
+    }
+    .credential-name span {
+      display: block;
+      font-family: var(--font-sans);
+      font-size: 13px;
+      color: rgba(251, 249, 245, 0.45);
+      margin-top: 2px;
+      font-style: normal;
+    }
+    .credential-tag {
+      font-family: var(--font-sans);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(239, 222, 192, 0.5);
+      white-space: nowrap;
+    }
+
+    /* ── CTA Strip ───────────────────────────────────────────── */
+    .cta-strip {
+      background: var(--surface-container-low);
+      padding-block: var(--sp-12);
+    }
+    .cta-strip-inner {
+      max-width: 720px;
+      margin-inline: auto;
+      padding-inline: var(--content-pad);
+      text-align: center;
+    }
+    .cta-strip-eyebrow {
+      display: inline-block;
+      font-family: var(--font-sans);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--tertiary);
+      margin-bottom: var(--sp-3);
+    }
+    .cta-strip h2 { color: var(--on-surface); margin-bottom: var(--sp-2); }
+    .cta-strip p  { color: var(--on-surface-variant); margin-bottom: var(--sp-5); font-size: 17px; max-width: 440px; margin-inline: auto; margin-bottom: var(--sp-5); }
+
+  </style>
+</head>
+<body>
+
+  <!-- ── Navigation ──────────────────────────────────────────── -->
+  <nav class="nav" aria-label="Main navigation">
+    <div class="container nav-inner">
+      <a href="index.html" class="nav-logo">The Byron Doula</a>
+      <div class="nav-links">
+        <a href="about.html" class="nav-active">About</a>
+        <a href="services.html">Services</a>
+        <a href="reviews.html">Testimonials</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      <button class="hamburger" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile drawer -->
+  <div class="nav-drawer" role="dialog" aria-modal="true" aria-label="Navigation menu">
+    <button class="drawer-close" aria-label="Close menu">✕</button>
+    <nav class="drawer-links">
+      <a href="about.html" class="nav-active">About</a>
+      <a href="services.html">Services</a>
+      <a href="reviews.html">Testimonials</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </div>
+
+  <main>
+
+    <!-- ── Opening Banner ──────────────────────────────────────── -->
+    <section class="about-banner" aria-label="About Nathalie">
+      <div class="about-banner-inner">
+
+        <div class="about-banner-text">
+          <h1 class="t-display">About<br>Nathalie</h1>
+          <p class="about-tagline">Certified birth doula, cultural anthropologist, and mother of three — holding space for the most profound threshold of your life.</p>
+        </div>
+
+        <div class="about-portrait-col" aria-hidden="true">
+          <div class="about-portrait-frame">
+            <img
+              src="images/nathalie-about.jpg"
+              alt="Nathalie Solis Pérez"
+              loading="eager"
+              fetchpriority="high"
+            >
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ── Story ───────────────────────────────────────────────── -->
+    <section class="story-section" aria-labelledby="story-heading">
+      <div class="story-inner">
+
+        <span class="t-label story-intro-label section-label">Her Story</span>
+        <h2 class="t-headline section-title story-headline" id="story-heading">From a Calling to a Career</h2>
+        <span class="divider" aria-hidden="true"></span>
+
+        <blockquote class="story-pull">"I've sat with women in their hardest moments. I'd be honoured to sit with you."</blockquote>
+
+        <div class="story-body">
+          <p>Drawing from my own experience as a mother of three, I can say that an empowered birth is not just good luck — it is helped by deep birth preparation and a support team dedicated to your vision. If we truly started honouring birth and parenthood as the transformative processes that they are, our birthing culture would look very different.</p>
+
+          <p>Born in Lübeck, raised in Germany, Guatemala and Spain, matured in the U.S. and Australia, residing between Byron Bay and Berlin. I derive inspiration from many different cultures and traditions.</p>
+        </div>
+
+        <p class="story-sig">— Nathalie Solis, The Byron Doula</p>
+
+        <div class="story-cta">
+          <a href="contact.html" class="arrow-link">Work with me</a>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ── Rule ─────────────────────────────────────────────────── -->
+    <div class="section-rule"><hr></div>
+
+    <!-- ── Philosophy ──────────────────────────────────────────── -->
+    <section class="philosophy-section" aria-labelledby="philosophy-heading">
+      <div class="philosophy-inner">
+
+        <span class="t-label section-label">Guiding Principles</span>
+        <h2 class="t-headline section-title" id="philosophy-heading">My Philosophy</h2>
+        <span class="divider" aria-hidden="true"></span>
+
+        <div class="philosophy-list">
+
+          <div class="philosophy-item">
+            <span class="philosophy-num">01</span>
+            <div class="philosophy-content">
+              <h3>Evidence-Based</h3>
+              <p>I stay current with the latest research so I can offer you accurate, balanced information — helping you make the decisions that are right for your family.</p>
+            </div>
+          </div>
+
+          <div class="philosophy-item">
+            <span class="philosophy-num">02</span>
+            <div class="philosophy-content">
+              <h3>Non-Judgmental</h3>
+              <p>Your birth, your choices. Whether you want an unmedicated home birth or a planned caesarean, I'm here to support your vision without agenda.</p>
+            </div>
+          </div>
+
+          <div class="philosophy-item">
+            <span class="philosophy-num">03</span>
+            <div class="philosophy-content">
+              <h3>Continuously Present</h3>
+              <p>I don't leave when my shift ends. I stay with you through the whole labour and birth — because consistency of support is what makes the difference.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Credentials ──────────────────────────────────────────── -->
+    <section class="credentials-section" aria-labelledby="credentials-heading">
+      <div class="credentials-inner">
+
+        <span class="t-label" style="color:rgba(239,222,192,0.5);display:inline-block;margin-bottom:var(--sp-2);">Qualifications</span>
+        <h2 class="t-headline section-title" id="credentials-heading">Training &amp; Credentials</h2>
+        <span class="divider" aria-hidden="true"></span>
+
+        <div class="credentials-list">
+
+          <div class="credential-row">
+            <div class="credential-name">
+              Cultural Anthropologist
+              <span>M.A.</span>
+            </div>
+            <span class="credential-tag">Academic</span>
+          </div>
+
+          <div class="credential-row">
+            <div class="credential-name">
+              Certified Birth Doula
+              <span>Childbirth International (CBI)</span>
+            </div>
+            <span class="credential-tag">Certification</span>
+          </div>
+
+          <div class="credential-row">
+            <div class="credential-name">
+              Certified Doula
+              <span>Dr. Michel Odent</span>
+            </div>
+            <span class="credential-tag">Certification</span>
+          </div>
+
+          <div class="credential-row">
+            <div class="credential-name">
+              End of Life &amp; Death Doula
+              <span>Thoughtful Transitions</span>
+            </div>
+            <span class="credential-tag">Certification</span>
+          </div>
+
+          <div class="credential-row">
+            <div class="credential-name">
+              Spinning Babies Approach
+              <span>Childbirth preparation</span>
+            </div>
+            <span class="credential-tag">Training</span>
+          </div>
+
+          <div class="credential-row">
+            <div class="credential-name">
+              Birth Specialist &amp; Parent Coach
+              <span>Cleo</span>
+            </div>
+            <span class="credential-tag">Professional</span>
+          </div>
+
+          <div class="credential-row">
+            <div class="credential-name">
+              Aware Parenting Coach
+            </div>
+            <span class="credential-tag">Certification</span>
+          </div>
+
+          <div class="credential-row">
+            <div class="credential-name">
+              Possums &amp; Co Approach
+              <span>Sleep, breastfeeding &amp; unsettled babies</span>
+            </div>
+            <span class="credential-tag">Training</span>
+          </div>
+
+          <div class="credential-row">
+            <div class="credential-name">
+              Yoga Teacher
+              <span>BYV</span>
+            </div>
+            <span class="credential-tag">Certification</span>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ── CTA Strip ────────────────────────────────────────────── -->
+    <section class="cta-strip" aria-labelledby="cta-heading">
+      <div class="cta-strip-inner">
+        <span class="cta-strip-eyebrow">Let's Connect</span>
+        <h2 class="t-headline" id="cta-heading">Ready to connect?</h2>
+        <p>Let's have a free 30-minute chat to see if we're the right fit.</p>
+        <a href="index.html#contact" class="btn btn-primary">Get in Touch</a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ── Footer ──────────────────────────────────────────────── -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <h2>The Byron Doula</h2>
+          <p>Certified birth doula supporting families across Byron Bay and the Northern Rivers, NSW.</p>
+          <div class="social-row" aria-label="Social media">
+            <a href="https://instagram.com/thebyrondoula" class="social-link" aria-label="Instagram" target="_blank" rel="noopener">
+              <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+            </a>
+            <a href="https://facebook.com/thebyrondoula" class="social-link" aria-label="Facebook" target="_blank" rel="noopener">
+              <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+            </a>
+            <a href="https://pinterest.com/thebyrondoula" class="social-link" aria-label="Pinterest" target="_blank" rel="noopener">
+              <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12c0 4.24 2.65 7.86 6.39 9.29-.09-.78-.17-1.98.04-2.83.18-.77 1.24-5.26 1.24-5.26s-.32-.63-.32-1.57c0-1.47.85-2.57 1.91-2.57.9 0 1.34.68 1.34 1.49 0 .91-.58 2.27-.88 3.53-.25 1.05.53 1.91 1.56 1.91 1.87 0 3.13-2.4 3.13-5.25 0-2.17-1.47-3.68-3.57-3.68-2.43 0-3.86 1.82-3.86 3.71 0 .74.28 1.52.64 1.95.07.08.08.16.06.24-.07.27-.21.85-.24.97-.04.16-.13.19-.29.12-1.09-.51-1.77-2.1-1.77-3.38 0-2.74 1.99-5.26 5.74-5.26 3.01 0 5.35 2.15 5.35 5.02 0 2.99-1.88 5.4-4.49 5.4-.88 0-1.7-.46-1.98-.99l-.54 2.02c-.19.75-.72 1.68-1.08 2.25.81.25 1.67.39 2.55.39 5.52 0 10-4.48 10-10S17.52 2 12 2z"/></svg>
+            </a>
+          </div>
+        </div>
+        <nav class="footer-nav" aria-label="Services navigation">
+          <h3>Services</h3>
+          <ul>
+            <li><a href="services.html#birth-preparation">Birth Preparation</a></li>
+            <li><a href="services.html#parent-coaching">Parent Coaching</a></li>
+          </ul>
+        </nav>
+        <nav class="footer-nav" aria-label="Site navigation">
+          <h3>More</h3>
+          <ul>
+            <li><a href="about.html">About Nathalie</a></li>
+            <li><a href="reviews.html">Testimonials</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-copyright">© 2025 Nathalie Solis Pérez · <a href="privacy-policy.html" style="color:inherit">Privacy</a> · <a href="terms.html" style="color:inherit">Terms</a></p>
+        <p class="footer-acknowledgement">I acknowledge the Bundjalung People as the original and true custodians of the land on which I live and work. I pay respect to all of our country's First Nations peoples and their ongoing strength in practising the world's oldest living culture. I pay my respect to their Elders past, present and emerging.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/nav.js"></script>
+
+</body>
+</html>

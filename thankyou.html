@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="theme-color" content="#2d1f16">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Message Received — The Byron Doula</title>
+  <link rel="icon" href="favicon.png" type="image/png">
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    .thankyou-page {
+      min-height: 100svh; display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      padding: calc(var(--nav-h) + var(--sp-8)) var(--sp-3) var(--sp-8);
+      text-align: center;
+    }
+    .thankyou-icon {
+      width: 72px; height: 72px; background: var(--secondary-container);
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      margin-bottom: var(--sp-4);
+    }
+    .thankyou-icon svg { width: 36px; height: 36px; stroke: var(--primary); }
+    .thankyou-page h1 { margin-bottom: var(--sp-2); }
+    .thankyou-page p { color: var(--on-surface-variant); max-width: 440px; margin-bottom: var(--sp-5); }
+  </style>
+</head>
+<body>
+  <nav class="nav scrolled"><div class="container nav-inner"><a href="index.html" class="nav-logo">The Byron Doula</a></div></nav>
+  <main class="thankyou-page">
+    <div class="thankyou-icon"><svg fill="none" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg></div>
+    <h1 class="t-headline">Message received</h1>
+    <p>Thank you for reaching out. I'll be in touch within 48 hours to arrange a time to chat.</p>
+    <a href="index.html" class="btn btn-primary">Back to Home</a>
+  </main>
+  <script src="js/nav.js"></script>
+</body>
+</html>
