@@ -2,560 +2,319 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="theme-color" content="#2d1f16">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>About Nathalie — The Byron Doula</title>
-  <meta name="description" content="Meet Nathalie Solis Pérez — certified birth doula based in Byron Bay. Her story, philosophy, and approach to supporting families through pregnancy, birth and postpartum.">
-  <link rel="icon" href="favicon.png" type="image/png">
-  <link rel="apple-touch-icon" href="apple-touch-icon.png">
-  <link rel="stylesheet" href="css/styles.css">
+  <title>About — The Byron Doula</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
+    :root {
+      --ivory:      #FAF5EE;
+      --stone:      #F0E9DF;
+      --charcoal:   #2D2A26;
+      --olive:      #5E6B57;
+      --olive-dark: #3B4437;
+      --clay:       #B8876B;
+      --mid:        #7A7268;
+      --border:     #E5E0D8;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', system-ui, sans-serif; background: var(--ivory); color: var(--charcoal); font-size: 18px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+    h1, h2, h3, h4 { font-family: 'Cormorant Garamond', serif; font-weight: 500; line-height: 1.15; color: var(--charcoal); }
+    h1 { font-size: clamp(32px, 4vw, 52px); }
+    h2 { font-size: clamp(30px, 3.5vw, 40px); }
+    h3 { font-size: 24px; }
+    p  { line-height: 1.7; }
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 48px; }
+    section { padding: 96px 0; }
 
-    /* ── Intro Banner ───────────────────────────────────────── */
-    .about-banner {
-      padding-top: var(--nav-h);
-      background: #2d1f16;
-      padding-bottom: var(--sp-12);
-    }
-    .about-banner-inner {
-      max-width: var(--content-max);
-      margin-inline: auto;
-      padding-inline: var(--content-pad);
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: var(--sp-8);
-      align-items: end;
-    }
-    @media (min-width: 900px) {
-      .about-banner-inner {
-        grid-template-columns: 5fr 4fr;
-        gap: var(--sp-12);
-      }
-    }
-
-    .about-banner-text {
-      padding-top: var(--sp-10);
-    }
-    .about-banner-eyebrow {
-      display: inline-block;
-      font-family: var(--font-sans);
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: rgba(239, 222, 192, 0.6);
-      margin-bottom: var(--sp-3);
-    }
-    .about-banner-text h1 {
-      color: #fbf9f5;
-      margin-bottom: var(--sp-3);
-    }
-    .about-banner-text .about-tagline {
-      font-family: var(--font-serif);
-      font-style: italic;
-      font-size: clamp(18px, 2.4vw, 22px);
-      color: rgba(251, 249, 245, 0.65);
-      line-height: 1.55;
-      max-width: 500px;
+    .eyebrow {
+      font-family: 'Inter', sans-serif;
+      font-size: 11px; font-weight: 500;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--mid); margin-bottom: 14px; display: block;
     }
 
-    /* ── Portrait — hangs out of the banner ─────────────────── */
-    .about-portrait-col {
-      display: flex;
-      justify-content: flex-end;
-      align-items: flex-end;
+    .btn-primary {
+      display: inline-block; background: var(--olive); color: white;
+      font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 500;
+      letter-spacing: 0.03em; padding: 14px 28px; text-decoration: none;
+      border: none; border-radius: 8px; cursor: pointer; transition: background 0.2s;
     }
-    .about-portrait-frame {
-      width: 100%;
-      max-width: 360px;
-      /* frame drops 80px below the dark banner into the cream section */
-      margin-bottom: calc(-1 * var(--sp-12));
-      border-radius: 0;
-      overflow: hidden;
-      aspect-ratio: 3/4;
-      box-shadow: 0 32px 80px rgba(0,0,0,0.28), 0 8px 24px rgba(0,0,0,0.18);
+    .btn-primary:hover { background: var(--olive-dark); }
+
+    .btn-secondary {
+      display: inline-block; color: var(--charcoal);
+      font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 500;
+      letter-spacing: 0.03em; padding: 13px 28px; text-decoration: none;
+      border: 1.5px solid var(--charcoal); border-radius: 8px; cursor: pointer; transition: all 0.2s;
     }
-    @media (max-width: 899px) {
-      .about-portrait-frame {
-        max-width: 260px;
-        margin-inline: auto;
-        margin-bottom: calc(-1 * var(--sp-10));
-      }
-      .about-portrait-col { justify-content: center; }
+    .btn-secondary:hover { background: var(--olive); border-color: var(--olive); color: white; }
+
+    /* NAV */
+    .site-nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(250,245,238,0.97);
+      box-shadow: 0 1px 16px rgba(45,42,38,0.08);
     }
-    .about-portrait-frame img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center top;
-      display: block;
+    .nav-inner {
+      max-width: 1100px; margin: 0 auto; padding: 0 48px;
+      height: 72px; display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 500; color: var(--charcoal); text-decoration: none; white-space: nowrap; }
+    .social-icons { display: flex; gap: 18px; align-items: center; }
+    .social-icon { color: #6B6B6B; display: flex; transition: color 0.2s; }
+    .social-icon:hover { color: var(--charcoal); }
+    .nav-links { display: flex; gap: 36px; list-style: none; }
+    .nav-links a { font-size: 14px; color: var(--mid); text-decoration: none; letter-spacing: 0.04em; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--charcoal); }
+    .nav-links a.active { color: var(--charcoal); font-weight: 500; }
+    .nav-toggle { display: none; flex-direction: column; justify-content: center; gap: 5px; background: none; border: none; cursor: pointer; padding: 6px; }
+    .nav-toggle span { display: block; width: 22px; height: 1.5px; background: var(--charcoal); transition: transform 0.2s, opacity 0.2s; }
+    .site-nav.nav-open .nav-toggle span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+    .site-nav.nav-open .nav-toggle span:nth-child(2) { opacity: 0; }
+    .site-nav.nav-open .nav-toggle span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+    .nav-cta { display: inline-block; background: var(--olive); color: white; font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 500; padding: 10px 22px; text-decoration: none; border-radius: 8px; transition: background 0.2s; }
+    .nav-cta:hover { background: var(--olive-dark); }
+
+    /* HERO */
+    .about-hero {
+      padding-top: 160px;
+      padding-bottom: 96px;
+      background: var(--ivory);
+    }
+    .about-hero-inner {
+      max-width: 1100px; margin: 0 auto; padding: 0 48px;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
+    }
+    .about-hero-quote {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(26px, 3.5vw, 42px);
+      font-style: italic; font-weight: 400; line-height: 1.3;
+      color: var(--charcoal); margin-bottom: 36px;
+    }
+    .about-hero-img {
+      aspect-ratio: 3/4; border-radius: 2px;
+      object-fit: cover; width: 100%; display: block;
     }
 
-    /* ── Story Section ───────────────────────────────────────── */
-    .story-section {
-      background: var(--surface);
-      /* extra top padding accounts for portrait overhang */
-      padding-top: calc(var(--sp-12) + var(--sp-12));
-      padding-bottom: var(--sp-12);
+    /* MY STORY */
+    .about-story {
+      background: var(--stone);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
     }
-    @media (max-width: 899px) {
-      .story-section {
-        padding-top: calc(var(--sp-10) + var(--sp-10));
-      }
+    .narrow { max-width: 720px; margin: 0 auto; padding: 0 48px; }
+    .about-story p { font-size: 17px; color: var(--mid); line-height: 1.85; margin-bottom: 22px; }
+    .about-story p:last-child { margin-bottom: 0; }
+
+    /* CREDENTIALS */
+    .about-creds { background: var(--ivory); }
+    .creds-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 0 64px; margin-top: 40px; list-style: none;
     }
-    .story-inner {
-      max-width: 720px;
-      margin-inline: auto;
-      padding-inline: var(--content-pad);
+    .creds-grid li {
+      font-size: 15px; color: var(--charcoal);
+      padding: 14px 0; border-bottom: 1px solid var(--border);
+      display: flex; align-items: flex-start; gap: 12px;
     }
-    .story-intro-label {
-      display: inline-block;
-      color: var(--tertiary);
-      margin-bottom: var(--sp-3);
-    }
-    .story-headline {
-      margin-bottom: var(--sp-4);
-    }
-    .story-body p {
-      color: var(--on-surface-variant);
-      font-size: 17px;
-      line-height: 1.85;
-      margin-bottom: var(--sp-4);
-    }
-    .story-body p:last-child {
-      margin-bottom: 0;
-    }
-    .story-pull {
-      border-left: 3px solid var(--primary);
-      padding: var(--sp-3) var(--sp-5);
-      margin-block: var(--sp-6);
-      font-family: var(--font-serif);
-      font-size: clamp(20px, 2.8vw, 26px);
-      font-style: italic;
-      color: var(--on-surface);
-      line-height: 1.5;
-      background: var(--surface-container-low);
-      border-radius: 0 var(--r-lg) var(--r-lg) 0;
-    }
-    .story-sig {
-      margin-top: var(--sp-6);
-      font-family: var(--font-serif);
-      font-style: italic;
-      font-size: 16px;
-      color: var(--outline);
-    }
-    .story-cta {
-      margin-top: var(--sp-6);
+    .creds-grid li::before {
+      content: ''; width: 4px; height: 4px;
+      background: var(--clay); border-radius: 50%;
+      flex-shrink: 0; margin-top: 8px;
     }
 
-    /* ── Rule ────────────────────────────────────────────────── */
-    .section-rule {
-      max-width: 720px;
-      margin-inline: auto;
-      padding-inline: var(--content-pad);
+    /* FEATURED IN */
+    .featured-band {
+      background: var(--stone); padding: 64px 0;
+      border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
     }
-    .section-rule hr {
-      border: none;
-      border-top: 1px solid var(--outline-variant);
+    .featured-label {
+      font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 500;
+      letter-spacing: 0.14em; text-transform: uppercase; color: var(--mid);
+      text-align: center; margin-bottom: 28px;
+    }
+    .media-list { list-style: none; margin-top: 8px; }
+    .media-list li {
+      font-size: 15px; color: var(--mid); padding: 13px 0;
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; gap: 10px;
+    }
+    .media-list li::before { content: ''; width: 3px; height: 3px; background: var(--clay); border-radius: 50%; flex-shrink: 0; }
+
+    /* WHY I DO THIS */
+    .about-why { background: var(--ivory); }
+    .placeholder-block {
+      font-size: 15px; color: var(--mid); font-style: italic;
+      background: var(--stone); border: 1px dashed var(--border);
+      padding: 24px; border-radius: 2px; margin-top: 24px; opacity: 0.7;
     }
 
-    /* ── Philosophy ──────────────────────────────────────────── */
-    .philosophy-section {
-      padding-block: var(--sp-12);
-      background: var(--surface);
+    /* CTA BAND */
+    .cta-light {
+      background: var(--stone); border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border); padding: 80px 0; text-align: center;
     }
-    .philosophy-inner {
-      max-width: 720px;
-      margin-inline: auto;
-      padding-inline: var(--content-pad);
-    }
-    .philosophy-inner .section-title {
-      margin-bottom: var(--sp-2);
-    }
-    .philosophy-list {
-      margin-top: var(--sp-8);
-      display: flex;
-      flex-direction: column;
-      gap: 0;
-    }
-    .philosophy-item {
-      display: grid;
-      grid-template-columns: 52px 1fr;
-      gap: var(--sp-4);
-      align-items: start;
-      padding-block: var(--sp-6);
-      border-top: 1px solid var(--outline-variant);
-    }
-    .philosophy-item:last-child {
-      border-bottom: 1px solid var(--outline-variant);
-    }
-    .philosophy-num {
-      font-family: var(--font-serif);
-      font-size: 13px;
-      font-style: italic;
-      color: var(--primary);
-      padding-top: 4px;
-      letter-spacing: 0.02em;
-    }
-    .philosophy-content h3 {
-      font-family: var(--font-serif);
-      font-size: clamp(20px, 2.6vw, 24px);
-      font-weight: 400;
-      color: var(--on-surface);
-      margin-bottom: var(--sp-2);
-      line-height: 1.25;
-    }
-    .philosophy-content p {
-      color: var(--on-surface-variant);
-      font-size: 16px;
-      line-height: 1.75;
-    }
+    .cta-light h2 { margin-bottom: 16px; }
+    .cta-light p { font-size: 16px; color: var(--mid); margin-bottom: 32px; max-width: 480px; margin-left: auto; margin-right: auto; line-height: 1.7; }
 
-    /* ── Credentials ─────────────────────────────────────────── */
-    .credentials-section {
-      padding-block: var(--sp-12);
-      background: #2d1f16;
-    }
-    .credentials-inner {
-      max-width: 720px;
-      margin-inline: auto;
-      padding-inline: var(--content-pad);
-    }
-    .credentials-inner .section-title {
-      color: #fbf9f5;
-      margin-bottom: var(--sp-2);
-    }
-    .credentials-inner .divider {
-      background: rgba(239, 222, 192, 0.4);
-    }
-    .credentials-list {
-      margin-top: var(--sp-6);
-      display: flex;
-      flex-direction: column;
-      gap: 0;
-    }
-    .credential-row {
-      display: grid;
-      grid-template-columns: 1fr auto;
-      align-items: baseline;
-      gap: var(--sp-4);
-      padding-block: var(--sp-3);
-      border-bottom: 1px solid rgba(251, 249, 245, 0.1);
-    }
-    .credential-row:first-child {
-      border-top: 1px solid rgba(251, 249, 245, 0.1);
-    }
-    .credential-name {
-      font-family: var(--font-serif);
-      font-size: 17px;
-      font-weight: 400;
-      color: #fbf9f5;
-      line-height: 1.4;
-    }
-    .credential-name span {
-      display: block;
-      font-family: var(--font-sans);
-      font-size: 13px;
-      color: rgba(251, 249, 245, 0.45);
-      margin-top: 2px;
-      font-style: normal;
-    }
-    .credential-tag {
-      font-family: var(--font-sans);
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: rgba(239, 222, 192, 0.5);
-      white-space: nowrap;
-    }
+    /* FOOTER */
+    .site-footer { background: var(--stone); border-top: 1px solid var(--border); padding: 40px 0; }
+    .footer-inner { max-width: 1100px; margin: 0 auto; padding: 0 48px; display: flex; flex-direction: column; gap: 16px; }
+    .footer-top { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
+    .footer-copy { font-size: 13px; color: var(--mid); }
+    .footer-links { display: flex; gap: 24px; list-style: none; }
+    .footer-links a { font-size: 13px; color: var(--mid); text-decoration: none; }
+    .footer-links a:hover { color: var(--charcoal); }
+    .footer-ack { font-size: 12px; color: var(--mid); line-height: 1.7; max-width: 700px; opacity: 0.75; border-top: 1px solid var(--border); padding-top: 16px; }
+    @media (max-width: 768px) {
+      /* Global */
+      .container { padding: 0 20px; }
+      section { padding: 64px 0; }
 
-    /* ── CTA Strip ───────────────────────────────────────────── */
-    .cta-strip {
-      background: var(--surface-container-low);
-      padding-block: var(--sp-12);
-    }
-    .cta-strip-inner {
-      max-width: 720px;
-      margin-inline: auto;
-      padding-inline: var(--content-pad);
-      text-align: center;
-    }
-    .cta-strip-eyebrow {
-      display: inline-block;
-      font-family: var(--font-sans);
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: var(--tertiary);
-      margin-bottom: var(--sp-3);
-    }
-    .cta-strip h2 { color: var(--on-surface); margin-bottom: var(--sp-2); }
-    .cta-strip p  { color: var(--on-surface-variant); margin-bottom: var(--sp-5); font-size: 17px; max-width: 440px; margin-inline: auto; margin-bottom: var(--sp-5); }
+      /* Nav */
+      .nav-toggle { display: flex; }
+      .nav-links { display: none; position: absolute; top: 72px; left: 0; right: 0; flex-direction: column; background: rgba(250,245,238,0.98); border-bottom: 1px solid var(--border); padding: 8px 0 20px; box-shadow: 0 4px 16px rgba(45,42,38,0.08); z-index: 99; }
+      .nav-links li a { display: block; padding: 14px 24px; opacity: 1; font-size: 15px; }
+      .nav-cta { display: none; }
+      .site-nav.nav-open .nav-links { display: flex; }
 
+      /* About hero */
+      .about-hero { padding-top: 120px; padding-bottom: 64px; }
+      .about-hero-inner { grid-template-columns: 1fr; gap: 40px; padding: 0 20px; }
+      .about-hero-img { aspect-ratio: 4/3; }
+
+      /* Story */
+      .narrow { padding: 0 20px; }
+
+      /* Creds */
+      .creds-grid { grid-template-columns: 1fr; gap: 0; }
+
+      /* CTA */
+      .cta-light { padding: 56px 0; }
+
+      /* Footer */
+      .footer-inner { padding: 0 20px; }
+      .footer-top { flex-direction: column; align-items: flex-start; gap: 20px; }
+    }
   </style>
 </head>
 <body>
 
-  <!-- ── Navigation ──────────────────────────────────────────── -->
-  <nav class="nav" aria-label="Main navigation">
-    <div class="container nav-inner">
-      <a href="index.html" class="nav-logo">The Byron Doula</a>
-      <div class="nav-links">
-        <a href="about.html" class="nav-active">About</a>
-        <a href="services.html">Services</a>
-        <a href="reviews.html">Testimonials</a>
-        <a href="contact.html">Contact</a>
-      </div>
-      <button class="hamburger" aria-label="Open menu" aria-expanded="false">
-        <span></span><span></span><span></span>
-      </button>
-    </div>
-  </nav>
-
-  <!-- Mobile drawer -->
-  <div class="nav-drawer" role="dialog" aria-modal="true" aria-label="Navigation menu">
-    <button class="drawer-close" aria-label="Close menu">✕</button>
-    <nav class="drawer-links">
-      <a href="about.html" class="nav-active">About</a>
-      <a href="services.html">Services</a>
-      <a href="reviews.html">Testimonials</a>
-      <a href="contact.html">Contact</a>
-    </nav>
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">The Byron Doula</a>
+    <ul class="nav-links">
+      <li><a href="about.html" class="active">About</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="reviews.html">Reviews</a></li>
+    </ul>
+    <button class="nav-toggle" aria-label="Menu" onclick="this.closest('nav').classList.toggle('nav-open')">
+      <span></span><span></span><span></span>
+    </button>
+    <a href="index.html#contact" class="nav-cta">Get in Touch</a>
   </div>
+</nav>
 
-  <main>
-
-    <!-- ── Opening Banner ──────────────────────────────────────── -->
-    <section class="about-banner" aria-label="About Nathalie">
-      <div class="about-banner-inner">
-
-        <div class="about-banner-text">
-          <h1 class="t-display">About<br>Nathalie</h1>
-          <p class="about-tagline">Certified birth doula, cultural anthropologist, and mother of three — holding space for the most profound threshold of your life.</p>
-        </div>
-
-        <div class="about-portrait-col" aria-hidden="true">
-          <div class="about-portrait-frame">
-            <img
-              src="images/nathalie-about.jpg"
-              alt="Nathalie Solis Pérez"
-              loading="eager"
-              fetchpriority="high"
-            >
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- ── Story ───────────────────────────────────────────────── -->
-    <section class="story-section" aria-labelledby="story-heading">
-      <div class="story-inner">
-
-        <span class="t-label story-intro-label section-label">Her Story</span>
-        <h2 class="t-headline section-title story-headline" id="story-heading">From a Calling to a Career</h2>
-        <span class="divider" aria-hidden="true"></span>
-
-        <blockquote class="story-pull">"I've sat with women in their hardest moments. I'd be honoured to sit with you."</blockquote>
-
-        <div class="story-body">
-          <p>Drawing from my own experience as a mother of three, I can say that an empowered birth is not just good luck — it is helped by deep birth preparation and a support team dedicated to your vision. If we truly started honouring birth and parenthood as the transformative processes that they are, our birthing culture would look very different.</p>
-
-          <p>Born in Lübeck, raised in Germany, Guatemala and Spain, matured in the U.S. and Australia, residing between Byron Bay and Berlin. I derive inspiration from many different cultures and traditions.</p>
-        </div>
-
-        <p class="story-sig">— Nathalie Solis, The Byron Doula</p>
-
-        <div class="story-cta">
-          <a href="contact.html" class="arrow-link">Work with me</a>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- ── Rule ─────────────────────────────────────────────────── -->
-    <div class="section-rule"><hr></div>
-
-    <!-- ── Philosophy ──────────────────────────────────────────── -->
-    <section class="philosophy-section" aria-labelledby="philosophy-heading">
-      <div class="philosophy-inner">
-
-        <span class="t-label section-label">Guiding Principles</span>
-        <h2 class="t-headline section-title" id="philosophy-heading">My Philosophy</h2>
-        <span class="divider" aria-hidden="true"></span>
-
-        <div class="philosophy-list">
-
-          <div class="philosophy-item">
-            <span class="philosophy-num">01</span>
-            <div class="philosophy-content">
-              <h3>Evidence-Based</h3>
-              <p>I stay current with the latest research so I can offer you accurate, balanced information — helping you make the decisions that are right for your family.</p>
-            </div>
-          </div>
-
-          <div class="philosophy-item">
-            <span class="philosophy-num">02</span>
-            <div class="philosophy-content">
-              <h3>Non-Judgmental</h3>
-              <p>Your birth, your choices. Whether you want an unmedicated home birth or a planned caesarean, I'm here to support your vision without agenda.</p>
-            </div>
-          </div>
-
-          <div class="philosophy-item">
-            <span class="philosophy-num">03</span>
-            <div class="philosophy-content">
-              <h3>Continuously Present</h3>
-              <p>I don't leave when my shift ends. I stay with you through the whole labour and birth — because consistency of support is what makes the difference.</p>
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </section>
-
-    <!-- ── Credentials ──────────────────────────────────────────── -->
-    <section class="credentials-section" aria-labelledby="credentials-heading">
-      <div class="credentials-inner">
-
-        <span class="t-label" style="color:rgba(239,222,192,0.5);display:inline-block;margin-bottom:var(--sp-2);">Qualifications</span>
-        <h2 class="t-headline section-title" id="credentials-heading">Training &amp; Credentials</h2>
-        <span class="divider" aria-hidden="true"></span>
-
-        <div class="credentials-list">
-
-          <div class="credential-row">
-            <div class="credential-name">
-              Cultural Anthropologist
-              <span>M.A.</span>
-            </div>
-            <span class="credential-tag">Academic</span>
-          </div>
-
-          <div class="credential-row">
-            <div class="credential-name">
-              Certified Birth Doula
-              <span>Childbirth International (CBI)</span>
-            </div>
-            <span class="credential-tag">Certification</span>
-          </div>
-
-          <div class="credential-row">
-            <div class="credential-name">
-              Certified Doula
-              <span>Dr. Michel Odent</span>
-            </div>
-            <span class="credential-tag">Certification</span>
-          </div>
-
-          <div class="credential-row">
-            <div class="credential-name">
-              End of Life &amp; Death Doula
-              <span>Thoughtful Transitions</span>
-            </div>
-            <span class="credential-tag">Certification</span>
-          </div>
-
-          <div class="credential-row">
-            <div class="credential-name">
-              Spinning Babies Approach
-              <span>Childbirth preparation</span>
-            </div>
-            <span class="credential-tag">Training</span>
-          </div>
-
-          <div class="credential-row">
-            <div class="credential-name">
-              Birth Specialist &amp; Parent Coach
-              <span>Cleo</span>
-            </div>
-            <span class="credential-tag">Professional</span>
-          </div>
-
-          <div class="credential-row">
-            <div class="credential-name">
-              Aware Parenting Coach
-            </div>
-            <span class="credential-tag">Certification</span>
-          </div>
-
-          <div class="credential-row">
-            <div class="credential-name">
-              Possums &amp; Co Approach
-              <span>Sleep, breastfeeding &amp; unsettled babies</span>
-            </div>
-            <span class="credential-tag">Training</span>
-          </div>
-
-          <div class="credential-row">
-            <div class="credential-name">
-              Yoga Teacher
-              <span>BYV</span>
-            </div>
-            <span class="credential-tag">Certification</span>
-          </div>
-
-        </div>
-      </div>
-    </section>
-
-    <!-- ── CTA Strip ────────────────────────────────────────────── -->
-    <section class="cta-strip" aria-labelledby="cta-heading">
-      <div class="cta-strip-inner">
-        <span class="cta-strip-eyebrow">Let's Connect</span>
-        <h2 class="t-headline" id="cta-heading">Ready to connect?</h2>
-        <p>Let's have a free 30-minute chat to see if we're the right fit.</p>
-        <a href="index.html#contact" class="btn btn-primary">Get in Touch</a>
-      </div>
-    </section>
-
-  </main>
-
-  <!-- ── Footer ──────────────────────────────────────────────── -->
-  <footer>
-    <div class="container">
-      <div class="footer-grid">
-        <div class="footer-brand">
-          <h2>The Byron Doula</h2>
-          <p>Certified birth doula supporting families across Byron Bay and the Northern Rivers, NSW.</p>
-          <div class="social-row" aria-label="Social media">
-            <a href="https://instagram.com/thebyrondoula" class="social-link" aria-label="Instagram" target="_blank" rel="noopener">
-              <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
-            </a>
-            <a href="https://facebook.com/thebyrondoula" class="social-link" aria-label="Facebook" target="_blank" rel="noopener">
-              <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
-            </a>
-            <a href="https://pinterest.com/thebyrondoula" class="social-link" aria-label="Pinterest" target="_blank" rel="noopener">
-              <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12c0 4.24 2.65 7.86 6.39 9.29-.09-.78-.17-1.98.04-2.83.18-.77 1.24-5.26 1.24-5.26s-.32-.63-.32-1.57c0-1.47.85-2.57 1.91-2.57.9 0 1.34.68 1.34 1.49 0 .91-.58 2.27-.88 3.53-.25 1.05.53 1.91 1.56 1.91 1.87 0 3.13-2.4 3.13-5.25 0-2.17-1.47-3.68-3.57-3.68-2.43 0-3.86 1.82-3.86 3.71 0 .74.28 1.52.64 1.95.07.08.08.16.06.24-.07.27-.21.85-.24.97-.04.16-.13.19-.29.12-1.09-.51-1.77-2.1-1.77-3.38 0-2.74 1.99-5.26 5.74-5.26 3.01 0 5.35 2.15 5.35 5.02 0 2.99-1.88 5.4-4.49 5.4-.88 0-1.7-.46-1.98-.99l-.54 2.02c-.19.75-.72 1.68-1.08 2.25.81.25 1.67.39 2.55.39 5.52 0 10-4.48 10-10S17.52 2 12 2z"/></svg>
-            </a>
-          </div>
-        </div>
-        <nav class="footer-nav" aria-label="Services navigation">
-          <h3>Services</h3>
-          <ul>
-            <li><a href="services.html#birth-preparation">Birth Preparation</a></li>
-            <li><a href="services.html#parent-coaching">Parent Coaching</a></li>
-          </ul>
-        </nav>
-        <nav class="footer-nav" aria-label="Site navigation">
-          <h3>More</h3>
-          <ul>
-            <li><a href="about.html">About Nathalie</a></li>
-            <li><a href="reviews.html">Testimonials</a></li>
-            <li><a href="contact.html">Contact</a></li>
-          </ul>
-        </nav>
-      </div>
-      <div class="footer-bottom">
-        <p class="footer-copyright">© 2025 Nathalie Solis Pérez · <a href="privacy-policy.html" style="color:inherit">Privacy</a> · <a href="terms.html" style="color:inherit">Terms</a></p>
-        <p class="footer-acknowledgement">I acknowledge the Bundjalung People as the original and true custodians of the land on which I live and work. I pay respect to all of our country's First Nations peoples and their ongoing strength in practising the world's oldest living culture. I pay my respect to their Elders past, present and emerging.</p>
-      </div>
+<!-- HERO -->
+<section class="about-hero">
+  <div class="about-hero-inner">
+    <div>
+      <h1 class="about-hero-quote">"I've sat with women in their hardest moments. I'd be honoured to sit with you."</h1>
+      <a href="index.html#contact" class="btn-primary">Get in Touch</a>
     </div>
-  </footer>
+    <img class="about-hero-img" src="images/nathalie-about.jpg" alt="Nathalie Solis Pérez">
+  </div>
+</section>
 
-  <script src="js/nav.js"></script>
+<!-- MY STORY -->
+<section class="about-story">
+  <div class="narrow">
+    <span class="eyebrow" style="color:var(--clay)">My Story</span>
+    <h2 style="margin-bottom:32px;">How I Came to This Work</h2>
+    <p>Drawing from my own experience as a mother of three, I can say that an empowered birth is not just good luck, it is helped by deep birth preparation and a support team dedicated to your vision. If we truly started honouring birth and parenthood as the transformative processes that they are, our birthing culture would look very different.</p>
+    <p>Born in Lübeck, raised in Germany, Guatemala and Spain, matured in the U.S. and Australia, residing between Byron Bay and Berlin. I derive inspiration from many different cultures and traditions.</p>
+  </div>
+</section>
+
+<!-- TRAINING & CREDENTIALS -->
+<section class="about-creds">
+  <div class="container">
+    <span class="eyebrow">Qualifications</span>
+    <h2>Training & Credentials</h2>
+    <ul class="creds-grid">
+      <li>Cultural Anthropologist (M.A.)</li>
+      <li>Certified Aware Parenting Coach</li>
+      <li>Certified Birth Doula CBI (Childbirth International)</li>
+      <li>Trained in the Possums & Co evidence-based approach</li>
+      <li>Certified Doula (Dr. Michel Odent)</li>
+      <li>Certified Yoga Teacher (BYV)</li>
+      <li>Certified End Of Life / Death Doula (Thoughtful Transitions)</li>
+      <li>Pregnancy & Birth Specialist / Parent Coach at Cleo</li>
+      <li>Trained in the Spinning Babies approach to childbirth</li>
+    </ul>
+  </div>
+</section>
+
+<!-- FEATURED IN -->
+<div class="featured-band">
+  <div class="container">
+    <h2 style="margin-bottom:8px;">Selected Interviews</h2>
+    <ul class="media-list">
+      <li>The Confidence That Comes After 40 — The Rara Files</li>
+      <li>Perinatal Support for Mothers — PBB Media Podcast</li>
+      <li>iamibu × Nathalie Solis Pérez</li>
+      <li>A Day With… Nathalie Solis Pérez — In A Day Naturopathy</li>
+      <li>Mother Moments — Interview with Space To Flow</li>
+      <li>Interview with Nadine Richardson — She Births®</li>
+    </ul>
+  </div>
+</div>
+
+<!-- WHY I DO THIS -->
+<section class="about-why">
+  <div class="narrow">
+    <span class="eyebrow">Purpose</span>
+    <h2>Why I Do This</h2>
+    <div class="placeholder-block">Content to be provided by Nathalie — why birth work matters, why support matters, what families can expect when working together.</div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="cta-light">
+  <div class="container">
+    <h2>Ready to feel informed, supported and prepared?</h2>
+    <p>I'd love to hear more about your journey.</p>
+    <a href="index.html#contact" class="btn-primary">Get in Touch</a>
+  </div>
+</div>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <span class="footer-copy">© 2026 The Byron Doula. All rights reserved.</span>
+      <div class="social-icons">
+        <a href="#" class="social-icon" aria-label="Instagram">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+        </a>
+        <a href="#" class="social-icon" aria-label="Facebook">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+        </a>
+        <a href="#" class="social-icon" aria-label="Pinterest">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12c0 5.084 3.163 9.426 7.627 11.174-.105-.949-.2-2.405.042-3.441.218-.937 1.407-5.965 1.407-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738a.36.36 0 0 1 .083.345l-.333 1.36c-.053.22-.174.267-.402.161-1.499-.698-2.436-2.889-2.436-4.649 0-3.785 2.75-7.262 7.929-7.262 4.163 0 7.398 2.967 7.398 6.931 0 4.136-2.607 7.464-6.227 7.464-1.216 0-2.359-.632-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0z" fill="#6B6B6B"/></svg>
+        </a>
+      </div>
+      <ul class="footer-links">
+        <li><a href="#">Privacy</a></li>
+        <li><a href="#">Terms</a></li>
+        <li><a href="#">Cookies</a></li>
+      </ul>
+    </div>
+    <p class="footer-ack">I acknowledge the Bundjalung People as the original and true custodians of the land on which I live and work. I pay respect to all of our country's First Nations peoples and their ongoing strength in practising the world's oldest living culture. I pay my respect to their Elders past, present and emerging.</p>
+  </div>
+</footer>
 
 </body>
 </html>
