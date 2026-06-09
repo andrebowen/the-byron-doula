@@ -1,0 +1,1776 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Layout Options — The Byron Doula</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Vollkorn:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+
+    /* ── Tokens ─────────────────────────────────────── */
+    :root {
+      --brown:      #2d1f16;
+      --terra:      #8c4a2f;
+      --terra-mid:  #a96245;
+      --cream:      #fbf9f5;
+      --warm-low:   #f5f3ef;
+      --warm-mid:   #efeeea;
+      --muted:      #53433d;
+      --outline:    #86736c;
+      --rule:       #d9c2ba;
+      --secondary-container: #efdec0;
+      --serif: 'Vollkorn', Georgia, serif;
+      --sans:  'DM Sans', system-ui, sans-serif;
+    }
+
+    /* ── Reset ──────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: var(--sans); background: #dedad5; }
+    img  { display: block; max-width: 100%; }
+
+    /* ── Tab bar ────────────────────────────────────── */
+    .tab-bar {
+      position: sticky;
+      top: 0;
+      z-index: 999;
+      background: #e8e4df;
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      padding: 12px 40px;
+      border-bottom: 1px solid rgba(134,115,108,0.2);
+    }
+    .tab-bar-logo {
+      font-family: var(--sans);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #86736c;
+      margin-right: 8px;
+      white-space: nowrap;
+    }
+    .tab-btn {
+      font-family: var(--sans);
+      font-size: 13px;
+      font-weight: 400;
+      border: none;
+      background: transparent;
+      color: #86736c;
+      cursor: pointer;
+      padding: 0;
+      transition: color 0.15s;
+      white-space: nowrap;
+    }
+    .tab-btn:hover { color: #1b1c1a; }
+    .tab-btn.active {
+      color: #1b1c1a;
+      font-weight: 500;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    /* ── Page sections ──────────────────────────────── */
+    .page-section { display: none; }
+    .page-section.active { display: block; }
+
+    /* ── Mockup wrapper ─────────────────────────────── */
+    .option-wrap {
+      padding: 48px max(32px, calc((100vw - 1100px)/2));
+    }
+    .option-label {
+      font-family: var(--sans);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: #86736c;
+      margin-bottom: 14px;
+    }
+    .option-frame {
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 6px 40px rgba(0,0,0,0.16), 0 1px 4px rgba(0,0,0,0.08);
+    }
+    .option-divider {
+      height: 1px;
+      background: rgba(134,115,108,0.18);
+      margin: 0 max(32px, calc((100vw - 1100px)/2));
+    }
+
+    /* ── Shared nav chrome ──────────────────────────── */
+    .mock-nav {
+      height: 60px;
+      background: var(--brown);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-inline: 48px;
+      flex-shrink: 0;
+    }
+    .mock-nav-logo {
+      font-family: var(--serif);
+      font-size: 19px;
+      font-weight: 400;
+      color: var(--cream);
+      letter-spacing: -0.02em;
+    }
+    .mock-nav-links { display: flex; gap: 28px; align-items: center; }
+    .mock-nav-links span {
+      font-family: var(--sans);
+      font-size: 13px;
+      font-weight: 500;
+      color: rgba(251,249,245,0.6);
+    }
+    .mock-nav-links span.active {
+      color: var(--cream);
+      text-decoration: underline;
+      text-underline-offset: 4px;
+    }
+    .mock-cta {
+      font-family: var(--sans);
+      font-size: 12px;
+      font-weight: 500;
+      background: var(--terra);
+      color: #fff;
+      padding: 8px 18px;
+      border-radius: 999px;
+    }
+    .mock-cta.active-cta {
+      background: var(--terra-mid);
+      box-shadow: 0 0 0 2px rgba(169,98,69,0.4);
+    }
+
+    /* ── Content stub ───────────────────────────────── */
+    .mock-body {
+      background: var(--cream);
+      padding: 40px 48px 48px;
+    }
+    .mock-grid {
+      display: grid;
+      gap: 16px;
+    }
+    .mock-grid-2 { grid-template-columns: 1fr 1fr; }
+    .mock-grid-3 { grid-template-columns: repeat(3, 1fr); }
+    .mock-card {
+      background: var(--warm-low);
+      border-radius: 12px;
+      height: 100px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .mock-card span {
+      font-family: var(--sans);
+      font-size: 11px;
+      color: var(--outline);
+      letter-spacing: 0.04em;
+    }
+    .mock-card.tall { height: 160px; }
+
+
+    /* ════════════════════════════════════════════════
+       HOME — 5 options
+    ════════════════════════════════════════════════ */
+
+    /* H1: Cinematic Left-Aligned */
+    .home-1 {
+      position: relative;
+      min-height: 440px;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+    }
+    .home-1-photo {
+      position: absolute; inset: 0;
+    }
+    .home-1-photo img {
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: center top;
+    }
+    .home-1-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to right,
+        rgba(45,31,22,0.82) 0%,
+        rgba(45,31,22,0.5) 55%,
+        rgba(45,31,22,0.1) 100%);
+    }
+    .home-1-copy {
+      position: relative; z-index: 1;
+      padding: 64px 48px;
+      max-width: 56%;
+    }
+    .home-1-eyebrow {
+      font-family: var(--sans);
+      font-size: 10px; font-weight: 600;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: rgba(239,222,192,0.55);
+      margin-bottom: 18px;
+    }
+    .home-1-h1 {
+      font-family: var(--serif);
+      font-size: clamp(36px, 5vw, 60px);
+      font-weight: 400; line-height: 1.08;
+      letter-spacing: -0.025em; color: var(--cream);
+      margin-bottom: 20px;
+    }
+    .home-1-h1 em { font-style: italic; color: rgba(239,222,192,0.85); }
+    .home-1-sub {
+      font-family: var(--sans);
+      font-size: 16px; color: rgba(251,249,245,0.65);
+      line-height: 1.7; max-width: 400px; margin-bottom: 32px;
+    }
+    .home-1-actions { display: flex; gap: 12px; align-items: center; }
+    .btn-p {
+      font-family: var(--sans); font-size: 14px; font-weight: 500;
+      background: var(--terra); color: #fff;
+      padding: 13px 26px; border-radius: 999px;
+    }
+    .btn-g {
+      font-family: var(--sans); font-size: 14px; font-weight: 500;
+      color: rgba(251,249,245,0.8); border: 1.5px solid rgba(251,249,245,0.3);
+      padding: 13px 26px; border-radius: 999px;
+    }
+
+    /* H2: Bold Dark Split */
+    .home-2 {
+      display: grid;
+      grid-template-columns: 5fr 6fr;
+      min-height: 440px;
+    }
+    .home-2-left {
+      background: var(--brown);
+      padding: 64px 48px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .home-2-eyebrow {
+      font-family: var(--sans);
+      font-size: 10px; font-weight: 600;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: rgba(239,222,192,0.45);
+      margin-bottom: 20px;
+    }
+    .home-2-h1 {
+      font-family: var(--serif);
+      font-size: clamp(32px, 4vw, 52px);
+      font-weight: 400; line-height: 1.1;
+      letter-spacing: -0.025em; color: var(--cream);
+      margin-bottom: 22px;
+    }
+    .home-2-h1 em { font-style: italic; color: rgba(239,222,192,0.8); }
+    .home-2-sub {
+      font-family: var(--sans);
+      font-size: 15px; color: rgba(251,249,245,0.55);
+      line-height: 1.7; max-width: 380px; margin-bottom: 32px;
+    }
+    .home-2-right {
+      position: relative; overflow: hidden;
+    }
+    .home-2-right img {
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: center top;
+    }
+    .home-2-right-fade {
+      position: absolute; inset: 0;
+      background: linear-gradient(to right, rgba(45,31,22,0.3) 0%, transparent 35%);
+    }
+
+    /* H3: Oversized Italic + Portrait Inset */
+    .home-3 {
+      background: var(--warm-low);
+      padding: 56px 48px 60px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 48px;
+      align-items: end;
+      min-height: 400px;
+      position: relative;
+      overflow: hidden;
+    }
+    .home-3-bg-word {
+      position: absolute;
+      font-family: var(--serif);
+      font-size: 220px;
+      font-weight: 600;
+      font-style: italic;
+      color: transparent;
+      -webkit-text-stroke: 1px rgba(140,74,47,0.06);
+      top: -20px; left: 40px;
+      pointer-events: none;
+      white-space: nowrap;
+      line-height: 1;
+    }
+    .home-3-copy { position: relative; z-index: 1; }
+    .home-3-eyebrow {
+      font-family: var(--sans);
+      font-size: 10px; font-weight: 600;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--outline); margin-bottom: 20px;
+    }
+    .home-3-h1 {
+      font-family: var(--serif);
+      font-size: clamp(36px, 5vw, 62px);
+      font-weight: 400; line-height: 1.08;
+      letter-spacing: -0.025em; color: #1b1c1a;
+      margin-bottom: 20px;
+    }
+    .home-3-h1 em { font-style: italic; color: var(--terra); }
+    .home-3-sub {
+      font-family: var(--sans);
+      font-size: 15px; color: var(--muted);
+      line-height: 1.7; max-width: 400px; margin-bottom: 28px;
+    }
+    .home-3-portrait {
+      width: 220px; height: 280px;
+      border-radius: 110px;
+      overflow: hidden;
+      flex-shrink: 0;
+      box-shadow: 0 16px 48px rgba(45,31,22,0.2);
+      position: relative; z-index: 1;
+      align-self: center;
+    }
+    .home-3-portrait img {
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: center top;
+    }
+
+    /* H4: Diagonal Reveal */
+    .home-4 {
+      position: relative;
+      min-height: 440px;
+      background: var(--brown);
+      overflow: hidden;
+    }
+    .home-4-photo {
+      position: absolute;
+      top: 0; right: 0;
+      width: 58%; height: 100%;
+      clip-path: polygon(12% 0%, 100% 0%, 100% 100%, 0% 100%);
+    }
+    .home-4-photo img {
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: center top;
+    }
+    .home-4-photo-fade {
+      position: absolute; inset: 0;
+      background: linear-gradient(to right, rgba(45,31,22,0.5) 0%, transparent 60%);
+    }
+    .home-4-copy {
+      position: relative; z-index: 1;
+      padding: 72px 48px;
+      max-width: 50%;
+    }
+    .home-4-eyebrow {
+      font-family: var(--sans);
+      font-size: 10px; font-weight: 600;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: rgba(239,222,192,0.45);
+      margin-bottom: 20px;
+    }
+    .home-4-h1 {
+      font-family: var(--serif);
+      font-size: clamp(34px, 4.5vw, 58px);
+      font-weight: 400; line-height: 1.1;
+      letter-spacing: -0.025em; color: var(--cream);
+      margin-bottom: 20px;
+    }
+    .home-4-h1 em { font-style: italic; color: rgba(239,222,192,0.8); }
+    .home-4-sub {
+      font-family: var(--sans);
+      font-size: 15px; color: rgba(251,249,245,0.55);
+      line-height: 1.7; max-width: 380px; margin-bottom: 28px;
+    }
+    .home-4-rule {
+      width: 40px; height: 1px;
+      background: rgba(239,222,192,0.25);
+      margin-bottom: 28px;
+    }
+
+    /* H5: Stacked Editorial */
+    .home-5 {
+      background: var(--cream);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: auto auto;
+    }
+    .home-5-headline-panel {
+      grid-column: 1; grid-row: 1;
+      background: var(--brown);
+      padding: 56px 44px 48px;
+    }
+    .home-5-h1 {
+      font-family: var(--serif);
+      font-size: clamp(30px, 4vw, 50px);
+      font-weight: 400; line-height: 1.1;
+      letter-spacing: -0.025em; color: var(--cream);
+    }
+    .home-5-h1 em { font-style: italic; color: rgba(239,222,192,0.8); }
+    .home-5-photo-panel {
+      grid-column: 2; grid-row: 1 / 3;
+      overflow: hidden;
+      min-height: 400px;
+    }
+    .home-5-photo-panel img {
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: center top;
+    }
+    .home-5-copy-panel {
+      grid-column: 1; grid-row: 2;
+      background: var(--warm-low);
+      padding: 36px 44px 44px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 20px;
+    }
+    .home-5-sub {
+      font-family: var(--sans);
+      font-size: 15px; color: var(--muted);
+      line-height: 1.7; max-width: 360px;
+    }
+
+
+    /* H6: Bottom-Left, Minimal Overlay */
+    .home-6 {
+      position: relative;
+      min-height: 480px;
+      overflow: hidden;
+    }
+    .home-6 img {
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: center top;
+      position: absolute; inset: 0;
+    }
+    .home-6-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top,
+        rgba(45,31,22,0.75) 0%,
+        rgba(45,31,22,0.2) 45%,
+        transparent 70%);
+    }
+    .home-6-copy {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      padding: 48px 56px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 14px;
+    }
+    .home-6-eyebrow {
+      font-family: var(--sans); font-size: 10px; font-weight: 600;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: rgba(239,222,192,0.6);
+    }
+    .home-6-h1 {
+      font-family: var(--serif);
+      font-size: clamp(36px, 5vw, 64px);
+      font-weight: 400; line-height: 1.05;
+      letter-spacing: -0.025em; color: var(--cream);
+    }
+    .home-6-sub {
+      font-family: var(--sans); font-size: 15px;
+      color: rgba(251,249,245,0.65); line-height: 1.65;
+      max-width: 380px;
+    }
+
+    /* H7: Centered, Dark Vignette */
+    .home-7 {
+      position: relative;
+      min-height: 480px;
+      overflow: hidden;
+    }
+    .home-7 img {
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: center top;
+      position: absolute; inset: 0;
+    }
+    .home-7-overlay {
+      position: absolute; inset: 0;
+      background: rgba(35,22,14,0.58);
+    }
+    .home-7-copy {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center;
+      padding: 48px;
+      gap: 16px;
+    }
+    .home-7-eyebrow {
+      font-family: var(--sans); font-size: 10px; font-weight: 600;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: rgba(239,222,192,0.55);
+    }
+    .home-7-h1 {
+      font-family: var(--serif);
+      font-size: clamp(36px, 5vw, 60px);
+      font-weight: 400; line-height: 1.08;
+      letter-spacing: -0.025em; color: var(--cream);
+    }
+    .home-7-sub {
+      font-family: var(--sans); font-size: 16px;
+      color: rgba(251,249,245,0.6); line-height: 1.65;
+      max-width: 420px;
+    }
+    .home-7-actions { display: flex; gap: 12px; align-items: center; }
+
+    /* H8: Headline top, breathes into photo */
+    .home-8 {
+      position: relative;
+      min-height: 500px;
+      overflow: hidden;
+    }
+    .home-8 img {
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: center top;
+      position: absolute; inset: 0;
+    }
+    .home-8-overlay {
+      position: absolute; inset: 0;
+      background:
+        linear-gradient(to bottom,
+          rgba(45,31,22,0.72) 0%,
+          rgba(45,31,22,0.15) 40%,
+          rgba(45,31,22,0.05) 60%,
+          rgba(45,31,22,0.55) 100%);
+    }
+    .home-8-copy {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column;
+      justify-content: space-between;
+      padding: 44px 56px 48px;
+    }
+    .home-8-h1 {
+      font-family: var(--serif);
+      font-size: clamp(38px, 5.5vw, 68px);
+      font-weight: 400; line-height: 1.05;
+      letter-spacing: -0.03em; color: var(--cream);
+      max-width: 65%;
+    }
+    .home-8-bottom {
+      display: flex; align-items: flex-end;
+      justify-content: space-between;
+    }
+    .home-8-sub {
+      font-family: var(--sans); font-size: 15px;
+      color: rgba(251,249,245,0.65); line-height: 1.65;
+      max-width: 340px;
+    }
+
+    /* H9: Text Right, Photo Bleeds Left */
+    .home-9 {
+      position: relative;
+      min-height: 480px;
+      overflow: hidden;
+    }
+    .home-9 img {
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: center top;
+      position: absolute; inset: 0;
+    }
+    .home-9-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to left,
+        rgba(45,31,22,0.85) 0%,
+        rgba(45,31,22,0.55) 45%,
+        rgba(45,31,22,0.1) 100%);
+    }
+    .home-9-copy {
+      position: absolute;
+      top: 0; right: 0; bottom: 0;
+      width: 46%;
+      display: flex; flex-direction: column;
+      justify-content: center;
+      padding: 48px 56px 48px 32px;
+      gap: 16px;
+    }
+    .home-9-eyebrow {
+      font-family: var(--sans); font-size: 10px; font-weight: 600;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: rgba(239,222,192,0.55);
+    }
+    .home-9-h1 {
+      font-family: var(--serif);
+      font-size: clamp(30px, 4vw, 52px);
+      font-weight: 400; line-height: 1.1;
+      letter-spacing: -0.025em; color: var(--cream);
+    }
+    .home-9-sub {
+      font-family: var(--sans); font-size: 15px;
+      color: rgba(251,249,245,0.6); line-height: 1.65;
+    }
+
+
+    /* ════════════════════════════════════════════════
+       SERVICES — 5 options
+    ════════════════════════════════════════════════ */
+
+    /* S1: Dark Editorial Band */
+    .svc-1 {
+      background: var(--brown);
+      padding: 56px 48px 52px;
+    }
+    .svc-1-eyebrow {
+      font-family: var(--sans); font-size: 10px; font-weight: 600;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: rgba(239,222,192,0.45); margin-bottom: 18px;
+    }
+    .svc-1-h1 {
+      font-family: var(--serif);
+      font-size: clamp(32px, 4.5vw, 52px);
+      font-weight: 400; line-height: 1.1;
+      letter-spacing: -0.025em; color: var(--cream);
+      margin-bottom: 0;
+    }
+    .svc-1-h1 em { font-style: italic; color: rgba(239,222,192,0.85); }
+    .svc-1-rule { width: 48px; height: 1px; background: rgba(239,222,192,0.25); margin: 24px 0; }
+    .svc-1-sub {
+      font-family: var(--sans); font-size: 16px;
+      color: rgba(251,249,245,0.55); line-height: 1.65; max-width: 480px;
+    }
+
+    /* S2: Ghost Underprint */
+    .svc-2 {
+      position: relative;
+      background: var(--cream);
+      padding: 56px 48px 60px;
+      overflow: hidden;
+    }
+    .svc-2-ghost {
+      position: absolute;
+      font-family: var(--serif);
+      font-size: clamp(100px,16vw,170px);
+      font-weight: 600; font-style: italic;
+      color: transparent;
+      -webkit-text-stroke: 1px rgba(140,74,47,0.07);
+      top: 50%; left: 50%;
+      transform: translate(-50%,-50%);
+      white-space: nowrap; pointer-events: none;
+      letter-spacing: -0.03em; line-height: 1;
+    }
+    .svc-2-content { position: relative; z-index: 1; max-width: 600px; }
+    .svc-2-eyebrow {
+      font-family: var(--sans); font-size: 10px; font-weight: 600;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--outline); margin-bottom: 18px;
+    }
+    .svc-2-h1 {
+      font-family: var(--serif);
+      font-size: clamp(32px, 4.5vw, 52px);
+      font-weight: 400; line-height: 1.1;
+      letter-spacing: -0.025em; color: #1b1c1a; margin-bottom: 18px;
+    }
+    .svc-2-sub {
+      font-family: var(--sans); font-size: 15px;
+      color: var(--muted); line-height: 1.7; max-width: 440px;
+    }
+
+    /* S3: Three-column intro */
+    .svc-3 {
+      background: var(--warm-low);
+      padding: 56px 48px 52px;
+    }
+    .svc-3-top {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      margin-bottom: 32px;
+      padding-bottom: 28px;
+      border-bottom: 1px solid var(--rule);
+    }
+    .svc-3-h1 {
+      font-family: var(--serif);
+      font-size: clamp(30px, 4vw, 48px);
+      font-weight: 400; line-height: 1.1;
+      letter-spacing: -0.025em; color: #1b1c1a;
+    }
+    .svc-3-h1 em { font-style: italic; color: var(--terra); }
+    .svc-3-eyebrow {
+      font-family: var(--sans); font-size: 10px; font-weight: 600;
+      letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--outline);
+    }
+    .svc-3-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+    }
+    .svc-3-stat-label {
+      font-family: var(--sans); font-size: 11px;
+      color: var(--outline); letter-spacing: 0.06em;
+      margin-bottom: 6px; text-transform: uppercase; font-weight: 500;
+    }
+    .svc-3-stat-val {
+      font-family: var(--serif);
+      font-size: 28px; font-weight: 400; color: #1b1c1a;
+    }
+    .svc-3-stat-sub {
+      font-family: var(--sans); font-size: 13px;
+      color: var(--muted); line-height: 1.5; margin-top: 6px;
+    }
+
+    /* S4: Split type + image */
+    .svc-4 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 320px;
+    }
+    .svc-4-left {
+      background: var(--cream);
+      padding: 52px 44px;
+      display: flex; flex-direction: column; justify-content: center;
+    }
+    .svc-4-eyebrow {
+      font-family: var(--sans); font-size: 10px; font-weight: 600;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--outline); margin-bottom: 18px;
+    }
+    .svc-4-h1 {
+      font-family: var(--serif);
+      font-size: clamp(28px, 3.5vw, 44px);
+      font-weight: 400; line-height: 1.15;
+      letter-spacing: -0.02em; color: #1b1c1a; margin-bottom: 16px;
+    }
+    .svc-4-h1 em { font-style: italic; color: var(--terra); }
+    .svc-4-sub {
+      font-family: var(--sans); font-size: 15px;
+      color: var(--muted); line-height: 1.7; max-width: 360px;
+    }
+    .svc-4-right { position: relative; overflow: hidden; }
+    .svc-4-right img {
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: center;
+    }
+    .svc-4-right-veil {
+      position: absolute; inset: 0;
+      background: linear-gradient(to right, rgba(251,249,245,0.2) 0%, transparent 40%);
+    }
+
+    /* S5: Vertical spine */
+    .svc-5 {
+      display: flex;
+      background: var(--cream);
+      min-height: 280px;
+    }
+    .svc-5-spine {
+      width: 44px; flex-shrink: 0;
+      background: var(--brown);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .svc-5-spine span {
+      font-family: var(--sans); font-size: 9px; font-weight: 600;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: rgba(251,249,245,0.45);
+      writing-mode: vertical-rl; transform: rotate(180deg);
+      white-space: nowrap;
+    }
+    .svc-5-vline { width: 1px; background: var(--rule); flex-shrink: 0; }
+    .svc-5-content {
+      flex: 1; padding: 52px 44px;
+      display: flex; flex-direction: column; justify-content: center;
+    }
+    .svc-5-h1 {
+      font-family: var(--serif);
+      font-size: clamp(34px, 5vw, 58px);
+      font-weight: 400; line-height: 1.05;
+      letter-spacing: -0.025em; color: #1b1c1a; margin-bottom: 18px;
+    }
+    .svc-5-h1 em { font-style: italic; color: var(--terra); }
+    .svc-5-sub {
+      font-family: var(--sans); font-size: 15px;
+      color: var(--muted); line-height: 1.7; max-width: 460px; margin-bottom: 20px;
+    }
+    .svc-5-meta {
+      font-family: var(--sans); font-size: 11px; font-weight: 500;
+      color: var(--outline); letter-spacing: 0.06em;
+      display: flex; gap: 10px; align-items: center;
+    }
+    .svc-5-dot { color: var(--rule); }
+
+
+    /* ════════════════════════════════════════════════
+       REVIEWS — 5 options
+    ════════════════════════════════════════════════ */
+
+    /* R1: Centered serif + ornament */
+    .rev-1 {
+      background: var(--cream);
+      padding: 64px 48px 60px;
+      text-align: center;
+      display: flex; flex-direction: column; align-items: center;
+    }
+    .rev-1-ornament { width: 48px; margin: 0 auto 22px; opacity: 0.4; }
+    .rev-1-eyebrow {
+      font-family: var(--sans); font-size: 10px; font-weight: 600;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--outline); margin-bottom: 14px;
+    }
+    .rev-1-h1 {
+      font-family: var(--serif);
+      font-size: clamp(30px, 4vw, 50px);
+      font-weight: 400; font-style: italic; line-height: 1.15;
+      letter-spacing: -0.02em; color: #1b1c1a; margin-bottom: 18px;
+    }
+    .rev-1-rule { width: 40px; height: 1px; background: var(--rule); margin: 0 auto 18px; }
+    .rev-1-sub {
+      font-family: var(--sans); font-size: 16px;
+      color: var(--muted); line-height: 1.7; max-width: 440px;
+    }
+
+    /* R2: Dark stats showcase */
+    .rev-2 {
+      background: var(--brown);
+      padding: 52px 48px 48px;
+    }
+    .rev-2-top {
+      display: flex; justify-content: space-between; align-items: flex-start;
+      margin-bottom: 36px;
+    }
+    .rev-2-h1 {
+      font-family: var(--serif);
+      font-size: clamp(28px, 3.5vw, 46px);
+      font-weight: 400; line-height: 1.1;
+      letter-spacing: -0.02em; color: var(--cream);
+    }
+    .rev-2-h1 em { font-style: italic; color: rgba(239,222,192,0.8); }
+    .rev-2-stars {
+      font-size: 20px; letter-spacing: 2px; color: rgba(239,222,192,0.7);
+      flex-shrink: 0;
+    }
+    .rev-2-stats {
+      display: flex; gap: 40px;
+      padding-top: 28px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+    .rev-2-stat-num {
+      font-family: var(--serif); font-size: 36px;
+      font-weight: 400; color: var(--cream); line-height: 1;
+    }
+    .rev-2-stat-label {
+      font-family: var(--sans); font-size: 12px;
+      color: rgba(251,249,245,0.45); margin-top: 4px;
+    }
+
+    /* R3: Triptych */
+    .rev-3 {
+      display: grid;
+      grid-template-columns: 180px 1fr 240px;
+      min-height: 300px;
+    }
+    .rev-3-left {
+      background: var(--brown);
+      padding: 44px 28px;
+      display: flex; flex-direction: column; justify-content: center; gap: 24px;
+    }
+    .rev-3-tag {
+      font-family: var(--sans); font-size: 9px; font-weight: 600;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: rgba(239,222,192,0.35);
+    }
+    .rev-3-num {
+      font-family: var(--serif); font-size: 40px; font-weight: 400;
+      color: var(--cream); line-height: 1;
+    }
+    .rev-3-num-label {
+      font-family: var(--sans); font-size: 11px;
+      color: rgba(251,249,245,0.4); margin-top: 4px;
+    }
+    .rev-3-center {
+      background: var(--cream);
+      padding: 44px 40px;
+      display: flex; flex-direction: column; justify-content: center;
+      border-right: 1px solid var(--rule);
+    }
+    .rev-3-h1 {
+      font-family: var(--serif);
+      font-size: clamp(26px, 3vw, 42px);
+      font-weight: 400; line-height: 1.15;
+      letter-spacing: -0.02em; color: #1b1c1a;
+    }
+    .rev-3-h1 em { font-style: italic; color: var(--terra); }
+    .rev-3-right { overflow: hidden; }
+    .rev-3-right img {
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: center top;
+    }
+
+    /* R4: Pull-quote hero */
+    .rev-4 {
+      background: var(--warm-low);
+      padding: 52px 48px 56px;
+      position: relative;
+      overflow: hidden;
+    }
+    .rev-4-quote-mark {
+      font-family: var(--serif); font-size: 160px; font-weight: 600;
+      color: rgba(140,74,47,0.07); line-height: 0.7;
+      position: absolute; top: 28px; left: 36px;
+      pointer-events: none;
+    }
+    .rev-4-eyebrow {
+      font-family: var(--sans); font-size: 10px; font-weight: 600;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--outline); margin-bottom: 20px;
+    }
+    .rev-4-quote {
+      font-family: var(--serif);
+      font-size: clamp(20px, 2.5vw, 28px);
+      font-style: italic; font-weight: 400;
+      line-height: 1.45; color: #1b1c1a;
+      max-width: 640px; margin-bottom: 20px;
+      position: relative; z-index: 1;
+    }
+    .rev-4-attribution {
+      font-family: var(--sans); font-size: 13px;
+      color: var(--muted); display: flex; align-items: center; gap: 10px;
+    }
+    .rev-4-attr-rule { width: 24px; height: 1px; background: var(--rule); }
+    .rev-4-sub {
+      font-family: var(--sans); font-size: 14px;
+      color: var(--outline); margin-top: 20px;
+    }
+
+    /* R5: Faces + headline */
+    .rev-5 {
+      background: var(--cream);
+      padding: 52px 48px 56px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 40px;
+      align-items: center;
+    }
+    .rev-5-eyebrow {
+      font-family: var(--sans); font-size: 10px; font-weight: 600;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--outline); margin-bottom: 18px;
+    }
+    .rev-5-h1 {
+      font-family: var(--serif);
+      font-size: clamp(28px, 3.5vw, 46px);
+      font-weight: 400; line-height: 1.15;
+      letter-spacing: -0.02em; color: #1b1c1a; margin-bottom: 16px;
+    }
+    .rev-5-h1 em { font-style: italic; color: var(--terra); }
+    .rev-5-sub {
+      font-family: var(--sans); font-size: 15px;
+      color: var(--muted); line-height: 1.7; max-width: 420px;
+    }
+    .rev-5-faces {
+      display: flex; flex-direction: column; align-items: center; gap: 0;
+    }
+    .rev-5-face-stack {
+      display: flex; flex-direction: row;
+    }
+    .rev-5-face {
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 2.5px solid var(--cream);
+      margin-right: -12px;
+      flex-shrink: 0;
+    }
+    .rev-5-face img {
+      width: 100%; height: 100%; object-fit: cover;
+    }
+    .rev-5-face-count {
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      background: var(--secondary-container);
+      border: 2.5px solid var(--cream);
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--sans); font-size: 10px; font-weight: 600;
+      color: var(--terra);
+      flex-shrink: 0;
+    }
+    .rev-5-face-label {
+      font-family: var(--sans); font-size: 11px;
+      color: var(--outline); margin-top: 10px; text-align: center;
+    }
+
+
+    /* ════════════════════════════════════════════════
+       CONTACT — 5 options
+    ════════════════════════════════════════════════ */
+
+    /* C1: Floating invitation card */
+    .con-1 {
+      position: relative;
+      background: var(--brown);
+      padding: 60px 48px 68px;
+      display: flex; align-items: center; justify-content: center;
+      overflow: hidden;
+    }
+    .con-1::before {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 60% 80% at 15% 50%, rgba(140,74,47,0.2) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 60% at 85% 30%, rgba(239,222,192,0.06) 0%, transparent 60%);
+    }
+    .con-1-card {
+      position: relative; z-index: 1;
+      background: var(--cream);
+      border-radius: 4px;
+      padding: 44px 52px 48px;
+      max-width: 500px; width: 100%;
+      text-align: center;
+      box-shadow: 0 24px 64px rgba(0,0,0,0.35), 0 4px 16px rgba(0,0,0,0.2);
+    }
+    .con-1-ornament { width: 56px; margin: 0 auto 18px; display: block; }
+    .con-1-eyebrow {
+      font-family: var(--sans); font-size: 10px; font-weight: 600;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--outline); margin-bottom: 12px;
+    }
+    .con-1-h1 {
+      font-family: var(--serif);
+      font-size: clamp(26px, 3.5vw, 40px);
+      font-weight: 400; line-height: 1.15;
+      letter-spacing: -0.02em; color: #1b1c1a; margin-bottom: 14px;
+    }
+    .con-1-h1 em { font-style: italic; color: var(--terra); }
+    .con-1-sub {
+      font-family: var(--sans); font-size: 15px;
+      color: var(--muted); line-height: 1.7;
+    }
+
+    /* C2: Split copy + nature photo */
+    .con-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 320px;
+    }
+    .con-2-left {
+      background: var(--warm-low);
+      padding: 52px 44px;
+      display: flex; flex-direction: column; justify-content: center;
+    }
+    .con-2-eyebrow {
+      font-family: var(--sans); font-size: 10px; font-weight: 600;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--outline); margin-bottom: 18px;
+    }
+    .con-2-h1 {
+      font-family: var(--serif);
+      font-size: clamp(26px, 3.5vw, 42px);
+      font-weight: 400; line-height: 1.15;
+      letter-spacing: -0.02em; color: #1b1c1a; margin-bottom: 14px;
+    }
+    .con-2-h1 em { font-style: italic; color: var(--terra); }
+    .con-2-sub {
+      font-family: var(--sans); font-size: 15px;
+      color: var(--muted); line-height: 1.7; margin-bottom: 24px;
+    }
+    .con-2-detail {
+      font-family: var(--sans); font-size: 13px;
+      color: var(--outline);
+      display: flex; flex-direction: column; gap: 8px;
+    }
+    .con-2-detail-item { display: flex; gap: 8px; align-items: center; }
+    .con-2-right { overflow: hidden; position: relative; }
+    .con-2-right img {
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: center;
+    }
+    .con-2-right-fade {
+      position: absolute; inset: 0;
+      background: linear-gradient(to right, rgba(245,243,239,0.15) 0%, transparent 30%);
+    }
+
+    /* C3: Full dark editorial */
+    .con-3 {
+      background: var(--brown);
+      padding: 60px 48px 56px;
+      position: relative; overflow: hidden;
+    }
+    .con-3-texture {
+      position: absolute; inset: 0; opacity: 0.03;
+      background: repeating-linear-gradient(
+        -45deg,
+        rgba(255,255,255,0.4) 0px, rgba(255,255,255,0.4) 1px,
+        transparent 1px, transparent 6px
+      );
+    }
+    .con-3-inner { position: relative; z-index: 1; }
+    .con-3-eyebrow {
+      font-family: var(--sans); font-size: 10px; font-weight: 600;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: rgba(239,222,192,0.35); margin-bottom: 20px;
+    }
+    .con-3-h1 {
+      font-family: var(--serif);
+      font-size: clamp(36px, 5vw, 62px);
+      font-weight: 400; line-height: 1.08;
+      letter-spacing: -0.025em; color: var(--cream);
+      max-width: 640px; margin-bottom: 22px;
+    }
+    .con-3-h1 em { font-style: italic; color: rgba(239,222,192,0.75); }
+    .con-3-sub {
+      font-family: var(--sans); font-size: 16px;
+      color: rgba(251,249,245,0.5); line-height: 1.7; max-width: 460px;
+    }
+    .con-3-rule { width: 48px; height: 1px; background: rgba(239,222,192,0.2); margin: 24px 0; }
+
+    /* C4: Full-bleed photo, copy bottom */
+    .con-4 {
+      position: relative;
+      height: 360px;
+      overflow: hidden;
+    }
+    .con-4 img {
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: center 30%;
+    }
+    .con-4-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top,
+        rgba(45,31,22,0.88) 0%,
+        rgba(45,31,22,0.4) 50%,
+        rgba(45,31,22,0.1) 100%);
+    }
+    .con-4-copy {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      padding: 40px 48px;
+    }
+    .con-4-eyebrow {
+      font-family: var(--sans); font-size: 10px; font-weight: 600;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: rgba(239,222,192,0.45); margin-bottom: 12px;
+    }
+    .con-4-h1 {
+      font-family: var(--serif);
+      font-size: clamp(30px, 4vw, 48px);
+      font-weight: 400; line-height: 1.1;
+      letter-spacing: -0.025em; color: var(--cream); margin-bottom: 10px;
+    }
+    .con-4-sub {
+      font-family: var(--sans); font-size: 15px;
+      color: rgba(251,249,245,0.6); line-height: 1.65; max-width: 440px;
+    }
+
+    /* C5: Warm letter header */
+    .con-5 {
+      background: var(--cream);
+      padding: 56px 48px 52px;
+      display: flex; flex-direction: column; align-items: flex-start;
+    }
+    .con-5-rule-top {
+      width: 100%; height: 1px; background: var(--rule); margin-bottom: 32px;
+    }
+    .con-5-eyebrow {
+      font-family: var(--sans); font-size: 10px; font-weight: 600;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--outline); margin-bottom: 20px;
+    }
+    .con-5-h1 {
+      font-family: var(--serif);
+      font-size: clamp(32px, 4.5vw, 54px);
+      font-weight: 400; line-height: 1.1;
+      letter-spacing: -0.025em; color: #1b1c1a;
+      max-width: 560px; margin-bottom: 20px;
+    }
+    .con-5-h1 em { font-style: italic; color: var(--terra); }
+    .con-5-body {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 40px; width: 100%;
+      padding-top: 24px;
+      border-top: 1px solid var(--rule);
+    }
+    .con-5-col-label {
+      font-family: var(--sans); font-size: 10px; font-weight: 600;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--outline); margin-bottom: 10px;
+    }
+    .con-5-col-text {
+      font-family: var(--sans); font-size: 14px;
+      color: var(--muted); line-height: 1.7;
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- ── Tab bar ────────────────────────────────────────── -->
+  <div class="tab-bar">
+    <span class="tab-bar-logo">The Byron Doula</span>
+    <button class="tab-btn active" data-page="home">Home</button>
+    <button class="tab-btn" data-page="services">Services</button>
+    <button class="tab-btn" data-page="reviews">Reviews</button>
+    <button class="tab-btn" data-page="contact">Contact</button>
+  </div>
+
+
+  <!-- ════════════ HOME ════════════ -->
+  <div class="page-section active" id="page-home">
+
+    <div class="option-wrap">
+      <p class="option-label">Home — Option 1 · Cinematic Left-Aligned</p>
+      <div class="option-frame">
+        <div class="mock-nav">
+          <span class="mock-nav-logo">The Byron Doula</span>
+          <div class="mock-nav-links">
+            <span>About</span><span>Services</span><span>Reviews</span><span class="mock-cta">Contact</span>
+          </div>
+        </div>
+        <div class="home-1">
+          <div class="home-1-photo"><img src="../../../site/public/images/mama-belly.jpg" alt=""></div>
+          <div class="home-1-overlay"></div>
+          <div class="home-1-copy">
+            <div class="home-1-eyebrow">Certified Birth Doula · Byron Bay</div>
+            <h1 class="home-1-h1">Feel Informed, Supported<br>and Empowered.</h1>
+            <p class="home-1-sub">Trusted support for pregnancy, birth and parenthood in Byron Bay.</p>
+            <div class="home-1-actions">
+              <span class="btn-p">Services</span>
+              <span class="btn-g">Learn more</span>
+            </div>
+          </div>
+        </div>
+        <div class="mock-body"><div class="mock-grid mock-grid-3"><div class="mock-card"><span>Trust band</span></div><div class="mock-card"><span>Trust band</span></div><div class="mock-card"><span>Trust band</span></div></div></div>
+      </div>
+    </div>
+
+    <div class="option-divider"></div>
+
+    <div class="option-wrap">
+      <p class="option-label">Home — Option 2 · Bold Dark Split</p>
+      <div class="option-frame">
+        <div class="mock-nav">
+          <span class="mock-nav-logo">The Byron Doula</span>
+          <div class="mock-nav-links"><span>About</span><span>Services</span><span>Reviews</span><span class="mock-cta">Contact</span></div>
+        </div>
+        <div class="home-2">
+          <div class="home-2-left">
+            <div class="home-2-eyebrow">Certified Birth Doula · Byron Bay</div>
+            <h1 class="home-2-h1">Feel Informed,<br>Supported and Empowered.</h1>
+            <p class="home-2-sub">Trusted support for pregnancy, birth and parenthood in Byron Bay.</p>
+            <div class="home-1-actions"><span class="btn-p">Services</span></div>
+          </div>
+          <div class="home-2-right">
+            <img src="../../../site/public/images/mama-belly.jpg" alt="">
+            <div class="home-2-right-fade"></div>
+          </div>
+        </div>
+        <div class="mock-body"><div class="mock-grid mock-grid-3"><div class="mock-card"><span>Trust band</span></div><div class="mock-card"><span>Trust band</span></div><div class="mock-card"><span>Trust band</span></div></div></div>
+      </div>
+    </div>
+
+    <div class="option-divider"></div>
+
+    <div class="option-wrap">
+      <p class="option-label">Home — Option 3 · Oversized Italic + Portrait Inset</p>
+      <div class="option-frame">
+        <div class="mock-nav">
+          <span class="mock-nav-logo">The Byron Doula</span>
+          <div class="mock-nav-links"><span>About</span><span>Services</span><span>Reviews</span><span class="mock-cta">Contact</span></div>
+        </div>
+        <div class="home-3">
+          <div class="home-3-bg-word" aria-hidden="true">Birth.</div>
+          <div class="home-3-copy">
+            <div class="home-3-eyebrow">Certified Birth Doula · Byron Bay</div>
+            <h1 class="home-3-h1">Feel Informed,<br>Supported and Empowered.</h1>
+            <p class="home-3-sub">Trusted support for pregnancy, birth and parenthood in Byron Bay.</p>
+            <div class="home-1-actions">
+              <span class="btn-p">Services</span>
+              <span style="font-family:var(--sans);font-size:14px;color:var(--terra);font-weight:500;">See services →</span>
+            </div>
+          </div>
+          <div class="home-3-portrait">
+            <img src="../../../site/public/images/nathalie-portrait.jpg" alt="Nathalie">
+          </div>
+        </div>
+        <div class="mock-body"><div class="mock-grid mock-grid-3"><div class="mock-card"><span>Trust band</span></div><div class="mock-card"><span>Trust band</span></div><div class="mock-card"><span>Trust band</span></div></div></div>
+      </div>
+    </div>
+
+    <div class="option-divider"></div>
+
+    <div class="option-wrap">
+      <p class="option-label">Home — Option 4 · Diagonal Reveal</p>
+      <div class="option-frame">
+        <div class="mock-nav">
+          <span class="mock-nav-logo">The Byron Doula</span>
+          <div class="mock-nav-links"><span>About</span><span>Services</span><span>Reviews</span><span class="mock-cta">Contact</span></div>
+        </div>
+        <div class="home-4">
+          <div class="home-4-photo">
+            <img src="../../../site/public/images/mama-belly.jpg" alt="">
+            <div class="home-4-photo-fade"></div>
+          </div>
+          <div class="home-4-copy">
+            <div class="home-4-eyebrow">Certified Birth Doula · Byron Bay</div>
+            <h1 class="home-4-h1">Feel Informed,<br>Supported and Empowered.</h1>
+            <div class="home-4-rule"></div>
+            <p class="home-4-sub">Trusted support for pregnancy, birth and parenthood in Byron Bay.</p>
+            <div class="home-1-actions"><span class="btn-p">Services</span></div>
+          </div>
+        </div>
+        <div class="mock-body"><div class="mock-grid mock-grid-3"><div class="mock-card"><span>Trust band</span></div><div class="mock-card"><span>Trust band</span></div><div class="mock-card"><span>Trust band</span></div></div></div>
+      </div>
+    </div>
+
+    <div class="option-divider"></div>
+
+    <div class="option-wrap">
+      <p class="option-label">Home — Option 5 · Stacked Editorial Grid</p>
+      <div class="option-frame">
+        <div class="mock-nav">
+          <span class="mock-nav-logo">The Byron Doula</span>
+          <div class="mock-nav-links"><span>About</span><span>Services</span><span>Reviews</span><span class="mock-cta">Contact</span></div>
+        </div>
+        <div class="home-5">
+          <div class="home-5-headline-panel">
+            <h1 class="home-5-h1">Feel Informed,<br>Supported and<br>Empowered.</h1>
+          </div>
+          <div class="home-5-photo-panel">
+            <img src="../../../site/public/images/mama-belly.jpg" alt="">
+          </div>
+          <div class="home-5-copy-panel">
+            <p class="home-5-sub">Trusted support for pregnancy, birth and parenthood in Byron Bay.</p>
+            <div class="home-1-actions"><span class="btn-p">Services</span><span style="font-family:var(--sans);font-size:14px;color:var(--terra);font-weight:500;">See services →</span></div>
+          </div>
+        </div>
+        <div class="mock-body"><div class="mock-grid mock-grid-3"><div class="mock-card"><span>Trust band</span></div><div class="mock-card"><span>Trust band</span></div><div class="mock-card"><span>Trust band</span></div></div></div>
+      </div>
+    </div>
+
+
+    <div class="option-divider"></div>
+
+    <!-- Option 6: Bottom-Left, Barely-There Overlay -->
+    <div class="option-wrap">
+      <p class="option-label">Home — Option 6 · Text Bottom-Left, Minimal Overlay</p>
+      <div class="option-frame">
+        <div class="mock-nav"><span class="mock-nav-logo">The Byron Doula</span><div class="mock-nav-links"><span>About</span><span>Services</span><span>Reviews</span><span class="mock-cta">Contact</span></div></div>
+        <div class="home-6">
+          <img src="../../../site/public/images/mama-belly.jpg" alt="">
+          <div class="home-6-overlay"></div>
+          <div class="home-6-copy">
+            <div class="home-6-eyebrow">Certified Birth Doula · Byron Bay</div>
+            <h1 class="home-6-h1">Feel Informed,<br>Supported and<br>Empowered.</h1>
+            <p class="home-6-sub">Trusted support for pregnancy, birth and parenthood in Byron Bay.</p>
+            <div class="home-1-actions"><span class="btn-p">Services</span></div>
+          </div>
+        </div>
+        <div class="mock-body"><div class="mock-grid mock-grid-3"><div class="mock-card"><span>Trust band</span></div><div class="mock-card"><span>Trust band</span></div><div class="mock-card"><span>Trust band</span></div></div></div>
+      </div>
+    </div>
+
+    <div class="option-divider"></div>
+
+    <!-- Option 7: Centered, Dark Vignette -->
+    <div class="option-wrap">
+      <p class="option-label">Home — Option 7 · Text Centered, Full Vignette</p>
+      <div class="option-frame">
+        <div class="mock-nav"><span class="mock-nav-logo">The Byron Doula</span><div class="mock-nav-links"><span>About</span><span>Services</span><span>Reviews</span><span class="mock-cta">Contact</span></div></div>
+        <div class="home-7">
+          <img src="../../../site/public/images/mama-belly.jpg" alt="">
+          <div class="home-7-overlay"></div>
+          <div class="home-7-copy">
+            <div class="home-7-eyebrow">Certified Birth Doula · Byron Bay</div>
+            <h1 class="home-7-h1">Feel Informed,<br>Supported and<br>Empowered.</h1>
+            <p class="home-7-sub">Trusted support for pregnancy, birth and parenthood in Byron Bay.</p>
+            <div class="home-7-actions"><span class="btn-p">Services</span><span class="btn-g">Learn more</span></div>
+          </div>
+        </div>
+        <div class="mock-body"><div class="mock-grid mock-grid-3"><div class="mock-card"><span>Trust band</span></div><div class="mock-card"><span>Trust band</span></div><div class="mock-card"><span>Trust band</span></div></div></div>
+      </div>
+    </div>
+
+    <div class="option-divider"></div>
+
+    <!-- Option 8: Top-Left, Large Type -->
+    <div class="option-wrap">
+      <p class="option-label">Home — Option 8 · Headline Top, Breathes Into Photo</p>
+      <div class="option-frame">
+        <div class="mock-nav"><span class="mock-nav-logo">The Byron Doula</span><div class="mock-nav-links"><span>About</span><span>Services</span><span>Reviews</span><span class="mock-cta">Contact</span></div></div>
+        <div class="home-8">
+          <img src="../../../site/public/images/mama-belly.jpg" alt="">
+          <div class="home-8-overlay"></div>
+          <div class="home-8-copy">
+            <h1 class="home-8-h1">Feel Informed,<br>Supported and<br>Empowered.</h1>
+            <div class="home-8-bottom">
+              <p class="home-8-sub">Trusted support for pregnancy, birth and parenthood in Byron Bay.</p>
+              <span class="btn-p">Services</span>
+            </div>
+          </div>
+        </div>
+        <div class="mock-body"><div class="mock-grid mock-grid-3"><div class="mock-card"><span>Trust band</span></div><div class="mock-card"><span>Trust band</span></div><div class="mock-card"><span>Trust band</span></div></div></div>
+      </div>
+    </div>
+
+    <div class="option-divider"></div>
+
+    <!-- Option 9: Right-Aligned Copy -->
+    <div class="option-wrap">
+      <p class="option-label">Home — Option 9 · Text Right, Photo Bleeds Left</p>
+      <div class="option-frame">
+        <div class="mock-nav"><span class="mock-nav-logo">The Byron Doula</span><div class="mock-nav-links"><span>About</span><span>Services</span><span>Reviews</span><span class="mock-cta">Contact</span></div></div>
+        <div class="home-9">
+          <img src="../../../site/public/images/mama-belly.jpg" alt="">
+          <div class="home-9-overlay"></div>
+          <div class="home-9-copy">
+            <div class="home-9-eyebrow">Certified Birth Doula · Byron Bay</div>
+            <h1 class="home-9-h1">Feel Informed,<br>Supported and<br>Empowered.</h1>
+            <p class="home-9-sub">Trusted support for pregnancy, birth and parenthood in Byron Bay.</p>
+            <span class="btn-p">Services</span>
+          </div>
+        </div>
+        <div class="mock-body"><div class="mock-grid mock-grid-3"><div class="mock-card"><span>Trust band</span></div><div class="mock-card"><span>Trust band</span></div><div class="mock-card"><span>Trust band</span></div></div></div>
+      </div>
+    </div>
+
+  </div><!-- /home -->
+
+
+  <!-- ════════════ SERVICES ════════════ -->
+  <div class="page-section" id="page-services">
+
+    <div class="option-wrap">
+      <p class="option-label">Services — Option 1 · Dark Editorial Band</p>
+      <div class="option-frame">
+        <div class="mock-nav"><span class="mock-nav-logo">The Byron Doula</span><div class="mock-nav-links"><span>About</span><span class="active">Services</span><span>Reviews</span><span class="mock-cta">Contact</span></div></div>
+        <div class="svc-1">
+          <div class="svc-1-eyebrow">Services &amp; Pricing</div>
+          <h1 class="svc-1-h1">Birth support<br>tailored to you.</h1>
+          <div class="svc-1-rule"></div>
+          <p class="svc-1-sub">Every family is different. Nathalie offers personalised packages for birth, postpartum, and education — all in Byron Bay and the Northern Rivers.</p>
+        </div>
+        <div class="mock-body"><div class="mock-grid mock-grid-2"><div class="mock-card tall"><span>Service card</span></div><div class="mock-card tall"><span>Service card</span></div></div></div>
+      </div>
+    </div>
+
+    <div class="option-divider"></div>
+
+    <div class="option-wrap">
+      <p class="option-label">Services — Option 2 · Ghost Underprint</p>
+      <div class="option-frame">
+        <div class="mock-nav"><span class="mock-nav-logo">The Byron Doula</span><div class="mock-nav-links"><span>About</span><span class="active">Services</span><span>Reviews</span><span class="mock-cta">Contact</span></div></div>
+        <div class="svc-2">
+          <div class="svc-2-ghost" aria-hidden="true">Support</div>
+          <div class="svc-2-content">
+            <div class="svc-2-eyebrow">Services &amp; Pricing</div>
+            <h1 class="svc-2-h1">How I can<br>support you.</h1>
+            <p class="svc-2-sub">Personalised birth, postpartum, and education packages for families across Byron Bay and the Northern Rivers.</p>
+          </div>
+        </div>
+        <div class="mock-body"><div class="mock-grid mock-grid-2"><div class="mock-card tall"><span>Service card</span></div><div class="mock-card tall"><span>Service card</span></div></div></div>
+      </div>
+    </div>
+
+    <div class="option-divider"></div>
+
+    <div class="option-wrap">
+      <p class="option-label">Services — Option 3 · Headline + Stats Row</p>
+      <div class="option-frame">
+        <div class="mock-nav"><span class="mock-nav-logo">The Byron Doula</span><div class="mock-nav-links"><span>About</span><span class="active">Services</span><span>Reviews</span><span class="mock-cta">Contact</span></div></div>
+        <div class="svc-3">
+          <div class="svc-3-top">
+            <h1 class="svc-3-h1">Birth support<br>for every family.</h1>
+            <span class="svc-3-eyebrow">Services &amp; Pricing</span>
+          </div>
+          <div class="svc-3-stats">
+            <div><div class="svc-3-stat-label">Families supported</div><div class="svc-3-stat-val">200+</div><div class="svc-3-stat-sub">Across Byron Bay &amp; Northern Rivers</div></div>
+            <div><div class="svc-3-stat-label">Average rating</div><div class="svc-3-stat-val">5★</div><div class="svc-3-stat-sub">From verified client reviews</div></div>
+            <div><div class="svc-3-stat-label">Years practicing</div><div class="svc-3-stat-val">6+</div><div class="svc-3-stat-sub">Certified since 2018</div></div>
+          </div>
+        </div>
+        <div class="mock-body"><div class="mock-grid mock-grid-2"><div class="mock-card tall"><span>Service card</span></div><div class="mock-card tall"><span>Service card</span></div></div></div>
+      </div>
+    </div>
+
+    <div class="option-divider"></div>
+
+    <div class="option-wrap">
+      <p class="option-label">Services — Option 4 · Split Type + Image</p>
+      <div class="option-frame">
+        <div class="mock-nav"><span class="mock-nav-logo">The Byron Doula</span><div class="mock-nav-links"><span>About</span><span class="active">Services</span><span>Reviews</span><span class="mock-cta">Contact</span></div></div>
+        <div class="svc-4">
+          <div class="svc-4-left">
+            <div class="svc-4-eyebrow">Services &amp; Pricing</div>
+            <h1 class="svc-4-h1">Support shaped<br>around you.</h1>
+            <p class="svc-4-sub">Personalised birth, postpartum, and education packages in Byron Bay and the Northern Rivers.</p>
+          </div>
+          <div class="svc-4-right">
+            <img src="../../../site/public/images/image-1.jpg" alt="">
+            <div class="svc-4-right-veil"></div>
+          </div>
+        </div>
+        <div class="mock-body"><div class="mock-grid mock-grid-2"><div class="mock-card tall"><span>Service card</span></div><div class="mock-card tall"><span>Service card</span></div></div></div>
+      </div>
+    </div>
+
+    <div class="option-divider"></div>
+
+    <div class="option-wrap">
+      <p class="option-label">Services — Option 5 · Vertical Spine</p>
+      <div class="option-frame">
+        <div class="mock-nav"><span class="mock-nav-logo">The Byron Doula</span><div class="mock-nav-links"><span>About</span><span class="active">Services</span><span>Reviews</span><span class="mock-cta">Contact</span></div></div>
+        <div class="svc-5">
+          <div class="svc-5-spine"><span>Services &amp; Pricing</span></div>
+          <div class="svc-5-vline"></div>
+          <div class="svc-5-content">
+            <h1 class="svc-5-h1">Everything you need<br>to feel ready.</h1>
+            <p class="svc-5-sub">Personalised packages for every stage — birth support, postpartum care, and childbirth education. All in Byron Bay.</p>
+            <div class="svc-5-meta"><span>200+ families</span><span class="svc-5-dot">·</span><span>Byron Bay</span><span class="svc-5-dot">·</span><span>Est. 2018</span></div>
+          </div>
+        </div>
+        <div class="mock-body"><div class="mock-grid mock-grid-2"><div class="mock-card tall"><span>Service card</span></div><div class="mock-card tall"><span>Service card</span></div></div></div>
+      </div>
+    </div>
+
+  </div><!-- /services -->
+
+
+  <!-- ════════════ REVIEWS ════════════ -->
+  <div class="page-section" id="page-reviews">
+
+    <div class="option-wrap">
+      <p class="option-label">Reviews — Option 1 · Centered Serif + Ornament</p>
+      <div class="option-frame">
+        <div class="mock-nav"><span class="mock-nav-logo">The Byron Doula</span><div class="mock-nav-links"><span>About</span><span>Services</span><span class="active">Reviews</span><span class="mock-cta">Contact</span></div></div>
+        <div class="rev-1">
+          <svg class="rev-1-ornament" viewBox="0 0 48 48" fill="none">
+            <path d="M24 4C24 4 18 12 24 20C30 12 24 4 24 4Z" fill="#8c4a2f"/>
+            <path d="M24 20C24 20 12 22 10 30C18 34 24 28 24 20Z" fill="#8c4a2f"/>
+            <path d="M24 20C24 20 36 22 38 30C30 34 24 28 24 20Z" fill="#8c4a2f"/>
+            <path d="M24 28C24 28 20 36 24 44C28 36 24 28 24 28Z" fill="#8c4a2f"/>
+          </svg>
+          <div class="rev-1-eyebrow">Kind words</div>
+          <h1 class="rev-1-h1">Stories from the families I've held.</h1>
+          <div class="rev-1-rule"></div>
+          <p class="rev-1-sub">Over 200 families supported across Byron Bay and the Northern Rivers. Here's what they say.</p>
+        </div>
+        <div class="mock-body"><div class="mock-grid mock-grid-3"><div class="mock-card"><span>Review card</span></div><div class="mock-card"><span>Review card</span></div><div class="mock-card"><span>Review card</span></div></div></div>
+      </div>
+    </div>
+
+    <div class="option-divider"></div>
+
+    <div class="option-wrap">
+      <p class="option-label">Reviews — Option 2 · Dark Stats Showcase</p>
+      <div class="option-frame">
+        <div class="mock-nav"><span class="mock-nav-logo">The Byron Doula</span><div class="mock-nav-links"><span>About</span><span>Services</span><span class="active">Reviews</span><span class="mock-cta">Contact</span></div></div>
+        <div class="rev-2">
+          <div class="rev-2-top">
+            <h1 class="rev-2-h1">What families<br>are saying.</h1>
+            <div class="rev-2-stars">★★★★★</div>
+          </div>
+          <div class="rev-2-stats">
+            <div><div class="rev-2-stat-num">200+</div><div class="rev-2-stat-label">families supported</div></div>
+            <div><div class="rev-2-stat-num">5.0</div><div class="rev-2-stat-label">average rating</div></div>
+            <div><div class="rev-2-stat-num">6+</div><div class="rev-2-stat-label">years practicing</div></div>
+          </div>
+        </div>
+        <div class="mock-body"><div class="mock-grid mock-grid-3"><div class="mock-card"><span>Review card</span></div><div class="mock-card"><span>Review card</span></div><div class="mock-card"><span>Review card</span></div></div></div>
+      </div>
+    </div>
+
+    <div class="option-divider"></div>
+
+    <div class="option-wrap">
+      <p class="option-label">Reviews — Option 3 · Triptych Columns</p>
+      <div class="option-frame">
+        <div class="mock-nav"><span class="mock-nav-logo">The Byron Doula</span><div class="mock-nav-links"><span>About</span><span>Services</span><span class="active">Reviews</span><span class="mock-cta">Contact</span></div></div>
+        <div class="rev-3">
+          <div class="rev-3-left">
+            <div class="rev-3-tag">Families</div>
+            <div><div class="rev-3-num">200+</div><div class="rev-3-num-label">supported</div></div>
+            <div><div class="rev-3-num">5★</div><div class="rev-3-num-label">average</div></div>
+          </div>
+          <div class="rev-3-center">
+            <h1 class="rev-3-h1">Stories from<br>the families<br>I've held.</h1>
+          </div>
+          <div class="rev-3-right">
+            <img src="../../../site/public/images/nathalie-portrait.jpg" alt="">
+          </div>
+        </div>
+        <div class="mock-body"><div class="mock-grid mock-grid-3"><div class="mock-card"><span>Review card</span></div><div class="mock-card"><span>Review card</span></div><div class="mock-card"><span>Review card</span></div></div></div>
+      </div>
+    </div>
+
+    <div class="option-divider"></div>
+
+    <div class="option-wrap">
+      <p class="option-label">Reviews — Option 4 · Pull-Quote Hero</p>
+      <div class="option-frame">
+        <div class="mock-nav"><span class="mock-nav-logo">The Byron Doula</span><div class="mock-nav-links"><span>About</span><span>Services</span><span class="active">Reviews</span><span class="mock-cta">Contact</span></div></div>
+        <div class="rev-4">
+          <div class="rev-4-quote-mark" aria-hidden="true">"</div>
+          <div class="rev-4-eyebrow">Kind words</div>
+          <p class="rev-4-quote">"Nathalie was everything I didn't know I needed. Her presence gave me the confidence to trust myself completely."</p>
+          <div class="rev-4-attribution">
+            <div class="rev-4-attr-rule"></div>
+            <span>Sophie W. — Byron Bay</span>
+          </div>
+          <p class="rev-4-sub">200+ families · Northern Rivers</p>
+        </div>
+        <div class="mock-body"><div class="mock-grid mock-grid-3"><div class="mock-card"><span>Review card</span></div><div class="mock-card"><span>Review card</span></div><div class="mock-card"><span>Review card</span></div></div></div>
+      </div>
+    </div>
+
+    <div class="option-divider"></div>
+
+    <div class="option-wrap">
+      <p class="option-label">Reviews — Option 5 · Faces + Headline</p>
+      <div class="option-frame">
+        <div class="mock-nav"><span class="mock-nav-logo">The Byron Doula</span><div class="mock-nav-links"><span>About</span><span>Services</span><span class="active">Reviews</span><span class="mock-cta">Contact</span></div></div>
+        <div class="rev-5">
+          <div>
+            <div class="rev-5-eyebrow">Kind words</div>
+            <h1 class="rev-5-h1">Families who trusted<br>Nathalie with their birth.</h1>
+            <p class="rev-5-sub">Over 200 families across Byron Bay and the Northern Rivers — in their own words.</p>
+          </div>
+          <div class="rev-5-faces">
+            <div class="rev-5-face-stack">
+              <div class="rev-5-face"><img src="../../../site/public/images/testimonials/mums/sophie-willing.jpg" alt=""></div>
+              <div class="rev-5-face"><img src="../../../site/public/images/testimonials/mums/amy-sinclair.jpg" alt=""></div>
+              <div class="rev-5-face"><img src="../../../site/public/images/testimonials/mums/emma-bellamy.jpg" alt=""></div>
+              <div class="rev-5-face"><img src="../../../site/public/images/testimonials/mums/karla-hammer.jpg" alt=""></div>
+              <div class="rev-5-face-count">+196</div>
+            </div>
+            <div class="rev-5-face-label">200+ families</div>
+          </div>
+        </div>
+        <div class="mock-body"><div class="mock-grid mock-grid-3"><div class="mock-card"><span>Review card</span></div><div class="mock-card"><span>Review card</span></div><div class="mock-card"><span>Review card</span></div></div></div>
+      </div>
+    </div>
+
+  </div><!-- /reviews -->
+
+
+  <!-- ════════════ CONTACT ════════════ -->
+  <div class="page-section" id="page-contact">
+
+    <div class="option-wrap">
+      <p class="option-label">Contact — Option 1 · Floating Invitation Card</p>
+      <div class="option-frame">
+        <div class="mock-nav"><span class="mock-nav-logo">The Byron Doula</span><div class="mock-nav-links"><span>About</span><span>Services</span><span>Reviews</span><span class="mock-cta active-cta">Contact</span></div></div>
+        <div class="con-1">
+          <div class="con-1-card">
+            <svg class="con-1-ornament" viewBox="0 0 60 24" fill="none">
+              <line x1="0" y1="12" x2="22" y2="12" stroke="#d9c2ba" stroke-width="0.75"/>
+              <circle cx="30" cy="12" r="3.5" stroke="#8c4a2f" stroke-width="0.75" fill="none"/>
+              <circle cx="30" cy="12" r="1" fill="#8c4a2f"/>
+              <line x1="38" y1="12" x2="60" y2="12" stroke="#d9c2ba" stroke-width="0.75"/>
+            </svg>
+            <div class="con-1-eyebrow">Get in touch</div>
+            <h1 class="con-1-h1">Let's talk about<br>your birth.</h1>
+            <p class="con-1-sub">Every conversation begins with listening. Book a free 30-minute discovery call with Nathalie.</p>
+          </div>
+        </div>
+        <div class="mock-body"><div class="mock-grid mock-grid-2"><div class="mock-card tall"><span>Contact form</span></div><div class="mock-card tall"><span>Details</span></div></div></div>
+      </div>
+    </div>
+
+    <div class="option-divider"></div>
+
+    <div class="option-wrap">
+      <p class="option-label">Contact — Option 2 · Split Copy + Photo</p>
+      <div class="option-frame">
+        <div class="mock-nav"><span class="mock-nav-logo">The Byron Doula</span><div class="mock-nav-links"><span>About</span><span>Services</span><span>Reviews</span><span class="mock-cta active-cta">Contact</span></div></div>
+        <div class="con-2">
+          <div class="con-2-left">
+            <div class="con-2-eyebrow">Get in touch</div>
+            <h1 class="con-2-h1">Ready to begin<br>your journey?</h1>
+            <p class="con-2-sub">Book a free 30-minute discovery call — no commitment, just a conversation.</p>
+            <div class="con-2-detail">
+              <div class="con-2-detail-item"><span>📍</span><span>Byron Bay &amp; Northern Rivers</span></div>
+              <div class="con-2-detail-item"><span>📞</span><span>Free discovery call available</span></div>
+            </div>
+          </div>
+          <div class="con-2-right">
+            <img src="../../../site/public/images/nathalie-about.jpg" alt="">
+            <div class="con-2-right-fade"></div>
+          </div>
+        </div>
+        <div class="mock-body"><div class="mock-grid mock-grid-2"><div class="mock-card tall"><span>Contact form</span></div><div class="mock-card tall"><span>Details</span></div></div></div>
+      </div>
+    </div>
+
+    <div class="option-divider"></div>
+
+    <div class="option-wrap">
+      <p class="option-label">Contact — Option 3 · Full Dark Editorial</p>
+      <div class="option-frame">
+        <div class="mock-nav"><span class="mock-nav-logo">The Byron Doula</span><div class="mock-nav-links"><span>About</span><span>Services</span><span>Reviews</span><span class="mock-cta active-cta">Contact</span></div></div>
+        <div class="con-3">
+          <div class="con-3-texture"></div>
+          <div class="con-3-inner">
+            <div class="con-3-eyebrow">Get in touch</div>
+            <h1 class="con-3-h1">Every birth story<br>begins with a conversation.</h1>
+            <div class="con-3-rule"></div>
+            <p class="con-3-sub">Book a free 30-minute discovery call and let's talk about how Nathalie can support you.</p>
+          </div>
+        </div>
+        <div class="mock-body"><div class="mock-grid mock-grid-2"><div class="mock-card tall"><span>Contact form</span></div><div class="mock-card tall"><span>Details</span></div></div></div>
+      </div>
+    </div>
+
+    <div class="option-divider"></div>
+
+    <div class="option-wrap">
+      <p class="option-label">Contact — Option 4 · Full-Bleed Photo, Copy Bottom</p>
+      <div class="option-frame">
+        <div class="mock-nav"><span class="mock-nav-logo">The Byron Doula</span><div class="mock-nav-links"><span>About</span><span>Services</span><span>Reviews</span><span class="mock-cta active-cta">Contact</span></div></div>
+        <div class="con-4">
+          <img src="../../../site/public/images/mama-belly.jpg" alt="">
+          <div class="con-4-overlay"></div>
+          <div class="con-4-copy">
+            <div class="con-4-eyebrow">Get in touch</div>
+            <h1 class="con-4-h1">Let's talk about your birth.</h1>
+            <p class="con-4-sub">Book a free 30-minute discovery call with Nathalie — no commitment, just a conversation.</p>
+          </div>
+        </div>
+        <div class="mock-body"><div class="mock-grid mock-grid-2"><div class="mock-card tall"><span>Contact form</span></div><div class="mock-card tall"><span>Details</span></div></div></div>
+      </div>
+    </div>
+
+    <div class="option-divider"></div>
+
+    <div class="option-wrap">
+      <p class="option-label">Contact — Option 5 · Warm Letter Header</p>
+      <div class="option-frame">
+        <div class="mock-nav"><span class="mock-nav-logo">The Byron Doula</span><div class="mock-nav-links"><span>About</span><span>Services</span><span>Reviews</span><span class="mock-cta active-cta">Contact</span></div></div>
+        <div class="con-5">
+          <div class="con-5-rule-top"></div>
+          <div class="con-5-eyebrow">Get in touch</div>
+          <h1 class="con-5-h1">I'd love to hear<br>about your birth.</h1>
+          <div class="con-5-body">
+            <div>
+              <div class="con-5-col-label">Location</div>
+              <div class="con-5-col-text">Byron Bay &amp; Northern Rivers, NSW. In-person and virtual consultations available.</div>
+            </div>
+            <div>
+              <div class="con-5-col-label">Discovery call</div>
+              <div class="con-5-col-text">Free 30-minute call to talk through your needs — no commitment required.</div>
+            </div>
+          </div>
+        </div>
+        <div class="mock-body"><div class="mock-grid mock-grid-2"><div class="mock-card tall"><span>Contact form</span></div><div class="mock-card tall"><span>Details</span></div></div></div>
+      </div>
+    </div>
+
+  </div><!-- /contact -->
+
+
+  <script>
+    const tabs = document.querySelectorAll('.tab-btn');
+    const sections = document.querySelectorAll('.page-section');
+    tabs.forEach(btn => {
+      btn.addEventListener('click', () => {
+        tabs.forEach(t => t.classList.remove('active'));
+        sections.forEach(s => s.classList.remove('active'));
+        btn.classList.add('active');
+        document.getElementById('page-' + btn.dataset.page).classList.add('active');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    });
+  </script>
+
+</body>
+</html>

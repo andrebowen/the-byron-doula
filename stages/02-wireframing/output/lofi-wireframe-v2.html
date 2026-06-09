@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lo-Fi Wireframe V2 • The Byron Doula</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #f1f5f9; scroll-behavior: smooth; }
+    .wf-frame { border: 3px solid #475569; background: white; box-shadow: 0 10px 24px rgba(15,23,42,0.12); max-width: 1100px; margin: 0 auto; }
+
+    /* Section labels */
+    .wf-section { position: relative; border-bottom: 2px solid #e2e8f0; padding: 32px 48px; }
+    .wf-section:last-child { border-bottom: none; }
+    .wf-tag { display: inline-block; background: #475569; color: white; font-size: 8px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; padding: 2px 8px; border-radius: 2px; margin-bottom: 16px; }
+
+    /* Header */
+    header { display: flex; align-items: center; justify-content: space-between; padding: 0 48px; height: 60px; border-bottom: 3px solid #475569; background: #f8fafc; }
+    .logo { font-weight: 700; font-size: 15px; color: #0f172a; }
+    nav { display: flex; gap: 24px; font-size: 13px; color: #475569; }
+    nav a { color: #475569; text-decoration: none; }
+    .header-cta { border: 2px solid #475569; background: white; font-weight: 600; font-size: 11px; padding: 6px 14px; text-decoration: none; color: #1e293b; }
+
+    /* Hero */
+    #hero { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: center; }
+    #hero h1 { font-size: 26px; font-weight: 700; line-height: 1.15; color: #0f172a; margin-bottom: 12px; }
+    #hero p { font-size: 13px; color: #334155; line-height: 1.5; margin-bottom: 20px; }
+    #hero .hero-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+    #hero .hero-actions a { border: 2px solid #475569; background: white; font-weight: 600; font-size: 11px; padding: 7px 14px; text-decoration: none; color: #1e293b; }
+    #hero .hero-actions a:first-child { background: #1e293b; color: white; }
+    .hero-image { background: repeating-linear-gradient(45deg, #e2e8f0, #e2e8f0 8px, #cbd5e1 8px, #cbd5e1 16px); border: 2px dashed #64748b; height: 240px; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 600; color: #475569; }
+
+    /* Trust bar */
+    #trust-bar { background: #f8fafc; border-top: 2px solid #e2e8f0; border-bottom: 2px solid #e2e8f0; display: flex; justify-content: space-around; padding: 14px 48px; gap: 16px; }
+    #trust-bar div { font-size: 11px; font-weight: 600; color: #475569; text-align: center; }
+
+    /* About preview */
+    #about-preview h2 { font-size: 18px; font-weight: 700; color: #0f172a; margin-bottom: 12px; }
+    #about-preview p { font-size: 13px; color: #334155; line-height: 1.5; margin-bottom: 12px; }
+    #about-preview ul { font-size: 12px; color: #475569; margin-bottom: 16px; padding-left: 16px; list-style: disc; line-height: 1.8; }
+    #about-preview a { border: 2px solid #475569; background: white; font-weight: 600; font-size: 11px; padding: 6px 14px; text-decoration: none; color: #1e293b; display: inline-block; }
+
+    /* Services */
+    #services h2 { font-size: 18px; font-weight: 700; color: #0f172a; margin-bottom: 20px; }
+    .services-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .services-grid article { background: #f8fafc; border: 1px solid #94a3b8; padding: 20px; }
+    .services-grid h3 { font-size: 14px; font-weight: 700; color: #0f172a; margin-bottom: 4px; }
+    .services-grid .service-tag { font-size: 10px; color: #64748b; font-weight: 600; background: #e2e8f0; display: inline-block; padding: 1px 8px; margin-bottom: 10px; border-radius: 2px; }
+    .services-grid p { font-size: 12px; color: #334155; line-height: 1.5; margin-bottom: 10px; }
+    .services-grid ul { font-size: 11px; color: #475569; padding-left: 14px; list-style: disc; margin-bottom: 10px; line-height: 1.8; }
+    .services-grid .price { font-size: 12px; font-weight: 600; color: #1e293b; margin-bottom: 12px; }
+    .services-grid a { border: 2px solid #475569; font-weight: 600; font-size: 10px; padding: 5px 12px; text-decoration: none; color: #1e293b; display: inline-block; }
+
+    /* Reviews */
+    #reviews h2 { font-size: 18px; font-weight: 700; color: #0f172a; margin-bottom: 16px; }
+    .reviews-summary { display: flex; align-items: center; gap: 20px; margin-bottom: 20px; flex-wrap: wrap; }
+    .reviews-summary div { font-size: 12px; font-weight: 600; color: #475569; }
+    .reviews-summary a { font-size: 11px; font-weight: 600; color: #1e293b; text-decoration: none; border-bottom: 1px solid #475569; }
+    .testimonial-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 4px; }
+    blockquote { background: white; border: 1px solid #94a3b8; padding: 16px; display: flex; flex-direction: column; justify-content: space-between; }
+    blockquote p { font-size: 12px; color: #1e293b; line-height: 1.5; margin-bottom: 12px; font-style: italic; }
+    blockquote footer { font-size: 11px; font-weight: 600; color: #475569; }
+
+    /* Featured in */
+    #featured-in h2 { font-size: 14px; font-weight: 700; color: #94a3b8; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px; }
+    .logo-strip { background: repeating-linear-gradient(45deg, #e2e8f0, #e2e8f0 8px, #cbd5e1 8px, #cbd5e1 16px); border: 2px dashed #64748b; height: 56px; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 600; color: #475569; }
+
+    /* FAQ */
+    #faq h2 { font-size: 18px; font-weight: 700; color: #0f172a; margin-bottom: 16px; }
+    details { border: 1px solid #94a3b8; background: #f8fafc; margin-bottom: 6px; }
+    summary { padding: 10px 14px; font-size: 12px; font-weight: 600; color: #1e293b; cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; }
+    summary::after { content: '+'; font-size: 14px; color: #64748b; }
+    details[open] summary::after { content: '−'; }
+    details p { padding: 8px 14px 12px; font-size: 11px; color: #475569; line-height: 1.5; border-top: 1px solid #e2e8f0; }
+
+    /* Final CTA */
+    #final-cta { background: #1e293b; text-align: center; }
+    #final-cta h2 { font-size: 18px; font-weight: 700; color: white; margin-bottom: 10px; }
+    #final-cta p { font-size: 13px; color: #94a3b8; margin-bottom: 20px; }
+    #final-cta a { border: 2px solid white; background: white; font-weight: 600; font-size: 12px; padding: 8px 20px; text-decoration: none; color: #1e293b; display: inline-block; }
+
+    /* Contact */
+    #contact h2 { font-size: 18px; font-weight: 700; color: #0f172a; margin-bottom: 8px; }
+    #contact > p { font-size: 13px; color: #475569; margin-bottom: 20px; line-height: 1.5; }
+    .contact-trust-signals { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
+    .contact-trust-signals div { font-size: 11px; color: #475569; background: #f1f5f9; border: 1px solid #cbd5e1; padding: 4px 10px; border-radius: 2px; }
+    form { max-width: 440px; }
+    label { display: block; font-size: 11px; font-weight: 600; color: #475569; margin-bottom: 4px; margin-top: 12px; }
+    input, select, textarea { display: block; width: 100%; background: #f8fafc; border: 1px solid #94a3b8; padding: 7px 10px; font-size: 12px; color: #1e293b; margin-bottom: 2px; }
+    textarea { height: 80px; resize: vertical; }
+    button[type="submit"] { margin-top: 14px; border: 2px solid #1e293b; background: #1e293b; color: white; font-weight: 600; font-size: 12px; padding: 8px 20px; cursor: pointer; }
+
+    /* Footer */
+    footer { background: #0f172a; padding: 24px 48px; display: flex; flex-direction: column; gap: 10px; }
+    footer > div { font-size: 11px; color: #64748b; }
+    footer nav { display: flex; gap: 16px; }
+    footer nav a { font-size: 11px; color: #64748b; text-decoration: none; }
+    footer p { font-size: 10px; color: #475569; line-height: 1.6; max-width: 640px; }
+
+    /* Meta bar */
+    .meta-bar { background: #1e293b; color: #94a3b8; font-size: 10px; font-weight: 600; letter-spacing: 0.5px; padding: 6px 48px; display: flex; align-items: center; justify-content: space-between; }
+    .meta-bar span { color: #fbbf24; }
+
+    /* Page separator */
+    .page-sep { max-width: 1100px; margin: 48px auto 0; display: flex; align-items: center; gap: 12px; }
+    .page-sep-label { background: #0f172a; color: white; font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; padding: 4px 14px; white-space: nowrap; }
+    .page-sep-line { flex: 1; height: 2px; background: #0f172a; }
+
+    /* Comparison table */
+    .comparison-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .comparison-card { background: #f8fafc; border: 1px solid #94a3b8; padding: 20px; }
+    .comparison-card h3 { font-size: 14px; font-weight: 700; color: #0f172a; margin-bottom: 8px; }
+    .comparison-card p { font-size: 12px; color: #475569; }
+    .comparison-card .best-for { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: #64748b; margin-bottom: 4px; }
+
+    /* Review filters */
+    .filter-bar { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 24px; }
+    .filter-chip { border: 1px solid #94a3b8; background: #f8fafc; font-size: 11px; font-weight: 600; color: #475569; padding: 4px 12px; cursor: pointer; }
+    .filter-chip.active { background: #1e293b; color: white; border-color: #1e293b; }
+
+    /* Reviews grid */
+    .reviews-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+
+    /* Google reviews bar */
+    .google-bar { display: flex; align-items: center; gap: 16px; background: #f8fafc; border: 1px solid #94a3b8; padding: 16px 20px; margin-top: 24px; }
+    .google-bar .g-rating { font-size: 13px; font-weight: 700; color: #0f172a; }
+    .google-bar .g-count { font-size: 12px; color: #475569; }
+    .google-bar a { font-size: 11px; font-weight: 600; color: #1e293b; text-decoration: none; border-bottom: 1px solid #475569; margin-left: auto; }
+
+    /* CTA band */
+    .cta-band { background: #1e293b; padding: 32px 48px; text-align: center; }
+    .cta-band h2 { font-size: 18px; font-weight: 700; color: white; margin-bottom: 16px; }
+    .cta-band a { border: 2px solid white; background: white; font-weight: 600; font-size: 12px; padding: 8px 20px; text-decoration: none; color: #1e293b; display: inline-block; }
+  </style>
+</head>
+<body class="py-8">
+
+  <div class="max-w-[1180px] mx-auto px-4">
+
+    <!-- Meta -->
+    <div class="mb-4 flex items-center gap-3">
+      <div class="px-3 py-1 bg-slate-800 text-white text-xs font-bold tracking-[1px]">LO-FI WIREFRAME — V2</div>
+      <div class="text-sm font-semibold text-slate-800">The Byron Doula</div>
+      <div class="text-xs text-slate-500">Semantic structure · Home page</div>
+    </div>
+
+    <div class="wf-frame">
+
+      <!-- META BAR -->
+      <div class="meta-bar">
+        <span>HEADER</span>
+        <span class="text-slate-500">logo · nav · cta</span>
+      </div>
+
+      <header>
+        <div class="logo">The Byron Doula</div>
+        <nav>
+          <a href="/about">About</a>
+          <a href="/services">Services</a>
+          <a href="/reviews">Reviews</a>
+        </nav>
+        <a href="#contact" class="header-cta">Get in Touch</a>
+      </header>
+
+      <main>
+
+        <!-- HERO -->
+        <div class="meta-bar"><span>HERO</span><span class="text-slate-500">headline · subheadline · 2 ctas · image</span></div>
+        <section id="hero" class="wf-section">
+          <div class="hero-content">
+            <h1>Feel Informed, Supported and Empowered.</h1>
+            <p>Trusted support for pregnancy, birth and parenthood — with calm guidance, emotional care, and evidence-based expertise that puts you first.</p>
+            <div class="hero-actions">
+              <a href="#contact">Enquire About Support</a>
+              <a href="/about">Learn More About Nathalie →</a>
+            </div>
+          </div>
+          <div class="hero-image">Hero Image Placeholder</div>
+        </section>
+
+        <!-- TRUST BAR -->
+        <div class="meta-bar"><span>TRUST BAR</span><span class="text-slate-500">4 trust signals</span></div>
+        <section id="trust-bar">
+          <div>13 Years Experience</div>
+          <div>Certified Doula &amp; Parenting Coach</div>
+          <div>★★★★★ 5.0 Rating</div>
+          <div>Byron Bay, Australia · Online Worldwide</div>
+        </section>
+
+        <!-- ABOUT PREVIEW -->
+        <div class="meta-bar"><span>ABOUT PREVIEW</span><span class="text-slate-500">heading · bio · bullets · cta → /about for full page</span></div>
+        <section id="about-preview" class="wf-section">
+          <h2>Meet Nathalie</h2>
+          <p>Support makes all the difference — for mothers and their partners. With 13 years of experience supporting births across Byron Bay and Berlin, and a deeply personalised approach to every family.</p>
+          <ul>
+            <li>Certified Holistic Birth Doula</li>
+            <li>Aware Parenting Coach</li>
+            <li>Based in Byron Bay, Australia — supporting worldwide</li>
+          </ul>
+          <a href="/about">Read My Story →</a>
+        </section>
+
+        <!-- SERVICES -->
+        <!-- FEATURED IN -->
+        <div class="meta-bar"><span>FEATURED IN</span><span class="text-slate-500">logo strip placeholder</span></div>
+        <section id="featured-in" class="wf-section">
+          <h2>As Featured In</h2>
+          <div class="logo-strip">Media Logo Placeholders</div>
+        </section>
+
+        <div class="meta-bar"><span>SERVICES</span><span class="text-slate-500">2 cards · tag · intro · bullets · price · cta → /services for full page</span></div>
+        <section id="services" class="wf-section">
+          <h2>How I Can Support You</h2>
+          <p style="font-size:13px;color:#475569;margin-bottom:20px;">Whether you're preparing for birth or navigating early parenthood, support can make all the difference.</p>
+          <div class="services-grid">
+            <article>
+              <h3>Birth Preparation</h3>
+              <div class="service-tag">Virtual or In-Person</div>
+              <p>Calm, personalised preparation so you and your partner feel informed, grounded, and ready for birth.</p>
+              <ul>
+                <li>Personalised Birth Plan</li>
+                <li>Partner Preparation</li>
+                <li>Labour Comfort Techniques</li>
+                <li>Evidence-Based Guidance</li>
+              </ul>
+              <p class="price">From $250</p>
+              <a href="/services">Learn More →</a>
+            </article>
+            <article>
+              <h3>Parent Coaching</h3>
+              <div class="service-tag">Virtual Sessions</div>
+              <p>Gentle guidance for pregnancy, postpartum and the transition into early parenthood.</p>
+              <ul>
+                <li>1-on-1 Support</li>
+                <li>Sleep &amp; Feeding Guidance</li>
+                <li>Relationship Support</li>
+                <li>Ongoing Coaching</li>
+              </ul>
+              <p class="price">From $180</p>
+              <a href="/services">Learn More →</a>
+            </article>
+          </div>
+        </section>
+
+        <!-- REVIEWS -->
+        <div class="meta-bar"><span>REVIEWS</span><span class="text-slate-500">heading · rating · 3 cards · see all → /reviews for full page</span></div>
+        <section id="reviews" class="wf-section">
+          <h2>Kind Words From Families I've Supported</h2>
+          <div class="reviews-summary">
+            <div>★★★★★ 5.0 Rating</div>
+            <div>32+ Five-Star Reviews</div>
+            <a href="/reviews">Read All Reviews →</a>
+          </div>
+          <div class="testimonial-grid">
+            <blockquote>
+              <p>"She was calm and professional yet kind and warm. She really helped support my partner so he could support me."</p>
+              <footer>Dr Camilla White, GP &amp; Mother of Three</footer>
+            </blockquote>
+            <blockquote>
+              <p>"Nat has the most divine way of making you feel safe, informed, connected and fully in control."</p>
+              <footer>Amy Sinclair, Mother of Two</footer>
+            </blockquote>
+            <blockquote>
+              <p>"The overwhelming calming confidence you gave my wife was what I liked best."</p>
+              <footer>George Gorrow, Father</footer>
+            </blockquote>
+          </div>
+        </section>
+
+        <!-- FAQ -->
+        <div class="meta-bar"><span>FAQ</span><span class="text-slate-500">5 accordion items</span></div>
+        <section id="faq" class="wf-section">
+          <h2>Frequently Asked Questions</h2>
+          <details>
+            <summary>What does a doula actually do?</summary>
+            <p>A doula provides continuous emotional, physical and informational support during pregnancy, birth and the postpartum period. I help you feel prepared and confident, support your partner, and advocate for your birth preferences — so you can focus entirely on your experience.</p>
+          </details>
+          <details>
+            <summary>Do I still need a doula if I have a midwife or OB?</summary>
+            <p>Absolutely. Midwives and OBs focus on your medical care. A doula's role is entirely different — I'm there for continuous, uninterrupted emotional and practical support, birth preparation, and to help you navigate decisions with clarity. We work alongside your care team, not instead of them.</p>
+          </details>
+          <details>
+            <summary>Where are you based and what areas do you serve?</summary>
+            <p>I'm based in Byron Bay and serve families across the Northern Rivers region of NSW. I also offer virtual support for birth preparation, parent coaching and postpartum check-ins for families further afield.</p>
+          </details>
+          <details>
+            <summary>When should I reach out to book a doula?</summary>
+            <p>As early as possible — ideally in your first or second trimester. Doulas often have limited availability as due dates approach. That said, if you're further along or even in the third trimester, it's always worth reaching out. I'll always do my best to support you.</p>
+          </details>
+          <details>
+            <summary>How do I get started?</summary>
+            <p>Use the contact form below. Choose the service you're interested in, tell me a little about your situation, and I'll reply personally within one business day to discuss next steps.</p>
+          </details>
+        </section>
+
+        <!-- CONTACT FORM (merged with final CTA) -->
+        <div class="meta-bar"><span>CONTACT FORM</span><span class="text-slate-500">heading · subheading · intro · reassurance · trust signals · form</span></div>
+        <section id="contact" class="wf-section">
+          <h2>Let's Talk About Your Journey</h2>
+          <p style="font-size:15px;font-weight:600;color:#1e293b;margin-bottom:10px;">Ready to feel more informed, supported and prepared?</p>
+          <p>Whether you're expecting your first baby or navigating a new chapter of parenthood, I'd love to hear more about where you are and how I can support you.</p>
+          <p style="font-size:13px;color:#475569;margin-bottom:20px;">No obligation. I'll personally respond within 1 business day.</p>
+          <div class="contact-trust-signals">
+            <div>13 years experience home &amp; hospital birth</div>
+            <div>Certified Doula &amp; Parenting Coach</div>
+            <div>Byron Bay, Australia · Online Worldwide</div>
+            <div>★★★★★ 5.0 · 14 Google Reviews</div>
+          </div>
+          <form>
+            <label>Your Name</label>
+            <input type="text" placeholder="Your Name">
+            <label>Email Address</label>
+            <input type="email" placeholder="Email Address">
+            <label>Service</label>
+            <select>
+              <option>Birth Preparation</option>
+              <option>Parent Coaching</option>
+            </select>
+            <label>Message</label>
+            <textarea placeholder="Tell me a little about your situation..."></textarea>
+            <button type="submit">Send Enquiry</button>
+          </form>
+        </section>
+
+      </main>
+
+      <!-- FOOTER -->
+      <div class="meta-bar"><span>FOOTER</span><span class="text-slate-500">copyright · nav · acknowledgement of country</span></div>
+      <footer>
+        <div>© 2026 The Byron Doula. All rights reserved.</div>
+        <nav>
+          <a href="/privacy">Privacy</a>
+          <a href="/terms">Terms</a>
+          <a href="/cookies">Cookies</a>
+        </nav>
+        <p>I acknowledge the Bundjalung People as the original and true custodians of the land on which I live and work. I pay respect to all of our country's First Nations peoples and their ongoing strength in practising the world's oldest living culture. I pay my respect to their Elders past, present and emerging.</p>
+      </footer>
+
+    </div>
+  </div>
+
+
+  <!-- ============================================================ -->
+  <!-- PAGE 2: ABOUT -->
+  <!-- ============================================================ -->
+  <div class="max-w-[1180px] mx-auto px-4">
+
+    <div class="page-sep"><div class="page-sep-label">2. About Page</div><div class="page-sep-line"></div></div>
+
+    <div class="wf-frame mt-4 mb-6">
+
+      <div class="meta-bar"><span>HEADER</span><span>logo · nav · cta</span></div>
+      <header>
+        <div class="logo">The Byron Doula</div>
+        <nav>
+          <a href="#">About</a>
+          <a href="/services">Services</a>
+          <a href="/reviews">Reviews</a>
+        </nav>
+        <a href="/contact" class="header-cta">Get in Touch</a>
+      </header>
+
+      <div class="meta-bar"><span>ABOUT HERO</span><span>large portrait · quote · intro paragraph</span></div>
+      <section class="wf-section" style="display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:center;">
+        <div>
+          <h1 style="font-size:22px;font-weight:700;line-height:1.3;color:#0f172a;font-style:italic;margin-bottom:16px;">"I've sat with women in their hardest moments. I'd be honoured to sit with you."</h1>
+          <p style="font-size:13px;color:#334155;line-height:1.6;">Short introductory paragraph about Nathalie — warm, personal, sets the tone for the page.</p>
+        </div>
+        <div style="background:repeating-linear-gradient(45deg,#e2e8f0,#e2e8f0 8px,#cbd5e1 8px,#cbd5e1 16px);border:2px dashed #64748b;height:280px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;color:#475569;">Large Portrait of Nathalie</div>
+      </section>
+
+      <div class="meta-bar"><span>MY STORY</span><span>2 paragraphs — personal biography</span></div>
+      <section class="wf-section">
+        <h2 style="font-size:18px;font-weight:700;color:#0f172a;margin-bottom:16px;">My Story</h2>
+        <p style="font-size:13px;color:#334155;line-height:1.6;margin-bottom:12px;">Drawing from my own experience as a mother of three, I can say that an empowered birth is not just good luck, it is helped by deep birth preparation and a support team dedicated to your vision. If we truly started honouring birth and parenthood as the transformative processes that they are, our birthing culture would look very different.</p>
+        <p style="font-size:13px;color:#334155;line-height:1.6;">Born in Lübeck, raised in Germany, Guatemala and Spain, matured in the U.S. and Australia, residing between Byron Bay and Berlin. I derive inspiration from many different cultures and traditions.</p>
+      </section>
+
+      <div class="meta-bar"><span>TRAINING &amp; CREDENTIALS</span><span>9 credentials — list</span></div>
+      <section class="wf-section">
+        <h2 style="font-size:18px;font-weight:700;color:#0f172a;margin-bottom:16px;">Training &amp; Credentials</h2>
+        <ul style="display:grid;grid-template-columns:1fr 1fr;gap:6px 32px;font-size:12px;color:#475569;list-style:disc;padding-left:16px;line-height:1.9;">
+          <li>Cultural Anthropologist (M.A.)</li>
+          <li>Certified Aware Parenting Coach</li>
+          <li>Certified Birth Doula CBI (Childbirth International)</li>
+          <li>Possums &amp; Co Training</li>
+          <li>Certified Doula (Dr Michel Odent)</li>
+          <li>Certified Yoga Teacher (BYV)</li>
+          <li>Certified End Of Life / Death Doula</li>
+          <li>Pregnancy &amp; Birth Specialist / Parent Coach at Cleo</li>
+          <li>Spinning Babies Training</li>
+          <li></li>
+        </ul>
+      </section>
+
+      <div class="meta-bar"><span>FEATURED IN</span><span>media logo strip · interview list</span></div>
+      <section class="wf-section">
+        <h2 style="font-size:18px;font-weight:700;color:#0f172a;margin-bottom:16px;">Featured In</h2>
+        <div style="background:repeating-linear-gradient(45deg,#e2e8f0,#e2e8f0 8px,#cbd5e1 8px,#cbd5e1 16px);border:2px dashed #64748b;height:56px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:600;color:#475569;margin-bottom:20px;">Media Logo Placeholders</div>
+        <h3 style="font-size:12px;font-weight:700;color:#0f172a;margin-bottom:10px;">Selected Interviews</h3>
+        <ul style="font-size:12px;color:#475569;list-style:disc;padding-left:16px;line-height:2;">
+          <li>The Confidence That Comes After 40 — The Rara Files</li>
+          <li>Perinatal Support for Mothers — PBB Media Podcast</li>
+          <li>iamibu × Nathalie Solis Pérez</li>
+          <li>A Day With… Nathalie Solis Pérez — In A Day Naturopathy</li>
+          <li>Mother Moments — Interview with Space To Flow</li>
+          <li>Interview with Nadine Richardson — She Births®</li>
+        </ul>
+      </section>
+
+      <div class="meta-bar"><span>WHY I DO THIS</span><span>personal section — motivation + what families can expect</span></div>
+      <section class="wf-section">
+        <h2 style="font-size:18px;font-weight:700;color:#0f172a;margin-bottom:16px;">Why I Do This</h2>
+        <p style="font-size:13px;color:#334155;line-height:1.6;margin-bottom:10px;">Why birth work matters.</p>
+        <p style="font-size:13px;color:#334155;line-height:1.6;margin-bottom:10px;">Why support matters.</p>
+        <p style="font-size:13px;color:#334155;line-height:1.6;">What families can expect when working together.</p>
+      </section>
+
+      <div class="meta-bar"><span>CONTACT CTA</span><span>dark band · heading · cta</span></div>
+      <div class="cta-band">
+        <h2>Ready to feel informed, supported and prepared?</h2>
+        <a href="/contact">Get in Touch</a>
+      </div>
+
+      <div class="meta-bar"><span>FOOTER</span></div>
+      <footer>
+        <div>© 2026 The Byron Doula. All rights reserved.</div>
+        <nav><a href="/privacy">Privacy</a><a href="/terms">Terms</a><a href="/cookies">Cookies</a></nav>
+        <p>I acknowledge the Bundjalung People as the original and true custodians of the land on which I live and work. I pay respect to all of our country's First Nations peoples and their ongoing strength in practising the world's oldest living culture. I pay my respect to their Elders past, present and emerging.</p>
+      </footer>
+
+    </div>
+
+
+    <!-- ============================================================ -->
+    <!-- PAGE 3: SERVICES -->
+    <!-- ============================================================ -->
+    <div class="page-sep"><div class="page-sep-label">3. Services Page</div><div class="page-sep-line"></div></div>
+
+    <div class="wf-frame mt-4 mb-6">
+
+      <div class="meta-bar"><span>HEADER</span><span>logo · nav · cta</span></div>
+      <header>
+        <div class="logo">The Byron Doula</div>
+        <nav>
+          <a href="/about">About</a>
+          <a href="#">Services</a>
+          <a href="/reviews">Reviews</a>
+        </nav>
+        <a href="/contact" class="header-cta">Get in Touch</a>
+      </header>
+
+      <div class="meta-bar"><span>PAGE HERO</span><span>headline · intro</span></div>
+      <section class="wf-section">
+        <h1 style="font-size:26px;font-weight:700;color:#0f172a;line-height:1.2;margin-bottom:12px;">Personalised support for pregnancy, birth and early parenthood.</h1>
+        <p style="font-size:13px;color:#475569;line-height:1.6;">Short introduction — warm, reassuring, sets expectations for what's below.</p>
+      </section>
+
+      <div class="meta-bar"><span>BIRTH PREPARATION</span><span>tag · description · included list · pricing · cta</span></div>
+      <section class="wf-section">
+        <h2 style="font-size:18px;font-weight:700;color:#0f172a;margin-bottom:6px;">Birth Preparation</h2>
+        <span style="font-size:10px;color:#64748b;font-weight:600;background:#e2e8f0;padding:2px 8px;border-radius:2px;display:inline-block;margin-bottom:14px;">Virtual or In-Person</span>
+        <p style="font-size:13px;color:#334155;line-height:1.6;margin-bottom:16px;">Description — what this service is, who it's for, and how it helps.</p>
+        <p style="font-size:11px;font-weight:700;color:#475569;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:8px;">What's Included</p>
+        <ul style="font-size:12px;color:#475569;list-style:disc;padding-left:16px;line-height:1.9;margin-bottom:16px;">
+          <li>Birth Planning</li>
+          <li>Comfort Techniques</li>
+          <li>Partner Preparation</li>
+          <li>Information &amp; Education</li>
+          <li>Emotional Readiness</li>
+          <li>Flexible Format</li>
+        </ul>
+        <p style="font-size:12px;font-weight:600;color:#1e293b;margin-bottom:16px;">Virtual — $250/hr · In-Person — $300/hr</p>
+        <a href="/contact" style="border:2px solid #475569;font-weight:600;font-size:11px;padding:6px 14px;text-decoration:none;color:#1e293b;display:inline-block;">Get in Touch</a>
+      </section>
+
+      <div class="meta-bar"><span>PARENT COACHING</span><span>tag · description · included list · pricing · cta</span></div>
+      <section class="wf-section">
+        <h2 style="font-size:18px;font-weight:700;color:#0f172a;margin-bottom:6px;">Parent Coaching</h2>
+        <span style="font-size:10px;color:#64748b;font-weight:600;background:#e2e8f0;padding:2px 8px;border-radius:2px;display:inline-block;margin-bottom:14px;">Virtual</span>
+        <p style="font-size:13px;color:#334155;line-height:1.6;margin-bottom:16px;">Description — what this service is, who it's for, and how it helps.</p>
+        <p style="font-size:11px;font-weight:700;color:#475569;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:8px;">What's Included</p>
+        <ul style="font-size:12px;color:#475569;list-style:disc;padding-left:16px;line-height:1.9;margin-bottom:16px;">
+          <li>1-on-1 Sessions</li>
+          <li>Birth Planning Support</li>
+          <li>Postpartum Questions</li>
+          <li>Relationship Support</li>
+          <li>Tailored Guidance</li>
+          <li>Ongoing Support</li>
+        </ul>
+        <p style="font-size:12px;font-weight:600;color:#1e293b;margin-bottom:16px;">From $180/session</p>
+        <a href="/contact" style="border:2px solid #475569;font-weight:600;font-size:11px;padding:6px 14px;text-decoration:none;color:#1e293b;display:inline-block;">Get in Touch</a>
+      </section>
+
+      <div class="meta-bar"><span>GUIDANCE BLOCK</span><span>heading · body · cta</span></div>
+      <section class="wf-section">
+        <h2 style="font-size:18px;font-weight:700;color:#0f172a;margin-bottom:12px;">Not sure which type of support is right for you?</h2>
+        <p style="font-size:13px;color:#334155;line-height:1.6;margin-bottom:20px;">Every family is different. If you're unsure whether Birth Preparation or Parent Coaching is the best fit, get in touch and we can discuss what would be most helpful for your situation.</p>
+        <a href="/contact" style="border:2px solid #475569;font-weight:600;font-size:11px;padding:6px 14px;text-decoration:none;color:#1e293b;display:inline-block;">Get in Touch</a>
+      </section>
+
+      <div class="meta-bar"><span>FOOTER</span></div>
+      <footer>
+        <div>© 2026 The Byron Doula. All rights reserved.</div>
+        <nav><a href="/privacy">Privacy</a><a href="/terms">Terms</a><a href="/cookies">Cookies</a></nav>
+        <p>I acknowledge the Bundjalung People...</p>
+      </footer>
+
+    </div>
+
+
+    <!-- ============================================================ -->
+    <!-- PAGE 4: REVIEWS -->
+    <!-- ============================================================ -->
+    <div class="page-sep"><div class="page-sep-label">4. Reviews Page</div><div class="page-sep-line"></div></div>
+
+    <div class="wf-frame mt-4 mb-10">
+
+      <div class="meta-bar"><span>HEADER</span><span>logo · nav · cta</span></div>
+      <header>
+        <div class="logo">The Byron Doula</div>
+        <nav>
+          <a href="/about">About</a>
+          <a href="/services">Services</a>
+          <a href="#">Reviews</a>
+        </nav>
+        <a href="/contact" class="header-cta">Get in Touch</a>
+      </header>
+
+      <div class="meta-bar"><span>PAGE HERO</span><span>heading · rating · review count</span></div>
+      <section class="wf-section" style="text-align:center;">
+        <h1 style="font-size:26px;font-weight:700;color:#0f172a;margin-bottom:12px;">Kind Words From Families I've Supported</h1>
+        <p style="font-size:16px;color:#475569;font-weight:600;margin-bottom:4px;">★★★★★ 5.0 Rating</p>
+        <p style="font-size:13px;color:#64748b;">32+ Five-Star Reviews</p>
+      </section>
+
+      <div class="meta-bar"><span>REVIEW FILTERS</span><span>optional — 5 filter chips</span></div>
+      <section class="wf-section">
+        <div class="filter-bar">
+          <div class="filter-chip active">All Reviews</div>
+          <div class="filter-chip">Pregnancy</div>
+          <div class="filter-chip">Birth Support</div>
+          <div class="filter-chip">Partner Experiences</div>
+          <div class="filter-chip">Postpartum</div>
+        </div>
+        <p style="font-size:10px;color:#94a3b8;font-style:italic;">Filters are optional — include if reviews grow in volume</p>
+      </section>
+
+      <div class="meta-bar"><span>REVIEWS GRID</span><span>all testimonials — 3-column grid</span></div>
+      <section class="wf-section">
+        <div class="reviews-grid">
+          <blockquote><p>"She was calm and professional yet kind and warm. She really helped support my partner so he could support me. I felt truly cared for in a very special way."</p><footer>Dr Camilla White, GP &amp; Mother of Three</footer></blockquote>
+          <blockquote><p>"Nat has the most divine way of making you feel safe, informed, connected and fully in control. She is a wealth of knowledge, experience and intuition."</p><footer>Amy Sinclair, Mother of Two</footer></blockquote>
+          <blockquote><p>"I felt very safe having her by my side..."</p><footer>Cisco Tschurtschenthaler</footer></blockquote>
+          <blockquote><p>"I felt supported in every essence of pregnancy and mothering. You just completely 'got' everything I needed and made me feel calm and confident."</p><footer>Renée D'Arcy, Mother of Three</footer></blockquote>
+          <blockquote><p>"Nat has the ability to create the most respectful..."</p><footer>Emma Bellamy</footer></blockquote>
+          <blockquote><p>"Nathalie has supported me for the births of two of my children..."</p><footer>Priscylla Elliott, Mother of Four</footer></blockquote>
+          <blockquote><p>"Nathalie was a constant support with the most beautiful nature. We adored her manner and communication."</p><footer>Lucy Folk, Mother</footer></blockquote>
+          <blockquote><p>"She helped me understand that there really is no need for fear..."</p><footer>Sophie Willing</footer></blockquote>
+          <blockquote><p>"Nathalie provided wonderful support..."</p><footer>Bethany Cecins</footer></blockquote>
+          <blockquote><p>"Nathalie was a great source of power..."</p><footer>Shanay Hall</footer></blockquote>
+          <blockquote><p>"You encouraged me in every moment..."</p><footer>Kaity Fox</footer></blockquote>
+          <blockquote><p>"You made us feel so nurtured..."</p><footer>Karla Hammer</footer></blockquote>
+          <blockquote><p>"I truly felt more held by the doula than anyone else..."</p><footer>Técha Noble</footer></blockquote>
+          <blockquote><p>"Her calming presence..."</p><footer>Tania C</footer></blockquote>
+          <blockquote><p>"Together we achieved a completely natural vaginal birth after cesarean..."</p><footer>Nerine M</footer></blockquote>
+          <blockquote><p>"My labor turned out to be a long one..."</p><footer>Jennifer PD</footer></blockquote>
+          <blockquote><p>"Nathalie not only exceeded every expectation..."</p><footer>Cassandra</footer></blockquote>
+          <blockquote><p>"Nathalie strikes a perfect balance..."</p><footer>Kate B</footer></blockquote>
+          <blockquote><p>"I believe that thanks to Nathalie I could give birth naturally..."</p><footer>Mai K</footer></blockquote>
+          <blockquote><p>"I don't think I could have endured 30 hours..."</p><footer>Laurie S</footer></blockquote>
+          <blockquote><p>"You helped me feel empowered and positive..."</p><footer>Thea V</footer></blockquote>
+          <blockquote><p>"The overwhelming calming confidence you gave my wife was what I liked best."</p><footer>George Gorrow, Father</footer></blockquote>
+          <blockquote><p>"I highly recommend Nathalie! Warm, kind..."</p><footer>Jan Svarovsky</footer></blockquote>
+          <blockquote><p>"Nathalie brought a beautiful calming energy..."</p><footer>Ryan Bienefelt</footer></blockquote>
+          <blockquote><p>"Nat was an amazing support..."</p><footer>Ryan Allen</footer></blockquote>
+          <blockquote><p>"She really was the most important support person..."</p><footer>Nico Georgieff</footer></blockquote>
+          <blockquote><p>"I strongly believe Nathalie must be one of the best doulas..."</p><footer>Rory K</footer></blockquote>
+          <blockquote><p>"Nathalie was able to support both of us..."</p><footer>George Popov</footer></blockquote>
+          <blockquote><p>"I actually don't know how you are supposed to do it without one..."</p><footer>Felix</footer></blockquote>
+          <blockquote><p>"Nathalie was able to read the situation well..."</p><footer>Jamie Baxter</footer></blockquote>
+          <blockquote><p>"I felt so comfortable with you..."</p><footer>(name TBC)</footer></blockquote>
+        </div>
+      </section>
+
+      <div class="meta-bar"><span>GOOGLE REVIEWS</span><span>aggregate rating · link to Google</span></div>
+      <section class="wf-section">
+        <div class="google-bar">
+          <span class="g-rating">★★★★★ 5.0</span>
+          <span class="g-count">14 Google Reviews</span>
+          <a href="#">View on Google →</a>
+        </div>
+      </section>
+
+      <div class="meta-bar"><span>CONTACT CTA</span><span>dark band · heading · cta</span></div>
+      <div class="cta-band">
+        <h2>Ready to feel supported too?</h2>
+        <a href="/contact">Get in Touch</a>
+      </div>
+
+      <div class="meta-bar"><span>FOOTER</span></div>
+      <footer>
+        <div>© 2026 The Byron Doula. All rights reserved.</div>
+        <nav><a href="/privacy">Privacy</a><a href="/terms">Terms</a><a href="/cookies">Cookies</a></nav>
+        <p>I acknowledge the Bundjalung People as the original and true custodians of the land on which I live and work. I pay respect to all of our country's First Nations peoples and their ongoing strength in practising the world's oldest living culture. I pay my respect to their Elders past, present and emerging.</p>
+      </footer>
+
+    </div>
+
+  </div>
+
+</body>
+</html>

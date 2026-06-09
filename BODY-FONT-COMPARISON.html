@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Body Font Comparison — The Byron Doula</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;1,400&family=DM+Sans:wght@400;500&family=Figtree:wght@400;500&family=Plus+Jakarta+Sans:wght@400;500&family=Nunito+Sans:wght@400;500&family=Work+Sans:wght@400;500&family=Jost:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg:      #fbf9f5;
+      --bg-low:  #f5f3ef;
+      --primary: #8c4a2f;
+      --dark:    #2d1f16;
+      --text:    #1b1c1a;
+      --muted:   #53433d;
+      --faint:   #86736c;
+      --outline: #d9c2ba;
+      --sand:    #efdec0;
+      --serif:   'Lora', Georgia, serif;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); -webkit-font-smoothing: antialiased; }
+
+    .sticky-top { position: sticky; top: 0; z-index: 100; }
+
+    .page-header {
+      background: var(--dark); padding: 28px 40px;
+    }
+    .page-header h1 { font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(251,249,245,0.55); font-family: 'DM Sans', sans-serif; }
+    .page-header p  { font-size: 11px; color: rgba(251,249,245,0.3); margin-top: 3px; font-family: 'DM Sans', sans-serif; }
+
+    .jump-nav {
+      background: var(--bg-low); border-bottom: 1px solid var(--outline);
+      padding: 10px 40px; display: flex; gap: 6px; flex-wrap: wrap;
+    }
+    .jump-nav a {
+      font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 500;
+      padding: 5px 14px; border-radius: 999px; border: 1px solid var(--outline);
+      color: var(--muted); text-decoration: none; transition: all 0.15s;
+    }
+    .jump-nav a:hover { background: var(--sand); border-color: var(--primary); color: var(--primary); }
+    .jump-nav a.current { background: var(--primary); border-color: var(--primary); color: #fff; }
+
+    .page-body { max-width: 860px; margin: auto; padding: 48px 40px 80px; display: flex; flex-direction: column; gap: 48px; }
+    @media (max-width: 600px) { .page-body { padding: 28px 20px 60px; } }
+
+    /* Font card */
+    .font-card { scroll-margin-top: 100px; background: #fff; border-radius: 20px; border: 1px solid var(--outline); overflow: hidden; }
+    .font-card.current { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(140,74,47,0.1); }
+
+    .card-header {
+      background: var(--bg-low); padding: 14px 24px;
+      display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px;
+      border-bottom: 1px solid var(--outline);
+    }
+    .card-header h2 { font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 600; color: var(--text); }
+    .card-tag {
+      font-family: 'DM Sans', sans-serif; font-size: 10px; font-weight: 600;
+      letter-spacing: 0.06em; text-transform: uppercase; padding: 3px 10px;
+      border-radius: 999px; background: var(--primary); color: #fff;
+    }
+
+    .card-body { padding: 28px 28px 32px; display: flex; flex-direction: column; gap: 28px; }
+
+    /* Size label */
+    .size-label {
+      font-family: 'DM Sans', sans-serif; font-size: 10px; font-weight: 600;
+      letter-spacing: 0.08em; text-transform: uppercase; color: var(--faint);
+      margin-bottom: 10px;
+    }
+
+    /* Lora heading — same across all cards */
+    .lora-heading {
+      font-family: var(--serif); font-weight: 500;
+      font-size: clamp(28px, 4vw, 42px); line-height: 1.15;
+      color: var(--text); margin-bottom: 14px;
+    }
+    .lora-sub {
+      font-family: var(--serif); font-weight: 400; font-style: italic;
+      font-size: 18px; color: var(--muted); margin-bottom: 20px;
+    }
+
+    hr.card-div { border: none; border-top: 1px solid var(--outline); }
+
+    /* Body specimens */
+    .body-block { padding-top: 4px; }
+    .body-p { font-size: 17px; font-weight: 400; line-height: 1.75; color: var(--muted); margin-bottom: 14px; }
+    .body-p:last-child { margin-bottom: 0; }
+    .body-small { font-size: 14px; font-weight: 400; line-height: 1.7; color: var(--faint); }
+
+    /* Nav label specimen */
+    .nav-spec {
+      display: flex; align-items: center; gap: 24px; flex-wrap: wrap;
+      padding: 14px 20px; background: var(--dark); border-radius: 12px;
+      margin-top: 4px;
+    }
+    .nav-logo-spec { font-family: var(--serif); font-weight: 500; font-size: 18px; color: #fbf9f5; }
+    .nav-link-spec { font-size: 14px; font-weight: 500; color: rgba(251,249,245,0.75); }
+    .nav-btn-spec  {
+      font-size: 13px; font-weight: 500; padding: 9px 18px;
+      background: var(--primary); color: #fff; border-radius: 999px;
+    }
+
+    /* Button/label specimen */
+    .ui-row { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-top: 4px; }
+    .btn-spec {
+      font-size: 15px; font-weight: 500; padding: 13px 28px;
+      background: var(--primary); color: #fff; border-radius: 999px;
+    }
+    .ghost-spec {
+      font-size: 15px; font-weight: 500; padding: 12px 28px;
+      border: 1.5px solid var(--primary); color: var(--primary); border-radius: 999px;
+    }
+    .chip-spec {
+      font-size: 12px; font-weight: 500; letter-spacing: 0.04em;
+      padding: 5px 14px; background: rgba(81,96,77,0.1); color: #51604d; border-radius: 999px;
+    }
+
+    /* Font assignments */
+    .f-dm-sans       { font-family: 'DM Sans', sans-serif; }
+    .f-figtree       { font-family: 'Figtree', sans-serif; }
+    .f-jakarta       { font-family: 'Plus Jakarta Sans', sans-serif; }
+    .f-nunito        { font-family: 'Nunito Sans', sans-serif; }
+    .f-work-sans     { font-family: 'Work Sans', sans-serif; }
+    .f-jost          { font-family: 'Jost', sans-serif; }
+  </style>
+</head>
+<body>
+
+  <div class="sticky-top">
+    <header class="page-header">
+      <h1>Body Font Comparison — The Byron Doula</h1>
+      <p>All paired with Lora 500 headlines · Same content across every card</p>
+    </header>
+    <nav class="jump-nav">
+      <a href="#dm-sans" class="current">DM Sans ★</a>
+      <a href="#figtree">Figtree</a>
+      <a href="#jakarta">Plus Jakarta Sans</a>
+      <a href="#nunito">Nunito Sans</a>
+      <a href="#work-sans">Work Sans</a>
+      <a href="#jost">Jost</a>
+    </nav>
+  </div>
+
+  <div class="page-body">
+
+    <!-- DM Sans — current -->
+    <div class="font-card current f-dm-sans" id="dm-sans">
+      <div class="card-header">
+        <h2>DM Sans <span style="font-weight:400;color:var(--faint)">— current</span></h2>
+        <span class="card-tag">Current</span>
+      </div>
+      <div class="card-body">
+        <div>
+          <div class="size-label">Heading (Lora 500) + Body 17px</div>
+          <div class="lora-heading">Certified Birth Doula, Byron Bay</div>
+          <div class="lora-sub">Compassionate, empowering and personalised support.</div>
+          <p class="body-p">As a doula I provide continuous emotional, educational and practical support during pregnancy, birth and postpartum. Every family deserves to feel heard, respected and cared for at all times.</p>
+          <p class="body-p">I believe birth is a profound threshold — and crossing it well can shape a family for a lifetime. Whether you're planning a home birth or a hospital birth, medicated or unmedicated, I'm here to support your vision.</p>
+          <p class="body-small">© 2025 Nathalie Solis Pérez · Privacy · Terms</p>
+        </div>
+        <hr class="card-div">
+        <div class="body-block">
+          <div class="size-label">Nav</div>
+          <div class="nav-spec">
+            <span class="nav-logo-spec">The Byron Doula</span>
+            <span class="nav-link-spec">Services</span>
+            <span class="nav-link-spec">About</span>
+            <span class="nav-link-spec">Reviews</span>
+            <span class="nav-btn-spec">Book a Call</span>
+          </div>
+        </div>
+        <hr class="card-div">
+        <div class="body-block">
+          <div class="size-label">Buttons &amp; labels</div>
+          <div class="ui-row">
+            <span class="btn-spec">Work With Me</span>
+            <span class="ghost-spec">Learn More</span>
+            <span class="chip-spec">Byron Bay &amp; Northern Rivers</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Figtree -->
+    <div class="font-card f-figtree" id="figtree">
+      <div class="card-header">
+        <h2>Figtree</h2>
+      </div>
+      <div class="card-body">
+        <div>
+          <div class="size-label">Heading (Lora 500) + Body 17px</div>
+          <div class="lora-heading">Certified Birth Doula, Byron Bay</div>
+          <div class="lora-sub">Compassionate, empowering and personalised support.</div>
+          <p class="body-p">As a doula I provide continuous emotional, educational and practical support during pregnancy, birth and postpartum. Every family deserves to feel heard, respected and cared for at all times.</p>
+          <p class="body-p">I believe birth is a profound threshold — and crossing it well can shape a family for a lifetime. Whether you're planning a home birth or a hospital birth, medicated or unmedicated, I'm here to support your vision.</p>
+          <p class="body-small">© 2025 Nathalie Solis Pérez · Privacy · Terms</p>
+        </div>
+        <hr class="card-div">
+        <div class="body-block">
+          <div class="size-label">Nav</div>
+          <div class="nav-spec">
+            <span class="nav-logo-spec">The Byron Doula</span>
+            <span class="nav-link-spec">Services</span>
+            <span class="nav-link-spec">About</span>
+            <span class="nav-link-spec">Reviews</span>
+            <span class="nav-btn-spec">Book a Call</span>
+          </div>
+        </div>
+        <hr class="card-div">
+        <div class="body-block">
+          <div class="size-label">Buttons &amp; labels</div>
+          <div class="ui-row">
+            <span class="btn-spec">Work With Me</span>
+            <span class="ghost-spec">Learn More</span>
+            <span class="chip-spec">Byron Bay &amp; Northern Rivers</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Plus Jakarta Sans -->
+    <div class="font-card f-jakarta" id="jakarta">
+      <div class="card-header">
+        <h2>Plus Jakarta Sans</h2>
+      </div>
+      <div class="card-body">
+        <div>
+          <div class="size-label">Heading (Lora 500) + Body 17px</div>
+          <div class="lora-heading">Certified Birth Doula, Byron Bay</div>
+          <div class="lora-sub">Compassionate, empowering and personalised support.</div>
+          <p class="body-p">As a doula I provide continuous emotional, educational and practical support during pregnancy, birth and postpartum. Every family deserves to feel heard, respected and cared for at all times.</p>
+          <p class="body-p">I believe birth is a profound threshold — and crossing it well can shape a family for a lifetime. Whether you're planning a home birth or a hospital birth, medicated or unmedicated, I'm here to support your vision.</p>
+          <p class="body-small">© 2025 Nathalie Solis Pérez · Privacy · Terms</p>
+        </div>
+        <hr class="card-div">
+        <div class="body-block">
+          <div class="size-label">Nav</div>
+          <div class="nav-spec">
+            <span class="nav-logo-spec">The Byron Doula</span>
+            <span class="nav-link-spec">Services</span>
+            <span class="nav-link-spec">About</span>
+            <span class="nav-link-spec">Reviews</span>
+            <span class="nav-btn-spec">Book a Call</span>
+          </div>
+        </div>
+        <hr class="card-div">
+        <div class="body-block">
+          <div class="size-label">Buttons &amp; labels</div>
+          <div class="ui-row">
+            <span class="btn-spec">Work With Me</span>
+            <span class="ghost-spec">Learn More</span>
+            <span class="chip-spec">Byron Bay &amp; Northern Rivers</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Nunito Sans -->
+    <div class="font-card f-nunito" id="nunito">
+      <div class="card-header">
+        <h2>Nunito Sans</h2>
+      </div>
+      <div class="card-body">
+        <div>
+          <div class="size-label">Heading (Lora 500) + Body 17px</div>
+          <div class="lora-heading">Certified Birth Doula, Byron Bay</div>
+          <div class="lora-sub">Compassionate, empowering and personalised support.</div>
+          <p class="body-p">As a doula I provide continuous emotional, educational and practical support during pregnancy, birth and postpartum. Every family deserves to feel heard, respected and cared for at all times.</p>
+          <p class="body-p">I believe birth is a profound threshold — and crossing it well can shape a family for a lifetime. Whether you're planning a home birth or a hospital birth, medicated or unmedicated, I'm here to support your vision.</p>
+          <p class="body-small">© 2025 Nathalie Solis Pérez · Privacy · Terms</p>
+        </div>
+        <hr class="card-div">
+        <div class="body-block">
+          <div class="size-label">Nav</div>
+          <div class="nav-spec">
+            <span class="nav-logo-spec">The Byron Doula</span>
+            <span class="nav-link-spec">Services</span>
+            <span class="nav-link-spec">About</span>
+            <span class="nav-link-spec">Reviews</span>
+            <span class="nav-btn-spec">Book a Call</span>
+          </div>
+        </div>
+        <hr class="card-div">
+        <div class="body-block">
+          <div class="size-label">Buttons &amp; labels</div>
+          <div class="ui-row">
+            <span class="btn-spec">Work With Me</span>
+            <span class="ghost-spec">Learn More</span>
+            <span class="chip-spec">Byron Bay &amp; Northern Rivers</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Work Sans -->
+    <div class="font-card f-work-sans" id="work-sans">
+      <div class="card-header">
+        <h2>Work Sans</h2>
+      </div>
+      <div class="card-body">
+        <div>
+          <div class="size-label">Heading (Lora 500) + Body 17px</div>
+          <div class="lora-heading">Certified Birth Doula, Byron Bay</div>
+          <div class="lora-sub">Compassionate, empowering and personalised support.</div>
+          <p class="body-p">As a doula I provide continuous emotional, educational and practical support during pregnancy, birth and postpartum. Every family deserves to feel heard, respected and cared for at all times.</p>
+          <p class="body-p">I believe birth is a profound threshold — and crossing it well can shape a family for a lifetime. Whether you're planning a home birth or a hospital birth, medicated or unmedicated, I'm here to support your vision.</p>
+          <p class="body-small">© 2025 Nathalie Solis Pérez · Privacy · Terms</p>
+        </div>
+        <hr class="card-div">
+        <div class="body-block">
+          <div class="size-label">Nav</div>
+          <div class="nav-spec">
+            <span class="nav-logo-spec">The Byron Doula</span>
+            <span class="nav-link-spec">Services</span>
+            <span class="nav-link-spec">About</span>
+            <span class="nav-link-spec">Reviews</span>
+            <span class="nav-btn-spec">Book a Call</span>
+          </div>
+        </div>
+        <hr class="card-div">
+        <div class="body-block">
+          <div class="size-label">Buttons &amp; labels</div>
+          <div class="ui-row">
+            <span class="btn-spec">Work With Me</span>
+            <span class="ghost-spec">Learn More</span>
+            <span class="chip-spec">Byron Bay &amp; Northern Rivers</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Jost -->
+    <div class="font-card f-jost" id="jost">
+      <div class="card-header">
+        <h2>Jost</h2>
+      </div>
+      <div class="card-body">
+        <div>
+          <div class="size-label">Heading (Lora 500) + Body 17px</div>
+          <div class="lora-heading">Certified Birth Doula, Byron Bay</div>
+          <div class="lora-sub">Compassionate, empowering and personalised support.</div>
+          <p class="body-p">As a doula I provide continuous emotional, educational and practical support during pregnancy, birth and postpartum. Every family deserves to feel heard, respected and cared for at all times.</p>
+          <p class="body-p">I believe birth is a profound threshold — and crossing it well can shape a family for a lifetime. Whether you're planning a home birth or a hospital birth, medicated or unmedicated, I'm here to support your vision.</p>
+          <p class="body-small">© 2025 Nathalie Solis Pérez · Privacy · Terms</p>
+        </div>
+        <hr class="card-div">
+        <div class="body-block">
+          <div class="size-label">Nav</div>
+          <div class="nav-spec">
+            <span class="nav-logo-spec">The Byron Doula</span>
+            <span class="nav-link-spec">Services</span>
+            <span class="nav-link-spec">About</span>
+            <span class="nav-link-spec">Reviews</span>
+            <span class="nav-btn-spec">Book a Call</span>
+          </div>
+        </div>
+        <hr class="card-div">
+        <div class="body-block">
+          <div class="size-label">Buttons &amp; labels</div>
+          <div class="ui-row">
+            <span class="btn-spec">Work With Me</span>
+            <span class="ghost-spec">Learn More</span>
+            <span class="chip-spec">Byron Bay &amp; Northern Rivers</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>
