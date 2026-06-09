@@ -13,8 +13,8 @@
       --ivory:      #FAF5EE;
       --stone:      #F0E9DF;
       --charcoal:   #2D2A26;
-      --olive:      #722F1E;
-      --olive-dark: #4a1e10;
+      --olive:      #5E6B57;
+      --olive-dark: #3B4437;
       --clay:       #B8876B;
       --mid:        #7A7268;
       --border:     #E5E0D8;
@@ -64,7 +64,7 @@
       cursor: pointer;
       transition: background 0.2s;
     }
-    .btn-primary:hover { background: #722F1E; }
+    .btn-primary:hover { background: var(--olive-dark); }
 
     .btn-secondary {
       display: inline-block;
@@ -184,8 +184,8 @@
       background: var(--ivory);
       box-shadow: 0 1px 16px rgba(45,42,38,0.08);
     }
-    .nav-cta { display: inline-block; background: #722F1E; color: white; font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 500; padding: 10px 22px; text-decoration: none; border-radius: 8px; white-space: nowrap; transition: background 0.2s; }
-    .nav-cta:hover { background: #4a1e10; }
+    .nav-cta { font-size: 14px; color: #722F1E; text-decoration: none; letter-spacing: 0.04em; transition: color 0.2s; }
+    .nav-cta:hover { color: #4a1e10; }
 
     /* ════════════════════════════
        HOME — HERO
@@ -593,7 +593,7 @@
        HOME — CONTACT
     ════════════════════════════ */
     #contact {
-      background: #745346;
+      background: var(--olive-dark);
       padding: 96px 80px;
       border-radius: 18px;
       margin-left: 24px;
@@ -716,7 +716,7 @@
     .form-group input:focus,
     .form-group select:focus,
     .form-group textarea:focus { border-color: rgba(255,255,255,0.45); }
-    .form-group select option { background: #745346; }
+    .form-group select option { background: var(--olive-dark); }
     .form-group textarea { height: 120px; resize: vertical; }
     .btn-form {
       background: white;
