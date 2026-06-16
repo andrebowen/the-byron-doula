@@ -1,1260 +1,371 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>The Byron Doula — Birth Doula & Parent Coach, Byron Bay</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-  <style>
-    /* ── TOKENS ── */
-    :root {
-      --ivory:      #FAF5EE;
-      --stone:      #F0E9DF;
-      --charcoal:   #2D2A26;
-      --olive:      #5E6B57;
-      --olive-dark: #3B4437;
-      --clay:       #B8876B;
-      --mid:        #7A7268;
-      --border:     #E5E0D8;
-    }
-
-    /* ── RESET ── */
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-    body {
-      font-family: 'Inter', system-ui, sans-serif;
-      background: var(--ivory);
-      color: var(--charcoal);
-      font-size: 18px;
-      line-height: 1.6;
-      -webkit-font-smoothing: antialiased;
-    }
-
-    /* ── TYPOGRAPHY ── */
-    h1, h2, h3, h4 {
-      font-family: 'Cormorant Garamond', Georgia, serif;
-      font-weight: 500;
-      line-height: 1.15;
-      color: var(--charcoal);
-    }
-    h1 { font-size: clamp(38px, 5vw, 58px); }
-    h2 { font-size: clamp(30px, 3.5vw, 40px); }
-    h3 { font-size: 24px; }
-    p  { color: var(--charcoal); line-height: 1.7; }
-
-    /* ── LAYOUT ── */
-    .container { max-width: 1100px; margin: 0 auto; padding: 0 48px; }
-    section { padding: 96px 0; }
-
-    /* ── BUTTONS ── */
-    .btn-primary {
-      display: inline-block;
-      background: var(--olive);
-      color: white;
-      font-family: 'Inter', sans-serif;
-      font-size: 14px;
-      font-weight: 500;
-      letter-spacing: 0.03em;
-      padding: 14px 28px;
-      text-decoration: none;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: background 0.2s;
-    }
-    .btn-primary:hover { background: var(--olive-dark); }
-
-    .btn-secondary {
-      display: inline-block;
-      color: var(--charcoal);
-      font-family: 'Inter', sans-serif;
-      font-size: 14px;
-      font-weight: 500;
-      letter-spacing: 0.03em;
-      padding: 13px 28px;
-      text-decoration: none;
-      border: 1.5px solid var(--charcoal);
-      border-radius: 8px;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-    .btn-secondary:hover { background: var(--olive); border-color: var(--olive); color: white; }
-
-    .btn-link {
-      display: inline-block;
-      color: var(--olive);
-      font-family: 'Inter', sans-serif;
-      font-size: 14px;
-      font-weight: 500;
-      text-decoration: none;
-      border-bottom: 1px solid var(--olive);
-      padding-bottom: 1px;
-      transition: opacity 0.2s;
-    }
-    .btn-link:hover { opacity: 0.7; }
-
-    /* ── IMAGE PLACEHOLDERS ── */
-    .img-ph {
-      background: var(--stone);
-      border: 1.5px dashed var(--border);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: 'Inter', sans-serif;
-      font-size: 11px;
-      font-weight: 500;
-      color: var(--mid);
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
-
-    /* ── PAGE SEPARATOR ── */
-    .page-sep {
-      background: var(--charcoal);
-      color: white;
-      font-family: 'Inter', sans-serif;
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      padding: 10px 48px;
-      margin-top: 80px;
-    }
-
-    /* ── EYEBROW ── */
-    .eyebrow {
-      font-family: 'Inter', sans-serif;
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--mid);
-      margin-bottom: 14px;
-      display: block;
-    }
-
-    /* ════════════════════════════
-       NAV
-    ════════════════════════════ */
-    .site-nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 100;
-      background: var(--ivory);
-      box-shadow: 0 1px 16px rgba(45,42,38,0.08);
-      transition: box-shadow 0.3s;
-    }
-    .site-nav.scrolled {
-      box-shadow: 0 2px 24px rgba(45,42,38,0.12);
-    }
-    .nav-inner {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 0 48px;
-      height: 72px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-    .nav-logo {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 28px;
-      font-weight: 500;
-      color: #722F1E;
-      text-decoration: none;
-      white-space: nowrap;
-    }
-    .nav-links { display: flex; gap: 36px; list-style: none; }
-    .nav-links a {
-      font-size: 14px;
-      color: #722F1E;
-      text-decoration: none;
-      letter-spacing: 0.04em;
-      transition: color 0.2s;
-    }
-    .nav-links a:hover { color: #4a1e10; }
-    .nav-toggle { display: none; flex-direction: column; justify-content: center; gap: 5px; background: none; border: none; cursor: pointer; padding: 6px; }
-    .nav-toggle span { display: block; width: 22px; height: 1.5px; background: var(--charcoal); transition: transform 0.2s, opacity 0.2s; }
-    .site-nav.nav-open .nav-toggle span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
-    .site-nav.nav-open .nav-toggle span:nth-child(2) { opacity: 0; }
-    .site-nav.nav-open .nav-toggle span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
-    .nav-static {
-      background: var(--ivory);
-      box-shadow: 0 1px 16px rgba(45,42,38,0.08);
-    }
-
-    /* ════════════════════════════
-       HOME — HERO
-    ════════════════════════════ */
-    .hero-frame {
-      max-width: 1400px;
-      margin: 0 auto;
-      padding: 72px 0 0;
-    }
-    @media (max-width: 768px) {
-      .hero-frame { padding: 72px 0 0; }
-    }
-
-    /* ── SECTION SPACING RHYTHM ── */
-    /* Sections float with deliberate gaps — spacing grows as you move down */
-    #trust-bar       { margin-top: 56px; }
-    #about-preview   { margin-top: 0; scroll-margin-top: 72px; } /* trust bar + about read as one unit */
-    .featured-band   { margin-top: 56px; }
-    #services        { margin-top: 56px; }
-    #reviews         { margin-top: 64px; }
-    #faq             { margin-top: 64px; }
-    #contact         { margin-top: 64px; }
-    .site-footer     { margin-top: 64px; }
-    #hero {
-      position: relative;
-      min-height: 80vh;
-      overflow: hidden;
-    }
-    .hero-bg {
-      position: absolute;
-      inset: 0;
-      background-image: url('images/mama-belly.jpg');
-      background-size: cover;
-      background-position: center center;
-    }
-    .hero-bg-label {
-      font-family: 'Inter', sans-serif;
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.5);
-    }
-    .hero-overlay {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to top, rgba(0,0,0,0.5), rgba(0,0,0,0.05));
-      pointer-events: none;
-    }
-    .hero-content {
-      position: absolute;
-      bottom: 72px;
-      left: 0;
-      right: 0;
-      z-index: 2;
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 0 64px;
-    }
-    .hero-eyebrow {
-      font-family: 'Inter', sans-serif;
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.6);
-      margin-bottom: 18px;
-      display: block;
-    }
-    .hero-headline {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(38px, 5.5vw, 68px);
-      font-weight: 400;
-      line-height: 1.06;
-      color: white;
-      margin-bottom: 20px;
-      max-width: 680px;
-    }
-    .hero-sub {
-      font-size: 16px;
-      color: rgba(255,255,255,0.78);
-      line-height: 1.75;
-      margin-bottom: 36px;
-      max-width: 460px;
-    }
-    .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
-    .btn-ghost {
-      display: inline-block;
-      color: rgba(255,255,255,0.85);
-      font-family: 'Inter', sans-serif;
-      font-size: 14px;
-      font-weight: 500;
-      letter-spacing: 0.03em;
-      padding: 13px 28px;
-      text-decoration: none;
-      border: 1.5px solid rgba(255,255,255,0.45);
-      border-radius: 8px;
-      transition: all 0.2s;
-    }
-    .btn-ghost:hover { background: var(--olive); border-color: var(--olive); color: white; }
-
-    /* ── HERO SCROLL CUE ── */
-    .hero-scroll {
-      position: absolute; bottom: 32px; left: 50%; transform: translateX(-50%);
-      z-index: 3; display: flex; align-items: center; justify-content: center;
-      width: 40px; height: 40px; text-decoration: none;
-      opacity: 0.45; transition: opacity 0.2s;
-      animation: scroll-bounce 2.2s ease-in-out infinite;
-    }
-    .hero-scroll:hover { opacity: 0.8; }
-    @keyframes scroll-bounce {
-      0%, 100% { transform: translateX(-50%) translateY(0); }
-      50%       { transform: translateX(-50%) translateY(7px); }
-    }
-
-    /* ════════════════════════════
-       HOME — TRUST BAR
-    ════════════════════════════ */
-    #trust-bar {
-      background: var(--stone);
-      padding: 32px 0;
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-    }
-    .trust-grid {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 0 48px;
-      display: grid;
-      grid-template-columns: repeat(4,1fr);
-      gap: 24px;
-    }
-    .trust-item { text-align: center; }
-    .trust-label {
-      font-family: 'Inter', sans-serif;
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--mid);
-      margin-bottom: 5px;
-    }
-    .trust-value {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 20px;
-      font-weight: 500;
-      color: var(--charcoal);
-    }
-
-    /* ════════════════════════════
-       HOME — ABOUT PREVIEW
-    ════════════════════════════ */
-    #about-preview { background: var(--ivory); padding-top: 64px; }
-    .about-inner {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 0 48px;
-      display: grid;
-      grid-template-columns: 5fr 7fr;
-      gap: 80px;
-      align-items: center;
-    }
-    .about-portrait { aspect-ratio: 3/4; border-radius: 2px; object-fit: cover; width: 100%; display: block; }
-    .about-body {
-      font-size: 16px;
-      color: var(--mid);
-      margin-bottom: 24px;
-      line-height: 1.75;
-    }
-    .cred-list { list-style: none; margin-bottom: 36px; }
-    .cred-list li {
-      font-size: 14px;
-      color: var(--charcoal);
-      padding: 10px 0;
-      border-bottom: 1px solid var(--border);
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    .cred-list li::before {
-      content: '';
-      width: 4px; height: 4px;
-      background: var(--clay);
-      border-radius: 50%;
-      flex-shrink: 0;
-    }
-
-    /* ════════════════════════════
-       FEATURED IN
-    ════════════════════════════ */
-    .featured-band {
-      background: var(--stone);
-      padding: 56px 0;
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-    }
-    .featured-label {
-      font-family: 'Inter', sans-serif;
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--mid);
-      text-align: center;
-      margin-bottom: 28px;
-    }
-    .logo-strip { height: 56px; border-radius: 2px; }
-    .logo-row { display: flex; align-items: center; justify-content: center; gap: 40px; flex-wrap: wrap; }
-    .featured-logo { width: 80px; height: auto; opacity: 0.5; filter: grayscale(100%); }
-
-    /* ════════════════════════════
-       HOME — SERVICES
-    ════════════════════════════ */
-    #services { background: var(--ivory); }
-    .section-intro {
-      font-size: 16px;
-      color: var(--mid);
-      max-width: 500px;
-      margin-bottom: 52px;
-      line-height: 1.75;
-    }
-    .services-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 24px;
-    }
-    .service-card {
-      background: white;
-      border: 1px solid var(--border);
-      border-radius: 18px;
-      padding: 40px;
-      box-shadow: 0 2px 16px rgba(45,42,38,0.05);
-    }
-    .service-tag {
-      display: inline-block;
-      font-family: 'Inter', sans-serif;
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 0.05em;
-      color: var(--olive);
-      background: rgba(94,107,87,0.1);
-      padding: 4px 12px;
-      border-radius: 20px;
-      margin-bottom: 18px;
-    }
-    .service-card h3 { margin-bottom: 10px; }
-    .service-card > p {
-      font-size: 15px;
-      color: var(--mid);
-      margin-bottom: 24px;
-      line-height: 1.7;
-    }
-    .service-includes {
-      list-style: none;
-      border-top: 1px solid var(--border);
-      padding-top: 20px;
-      margin-bottom: 28px;
-    }
-    .service-includes li {
-      font-size: 14px;
-      color: var(--charcoal);
-      padding: 8px 0;
-      border-bottom: 1px solid var(--border);
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    .service-includes li::before {
-      content: '';
-      width: 3px; height: 3px;
-      background: var(--clay);
-      border-radius: 50%;
-      flex-shrink: 0;
-    }
-    .service-price {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 22px;
-      font-weight: 500;
-      color: var(--charcoal);
-      margin-bottom: 24px;
-    }
-
-    /* ════════════════════════════
-       HOME — REVIEWS
-    ════════════════════════════ */
-    #reviews {
-      background: var(--stone);
-      border-top: 1px solid var(--border);
-    }
-    .reviews-header {
-      display: flex;
-      align-items: flex-end;
-      justify-content: space-between;
-      margin-bottom: 48px;
-      flex-wrap: wrap;
-      gap: 24px;
-    }
-    .reviews-meta {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-top: 14px;
-      flex-wrap: wrap;
-    }
-    .stars { font-size: 20px; color: var(--clay); letter-spacing: 2px; }
-    .review-count { font-size: 14px; color: var(--mid); }
-    .testimonials-grid {
-      display: grid;
-      grid-template-columns: repeat(3,1fr);
-      gap: 20px;
-    }
-    .t-card {
-      background: white;
-      border: 1px solid var(--border);
-      border-radius: 18px;
-      padding: 32px;
-      display: flex;
-      flex-direction: column;
-      box-shadow: 0 2px 12px rgba(45,42,38,0.04);
-    }
-    .quote-mark {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 64px;
-      line-height: 0.6;
-      color: var(--clay);
-      opacity: 0.35;
-      margin-bottom: 16px;
-      display: block;
-    }
-    .t-card blockquote {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 18px;
-      font-style: italic;
-      color: var(--charcoal);
-      line-height: 1.6;
-      margin-bottom: 24px;
-      flex: 1;
-    }
-    .t-avatar {
-      width: 44px; height: 44px;
-      border-radius: 50%;
-      object-fit: cover;
-      display: block;
-      margin-bottom: 10px;
-      background: var(--stone);
-    }
-    .t-attr {
-      font-family: 'Inter', sans-serif;
-      font-size: 12px;
-      font-weight: 500;
-      color: var(--mid);
-      letter-spacing: 0.04em;
-    }
-
-    /* ════════════════════════════
-       HOME — FAQ
-    ════════════════════════════ */
-    #faq { background: var(--ivory); }
-    .faq-inner {
-      max-width: 720px;
-      margin: 0 auto;
-      padding: 0 48px;
-    }
-    .faq-item { border-bottom: 1px solid var(--border); }
-    .faq-q {
-      width: 100%;
-      background: none;
-      border: none;
-      padding: 24px 0;
-      text-align: left;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      cursor: pointer;
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 20px;
-      font-weight: 500;
-      color: var(--charcoal);
-      gap: 16px;
-    }
-    .faq-icon {
-      width: 18px; height: 18px;
-      flex-shrink: 0;
-      position: relative;
-      opacity: 0.4;
-    }
-    .faq-icon::before, .faq-icon::after {
-      content: '';
-      position: absolute;
-      background: var(--charcoal);
-    }
-    .faq-icon::before { width: 12px; height: 1.5px; top: 50%; left: 50%; transform: translate(-50%,-50%); }
-    .faq-icon::after  { width: 1.5px; height: 12px; top: 50%; left: 50%; transform: translate(-50%,-50%); transition: opacity 0.2s; }
-    .faq-item.open .faq-icon::after { opacity: 0; }
-    .faq-a {
-      display: none;
-      padding-bottom: 24px;
-      font-size: 15px;
-      color: var(--mid);
-      line-height: 1.75;
-    }
-    .faq-item.open .faq-a { display: block; }
-
-    /* ════════════════════════════
-       HOME — CONTACT
-    ════════════════════════════ */
-    #contact {
-      background: var(--olive-dark);
-      padding: 96px 80px;
-      border-radius: 18px;
-      margin-left: 24px;
-      margin-right: 24px;
-      scroll-margin-top: 96px;
-    }
-    .contact-inner {
-      max-width: 1000px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 80px;
-      align-items: start;
-    }
-    @media (max-width: 768px) {
-      /* Global */
-      .container { padding: 0 20px; }
-      section { padding: 64px 0; }
-
-      /* Nav */
-      .nav-toggle { display: flex; }
-      .nav-links { display: none; position: absolute; top: 72px; left: 0; right: 0; flex-direction: column; background: rgba(250,245,238,0.98); border-bottom: 1px solid var(--border); padding: 8px 0 20px; box-shadow: 0 4px 16px rgba(45,42,38,0.08); z-index: 99; }
-      .nav-links li a { display: block; padding: 14px 24px; opacity: 1; font-size: 15px; }
-
-      .site-nav.nav-open .nav-links { display: flex; }
-
-      /* Hero */
-      .hero-content { padding: 0 24px; bottom: 48px; }
-      .hero-headline { font-size: clamp(44px, 12vw, 56px); }
-      .hero-sub { max-width: 100%; }
-      .hero-actions { flex-direction: column; }
-      .hero-actions a { text-align: center; }
-
-      /* Trust bar */
-      .trust-grid { grid-template-columns: 1fr 1fr; padding: 0 20px; }
-
-      /* About preview */
-      .about-inner { grid-template-columns: 1fr; gap: 40px; padding: 0 20px; }
-      .about-portrait { aspect-ratio: 4/3; object-position: top; }
-
-      /* Featured In */
-      .featured-band { padding: 40px 0; }
-      .logo-row { gap: 20px; padding: 0 20px; }
-      .featured-logo { width: 80px; }
-
-      /* Services */
-      .services-grid { grid-template-columns: 1fr; }
-
-      /* Reviews — horizontal swipe carousel */
-      .reviews-header { flex-direction: column; align-items: flex-start; }
-      #reviews .container { overflow: visible; }
-      .testimonials-grid { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; scrollbar-width: none; gap: 16px; padding: 4px 0 8px; }
-      .testimonials-grid::-webkit-scrollbar { display: none; }
-      .testimonials-grid::before { content: ''; flex: 0 0 20px; }
-      .testimonials-grid::after  { content: ''; flex: 0 0 20px; }
-      .testimonials-grid .t-card { flex: 0 0 82vw; scroll-snap-align: start; }
-
-      /* FAQ */
-      .faq-inner { padding: 0 20px; }
-
-      /* Contact */
-      #contact { padding: 56px 24px; margin-left: 14px; margin-right: 14px; border-radius: 14px; }
-      .contact-inner { grid-template-columns: 1fr; gap: 40px; }
-
-      /* Footer */
-      .footer-inner { padding: 0 20px; }
-      .footer-top { flex-direction: column; align-items: flex-start; gap: 20px; }
-    }
-    .contact-left h2 { color: white; margin-bottom: 16px; }
-    .contact-subhead {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 20px;
-      font-style: italic;
-      color: rgba(255,255,255,0.7);
-      margin-bottom: 18px;
-      line-height: 1.4;
-    }
-    .contact-body { font-size: 15px; color: rgba(255,255,255,0.55); line-height: 1.75; margin-bottom: 8px; }
-    .contact-reassure { font-size: 13px; color: rgba(255,255,255,0.38); margin-bottom: 40px; }
-    .contact-trust { display: flex; flex-direction: column; gap: 10px; }
-    .c-trust-item {
-      font-size: 16px;
-      color: rgba(255,255,255,0.5);
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .c-trust-item::before {
-      content: '';
-      width: 3px; height: 3px;
-      background: var(--clay);
-      border-radius: 50%;
-      flex-shrink: 0;
-    }
-    .contact-form { display: flex; flex-direction: column; gap: 16px; }
-    .form-group { display: flex; flex-direction: column; gap: 6px; }
-    .form-group label {
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.45);
-    }
-    .form-group input,
-    .form-group select,
-    .form-group textarea {
-      background: rgba(255,255,255,0.07);
-      border: 1px solid rgba(255,255,255,0.16);
-      padding: 12px 16px;
-      font-family: 'Inter', sans-serif;
-      font-size: 14px;
-      color: white;
-      border-radius: 2px;
-      outline: none;
-      transition: border-color 0.2s;
-      width: 100%;
-    }
-    .form-group input::placeholder,
-    .form-group textarea::placeholder { color: rgba(255,255,255,0.28); }
-    .form-group input:focus,
-    .form-group select:focus,
-    .form-group textarea:focus { border-color: rgba(255,255,255,0.45); }
-    .form-group select option { background: var(--olive-dark); }
-    .form-group textarea { height: 120px; resize: vertical; }
-    .btn-form {
-      background: white;
-      color: var(--olive-dark);
-      font-family: 'Inter', sans-serif;
-      font-size: 14px;
-      font-weight: 600;
-      padding: 14px 28px;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      align-self: flex-start;
-      transition: opacity 0.2s;
-    }
-    .btn-form:hover { opacity: 0.9; }
-
-    /* ════════════════════════════
-       FOOTER
-    ════════════════════════════ */
-    .site-footer {
-      background: var(--stone);
-      border-top: 1px solid var(--border);
-      padding: 40px 0;
-    }
-    .footer-inner { max-width: 1100px; margin: 0 auto; padding: 0 48px; display: flex; flex-direction: column; gap: 16px; }
-    .footer-top { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
-    .footer-copy { font-size: 13px; color: var(--mid); }
-    .footer-links { display: flex; gap: 24px; list-style: none; }
-    .footer-links a { font-size: 13px; color: var(--mid); text-decoration: none; }
-    .footer-links a:hover { color: var(--charcoal); }
-    .social-icons { display: flex; gap: 18px; align-items: center; }
-    .social-icon { color: #6B6B6B; display: flex; transition: color 0.2s; }
-    .social-icon:hover { color: var(--charcoal); }
-    .footer-ack {
-      font-size: 12px;
-      color: var(--mid);
-      line-height: 1.7;
-      max-width: 700px;
-      opacity: 0.75;
-      border-top: 1px solid var(--border);
-      padding-top: 16px;
-    }
-
-    /* ════════════════════════════
-       LIGHT CTA BAND
-    ════════════════════════════ */
-    .cta-light {
-      background: var(--stone);
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-      padding: 80px 0;
-      text-align: center;
-    }
-    .cta-light h2 { margin-bottom: 16px; }
-    .cta-light p { font-size: 16px; color: var(--mid); margin-bottom: 32px; max-width: 480px; margin-left: auto; margin-right: auto; line-height: 1.7; }
-
-    /* ════════════════════════════
-       ABOUT PAGE
-    ════════════════════════════ */
-    .about-hero {
-      padding-top: 160px;
-      padding-bottom: 96px;
-      background: var(--ivory);
-    }
-    .about-hero-inner {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 0 48px;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 80px;
-      align-items: center;
-    }
-    .about-hero-quote {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(26px, 3.5vw, 40px);
-      font-style: italic;
-      font-weight: 400;
-      line-height: 1.3;
-      color: var(--charcoal);
-      margin-bottom: 36px;
-    }
-    .about-hero-img { aspect-ratio: 3/4; border-radius: 2px; }
-
-    .about-story {
-      background: var(--stone);
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-    }
-    .narrow { max-width: 720px; margin: 0 auto; padding: 0 48px; }
-    .about-story p { font-size: 17px; color: var(--mid); line-height: 1.8; margin-bottom: 20px; }
-    .about-story p:last-child { margin-bottom: 0; }
-
-    .about-creds { background: var(--ivory); }
-    .creds-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0 64px;
-      margin-top: 40px;
-      list-style: none;
-    }
-    .creds-grid li {
-      font-size: 15px;
-      color: var(--charcoal);
-      padding: 14px 0;
-      border-bottom: 1px solid var(--border);
-      display: flex;
-      align-items: flex-start;
-      gap: 12px;
-    }
-    .creds-grid li::before {
-      content: '';
-      width: 4px; height: 4px;
-      background: var(--clay);
-      border-radius: 50%;
-      flex-shrink: 0;
-      margin-top: 8px;
-    }
-
-    .media-list { list-style: none; margin-top: 24px; }
-    .media-list li {
-      font-size: 15px;
-      color: var(--mid);
-      padding: 13px 0;
-      border-bottom: 1px solid var(--border);
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    .media-list li::before {
-      content: '';
-      width: 3px; height: 3px;
-      background: var(--clay);
-      border-radius: 50%;
-      flex-shrink: 0;
-    }
-
-    .about-why { background: var(--ivory); }
-    .placeholder-block {
-      font-size: 15px;
-      color: var(--mid);
-      font-style: italic;
-      background: var(--stone);
-      border: 1px dashed var(--border);
-      padding: 24px;
-      border-radius: 2px;
-      margin-top: 24px;
-      opacity: 0.7;
-    }
-
-    /* ════════════════════════════
-       SERVICES PAGE
-    ════════════════════════════ */
-    .services-hero {
-      padding-top: 160px;
-      padding-bottom: 72px;
-      background: var(--ivory);
-    }
-    .services-hero h1 { max-width: 620px; margin-bottom: 20px; }
-    .services-hero p { font-size: 17px; color: var(--mid); max-width: 500px; line-height: 1.75; }
-
-    .service-block {
-      padding: 80px 0;
-      border-bottom: 1px solid var(--border);
-      display: grid;
-      grid-template-columns: 5fr 7fr;
-      gap: 80px;
-      align-items: start;
-    }
-    .service-block:last-child { border-bottom: none; }
-    .sb-left h2 { margin-bottom: 12px; }
-    .sb-left .service-tag { margin-bottom: 20px; }
-    .sb-body { font-size: 16px; color: var(--mid); line-height: 1.75; }
-    .sb-right h4 {
-      font-family: 'Inter', sans-serif;
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--mid);
-      margin-bottom: 16px;
-    }
-    .detail-list { list-style: none; margin-bottom: 32px; }
-    .detail-list li {
-      font-size: 15px;
-      color: var(--charcoal);
-      padding: 13px 0;
-      border-bottom: 1px solid var(--border);
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-    }
-    .detail-list li strong { font-weight: 500; font-size: 14px; }
-    .detail-list li span { font-size: 13px; color: var(--mid); }
-    .detail-price {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 24px;
-      color: var(--charcoal);
-      margin-bottom: 24px;
-      font-weight: 500;
-    }
-
-    .guidance-band {
-      background: var(--stone);
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-      padding: 80px 0;
-      text-align: center;
-    }
-    .guidance-band h2 { margin-bottom: 16px; }
-    .guidance-band p { font-size: 16px; color: var(--mid); line-height: 1.75; margin-bottom: 32px; max-width: 560px; margin-left: auto; margin-right: auto; }
-
-    /* ════════════════════════════
-       REVIEWS PAGE
-    ════════════════════════════ */
-    .reviews-hero {
-      padding-top: 160px;
-      padding-bottom: 64px;
-      background: var(--ivory);
-      text-align: center;
-    }
-    .reviews-hero h1 { margin-bottom: 20px; }
-    .reviews-summary-bar {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 20px;
-      flex-wrap: wrap;
-    }
-    .reviews-full {
-      background: var(--stone);
-      border-top: 1px solid var(--border);
-    }
-    .reviews-full-grid {
-      display: grid;
-      grid-template-columns: repeat(3,1fr);
-      gap: 20px;
-    }
-    .google-bar {
-      display: flex;
-      align-items: center;
-      gap: 20px;
-      background: white;
-      border: 1px solid var(--border);
-      padding: 20px 28px;
-      margin-top: 48px;
-      border-radius: 2px;
-      flex-wrap: wrap;
-    }
-    .google-rating {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 22px;
-      font-weight: 500;
-    }
-    .google-count { font-size: 14px; color: var(--mid); }
-    .google-bar .btn-link { margin-left: auto; }
-  </style>
+<meta charset="UTF-8">
+<meta name="theme-color" content="#722F1E">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Byron Doula | Birth Doula &amp; Parent Coach, Byron Bay</title>
+<meta name="description" content="Certified birth doula and parent coach in Byron Bay. Holistic support for pregnancy, birth, and parenting. 46+ five-star reviews.">
+<link rel="icon" href="favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="stylesheet" href="css/design-system.css">
 </head>
 <body>
-
-<!-- ══════════════════════════════════════════════ -->
-<!-- PAGE 1 — HOME                                  -->
-<!-- ══════════════════════════════════════════════ -->
 
 <nav class="site-nav" id="site-nav">
   <div class="nav-inner">
     <a href="index.html" class="nav-logo">The Byron Doula</a>
     <ul class="nav-links">
-      <li><a href="#about-preview">About</a></li>
-      <li><a href="#services">Services</a></li>
-      <li><a href="#reviews">Reviews</a></li>
-      <li><a href="#contact">Contact</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="birth-preparation.html">Birth Preparation</a></li>
+      <li><a href="parent-coaching.html">Parent Coaching</a></li>
+      <li class="nav-mobile-only"><a href="index.html#contact">Contact</a></li>
     </ul>
-    <button class="nav-toggle" aria-label="Menu" onclick="document.getElementById('site-nav').classList.toggle('nav-open')">
+    <a href="index.html#contact" class="btn btn--primary btn--sm nav-cta">Contact</a>
+    <button class="nav-toggle" id="nav-toggle" type="button" aria-label="Menu">
       <span></span><span></span><span></span>
     </button>
   </div>
 </nav>
 
-<div class="hero-frame">
-  <section id="hero">
-    <div class="hero-bg"></div>
-    <div class="hero-overlay"></div>
-    <div class="hero-content">
-      <h1 class="hero-headline">Feel Informed, Supported and Empowered.</h1>
-      <p class="hero-sub">Trusted support for pregnancy, birth and parenthood — with calm guidance, emotional care, and evidence-based expertise that puts you first.</p>
-      <div class="hero-actions">
-        <a href="#contact" class="btn-primary">Enquire About Support</a>
-        <a href="about.html" class="btn-ghost">Read My Story →</a>
+<!-- HERO - section type 01 (matches fold demo A) -->
+<section class="section section--hero section--bg">
+  <div class="hero">
+    <div class="hero-text">
+      <span class="eyebrow eyebrow-accent">Doula &amp; Parent Coach</span>
+      <!-- Break A: From Overwhelmed / to Confident -->
+      <h1 class="type-xl">From Overwhelmed<br>to Confident</h1>
+      <p>Holistic support for pregnancy, birth and parenting.<br>Clarity, calm and confidence at every stage.</p>
+      <div class="actions">
+        <a class="btn btn--primary" href="#contact">Contact</a>
+        <a class="btn btn--secondary" href="about.html">About me</a>
       </div>
     </div>
-    <a href="#trust-bar" class="hero-scroll" aria-label="Scroll down">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
-    </a>
-  </section>
-</div>
-
-<section id="trust-bar">
-  <div class="trust-grid">
-    <div class="trust-item">
-      <div class="trust-label">Experience</div>
-      <div class="trust-value">13 Years</div>
-    </div>
-    <div class="trust-item">
-      <div class="trust-label">Qualifications</div>
-      <div class="trust-value">Certified Doula & Parenting Coach</div>
-    </div>
-    <div class="trust-item">
-      <div class="trust-label">Rating</div>
-      <div class="trust-value">★★★★★ 5.0</div>
-    </div>
-    <div class="trust-item">
-      <div class="trust-label">Location</div>
-      <div class="trust-value">Byron Bay & Worldwide</div>
+    <div class="hero-photo">
+      <img src="images/nathalie-about.jpg" alt="Nathalie Solis Pérez">
     </div>
   </div>
 </section>
 
-<section id="about-preview">
-  <div class="about-inner">
-    <img class="about-portrait" src="images/nathalie-portrait.jpg" alt="Nathalie Solis Pérez">
-    <div>
-      <span class="eyebrow" style="color:var(--clay)">About Nathalie</span>
-      <h2 style="margin-bottom:18px;">The right support changes everything.</h2>
-      <p class="about-body">Support makes all the difference — for mothers and their partners. With 13 years of experience supporting births across Byron Bay and Berlin, and a deeply personalised approach to every family.</p>
-      <ul class="cred-list">
-        <li>Certified Holistic Birth Doula</li>
-        <li>Aware Parenting Coach</li>
-        <li>Based in Byron Bay, Australia — supporting worldwide</li>
-      </ul>
-      <a href="about.html" class="btn-secondary">Read My Story →</a>
+<!-- TRUST - section type 06 -->
+<section class="section section--bg">
+  <div class="container">
+    <span class="eyebrow eyebrow-accent">Experience</span>
+    <div class="trust-cards">
+      <div class="trust-card">
+        <div class="trust-num">13 years</div>
+        <div class="trust-sub">Experience as a certified birth doula, supporting families across Byron Bay and Berlin.</div>
+      </div>
+      <div class="trust-card">
+        <div class="trust-num">46+</div>
+        <div class="trust-sub"><span class="trust-stars">★★★★★</span> five-star reviews on Google and Facebook from families worldwide.</div>
+      </div>
+      <div class="trust-card">
+        <div class="trust-num">100+ births</div>
+        <div class="trust-sub">Attended as a doula, bringing calm, knowledge, and personalised care to every birth.</div>
+      </div>
     </div>
   </div>
 </section>
 
-<div class="featured-band">
+<!-- ABOUT - section type 03 -->
+<section class="section section--bg section--flush-bottom about-before-logos">
   <div class="container">
-    <p class="featured-label">As Featured In</p>
-    <div class="logo-row">
-      <img src="images/logo-rara-new.png" alt="The Rara Files" class="featured-logo">
-      <img src="images/logo-pbb-media.png" alt="PBB Media" class="featured-logo">
-      <img src="images/logo-iamibu.png" alt="iamibu" class="featured-logo">
-      <img src="images/logo-in-a-day-naturopathy.png" alt="In A Day Naturopathy" class="featured-logo" style="width:120px">
-      <img src="images/logo-space-to-flow.png" alt="Space To Flow" class="featured-logo" style="width:120px">
-      <img src="images/logo-grace-tales.png" alt="Grace Tales" class="featured-logo">
-      <img src="images/logo-cleo.png" alt="Cleo" class="featured-logo">
-      <img src="images/logo-dearwork.png" alt="Dear Work" class="featured-logo">
-    </div>
-  </div>
-</div>
-
-<section id="services">
-  <div class="container">
-    <span class="eyebrow">Support</span>
-    <h2 style="margin-bottom:14px;">How I Can Support You</h2>
-    <p class="section-intro">Whether you're preparing for birth or navigating early parenthood, support can make all the difference.</p>
-    <div class="services-grid">
-      <article class="service-card">
-        <div class="service-tag">Virtual or In-Person</div>
-        <h3>Birth Preparation</h3>
-        <p>Calm, personalised preparation so you and your partner feel informed, grounded, and ready for birth.</p>
-        <ul class="service-includes">
-          <li>Personalised Birth Plan</li>
-          <li>Partner Preparation</li>
-          <li>Labour Comfort Techniques</li>
-          <li>Evidence-Based Guidance</li>
+    <div class="about-card">
+      <div class="about-photo-col">
+        <img src="images/nathalie-bananas.jpg" alt="Nathalie Solis Pérez">
+      </div>
+      <div class="about-text-col">
+        <span class="eyebrow eyebrow-accent">About Nathalie</span>
+        <h2>The right support changes everything.</h2>
+        <p class="about-body">Support makes all the difference for mothers and their partners. With 13 years of experience supporting births across Byron Bay and Berlin, and a deeply personalised approach to every family.</p>
+        <ul class="dot-list">
+          <li>Certified Holistic Birth Doula (CBI)</li>
+          <li>Aware Parenting Coach</li>
+          <li>Based in Byron Bay, Australia, supporting worldwide</li>
         </ul>
-        <div class="service-price">Virtual $250 · In-Person $300</div>
-        <a href="services.html" class="btn-secondary">Learn More →</a>
-      </article>
-      <article class="service-card">
-        <div class="service-tag">Virtual Sessions</div>
-        <h3>Parent Coaching</h3>
-        <p>Gentle guidance for pregnancy, postpartum and the transition into early parenthood.</p>
-        <ul class="service-includes">
-          <li>1-on-1 Support</li>
-          <li>Sleep & Feeding Guidance</li>
-          <li>Relationship Support</li>
-          <li>Ongoing Coaching</li>
-        </ul>
-        <div class="service-price">Virtual $180/hr</div>
-        <a href="services.html" class="btn-secondary">Learn More →</a>
-      </article>
+        <a class="btn btn--secondary" href="about.html">About me</a>
+      </div>
     </div>
   </div>
 </section>
 
-<section id="reviews">
+<!-- LOGO BAR - section type 02 -->
+<section class="section section--flush-y section--bg homepage-logos">
   <div class="container">
-    <div class="reviews-header">
-      <div>
-        <span class="eyebrow">Testimonials</span>
-        <h2>Families Share Their Experience</h2>
-        <div class="reviews-meta">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" style="vertical-align:middle;margin-right:6px;flex-shrink:0"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg><span class="stars">★★★★★</span>
-          <span class="review-count">5.0 Rating · 32+ Five-Star Reviews</span>
+    <div class="logo-bar">
+      <span class="eyebrow eyebrow-accent logo-bar-eyebrow">As featured in</span>
+      <div class="logo-row">
+        <div class="logo-card"><img src="images/logo-grace-tales.png" alt="Grace Tales"></div>
+        <div class="logo-card"><img src="images/logo-iamibu.png" alt="iamibu"></div>
+        <div class="logo-card"><img src="images/logo-rara-new.png" alt="The Rara Files"></div>
+        <div class="logo-card"><img src="images/logo-cleo.png" alt="Cleo"></div>
+        <div class="logo-card"><img src="images/logo-dearwork.png" alt="Dear Work"></div>
+        <div class="logo-card"><img src="images/logo-space-to-flow.png" alt="Space to Flow"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES - section type 04 -->
+<section class="section section--card">
+  <div class="container">
+    <div class="sec-head">
+      <span class="eyebrow eyebrow-accent">Services</span>
+      <h2>How I Can Support You</h2>
+    </div>
+    <div class="cards">
+      <div class="home-card">
+        <img src="images/mama-belly.jpg" alt="Birth preparation session">
+        <div class="card-b">
+          <div class="card-head">
+            <h3>Birth Preparation</h3>
+            <p class="card-desc">Feel informed, confident, and ready for birth.</p>
+          </div>
+          <ul>
+            <li>Personalised birth plan</li>
+            <li>Labour comfort and breathing techniques</li>
+            <li>Partner preparation</li>
+            <li>Personalised postpartum plan</li>
+          </ul>
+          <figure class="card-quote">
+            <blockquote>Nat has the most divine way of making you feel safe, informed, connected and fully in control.</blockquote>
+            <figcaption>Amy Sinclair</figcaption>
+          </figure>
+          <div class="card-f">
+            <p class="type-base card-price">Virtual $295 · In-Person $495</p>
+            <div class="card-actions">
+              <a class="btn btn--primary" href="#contact">Contact</a>
+              <a class="btn btn--secondary" href="birth-preparation.html">Learn more <span class="arrow">→</span></a>
+            </div>
+          </div>
         </div>
       </div>
-      <a href="reviews.html" class="btn-link">Read All Reviews →</a>
-    </div>
-    <div class="testimonials-grid">
-      <div class="t-card">
-                <blockquote>She was calm and professional yet kind and warm. She really helped support my partner so he could support me. I felt truly cared for in a very special way.</blockquote>
-        <img class="t-avatar" src="images/testimonials/mums/camilla-white.jpg" alt="Dr Camilla White">
-        <div class="t-attr">Dr Camilla White — GP & Mother of Three</div>
-      </div>
-      <div class="t-card">
-                <blockquote>Nat has the most divine way of making you feel safe, informed, connected and fully in control. She is a wealth of knowledge, experience and intuition.</blockquote>
-        <img class="t-avatar" src="images/testimonials/mums/amy-sinclair.jpg" alt="Amy Sinclair">
-        <div class="t-attr">Amy Sinclair — Mother of Two</div>
-      </div>
-      <div class="t-card">
-                <blockquote>The overwhelming calming confidence you gave my wife was what I liked best. Your calm confidence and knowledge allowed her to trust her body.</blockquote>
-        <img class="t-avatar" src="images/testimonials/dads/george-gorrow.jpg" alt="George Gorrow">
-        <div class="t-attr">George Gorrow — Father</div>
+      <div class="home-card home-card--parent-coaching">
+        <img src="images/dei-pablo.jpg" alt="Parent coaching session">
+        <div class="card-b">
+          <div class="card-head">
+            <h3>Parent Coaching</h3>
+            <p class="card-desc">Less power struggles. Better sleep. More connection.</p>
+          </div>
+          <ul>
+            <li>60-minute Zoom session</li>
+            <li>Written session summary</li>
+            <li>Personalised support plan</li>
+            <li>One week of follow-up support via email or voice note</li>
+          </ul>
+          <figure class="card-quote">
+            <blockquote>You just completely got everything I needed and made me feel calm and confident whenever I started to doubt myself.</blockquote>
+            <figcaption>Renée D'Arcy</figcaption>
+          </figure>
+          <div class="card-f">
+            <p class="type-base card-price">Virtual Session $275</p>
+            <div class="card-actions">
+              <a class="btn btn--primary" href="#contact">Contact</a>
+              <a class="btn btn--secondary" href="parent-coaching.html">Learn more <span class="arrow">→</span></a>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<section id="faq">
-  <div class="faq-inner">
-    <span class="eyebrow" style="display:block;">FAQ</span>
-    <h2 style="margin-bottom:48px;">Your Questions, Answered</h2>
-    <div class="faq-item">
-      <button class="faq-q" onclick="toggleFaq(this)">What does a doula actually do?<span class="faq-icon"></span></button>
-      <div class="faq-a">A doula provides continuous emotional, physical and informational support during pregnancy, birth and the postpartum period. I help you feel prepared and confident, support your partner, and advocate for your birth preferences — so you can focus entirely on your experience.</div>
-    </div>
-    <div class="faq-item">
-      <button class="faq-q" onclick="toggleFaq(this)">Do I still need a doula if I have a midwife or OB?<span class="faq-icon"></span></button>
-      <div class="faq-a">Absolutely. Midwives and OBs focus on your medical care. A doula's role is entirely different — I'm there for continuous, uninterrupted emotional and practical support, birth preparation, and to help you navigate decisions with clarity. We work alongside your care team, not instead of them.</div>
-    </div>
-    <div class="faq-item">
-      <button class="faq-q" onclick="toggleFaq(this)">Where are you based and what areas do you serve?<span class="faq-icon"></span></button>
-      <div class="faq-a">I'm based in Byron Bay and serve families across the Northern Rivers region of NSW. I also offer virtual support for birth preparation, parent coaching and postpartum check-ins for families further afield.</div>
-    </div>
-    <div class="faq-item">
-      <button class="faq-q" onclick="toggleFaq(this)">When should I reach out to book a doula?<span class="faq-icon"></span></button>
-      <div class="faq-a">As early as possible — ideally in your first or second trimester. Doulas often have limited availability as due dates approach. That said, if you're further along or even in the third trimester, it's always worth reaching out. I'll always do my best to support you.</div>
-    </div>
-    <div class="faq-item">
-      <button class="faq-q" onclick="toggleFaq(this)">How do I get started?<span class="faq-icon"></span></button>
-      <div class="faq-a">Use the contact form below. Choose the service you're interested in, tell me a little about your situation, and I'll reply personally within one business day to discuss next steps.</div>
+<!-- FAQ - section type 09 -->
+<section class="section section--bg home-faq section--seam-wide-bottom">
+  <div class="container">
+    <div class="faq-grid">
+      <div class="faq-head">
+        <span class="eyebrow eyebrow-accent">FAQ</span>
+        <h2>Is this right for you?</h2>
+      </div>
+      <div class="faq-content">
+        <div class="faq-tabs" role="tablist" aria-label="FAQ categories">
+          <span class="faq-tab-slider" aria-hidden="true"></span>
+          <button class="faq-tab active" data-panel="birth" type="button" role="tab" aria-selected="true" aria-controls="panel-birth" id="tab-birth">Birth Preparation</button>
+          <button class="faq-tab" data-panel="coaching" type="button" role="tab" aria-selected="false" aria-controls="panel-coaching" id="tab-coaching">Parent Coaching</button>
+        </div>
+        <div class="faq-panel active" id="panel-birth" role="tabpanel" aria-labelledby="tab-birth">
+          <div class="faq-item open">
+            <button class="faq-q" type="button">Do I really need an antenatal class if I've read books and podcasts? <span class="faq-icon" aria-hidden="true"></span></button>
+            <div class="faq-a">Absolutely. Information is helpful, but confidence comes from understanding how to apply it when labour actually begins. Most parents leave feeling calmer, clearer, and far more confident about their upcoming birth.</div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" type="button">My partner feels unsure about their role. Is this class for them too? <span class="faq-icon" aria-hidden="true"></span></button>
+            <div class="faq-a">Definitely. Partners often want to help but aren't sure how. This class gives them practical, hands-on ways to support you throughout labour and birth, from comfort techniques to advocating for your preferences.</div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" type="button">Is a 2-hour class really enough time to prepare us? <span class="faq-icon" aria-hidden="true"></span></button>
+            <div class="faq-a">Yes. This class is intentionally concise, practical, and focused on what matters most. You'll walk away with clear strategies and a deeper understanding of your options, without feeling overloaded.</div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" type="button">What makes this different from a hospital antenatal class? <span class="faq-icon" aria-hidden="true"></span></button>
+            <div class="faq-a">This is a holistic, personalised class combining evidence-based education with practical preparation. I focus on helping you understand your options, build confidence, and feel genuinely prepared for birth.</div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" type="button">My biggest fear is not knowing what to do during labour. Will this help? <span class="faq-icon" aria-hidden="true"></span></button>
+            <div class="faq-a">Yes. One of the main goals is to help you feel prepared rather than overwhelmed. You'll learn how labour unfolds, practical comfort measures, breathing techniques, and how to navigate your birth confidently, whatever path it takes.</div>
+          </div>
+        </div>
+        <div class="faq-panel" id="panel-coaching" role="tabpanel" aria-labelledby="tab-coaching">
+          <div class="faq-item">
+            <button class="faq-q" type="button">What is Aware Parenting, and how can it help my family? <span class="faq-icon" aria-hidden="true"></span></button>
+            <div class="faq-a">Aware Parenting helps you understand the feelings and needs behind your child's behaviour. Rather than punishments or rewards, it focuses on connection, attachment, and respectful limits, with practical tools for tantrums, sleep, and power struggles.</div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" type="button">My child's behaviour feels really challenging right now. Can this help? <span class="faq-icon" aria-hidden="true"></span></button>
+            <div class="faq-a">Yes. Many parents come feeling exhausted or unsure what to do. We'll explore what's happening beneath the behaviour, identify unmet needs, and build personalised strategies to reduce power struggles and increase cooperation.</div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" type="button">Will I receive practical strategies, or is this mainly theory? <span class="faq-icon" aria-hidden="true"></span></button>
+            <div class="faq-a">Both. You'll receive a personalised action plan, practical tools for tantrums and challenging behaviour, guidance on setting limits with connection, and clear next steps you can begin immediately.</div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" type="button">Can one 1-hour coaching session really make a difference? <span class="faq-icon" aria-hidden="true"></span></button>
+            <div class="faq-a">Absolutely. What parents often need most is clarity. A focused session helps you understand what's really driving the challenges and identify the changes that will have the greatest impact.</div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" type="button">What if I'm worried I'll be judged for how I'm parenting? <span class="faq-icon" aria-hidden="true"></span></button>
+            <div class="faq-a">You won't be. This is a compassionate, judgement-free space. My role isn't to tell you how to parent. It's to help you better understand your child, trust your instincts, and feel more confident in your choices.</div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<section id="contact">
-  <div class="contact-inner">
-    <div class="contact-left">
-      <h2>Let's Talk About Your Journey</h2>
-      <p class="contact-subhead">Ready to feel more informed, supported and prepared?</p>
-      <p class="contact-body">Whether you're expecting your first baby or navigating a new chapter of parenthood, I'd love to hear more about where you are and how I can support you.</p>
-      <p class="contact-reassure">No obligation. I'll personally respond within 1 business day.</p>
-      <div class="contact-trust">
-        <div class="c-trust-item">13 years experience home & hospital birth</div>
-        <div class="c-trust-item">Certified Doula & Parenting Coach</div>
-        <div class="c-trust-item">Byron Bay, Australia · Online Worldwide</div>
-        <div class="c-trust-item"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" style="vertical-align:middle;margin-right:4px;flex-shrink:0"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>★★★★★ 5.0 Rating</div>
+<!-- TESTIMONIALS - section type 05 -->
+<section class="section section--card">
+  <div class="container">
+    <div class="testimonials-head">
+      <div>
+        <span class="eyebrow eyebrow-accent">Testimonials</span>
+        <h2>What clients say</h2>
       </div>
     </div>
-    <form class="contact-form" onsubmit="return false;">
-      <div class="form-group">
-        <label for="contact-name">Your Name</label>
-        <input id="contact-name" type="text" placeholder="e.g. Sarah Johnson">
+    <div class="quotes">
+      <div class="q">
+        <blockquote>Nathalie gave support throughout the whole pregnancy, birth and postpartum period. She was calm and professional yet kind and warm and really helped support my partner so he could support me. As a GP I will be highly recommending Nathalie.</blockquote>
+        <div class="who">
+          <img src="images/testimonials/mums/camilla-white.jpg" alt="Dr Camilla White">
+          <span class="who-name">Dr Camilla White<br>GP and Mother of Three</span>
+        </div>
       </div>
-      <div class="form-group">
-        <label for="contact-email">Email Address</label>
-        <input id="contact-email" type="email" placeholder="e.g. sarah@email.com">
+      <div class="q">
+        <blockquote>Nat has the most divine way of making you feel safe, informed, connected and fully in control. She is a wealth of knowledge, experience and intuition.</blockquote>
+        <div class="who">
+          <img src="images/testimonials/mums/amy-sinclair.jpg" alt="Amy Sinclair">
+          <span class="who-name">Amy Sinclair<br>Mother of Two</span>
+        </div>
       </div>
-      <div class="form-group">
-        <label for="contact-service">Service</label>
-        <select id="contact-service">
-          <option>Birth Preparation</option>
-          <option>Parent Coaching</option>
-          <option>Doula Mentoring</option>
-          <option>Other</option>
-        </select>
+      <div class="q">
+        <blockquote>I was visualising an intimate, drug-free water birth and my wish became a reality with the help of Nathalie. This was the best investment and I can highly recommend having this beautiful woman by your side.</blockquote>
+        <div class="who">
+          <img src="images/testimonials/mums/cisco-tschurtschenthaler.png" alt="Cisco Tschurtschenthaler">
+          <span class="who-name">Cisco Tschurtschenthaler<br>Mother</span>
+        </div>
       </div>
-      <div class="form-group">
-        <label for="contact-message">Message</label>
-        <textarea id="contact-message" placeholder="Tell me a little about your situation..."></textarea>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT - Byron-specific pattern -->
+<section class="section section--bg section--seam-wide-top" id="contact">
+  <div class="container">
+    <div class="contact">
+      <div class="contact-bg">
+        <img src="images/home.jpg" alt="" role="presentation">
       </div>
-      <button type="submit" class="btn-form">Send Enquiry</button>
-    </form>
+      <div class="contact-inner">
+        <div class="contact-card">
+          <span class="eyebrow eyebrow-accent">Contact</span>
+          <h2>Get in Touch</h2>
+          <h3>Ready to feel calm, informed, and prepared for birth?</h3>
+          <p class="contact-body">Book your 2-hour antenatal class today and gain the knowledge, confidence, and practical tools to approach labour with clarity and peace of mind. Your future self will thank you.</p>
+          <ul class="contact-trust">
+            <li>13 years experience home &amp; hospital birth</li>
+            <li>In-Person Byron Bay, Australia · Online Worldwide</li>
+            <li>Birth Doula (CBI) &amp; Aware Parenting Coach</li>
+            <li><span class="stars">★★★★★</span>&nbsp;5.0 Rating</li>
+          </ul>
+          <form class="contact-form" action="https://formsubmit.co/hello@thebyrondoula.com" method="POST">
+            <input type="hidden" name="_subject" value="New enquiry | The Byron Doula website">
+            <input type="hidden" name="_captcha" value="false">
+            <input type="hidden" name="_next" value="thankyou.html">
+            <div class="form-group">
+              <label for="c-name">Your Name</label>
+              <input id="c-name" name="name" type="text" placeholder="e.g. Sarah Johnson" autocomplete="name" required>
+            </div>
+            <div class="form-group">
+              <label for="c-email">Email Address</label>
+              <input id="c-email" name="email" type="email" placeholder="e.g. sarah@email.com" autocomplete="email" required>
+            </div>
+            <div class="form-group">
+              <label for="c-service">Service</label>
+              <select id="c-service" name="service" required>
+                <option value="" disabled selected>Select a service…</option>
+                <option value="birth-preparation">Birth Preparation</option>
+                <option value="parent-coaching">Parent Coaching</option>
+                <option value="doula-mentoring">Doula Mentoring</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="c-message">Message</label>
+              <textarea id="c-message" name="message" placeholder="How can I support you?" required></textarea>
+            </div>
+            <button type="submit" class="btn-submit btn btn--primary">Send</button>
+          </form>
+          <p class="contact-reassure">I respond within 1 business day.</p>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
 <footer class="site-footer">
   <div class="footer-inner">
-    <div class="footer-top">
-      <span class="footer-copy">© 2026 The Byron Doula. All rights reserved.</span>
-      <div class="social-icons">
-        <a href="#" class="social-icon" aria-label="Instagram">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
-            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
-            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
-          </svg>
-        </a>
-        <a href="#" class="social-icon" aria-label="Facebook">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
-          </svg>
-        </a>
-        <a href="#" class="social-icon" aria-label="Pinterest">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M12 0C5.373 0 0 5.373 0 12c0 5.084 3.163 9.426 7.627 11.174-.105-.949-.2-2.405.042-3.441.218-.937 1.407-5.965 1.407-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738a.36.36 0 0 1 .083.345l-.333 1.36c-.053.22-.174.267-.402.161-1.499-.698-2.436-2.889-2.436-4.649 0-3.785 2.75-7.262 7.929-7.262 4.163 0 7.398 2.967 7.398 6.931 0 4.136-2.607 7.464-6.227 7.464-1.216 0-2.359-.632-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0z" fill="#6B6B6B"/>
-          </svg>
-        </a>
+    <div class="footer-grid">
+      <div class="footer-col">
+        <p class="footer-col-title">Services</p>
+        <ul class="footer-links">
+          <li><a href="birth-preparation.html">Birth Preparation</a></li>
+          <li><a href="parent-coaching.html">Parent Coaching</a></li>
+          <li><a href="services.html">All Services</a></li>
+        </ul>
       </div>
-      <ul class="footer-links">
-        <li><a href="#">Privacy</a></li>
-        <li><a href="#">Terms</a></li>
-        <li><a href="#">Cookies</a></li>
-      </ul>
+      <div class="footer-col">
+        <p class="footer-col-title">About</p>
+        <ul class="footer-links">
+          <li><a href="about.html">About Nathalie</a></li>
+          <li><a href="reviews.html">Reviews</a></li>
+          <li><a href="index.html#contact">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <p class="footer-col-title">Legal</p>
+        <ul class="footer-links">
+          <li><a href="privacy-policy.html">Privacy Policy</a></li>
+          <li><a href="terms.html">Terms of Service</a></li>
+          <li><a href="cookies.html">Cookies</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <p class="footer-col-title">Connect</p>
+        <ul class="footer-links">
+          <li><a href="https://www.instagram.com/thebyrondoula" target="_blank" rel="noopener">Instagram</a></li>
+          <li><a href="https://www.facebook.com/thebyrondoula" target="_blank" rel="noopener">Facebook</a></li>
+          <li><a href="mailto:hello@thebyrondoula.com">hello@thebyrondoula.com</a></li>
+        </ul>
+      </div>
     </div>
-    <p class="footer-ack">I acknowledge the Bundjalung People as the original and true custodians of the land on which I live and work. I pay respect to all of our country's First Nations peoples and their ongoing strength in practising the world's oldest living culture. I pay my respect to their Elders past, present and emerging.</p>
+    <div class="footer-utility">
+      <span class="footer-copy">© 2026 The Byron Doula</span>
+    </div>
+    <p class="footer-ack">I acknowledge the Bundjalung People as the original and true custodians of the land on which I live and work. I pay respect to all of our country's First Nations peoples and their ongoing strength in practising the world's oldest living culture. I pay respect to their Elders past, present and emerging.</p>
   </div>
 </footer>
 
-
-<script>
-  document.querySelectorAll('.t-card').forEach(card => {
-    const bq = card.querySelector('blockquote');
-    if (bq) { const m = document.createElement('span'); m.className = 'quote-mark'; m.textContent = '"'; card.insertBefore(m, bq); }
-  });
-
-  const nav = document.getElementById('site-nav');
-  if (nav) {
-    window.addEventListener('scroll', () => {
-      nav.classList.toggle('scrolled', window.scrollY > 40);
-    });
-  }
-  function toggleFaq(btn) {
-    const item = btn.parentElement;
-    const isOpen = item.classList.contains('open');
-    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
-    if (!isOpen) item.classList.add('open');
-  }
-</script>
+<script src="js/site.js" defer></script>
 </body>
 </html>

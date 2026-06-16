@@ -1,282 +1,155 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Services — The Byron Doula</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --ivory:      #FAF5EE;
-      --stone:      #F0E9DF;
-      --charcoal:   #2D2A26;
-      --olive:      #722F1E;
-      --olive-dark: #4a1e10;
-      --clay:       #B8876B;
-      --mid:        #7A7268;
-      --border:     #E5E0D8;
-    }
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-    body { font-family: 'Inter', system-ui, sans-serif; background: var(--ivory); color: var(--charcoal); font-size: 18px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
-    h1, h2, h3, h4 { font-family: 'Cormorant Garamond', serif; font-weight: 500; line-height: 1.15; color: var(--charcoal); }
-    h1 { font-size: clamp(32px, 4vw, 52px); }
-    h2 { font-size: clamp(30px, 3.5vw, 40px); }
-    h3 { font-size: 24px; }
-    p  { line-height: 1.7; }
-    .container { max-width: 1100px; margin: 0 auto; padding: 0 48px; }
-    section { padding: 96px 0; }
-
-    .eyebrow {
-      font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 500;
-      letter-spacing: 0.12em; text-transform: uppercase;
-      color: var(--mid); margin-bottom: 14px; display: block;
-    }
-
-    .btn-primary {
-      display: inline-block; background: var(--olive); color: white;
-      font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 500;
-      letter-spacing: 0.03em; padding: 14px 28px; text-decoration: none;
-      border-radius: 8px; cursor: pointer; transition: background 0.2s;
-    }
-    .btn-primary:hover { background: var(--olive-dark); }
-
-    /* NAV */
-    .site-nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      background: rgba(250,245,238,0.97);
-      box-shadow: 0 1px 16px rgba(45,42,38,0.08);
-    }
-    .nav-inner {
-      max-width: 1100px; margin: 0 auto; padding: 0 48px;
-      height: 72px; display: flex; align-items: center; justify-content: space-between;
-    }
-    .nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 500; color: var(--charcoal); text-decoration: none; white-space: nowrap; }
-    .social-icons { display: flex; gap: 18px; align-items: center; }
-    .social-icon { color: #6B6B6B; display: flex; transition: color 0.2s; }
-    .social-icon:hover { color: var(--charcoal); }
-    .nav-links { display: flex; gap: 36px; list-style: none; }
-    .nav-links a { font-size: 14px; color: var(--mid); text-decoration: none; letter-spacing: 0.04em; transition: color 0.2s; }
-    .nav-links a:hover { color: var(--charcoal); }
-    .nav-links a.active { color: var(--charcoal); font-weight: 500; }
-    .nav-toggle { display: none; flex-direction: column; justify-content: center; gap: 5px; background: none; border: none; cursor: pointer; padding: 6px; }
-    .nav-toggle span { display: block; width: 22px; height: 1.5px; background: var(--charcoal); transition: transform 0.2s, opacity 0.2s; }
-    .site-nav.nav-open .nav-toggle span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
-    .site-nav.nav-open .nav-toggle span:nth-child(2) { opacity: 0; }
-    .site-nav.nav-open .nav-toggle span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
-    .nav-cta { display: inline-block; background: var(--olive); color: white; font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 500; padding: 10px 22px; text-decoration: none; border-radius: 8px; transition: background 0.2s; }
-    .nav-cta:hover { background: var(--olive-dark); }
-
-    /* PAGE HERO */
-    .services-hero {
-      padding-top: 160px; padding-bottom: 72px; background: var(--ivory);
-      border-bottom: 1px solid var(--border);
-    }
-    .services-hero h1 { max-width: 620px; margin-bottom: 20px; }
-    .services-hero p { font-size: 17px; color: var(--mid); max-width: 500px; line-height: 1.75; }
-
-    /* SERVICE BLOCKS */
-    .services-section { background: var(--ivory); }
-    .service-block {
-      max-width: 1100px; margin: 0 auto; padding: 80px 48px;
-      border-bottom: 1px solid var(--border);
-      display: grid; grid-template-columns: 5fr 7fr; gap: 80px; align-items: start;
-    }
-    .service-block:last-child { border-bottom: none; }
-
-    .sb-img {
-      width: 100%; aspect-ratio: 4/3; object-fit: cover;
-      border-radius: 2px; display: block; margin-bottom: 32px;
-    }
-
-    .service-tag {
-      display: inline-block; font-family: 'Inter', sans-serif;
-      font-size: 11px; font-weight: 500; letter-spacing: 0.05em;
-      color: var(--olive); background: rgba(114,47,30,0.1);
-      padding: 4px 12px; border-radius: 20px; margin-bottom: 18px;
-    }
-    .sb-left h2 { margin-bottom: 12px; }
-    .sb-left .service-tag { display: inline-block; margin-bottom: 16px; }
-    .sb-body { font-size: 16px; color: var(--mid); line-height: 1.8; }
-    .sb-body + .sb-body { margin-top: 18px; }
-
-    .sb-right h4 {
-      font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 600;
-      letter-spacing: 0.1em; text-transform: uppercase; color: var(--mid); margin-bottom: 16px;
-    }
-    .detail-list { list-style: none; margin-bottom: 32px; }
-    .detail-list li {
-      font-size: 15px; color: var(--charcoal);
-      padding: 13px 0; border-bottom: 1px solid var(--border);
-      display: flex; flex-direction: column; gap: 3px;
-    }
-    .detail-list li strong { font-weight: 500; font-size: 14px; }
-    .detail-list li span { font-size: 13px; color: var(--mid); }
-    .detail-price {
-      font-family: 'Cormorant Garamond', serif; font-size: 24px;
-      color: var(--charcoal); margin-bottom: 24px; font-weight: 500;
-    }
-
-    /* GUIDANCE BAND */
-    .guidance-band {
-      background: var(--stone);
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-      padding: 80px 0; text-align: center;
-    }
-    .guidance-band h2 { margin-bottom: 16px; }
-    .guidance-band p {
-      font-size: 16px; color: var(--mid); line-height: 1.75;
-      margin-bottom: 32px; max-width: 560px; margin-left: auto; margin-right: auto;
-    }
-
-    /* FOOTER */
-    .site-footer { background: var(--stone); border-top: 1px solid var(--border); padding: 40px 0; }
-    .footer-inner { max-width: 1100px; margin: 0 auto; padding: 0 48px; display: flex; flex-direction: column; gap: 16px; }
-    .footer-top { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
-    .footer-copy { font-size: 13px; color: var(--mid); }
-    .footer-links { display: flex; gap: 24px; list-style: none; }
-    .footer-links a { font-size: 13px; color: var(--mid); text-decoration: none; }
-    .footer-links a:hover { color: var(--charcoal); }
-    .footer-ack { font-size: 12px; color: var(--mid); line-height: 1.7; max-width: 700px; opacity: 0.75; border-top: 1px solid var(--border); padding-top: 16px; }
-    @media (max-width: 768px) {
-      /* Global */
-      .container { padding: 0 20px; }
-
-      /* Nav */
-      .nav-toggle { display: flex; }
-      .nav-links { display: none; position: absolute; top: 72px; left: 0; right: 0; flex-direction: column; background: rgba(250,245,238,0.98); border-bottom: 1px solid var(--border); padding: 8px 0 20px; box-shadow: 0 4px 16px rgba(45,42,38,0.08); z-index: 99; }
-      .nav-links li a { display: block; padding: 14px 24px; opacity: 1; font-size: 15px; }
-      .nav-cta { display: none; }
-      .site-nav.nav-open .nav-links { display: flex; }
-
-      /* Page hero */
-      .services-hero { padding-top: 120px; padding-bottom: 48px; }
-
-      /* Service blocks */
-      .service-block { grid-template-columns: 1fr; gap: 40px; padding: 56px 20px; }
-
-      /* Guidance */
-      .guidance-band { padding: 56px 0; }
-
-      /* Footer */
-      .footer-inner { padding: 0 20px; }
-      .footer-top { flex-direction: column; align-items: flex-start; gap: 20px; }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="theme-color" content="#722F1E">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Services | The Byron Doula</title>
+<meta name="description" content="Birth preparation and parent coaching services with Nathalie Solis Pérez in Byron Bay and online.">
+<link rel="icon" href="favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="stylesheet" href="css/design-system.css">
 </head>
 <body>
 
-<nav class="site-nav">
+<nav class="site-nav" id="site-nav">
   <div class="nav-inner">
     <a href="index.html" class="nav-logo">The Byron Doula</a>
     <ul class="nav-links">
       <li><a href="about.html">About</a></li>
-      <li><a href="services.html" class="active">Services</a></li>
-      <li><a href="reviews.html">Reviews</a></li>
+      <li><a href="birth-preparation.html">Birth Preparation</a></li>
+      <li><a href="parent-coaching.html">Parent Coaching</a></li>
+      <li class="nav-mobile-only"><a href="index.html#contact">Contact</a></li>
     </ul>
-    <button class="nav-toggle" aria-label="Menu" onclick="this.closest('nav').classList.toggle('nav-open')">
+    <a href="index.html#contact" class="btn btn--primary btn--sm nav-cta">Contact</a>
+    <button class="nav-toggle" id="nav-toggle" type="button" aria-label="Menu">
       <span></span><span></span><span></span>
     </button>
-    <a href="index.html#contact" class="nav-cta">Get in Touch</a>
   </div>
 </nav>
 
-<!-- PAGE HERO -->
-<section class="services-hero">
+<!-- ═══════════════════════ PAGE HERO ═════════════════════ -->
+<section class="section section--hero section--bg page-hero">
   <div class="container">
-    <span class="eyebrow" style="color:var(--clay)">Support</span>
+    <span class="eyebrow eyebrow-accent">Support</span>
     <h1>Personalised support for pregnancy, birth and early parenthood.</h1>
     <p>Whether you're preparing to welcome your baby or navigating the questions that come after, I offer calm, evidence-based support that meets you exactly where you are.</p>
   </div>
 </section>
 
-<!-- SERVICE BLOCKS -->
-<div class="services-section">
-
-  <div class="service-block">
-    <div class="sb-left">
-      <img class="sb-img" src="images/image-2.jpg" alt="Birth preparation support">
-      <span class="service-tag">Virtual or In-Person</span>
-      <h2>Birth Preparation</h2>
-      <p class="sb-body">Feeling prepared makes all the difference. Whether you're a first-time parent or going into birth again with new questions, my birth preparation support gives you the knowledge, tools and confidence to meet your birth on your own terms.</p>
-      <p class="sb-body">Sessions are available in-person in Byron Bay and the Northern Rivers, or virtually from anywhere.</p>
-    </div>
-    <div class="sb-right">
-      <h4>What's Included</h4>
-      <ul class="detail-list">
-        <li><strong>Birth Planning</strong><span>Build a clear, realistic birth preferences guide tailored to your wishes</span></li>
-        <li><strong>Comfort Techniques</strong><span>Learn positions, breathing, movement and coping strategies for labour</span></li>
-        <li><strong>Partner Preparation</strong><span>Help your partner understand their role and how to support you</span></li>
-        <li><strong>Information & Education</strong><span>Evidence-based guidance on your options at every stage</span></li>
-        <li><strong>Emotional Readiness</strong><span>Process fears, set intentions and arrive at birth feeling grounded</span></li>
-        <li><strong>Flexible Format</strong><span>Available as a single session or a series of sessions</span></li>
-      </ul>
-      <div class="detail-price">Virtual $250 · In-Person $300</div>
-      <a href="index.html#contact" class="btn-primary">Get in Touch</a>
-    </div>
-  </div>
-
-  <div class="service-block">
-    <div class="sb-left">
-      <img class="sb-img" src="images/image-3.jpg" alt="Parent coaching support" style="object-position: top center;">
-      <span class="service-tag">Virtual</span>
-      <h2>Parent Coaching</h2>
-      <p class="sb-body">Parenthood raises questions that don't always have easy answers. My parent coaching sessions offer a calm, non-judgmental space to work through whatever you're navigating — whether you're pregnant, freshly postpartum or finding your feet in the early years.</p>
-      <p class="sb-body">All sessions are held virtually, so you can connect from the comfort of your home, wherever you are.</p>
-    </div>
-    <div class="sb-right">
-      <h4>What's Included</h4>
-      <ul class="detail-list">
-        <li><strong>1-on-1 Sessions</strong><span>Dedicated time focused entirely on you and your situation</span></li>
-        <li><strong>Birth Planning Support</strong><span>Clarify your options and build a plan that feels right for you</span></li>
-        <li><strong>Postpartum Questions</strong><span>Navigate feeding, sleep, recovery and the emotional adjustment</span></li>
-        <li><strong>Relationship & Partner Dynamics</strong><span>Support for couples as they step into parenthood together</span></li>
-        <li><strong>Tailored to You</strong><span>No generic advice — every session is shaped around what you actually need</span></li>
-        <li><strong>Ongoing Support</strong><span>Book single sessions or a coaching package as your journey evolves</span></li>
-      </ul>
-      <div class="detail-price">Virtual $180/hr</div>
-      <a href="index.html#contact" class="btn-primary">Get in Touch</a>
-    </div>
-  </div>
-
-</div>
-
-<!-- GUIDANCE BAND -->
-<div class="guidance-band">
+<!-- ═══════════════════════ SERVICES CARDS ════════════════ -->
+<section class="section section--bg">
   <div class="container">
-    <h2>Not sure which type of support is right for you?</h2>
-    <p>Every family is different. If you're unsure whether Birth Preparation or Parent Coaching is the best fit, get in touch and we can discuss what would be most helpful for your situation.</p>
-    <a href="index.html#contact" class="btn-primary">Get in Touch</a>
+    <div class="cards">
+      <div class="home-card">
+        <img src="images/mama-belly.jpg" alt="Birth preparation session">
+        <div class="card-b">
+          <div class="card-head">
+            <h3>Birth Preparation</h3>
+            <p class="card-desc">Feel informed, confident, and ready for birth.</p>
+          </div>
+          <ul>
+            <li>Personalised birth plan</li>
+            <li>Labour comfort and breathing techniques</li>
+            <li>Partner preparation</li>
+            <li>Personalised postpartum plan</li>
+          </ul>
+          <figure class="card-quote">
+            <blockquote>Nat has the most divine way of making you feel safe, informed, connected and fully in control.</blockquote>
+            <figcaption>Amy Sinclair</figcaption>
+          </figure>
+          <div class="card-f">
+            <p class="type-base card-price">Virtual $295 · In-Person $495</p>
+            <div class="card-actions">
+              <a class="btn btn--primary" href="index.html#contact">Contact</a>
+              <a class="btn btn--secondary" href="birth-preparation.html">Learn more <span class="arrow">→</span></a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="home-card">
+        <img src="images/nathalie-balloon.jpg" alt="Parent coaching session" class="img-cover-top">
+        <div class="card-b">
+          <div class="card-head">
+            <h3>Parent Coaching</h3>
+            <p class="card-desc">Less power struggles. Better sleep. More connection.</p>
+          </div>
+          <ul>
+            <li>60-minute Zoom session</li>
+            <li>Written session summary</li>
+            <li>Personalised support plan</li>
+            <li>One week of follow-up support via email or voice note</li>
+          </ul>
+          <figure class="card-quote">
+            <blockquote>You just completely got everything I needed and made me feel calm and confident whenever I started to doubt myself.</blockquote>
+            <figcaption>Renée D'Arcy</figcaption>
+          </figure>
+          <div class="card-f">
+            <p class="type-base card-price">Virtual Session $275</p>
+            <div class="card-actions">
+              <a class="btn btn--primary" href="index.html#contact">Contact</a>
+              <a class="btn btn--secondary" href="parent-coaching.html">Learn more <span class="arrow">→</span></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-</div>
+</section>
 
+<!-- ═══════════════════════ CTA BAND ══════════════════════ -->
+<section class="section section--headline section--card cta-band">
+  <div class="container">
+    <h2>Not sure if this support is right for you?</h2>
+    <p>Every family is different. If you're unsure whether this is the best fit, get in touch and we can discuss what would be most helpful for your situation.</p>
+    <a href="index.html#contact" class="btn btn--primary">Contact</a>
+  </div>
+</section>
+
+<!-- ═══════════════════════ FOOTER ════════════════════════ -->
 <footer class="site-footer">
   <div class="footer-inner">
-    <div class="footer-top">
-      <span class="footer-copy">© 2026 The Byron Doula. All rights reserved.</span>
-      <div class="social-icons">
-        <a href="#" class="social-icon" aria-label="Instagram">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
-        </a>
-        <a href="#" class="social-icon" aria-label="Facebook">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
-        </a>
-        <a href="#" class="social-icon" aria-label="Pinterest">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12c0 5.084 3.163 9.426 7.627 11.174-.105-.949-.2-2.405.042-3.441.218-.937 1.407-5.965 1.407-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738a.36.36 0 0 1 .083.345l-.333 1.36c-.053.22-.174.267-.402.161-1.499-.698-2.436-2.889-2.436-4.649 0-3.785 2.75-7.262 7.929-7.262 4.163 0 7.398 2.967 7.398 6.931 0 4.136-2.607 7.464-6.227 7.464-1.216 0-2.359-.632-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0z" fill="#6B6B6B"/></svg>
-        </a>
+    <div class="footer-grid">
+      <div class="footer-col">
+        <p class="footer-col-title">Services</p>
+        <ul class="footer-links">
+          <li><a href="birth-preparation.html">Birth Preparation</a></li>
+          <li><a href="parent-coaching.html">Parent Coaching</a></li>
+          <li><a href="services.html">All Services</a></li>
+        </ul>
       </div>
-      <ul class="footer-links">
-        <li><a href="#">Privacy</a></li>
-        <li><a href="#">Terms</a></li>
-        <li><a href="#">Cookies</a></li>
-      </ul>
+      <div class="footer-col">
+        <p class="footer-col-title">About</p>
+        <ul class="footer-links">
+          <li><a href="about.html">About Nathalie</a></li>
+          <li><a href="reviews.html">Reviews</a></li>
+          <li><a href="index.html#contact">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <p class="footer-col-title">Legal</p>
+        <ul class="footer-links">
+          <li><a href="privacy-policy.html">Privacy Policy</a></li>
+          <li><a href="terms.html">Terms of Service</a></li>
+          <li><a href="cookies.html">Cookies</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <p class="footer-col-title">Connect</p>
+        <ul class="footer-links">
+          <li><a href="https://www.instagram.com/thebyrondoula" target="_blank" rel="noopener">Instagram</a></li>
+          <li><a href="https://www.facebook.com/thebyrondoula" target="_blank" rel="noopener">Facebook</a></li>
+          <li><a href="mailto:hello@thebyrondoula.com">hello@thebyrondoula.com</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-utility">
+      <span class="footer-copy">© 2026 The Byron Doula</span>
     </div>
     <p class="footer-ack">I acknowledge the Bundjalung People as the original and true custodians of the land on which I live and work. I pay respect to all of our country's First Nations peoples and their ongoing strength in practising the world's oldest living culture. I pay my respect to their Elders past, present and emerging.</p>
   </div>
 </footer>
 
+<script src="js/site.js" defer></script>
 </body>
 </html>

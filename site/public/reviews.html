@@ -2,333 +2,278 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="theme-color" content="#722F1E">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Reviews — The Byron Doula</title>
+  <title>Reviews | The Byron Doula</title>
+  <meta name="description" content="46+ five-star reviews from families supported by Nathalie Solis Pérez, certified doula and parent coach in Byron Bay.">
+  <link rel="icon" href="favicon.png" type="image/png">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --ivory:      #FAF5EE;
-      --stone:      #F0E9DF;
-      --charcoal:   #2D2A26;
-      --olive:      #722F1E;
-      --olive-dark: #4a1e10;
-      --clay:       #B8876B;
-      --mid:        #7A7268;
-      --border:     #E5E0D8;
-    }
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-    body { font-family: 'Inter', system-ui, sans-serif; background: var(--ivory); color: var(--charcoal); font-size: 18px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
-    h1, h2, h3, h4 { font-family: 'Cormorant Garamond', serif; font-weight: 500; line-height: 1.15; color: var(--charcoal); }
-    h1 { font-size: clamp(32px, 4vw, 52px); }
-    h2 { font-size: clamp(30px, 3.5vw, 40px); }
-    h3 { font-size: 24px; }
-    p  { line-height: 1.7; }
-    section { padding: 96px 0; }
-    .container { max-width: 1100px; margin: 0 auto; padding: 0 48px; }
-
-    .eyebrow {
-      font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 500;
-      letter-spacing: 0.12em; text-transform: uppercase;
-      color: var(--mid); margin-bottom: 14px; display: block;
-    }
-
-    .btn-primary {
-      display: inline-block; background: var(--olive); color: white;
-      font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 500;
-      letter-spacing: 0.03em; padding: 14px 28px; text-decoration: none;
-      border-radius: 8px; cursor: pointer; transition: background 0.2s;
-    }
-    .btn-primary:hover { background: var(--olive-dark); }
-
-    .btn-link {
-      display: inline-block; color: var(--olive); font-family: 'Inter', sans-serif;
-      font-size: 14px; font-weight: 500; text-decoration: none;
-      border-bottom: 1px solid var(--olive); padding-bottom: 1px; transition: opacity 0.2s;
-    }
-    .btn-link:hover { opacity: 0.7; }
-
-    /* NAV */
-    .site-nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      background: rgba(250,245,238,0.97);
-      box-shadow: 0 1px 16px rgba(45,42,38,0.08);
-    }
-    .nav-inner {
-      max-width: 1100px; margin: 0 auto; padding: 0 48px;
-      height: 72px; display: flex; align-items: center; justify-content: space-between;
-    }
-    .nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 500; color: var(--charcoal); text-decoration: none; white-space: nowrap; }
-    .social-icons { display: flex; gap: 18px; align-items: center; }
-    .social-icon { color: #6B6B6B; display: flex; transition: color 0.2s; }
-    .social-icon:hover { color: var(--charcoal); }
-    .nav-links { display: flex; gap: 36px; list-style: none; }
-    .nav-links a { font-size: 14px; color: var(--mid); text-decoration: none; letter-spacing: 0.04em; transition: color 0.2s; }
-    .nav-links a:hover { color: var(--charcoal); }
-    .nav-links a.active { color: var(--charcoal); font-weight: 500; }
-    .nav-toggle { display: none; flex-direction: column; justify-content: center; gap: 5px; background: none; border: none; cursor: pointer; padding: 6px; }
-    .nav-toggle span { display: block; width: 22px; height: 1.5px; background: var(--charcoal); transition: transform 0.2s, opacity 0.2s; }
-    .site-nav.nav-open .nav-toggle span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
-    .site-nav.nav-open .nav-toggle span:nth-child(2) { opacity: 0; }
-    .site-nav.nav-open .nav-toggle span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
-    .nav-cta { display: inline-block; background: var(--olive); color: white; font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 500; padding: 10px 22px; text-decoration: none; border-radius: 8px; transition: background 0.2s; }
-    .nav-cta:hover { background: var(--olive-dark); }
-
-    /* PAGE HERO */
-    .reviews-hero {
-      padding-top: 160px; padding-bottom: 64px;
-      background: var(--ivory); text-align: center;
-      border-bottom: 1px solid var(--border);
-    }
-    .reviews-hero h1 { margin-bottom: 20px; }
-    .reviews-summary-bar {
-      display: flex; align-items: center; justify-content: center; gap: 20px; flex-wrap: wrap;
-    }
-    .stars { font-size: 20px; color: var(--clay); letter-spacing: 2px; }
-    .review-count { font-size: 15px; color: var(--mid); }
-
-    /* FILTER TABS */
-    .review-filters {
-      display: flex; gap: 8px; margin-bottom: 48px; flex-wrap: wrap;
-    }
-    .rf-btn {
-      font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 500;
-      letter-spacing: 0.04em; padding: 8px 22px; border-radius: 20px;
-      border: 1.5px solid var(--border); background: none; color: var(--mid);
-      cursor: pointer; transition: all 0.2s;
-    }
-    .rf-btn:hover { border-color: var(--olive); color: var(--olive); }
-    .rf-btn.rf-active { background: var(--olive); border-color: var(--olive); color: white; }
-
-    /* REVIEWS GRID */
-    .reviews-grid-section {
-      background: var(--stone);
-      border-bottom: 1px solid var(--border);
-      padding: 80px 0;
-    }
-    .reviews-full-grid {
-      display: grid; grid-template-columns: repeat(3,1fr); gap: 20px;
-    }
-    .t-card {
-      background: white; border: 1px solid var(--border); border-radius: 18px;
-      padding: 32px; display: flex; flex-direction: column;
-      box-shadow: 0 2px 12px rgba(45,42,38,0.04);
-    }
-    .quote-mark {
-      font-family: 'Cormorant Garamond', serif; font-size: 64px; line-height: 0.6;
-      color: var(--clay); opacity: 0.35; margin-bottom: 16px; display: block;
-    }
-    .t-card blockquote {
-      font-family: 'Cormorant Garamond', serif; font-size: 18px; font-style: italic;
-      color: var(--charcoal); line-height: 1.6; margin-bottom: 24px; flex: 1;
-    }
-    .t-avatar {
-      width: 44px; height: 44px;
-      border-radius: 50%;
-      object-fit: cover;
-      display: block;
-      margin-bottom: 10px;
-      background: var(--stone);
-    }
-    .t-attr { font-size: 12px; font-weight: 500; color: var(--mid); letter-spacing: 0.04em; }
-
-    /* GOOGLE BAR */
-    .google-bar {
-      display: flex; align-items: center; gap: 20px;
-      background: white; border: 1px solid var(--border);
-      padding: 20px 28px; margin-top: 48px; border-radius: 2px; flex-wrap: wrap;
-    }
-    .google-rating { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 500; }
-    .google-count { font-size: 14px; color: var(--mid); }
-    .google-bar .btn-link { margin-left: auto; }
-
-    /* CTA BAND */
-    .cta-light {
-      background: var(--stone); border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border); padding: 80px 0; text-align: center;
-    }
-    .cta-light h2 { margin-bottom: 16px; }
-    .cta-light p { font-size: 16px; color: var(--mid); margin-bottom: 32px; max-width: 480px; margin-left: auto; margin-right: auto; line-height: 1.7; }
-
-    /* FOOTER */
-    .site-footer { background: var(--stone); border-top: 1px solid var(--border); padding: 40px 0; }
-    .footer-inner { max-width: 1100px; margin: 0 auto; padding: 0 48px; display: flex; flex-direction: column; gap: 16px; }
-    .footer-top { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
-    .footer-copy { font-size: 13px; color: var(--mid); }
-    .footer-links { display: flex; gap: 24px; list-style: none; }
-    .footer-links a { font-size: 13px; color: var(--mid); text-decoration: none; }
-    .footer-links a:hover { color: var(--charcoal); }
-    .footer-ack { font-size: 12px; color: var(--mid); line-height: 1.7; max-width: 700px; opacity: 0.75; border-top: 1px solid var(--border); padding-top: 16px; }
-    @media (max-width: 768px) {
-      /* Global */
-      .container { padding: 0 20px; }
-
-      /* Nav */
-      .nav-toggle { display: flex; }
-      .nav-links { display: none; position: absolute; top: 72px; left: 0; right: 0; flex-direction: column; background: rgba(250,245,238,0.98); border-bottom: 1px solid var(--border); padding: 8px 0 20px; box-shadow: 0 4px 16px rgba(45,42,38,0.08); z-index: 99; }
-      .nav-links li a { display: block; padding: 14px 24px; opacity: 1; font-size: 15px; }
-      .nav-cta { display: none; }
-      .site-nav.nav-open .nav-links { display: flex; }
-
-      /* Page hero */
-      .reviews-hero { padding-top: 120px; padding-bottom: 48px; }
-
-      /* Reviews grid — horizontal swipe carousel */
-      .reviews-grid-section .container { overflow: visible; }
-      .reviews-full-grid { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; scrollbar-width: none; gap: 16px; padding: 4px 0 8px; }
-      .reviews-full-grid::-webkit-scrollbar { display: none; }
-      .reviews-full-grid::before { content: ''; flex: 0 0 20px; }
-      .reviews-full-grid::after  { content: ''; flex: 0 0 20px; }
-      .reviews-full-grid .t-card { flex: 0 0 82vw; scroll-snap-align: start; }
-
-      /* Google bar */
-      .google-bar .btn-link { margin-left: 0; margin-top: 8px; }
-
-      /* CTA */
-      .cta-light { padding: 56px 0; }
-
-      /* Footer */
-      .footer-inner { padding: 0 20px; }
-      .footer-top { flex-direction: column; align-items: flex-start; gap: 20px; }
-    }
-  </style>
+  <link rel="stylesheet" href="css/design-system.css">
 </head>
 <body>
 
-<nav class="site-nav">
+<!-- ═══════════════════════ NAV ═══════════════════════════ -->
+<nav class="site-nav" id="site-nav">
   <div class="nav-inner">
     <a href="index.html" class="nav-logo">The Byron Doula</a>
     <ul class="nav-links">
       <li><a href="about.html">About</a></li>
-      <li><a href="services.html">Services</a></li>
-      <li><a href="reviews.html" class="active">Reviews</a></li>
+      <li><a href="birth-preparation.html">Birth Preparation</a></li>
+      <li><a href="parent-coaching.html">Parent Coaching</a></li>
+      <li class="nav-mobile-only"><a href="index.html#contact">Contact</a></li>
     </ul>
-    <button class="nav-toggle" aria-label="Menu" onclick="this.closest('nav').classList.toggle('nav-open')">
+    <a href="index.html#contact" class="btn btn--primary btn--sm nav-cta">Contact</a>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Menu">
       <span></span><span></span><span></span>
     </button>
-    <a href="index.html#contact" class="nav-cta">Get in Touch</a>
   </div>
 </nav>
 
-<!-- PAGE HERO -->
-<section class="reviews-hero">
+<!-- ═══════════════════════ PAGE HERO ═════════════════════ -->
+<section class="section section--hero section--bg page-hero">
   <div class="container">
-    <span class="eyebrow" style="color:var(--clay)">Testimonials</span>
+    <span class="eyebrow eyebrow-accent">Testimonials</span>
     <h1>Kind Words From Families I've Supported</h1>
-    <div class="reviews-summary-bar">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" style="vertical-align:middle;margin-right:6px;flex-shrink:0"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg><span class="stars">★★★★★</span>
-      <span class="review-count">5.0 Rating · 32+ Five-Star Reviews</span>
+    <div class="hero-rating">
+      <span class="hero-stars">★★★★★</span>
+      <span>5.0 Rating · 46+ Five-Star Reviews</span>
     </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════ FILTER BAR ════════════════════ -->
+<section class="section section--flush-y section--bg filter-bar">
+  <div class="filter-inner">
+    <button class="rf-btn rf-active" data-filter="all">All</button>
+    <button class="rf-btn" data-filter="mum">Mums</button>
+    <button class="rf-btn" data-filter="dad">Dads</button>
   </div>
 </section>
 
 <!-- REVIEWS GRID -->
-<section class="reviews-grid-section">
-  <div class="container">
-    <div class="review-filters">
-      <button class="rf-btn rf-active" data-filter="all">All Reviews</button>
-      <button class="rf-btn" data-filter="mum">Mums</button>
-      <button class="rf-btn" data-filter="dad">Dads</button>
-    </div>
-    <div class="reviews-full-grid">
-      <div class="t-card"><blockquote>She was calm and professional yet kind and warm. She really helped support my partner so he could support me. I felt truly cared for in a very special way.</blockquote><img class="t-avatar" src="images/testimonials/mums/camilla-white.jpg" alt="Dr Camilla White"><div class="t-attr">Dr Camilla White — GP & Mother of Three</div></div>
-      <div class="t-card"><blockquote>Nat has the most divine way of making you feel safe, informed, connected and fully in control. She is a wealth of knowledge, experience and intuition.</blockquote><img class="t-avatar" src="images/testimonials/mums/amy-sinclair.jpg" alt="Amy Sinclair"><div class="t-attr">Amy Sinclair — Mother of Two</div></div>
-      <div class="t-card"><blockquote>I was visualising an intimate, drug-free water birth and my wish became a reality with the help of Nathalie. This was the best investment and I can highly recommend having this beautiful woman by your side.</blockquote><img class="t-avatar" src="images/testimonials/mums/cisco-tschurtschenthaler.png" alt="Cisco Tschurtschenthaler"><div class="t-attr">Cisco Tschurtschenthaler — Mother of Two</div></div>
-      <div class="t-card"><blockquote>I felt supported in every essence of pregnancy and mothering. You just completely 'got' everything I needed and made me feel calm and confident whenever I started to doubt myself.</blockquote><img class="t-avatar" src="images/testimonials/mums/renee-darcy.png" alt="Renée D'Arcy"><div class="t-attr">Renée D'Arcy — Mother of Three</div></div>
-      <div class="t-card"><blockquote>If you want the best for your birth, choose the wonderful Nathalie. She has the ability to create the most respectful, beautiful, gentle and sacred space. At my most vulnerable I felt safe and connected.</blockquote><img class="t-avatar" src="images/testimonials/mums/emma-bellamy.jpg" alt="Emma Bellamy"><div class="t-attr">Emma Bellamy — Mother of Three</div></div>
-      <div class="t-card"><blockquote>Nathalie has supported me for the births of two of my children. Her calm and grounded energy coupled with her extensive knowledge gave me such comfort. A supported mother is the best kind of mother.</blockquote><img class="t-avatar" src="images/testimonials/mums/priscylla-elliott.jpg" alt="Priscylla Elliott"><div class="t-attr">Priscylla Elliott — Mother of Four</div></div>
-      <div class="t-card"><blockquote>Nathalie was a constant support with the most beautiful nature. We adored her manner, communication and we found all of her teachings highly informative and clear.</blockquote><img class="t-avatar" src="images/testimonials/mums/lucy-folk.png" alt="Lucy Folk"><div class="t-attr">Lucy Folk — Mother</div></div>
-      <div class="t-card"><blockquote>Having her by my side during my pregnancy and postpartum period was so comforting. She helped me to understand that there really is no need for fear around birthing, to trust my intuition.</blockquote><img class="t-avatar" src="images/testimonials/mums/sophie-willing.jpg" alt="Sophie Willing"><div class="t-attr">Sophie Willing — Mother of Two</div></div>
-      <div class="t-card"><blockquote>Nathalie provided wonderful support throughout my pregnancy and birth. Her unwavering calmness was so beneficial in such a pivotal event in life.</blockquote><img class="t-avatar" src="images/testimonials/mums/bethany-cecins.jpg" alt="Bethany Cecins"><div class="t-attr">Bethany Cecins — Mother of One</div></div>
-      <div class="t-card"><blockquote>It was so comforting to know I could message her about anything pregnancy and birth related when the doubts crept in.</blockquote><img class="t-avatar" src="images/testimonials/mums/shanay-hall.jpg" alt="Shanay Hall"><div class="t-attr">Shanay Hall — Mother of Three</div></div>
-      <div class="t-card"><blockquote>Knowing that you were going to be by our side during the birth was extremely reassuring. You encouraged me in every moment I was beginning to feel like I couldn't do it anymore.</blockquote><img class="t-avatar" src="images/testimonials/mums/kaity-fox.png" alt="Kaity Fox"><div class="t-attr">Kaity Fox — Mother of Two</div></div>
-      <div class="t-card"><blockquote>You made us feel so nurtured — gorgeous smile, calm presence, yummy food, amazing pictures, and you transformed the house into the most beautiful sanctuary. Your support was invaluable.</blockquote><img class="t-avatar" src="images/testimonials/mums/karla-hammer.jpg" alt="Karla Hammer"><div class="t-attr">Karla Hammer — Mother of Three</div></div>
-      <div class="t-card"><blockquote>I truly felt more held by the doula than anyone else in the birth process and I literally don't know what we would have done without her.</blockquote><img class="t-avatar" src="images/testimonials/mums/techa-noble.png" alt="Técha Noble"><div class="t-attr">Técha Noble — Mother of Two</div></div>
-      <div class="t-card"><blockquote>Her calming presence and gentle nature was invaluable. Just being around her makes you feel calm and relaxed always.</blockquote><img class="t-avatar" src="images/testimonials/mums/tania-c.jpg" alt="Tania C"><div class="t-attr">Tania C — Mother of Two</div></div>
-      <div class="t-card"><blockquote>Her beautiful calm open nature is a pleasure to be around. Together we achieved a completely natural vaginal birth after cesarean!</blockquote><img class="t-avatar" src="images/testimonials/mums/nerine-m.jpg" alt="Nerine M"><div class="t-attr">Nerine M — Mother of Two</div></div>
-      <div class="t-card"><blockquote>My labor turned out to be a long one with complications, but it is not a bad memory thanks to Nathalie's warm support.</blockquote><img class="t-avatar" src="images/testimonials/mums/jennifer-pd.jpg" alt="Jennifer PD"><div class="t-attr">Jennifer PD — Mother of One</div></div>
-      <div class="t-card"><blockquote>Nathalie not only exceeded every expectation, she was a pivotal component of my dream birth story from start to finish.</blockquote><img class="t-avatar" src="images/testimonials/mums/cassandra.jpg" alt="Cassandra"><div class="t-attr">Cassandra — Mother of Two</div></div>
-      <div class="t-card"><blockquote>Nathalie strikes a perfect balance between being both personal and professional in her approach and supportive guidance always.</blockquote><img class="t-avatar" src="images/testimonials/mums/kate-b.jpg" alt="Kate B"><div class="t-attr">Kate B — Mother of One</div></div>
-      <div class="t-card"><blockquote>Without her he would have been terrified and lost. I felt safe with her and could better control my fears always.</blockquote><img class="t-avatar" src="images/testimonials/mums/mai-k.jpg" alt="Mai K"><div class="t-attr">Mai K — Mother of Four</div></div>
-      <div class="t-card"><blockquote>I don't think I could have endured 30 hours of labor without having you there helping me breathe through contractions.</blockquote><img class="t-avatar" src="images/testimonials/mums/laurie-s.png" alt="Laurie S"><div class="t-attr">Laurie S — Mother of Two</div></div>
-      <div class="t-card"><blockquote>With you in my corner, I didn't feel fearful at all — I felt confident, well balanced and full of trust in my body.</blockquote><img class="t-avatar" src="images/testimonials/mums/thea-v.jpg" alt="Thea V"><div class="t-attr">Thea V — Mother of Two</div></div>
-      <div class="t-card"><blockquote>The overwhelming calming confidence you gave my wife was what I liked best. Your calm confidence and knowledge allowed her to trust her body.</blockquote><img class="t-avatar" src="images/testimonials/dads/george-gorrow.jpg" alt="George Gorrow"><div class="t-attr">George Gorrow — Father</div></div>
-      <div class="t-card"><blockquote>I highly recommend Nathalie! She was our doula for our third baby, and she helped in so many ways!</blockquote><img class="t-avatar" src="images/testimonials/dads/jan-svarovsky.jpg" alt="Jan Svarovsky"><div class="t-attr">Jan Svarovsky — Father of Three</div></div>
-      <div class="t-card"><blockquote>Nathalie brought a beautiful calming energy through our journey of being parents.</blockquote><img class="t-avatar" src="images/testimonials/dads/ryan-bienefelt.jpg" alt="Ryan Bienefelt"><div class="t-attr">Ryan Bienefelt — Father of One</div></div>
-      <div class="t-card"><blockquote>Nat was an amazing support to my wife and I throughout the whole process, from preparation for birth.</blockquote><img class="t-avatar" src="images/testimonials/dads/ryan-allen.jpg" alt="Ryan Allen"><div class="t-attr">Ryan Allen — Father of Two</div></div>
-      <div class="t-card"><blockquote>After the birth I realised that she really was the most important support person in the room.</blockquote><img class="t-avatar" src="images/testimonials/dads/nico-georgieff.jpg" alt="Nico Georgieff"><div class="t-attr">Nico Georgieff — Father of Two</div></div>
-      <div class="t-card"><blockquote>We loved the pre-natal support and check-ins, this was of course very comforting to us.</blockquote><img class="t-avatar" src="images/testimonials/dads/rory-k.jpg" alt="Rory K"><div class="t-attr">Rory K — Father of Two</div></div>
-      <div class="t-card"><blockquote>Soon I realised that Nathalie was able to support both of us in a way that I knew I couldn't do alone.</blockquote><img class="t-avatar" src="images/testimonials/dads/george-popov.jpg" alt="George Popov"><div class="t-attr">George Popov — Father of Two</div></div>
-      <div class="t-card"><blockquote>I actually don't know how you are supposed to do it without one — both as a mother and a father.</blockquote><img class="t-avatar" src="images/testimonials/dads/felix.jpg" alt="Felix"><div class="t-attr">Felix — Father of Two</div></div>
-      <div class="t-card"><blockquote>Initially, I thought having someone else there during birth would take away from my role supporting my partner. I was wrong.</blockquote><img class="t-avatar" src="images/testimonials/dads/jamie-baxter.jpg" alt="Jamie Baxter"><div class="t-attr">Jamie Baxter — Father of Two</div></div>
+<section class="section section--card reviews-section">
+  <div class="reviews-full-grid">
+
+    <!-- Mums -->
+    <div class="t-card" data-cat="mum">
+      <blockquote>She was calm and professional yet kind and warm. She really helped support my partner so he could support me. I felt truly cared for in a very special way.</blockquote>
+      <p class="t-attr">Dr Camilla White</p>
     </div>
 
-    <div class="google-bar">
-      <span class="google-rating">★★★★★ 5.0</span>
-      <span class="google-count">14 Google Reviews</span>
-      <a href="#" class="btn-link" title="[Link to be added — Google Reviews URL needed]">View on Google →</a>
+    <div class="t-card" data-cat="mum">
+      <blockquote>Nat has the most divine way of making you feel safe, informed, connected and fully in control. She is a wealth of knowledge, experience and intuition.</blockquote>
+      <p class="t-attr">Amy Sinclair</p>
     </div>
+
+    <div class="t-card" data-cat="dad">
+      <blockquote>The overwhelming calming confidence you gave my wife was what I liked best about your support. Your calm confidence and knowledge allowed her to trust her body and give birth with such grace.</blockquote>
+      <p class="t-attr">George Gorrow, Father</p>
+    </div>
+
+    <div class="t-card" data-cat="mum">
+      <blockquote>I felt supported in every essence of pregnancy and mothering. You just completely 'got' everything I needed and made me feel calm and confident whenever I started to doubt myself.</blockquote>
+      <p class="t-attr">Renée D'Arcy</p>
+    </div>
+
+    <div class="t-card" data-cat="mum">
+      <blockquote>If you want the best for your birth, choose the wonderful Nathalie. She has the ability to create the most respectful, beautiful, gentle and sacred space. At my most vulnerable I felt safe and connected.</blockquote>
+      <p class="t-attr">Emma Bellamy</p>
+    </div>
+
+    <div class="t-card" data-cat="mum">
+      <blockquote>Nathalie has supported me for the births of two of my children. Her calm and grounded energy coupled with her extensive knowledge gave me such comfort. A supported mother is the best kind of mother.</blockquote>
+      <p class="t-attr">Priscylla Elliott</p>
+    </div>
+
+    <div class="t-card" data-cat="mum">
+      <blockquote>Nathalie was a constant support with the most beautiful nature. We adored her manner, communication and we found all of her teachings highly informative and clear. We felt supported all the way.</blockquote>
+      <p class="t-attr">Lucy Folk</p>
+    </div>
+
+    <div class="t-card" data-cat="mum">
+      <blockquote>Having her by my side during my pregnancy and postpartum period was so comforting. She helped me to understand that there really is no need for fear around birthing, to trust my intuition.</blockquote>
+      <p class="t-attr">Sophie Willing</p>
+    </div>
+
+    <div class="t-card" data-cat="mum">
+      <blockquote>Nathalie provided wonderful support throughout my pregnancy and birth. Her unwavering calmness was so beneficial in such a pivotal event in life.</blockquote>
+      <p class="t-attr">Bethany Cecins</p>
+    </div>
+
+    <div class="t-card" data-cat="mum">
+      <blockquote>It was so comforting to know I could message her about anything pregnancy and birth related when the doubts crept in.</blockquote>
+      <p class="t-attr">Shanay Hall</p>
+    </div>
+
+    <div class="t-card" data-cat="mum">
+      <blockquote>Knowing that you were going to be by our side during the birth was extremely reassuring. You encouraged me in every moment I was beginning to feel like I couldn't do it anymore.</blockquote>
+      <p class="t-attr">Kaity Fox</p>
+    </div>
+
+    <div class="t-card" data-cat="mum">
+      <blockquote>You made us feel so nurtured: gorgeous smile, calm presence, yummy food, amazing pictures, and you transformed the house into the most beautiful sanctuary. Your support was invaluable.</blockquote>
+      <p class="t-attr">Karla Hammer</p>
+    </div>
+
+    <div class="t-card" data-cat="mum">
+      <blockquote>I truly felt more held by the doula than anyone else in the birth process and I literally don't know what we would have done without her.</blockquote>
+      <p class="t-attr">Técha Noble</p>
+    </div>
+
+    <div class="t-card" data-cat="mum">
+      <blockquote>Her calming presence and gentle nature was invaluable. Just being around her makes you feel calm and relaxed always.</blockquote>
+      <p class="t-attr">Tania C.</p>
+    </div>
+
+    <div class="t-card" data-cat="mum">
+      <blockquote>Her beautiful calm open nature is a pleasure to be around. Together we achieved a completely natural vaginal birth after cesarean!</blockquote>
+      <p class="t-attr">Nerine M.</p>
+    </div>
+
+    <div class="t-card" data-cat="mum">
+      <blockquote>My labor turned out to be a long one with complications, but it is not a bad memory thanks to Nathalie's warm support.</blockquote>
+      <p class="t-attr">Jennifer PD</p>
+    </div>
+
+    <div class="t-card" data-cat="mum">
+      <blockquote>Nathalie not only exceeded every expectation, she was a pivotal component of my dream birth story from start to finish.</blockquote>
+      <p class="t-attr">Cassandra</p>
+    </div>
+
+    <div class="t-card" data-cat="mum">
+      <blockquote>Nathalie strikes a perfect balance between being both personal and professional in her approach and supportive guidance always.</blockquote>
+      <p class="t-attr">Kate B.</p>
+    </div>
+
+    <div class="t-card" data-cat="mum">
+      <blockquote>Without her he would have been terrified and lost. I felt safe with her and could better control my fears always.</blockquote>
+      <p class="t-attr">Mai K.</p>
+    </div>
+
+    <div class="t-card" data-cat="mum">
+      <blockquote>I don't think I could have endured 30 hours of labor without having you there helping me breathe through contractions.</blockquote>
+      <p class="t-attr">Laurie S.</p>
+    </div>
+
+    <div class="t-card" data-cat="mum">
+      <blockquote>With you in my corner, I didn't feel fearful at all. I felt confident, well balanced and full of trust in my body.</blockquote>
+      <p class="t-attr">Thea V.</p>
+    </div>
+
+    <!-- Dads -->
+    <div class="t-card" data-cat="dad">
+      <blockquote>The overwhelming calming confidence you gave my wife was what I liked best. Your calm confidence and knowledge allowed her to trust her body.</blockquote>
+      <p class="t-attr">George Gorrow</p>
+    </div>
+
+    <div class="t-card" data-cat="dad">
+      <blockquote>I highly recommend Nathalie! She was our doula for our third baby, and she helped in so many ways!</blockquote>
+      <p class="t-attr">Jan Svarovsky</p>
+    </div>
+
+    <div class="t-card" data-cat="dad">
+      <blockquote>Nathalie brought a beautiful calming energy through our journey of being parents.</blockquote>
+      <p class="t-attr">Ryan Bienefelt</p>
+    </div>
+
+    <div class="t-card" data-cat="dad">
+      <blockquote>Nat was an amazing support to my wife and I throughout the whole process, from preparation for birth.</blockquote>
+      <p class="t-attr">Ryan Allen</p>
+    </div>
+
+    <div class="t-card" data-cat="dad">
+      <blockquote>After the birth I realised that she really was the most important support person in the room.</blockquote>
+      <p class="t-attr">Nico Georgieff</p>
+    </div>
+
+    <div class="t-card" data-cat="dad">
+      <blockquote>We loved the pre-natal support and check-ins, this was of course very comforting to us.</blockquote>
+      <p class="t-attr">Rory K.</p>
+    </div>
+
+    <div class="t-card" data-cat="dad">
+      <blockquote>Soon I realised that Nathalie was able to support both of us in a way that I knew I couldn't do alone.</blockquote>
+      <p class="t-attr">George Popov</p>
+    </div>
+
+    <div class="t-card" data-cat="dad">
+      <blockquote>I actually don't know how you are supposed to do it without one, both as a mother and a father.</blockquote>
+      <p class="t-attr">Felix</p>
+    </div>
+
+    <div class="t-card" data-cat="dad">
+      <blockquote>Initially, I thought having someone else there during birth would take away from my role supporting my partner. I was wrong.</blockquote>
+      <p class="t-attr">Jamie Baxter</p>
+    </div>
+
   </div>
 </section>
 
-<!-- CTA -->
-<div class="cta-light">
+<!-- ═══════════════════════ GOOGLE BAR ════════════════════ -->
+<section class="section section--flush-y section--bg google-bar">
+  <div class="google-inner">
+    <span class="google-logo">
+      <span>G</span><span>o</span><span>o</span><span>g</span><span>l</span><span>e</span>
+    </span>
+    <span class="google-rating-stars">★★★★★</span>
+    <span class="google-rating-text">5.0 · 14 Google Reviews</span>
+    <a class="google-link" href="https://maps.app.goo.gl/yKQ22ncVsXBxAPKw6" target="_blank" rel="noopener">View on Google →</a>
+  </div>
+</section>
+<section class="section section--headline section--card cta-band">
   <div class="container">
     <h2>Ready to feel supported too?</h2>
-    <p>I'd love to hear more about your journey.</p>
-    <a href="index.html#contact" class="btn-primary">Get in Touch</a>
+    <p>Let me know how I can support you.</p>
+    <a href="index.html#contact" class="btn btn--primary">Contact</a>
   </div>
-</div>
+</section>
 
+<!-- ═══════════════════════ FOOTER ════════════════════════ -->
 <footer class="site-footer">
   <div class="footer-inner">
-    <div class="footer-top">
-      <span class="footer-copy">© 2026 The Byron Doula. All rights reserved.</span>
-      <div class="social-icons">
-        <a href="#" class="social-icon" aria-label="Instagram">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
-        </a>
-        <a href="#" class="social-icon" aria-label="Facebook">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
-        </a>
-        <a href="#" class="social-icon" aria-label="Pinterest">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12c0 5.084 3.163 9.426 7.627 11.174-.105-.949-.2-2.405.042-3.441.218-.937 1.407-5.965 1.407-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738a.36.36 0 0 1 .083.345l-.333 1.36c-.053.22-.174.267-.402.161-1.499-.698-2.436-2.889-2.436-4.649 0-3.785 2.75-7.262 7.929-7.262 4.163 0 7.398 2.967 7.398 6.931 0 4.136-2.607 7.464-6.227 7.464-1.216 0-2.359-.632-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0z" fill="#6B6B6B"/></svg>
-        </a>
+    <div class="footer-grid">
+      <div class="footer-col">
+        <p class="footer-col-title">Services</p>
+        <ul class="footer-links">
+          <li><a href="birth-preparation.html">Birth Preparation</a></li>
+          <li><a href="parent-coaching.html">Parent Coaching</a></li>
+          <li><a href="services.html">All Services</a></li>
+        </ul>
       </div>
-      <ul class="footer-links">
-        <li><a href="#">Privacy</a></li>
-        <li><a href="#">Terms</a></li>
-        <li><a href="#">Cookies</a></li>
-      </ul>
+      <div class="footer-col">
+        <p class="footer-col-title">About</p>
+        <ul class="footer-links">
+          <li><a href="about.html">About Nathalie</a></li>
+          <li><a href="reviews.html">Reviews</a></li>
+          <li><a href="index.html#contact">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <p class="footer-col-title">Legal</p>
+        <ul class="footer-links">
+          <li><a href="privacy-policy.html">Privacy Policy</a></li>
+          <li><a href="terms.html">Terms of Service</a></li>
+          <li><a href="cookies.html">Cookies</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <p class="footer-col-title">Connect</p>
+        <ul class="footer-links">
+          <li><a href="https://www.instagram.com/thebyrondoula" target="_blank" rel="noopener">Instagram</a></li>
+          <li><a href="https://www.facebook.com/thebyrondoula" target="_blank" rel="noopener">Facebook</a></li>
+          <li><a href="mailto:hello@thebyrondoula.com">hello@thebyrondoula.com</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-utility">
+      <span class="footer-copy">© 2026 The Byron Doula</span>
     </div>
     <p class="footer-ack">I acknowledge the Bundjalung People as the original and true custodians of the land on which I live and work. I pay respect to all of our country's First Nations peoples and their ongoing strength in practising the world's oldest living culture. I pay my respect to their Elders past, present and emerging.</p>
   </div>
 </footer>
 
-<script>
-  // Quote marks
-  document.querySelectorAll('.t-card').forEach(card => {
-    const bq = card.querySelector('blockquote');
-    if (bq) { const m = document.createElement('span'); m.className = 'quote-mark'; m.textContent = '“'; card.insertBefore(m, bq); }
-  });
-
-  // Filter — infer category from avatar image path
-  document.querySelectorAll('.reviews-full-grid .t-card').forEach(card => {
-    const img = card.querySelector('.t-avatar');
-    card.dataset.cat = (img && img.src.includes('/dads/')) ? 'dad' : 'mum';
-  });
-  document.querySelectorAll('.rf-btn').forEach(btn => {
-    btn.addEventListener('click', function() {
-      document.querySelectorAll('.rf-btn').forEach(b => b.classList.remove('rf-active'));
-      this.classList.add('rf-active');
-      const f = this.dataset.filter;
-      document.querySelectorAll('.reviews-full-grid .t-card').forEach(c => {
-        c.style.display = (f === 'all' || c.dataset.cat === f) ? '' : 'none';
-      });
-    });
-  });
-</script>
+<script src="js/site.js" defer></script>
 </body>
 </html>
