@@ -938,18 +938,18 @@ p {
     gap: var(--g1);
   }
   .footer-social {
-    order: 1;
+    order: 3;
     justify-content: center;
     width: 100%;
-    padding-bottom: 4px;
+    padding: var(--g1) 0;
   }
   .footer-legal {
-    order: 2;
+    order: 1;
     justify-content: center;
     justify-self: center;
   }
   .footer-copy {
-    order: 3;
+    order: 2;
     text-align: center;
     white-space: normal;
   }
