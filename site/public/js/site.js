@@ -11,11 +11,30 @@
 
   /* ── Nav: mobile hamburger ──────────────────────────────── */
   const toggle = document.getElementById('nav-toggle');
+  const navLinks = nav ? nav.querySelector('.nav-links') : null;
+
+  function closeNav() {
+    if (nav) nav.classList.remove('nav-open');
+    document.body.classList.remove('nav-open');
+  }
+
   if (toggle && nav) {
     toggle.addEventListener('click', function () {
+      const opening = !nav.classList.contains('nav-open');
       nav.classList.toggle('nav-open');
+      document.body.classList.toggle('nav-open', opening);
     });
   }
+
+  if (navLinks) {
+    navLinks.querySelectorAll('a').forEach(function (link) {
+      link.addEventListener('click', closeNav);
+    });
+  }
+
+  window.addEventListener('resize', function () {
+    if (window.innerWidth > 768) closeNav();
+  });
 
   /* ── Nav: mobile services dropdown ─────────────────────── */
   document.querySelectorAll('.nav-dropdown-toggle').forEach(function (btn) {
