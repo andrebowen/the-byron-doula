@@ -974,18 +974,18 @@ p {
     text-align: center;
     white-space: normal;
   }
-  .footer-social a {
-    width: 44px;
-    height: 44px;
-    color: #722F1E;
-    background: rgba(114, 47, 30, 0.12);
-    border-radius: 50%;
+  .footer-social {
+    width: 100%;
   }
-  .footer-social-mark {
-    display: block;
-  }
-  .footer-social svg {
+  .footer-social li {
     display: none;
+  }
+  .footer-social::before {
+    content: "Instagram   Facebook   Pinterest";
+    font-family: var(--font-sans);
+    font-size: var(--type-sm);
+    letter-spacing: var(--tracking-type-sm);
+    color: #722F1E;
   }
 }
 @media (max-width: 540px) {
