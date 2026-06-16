@@ -1,0 +1,20 @@
+.DS_Store
+**/.DS_Store
+Thumbs.db
+
+# ICM workspace — lives in Superpowers, not on GitHub
+AGENTS.md
+CONTEXT.md
+MEMORY.md
+VISION.md
+stages/
+setup/
+_config/
+shared/
+site-backup*/
+Media-Kit/
+AI-Expansion/
+references/
+skills/
+site-text.md
+To-do.md
