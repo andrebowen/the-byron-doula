@@ -691,7 +691,14 @@ p {
 .nav-links a[href="parent-coaching.html"] {
   font-weight: 400;
 }
-.nav-links a:hover { background: var(--nav-link-hover-bg); color: var(--color-text); }
+.nav-links a:hover { color: var(--color-text); }
+@media (min-width: 769px) {
+  .nav-links a:hover {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    text-decoration-thickness: 1px;
+  }
+}
 .nav-links a.active { color: var(--color-text); font-weight: 600; }
 .nav-links a[href="about.html"].active,
 .nav-links a[href="birth-preparation.html"].active,
@@ -907,13 +914,22 @@ p {
   transition: color 0.15s ease;
 }
 .footer-social a:hover { color: var(--footer-link-hover); }
+.footer-social-mark {
+  display: none;
+  font-family: var(--font-sans);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  line-height: 1;
+  color: #722F1E;
+}
 .footer-social svg {
   display: block;
   width: 18px;
   height: 18px;
   flex-shrink: 0;
-  fill: currentColor;
 }
+.footer-social svg path { fill: #722F1E; }
 .footer-ack {
   font-family: var(--font-sans);
   font-size: var(--type-xs);
@@ -961,15 +977,15 @@ p {
   .footer-social a {
     width: 44px;
     height: 44px;
-    color: var(--color-brand);
-    background: color-mix(in oklab, var(--color-brand) 10%, var(--color-card));
+    color: #722F1E;
+    background: rgba(114, 47, 30, 0.12);
     border-radius: 50%;
   }
-  .footer-social svg,
-  .footer-social svg path {
-    width: 20px;
-    height: 20px;
-    fill: var(--color-brand);
+  .footer-social-mark {
+    display: block;
+  }
+  .footer-social svg {
+    display: none;
   }
 }
 @media (max-width: 540px) {
