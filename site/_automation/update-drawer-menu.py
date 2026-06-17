@@ -17,7 +17,6 @@ ACTIVE = {
     "about.html": "about",
     "birth-preparation.html": "birth",
     "parent-coaching.html": "parent",
-    "reviews.html": "reviews",
 }
 
 DRAWER_BODY_RE = re.compile(
@@ -37,7 +36,6 @@ def drawer_body(page: str) -> str:
           <li><a href="about.html"{active_attr(page, "about")}><span>About</span>{CHEVRON}</a></li>
           <li><a href="birth-preparation.html"{active_attr(page, "birth")}><span>Birth Preparation</span>{CHEVRON}</a></li>
           <li><a href="parent-coaching.html"{active_attr(page, "parent")}><span>Parent Coaching</span>{CHEVRON}</a></li>
-          <li><a href="reviews.html"{active_attr(page, "reviews")}><span>Reviews</span>{CHEVRON}</a></li>
         </ul>
       </div>"""
 

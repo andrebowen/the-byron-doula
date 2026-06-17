@@ -10,7 +10,6 @@ PAGES = {
     "birth-preparation.html": {"birth": True},
     "parent-coaching.html": {"parent": True},
     "services.html": {},
-    "reviews.html": {"reviews": True},
     "privacy-policy.html": {},
     "cookies.html": {},
     "terms.html": {},
@@ -72,17 +71,12 @@ def mobile_header(flags: dict) -> str:
         <ul class="nav-links menu-drawer__list">
           <li><a href="index.html"{active("home", flags)}><span>Home</span><svg class="menu-drawer__chevron" width="7" height="12" viewBox="0 0 7 12" fill="none" aria-hidden="true"><path d="M1 1l5 5-5 5" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
           <li><a href="about.html"{active("about", flags)}><span>About</span><svg class="menu-drawer__chevron" width="7" height="12" viewBox="0 0 7 12" fill="none" aria-hidden="true"><path d="M1 1l5 5-5 5" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
-          <li><a href="reviews.html"{active("reviews", flags)}><span>Reviews</span><svg class="menu-drawer__chevron" width="7" height="12" viewBox="0 0 7 12" fill="none" aria-hidden="true"><path d="M1 1l5 5-5 5" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
         </ul>
       </div>
       <div class="menu-drawer__bottom">
         <a href="index.html#contact" class="menu-drawer__bottom-link">
           <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M3.5 5.5h13v9h-13v-9z" stroke="currentColor" stroke-width="1.1"/><path d="M3.5 6.5l6.5 4.5 6.5-4.5" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/></svg>
           <span>Contact</span>
-        </a>
-        <a href="reviews.html" class="menu-drawer__bottom-link">
-          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M10 17s5-4.5 5-8.5a5 5 0 10-10 0C5 12.5 10 17 10 17z" stroke="currentColor" stroke-width="1.1"/><circle cx="10" cy="8.5" r="1.5" stroke="currentColor" stroke-width="1.1"/></svg>
-          <span>Reviews</span>
         </a>
       </div>
     </div>
