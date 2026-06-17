@@ -87,6 +87,14 @@
     });
   }
 
+  if (siteMenu) {
+    siteMenu.addEventListener('click', function (event) {
+      if (!event.target.closest('.menu-drawer')) {
+        closeNav();
+      }
+    });
+  }
+
   window.addEventListener('resize', function () {
     if (window.innerWidth > 768) closeNav();
   });
