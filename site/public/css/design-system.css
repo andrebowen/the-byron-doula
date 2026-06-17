@@ -81,6 +81,7 @@
   --v-seam: var(--v3);
   --v-seam-wide: calc(var(--v3) * 2);
   /* Gutters - component gaps and horizontal padding */
+  --g0.5: 5px;
   --g1: 10px;
   --g2: 20px;
   --g3: 30px;
@@ -97,6 +98,7 @@
   --prose:         658px;
   --prose-narrow:  48ch;
   --content-pad:   var(--g2);
+  --testimonial-avatar: 5rem;
 
   --nav-h:              64px;
   --site-header-height: 64px;
@@ -1054,7 +1056,8 @@ p {
 .t-card blockquote::before,
 .t-card blockquote::after { content: none; }
 .t-avatar {
-  width: 100px; height: 100px;
+  width: var(--testimonial-avatar);
+  height: var(--testimonial-avatar);
   border-radius: 50%;
   object-fit: cover;
   display: block;
@@ -1210,7 +1213,7 @@ p {
 }
 .featured-logo:hover { opacity: 1; }
 .featured-logo[alt="Grace Tales"] { height: 57px; }
-.featured-logo[alt="Cleo"] { height: 34px; }
+.featured-logo[alt="Mumma Milla"] { height: 34px; }
 .featured-logo[alt="Dear Work"] { height: 23px; }
 @media (max-width: 768px) {
   .logo-row { gap: 28px; }
@@ -1634,7 +1637,7 @@ p {
 }
 .logo-card img { max-width: 96px; max-height: 38px; object-fit: contain; filter: brightness(0); }
 .logo-card img[alt="Grace Tales"] { max-width: calc(96px * 1.1); max-height: calc(38px * 1.1); }
-.logo-card img[alt="Cleo"] { max-width: calc(77px * 0.9); }
+.logo-card img[alt="Mumma Milla"] { max-width: calc(77px * 1.05); }
 .logo-card img[alt="Space to Flow"] { max-width: calc(88px * 1.1); }
 
 .sec-head .sec-intro { max-width: var(--prose-narrow); }
@@ -1650,11 +1653,11 @@ p {
 }
 .home-card:hover { transform: translateY(-3px); box-shadow: 0 12px 40px rgba(45,42,38,.09); }
 .card-head { padding: 0; }
-.card-b { padding: calc(var(--g2) + 10px) var(--g3) var(--g3); display: flex; flex-direction: column; flex: 1; }
+.card-b { padding: calc(var(--g2) + 10px) var(--g3) calc(var(--g3) * 2); display: flex; flex-direction: column; flex: 1; }
 .home-card > img {
   width: 100%;
   margin: 0;
-  aspect-ratio: 3/2;
+  aspect-ratio: 1/1;
   object-fit: cover;
   flex-shrink: 0;
   border-radius: 0;
@@ -1899,8 +1902,14 @@ p {
 }
 .q:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(45,42,38,.07); }
 .q blockquote { font-size: var(--text-base); line-height: 1.75; color: var(--color-text-body); margin-bottom: var(--g3); flex: 1; }
-.who { display: flex; gap: var(--g1); align-items: center; }
-.who img { width: 88px; height: 88px; border-radius: 50%; object-fit: cover; flex-shrink: 0; }
+.who { display: flex; gap: var(--g2); align-items: center; }
+.who img {
+  width: var(--testimonial-avatar);
+  height: var(--testimonial-avatar);
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
 .who-name { font-size: var(--text-sm); font-weight: 500; letter-spacing: 0.03em; color: var(--color-text-body); line-height: 1.4; }
 
 @media (max-width: 900px) {
@@ -1927,7 +1936,10 @@ p {
     margin-top: var(--v2);
     margin-bottom: var(--v-seam-wide);
   }
-  .logo-bar .logo-row { grid-template-columns: repeat(3, 1fr); }
+  .logo-bar .logo-row {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--g1);
+  }
   .about-card { grid-template-columns: 1fr; overflow: hidden; }
   .about-photo-col {
     margin: 0;
@@ -2371,7 +2383,7 @@ a.media-card {
     padding: var(--g2);
     background: var(--color-card-03);
   }
-  .home-card .card-b { padding: calc(var(--g2) + 14px) var(--g2) var(--g2); }
+  .home-card .card-b { padding: calc(var(--g2) + 14px) var(--g2) calc(var(--g2) * 2); }
   .home-card > img,
   .pricing-card > img {
     width: 100%;
@@ -2382,9 +2394,7 @@ a.media-card {
   .media-card-body { padding-top: calc(var(--g2) + 10px); }
   .pricing-card { padding: var(--g2); }
   .q { padding: var(--g2); }
-  .logo-card { height: 120px; padding: 0 12px; }
-  .logo-bar .logo-row { gap: 0; }
-  .who img { width: 64px; height: 64px; }
+  .logo-card { height: 120px; padding: 0 16px; }
   .who-name { line-height: 1.45; }
   .home-faq .faq-tab { padding: 8px 12px; font-size: var(--type-sm); }
   .home-faq .faq-tabs { max-width: 100%; flex-wrap: wrap; justify-content: center; }
