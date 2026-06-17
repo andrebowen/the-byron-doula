@@ -1,33 +1,65 @@
 (function () {
   'use strict';
 
-  /* ── Nav: scroll shadow ─────────────────────────────────── */
+  /* ── Nav: scroll + hero overlay ─────────────────────────── */
   const nav = document.getElementById('site-nav');
+  const hero = document.getElementById('hero');
+
+  function updateNav() {
+    if (!nav) return;
+    const pastHero = hero
+      ? window.scrollY > hero.offsetHeight - nav.offsetHeight
+      : window.scrollY > 40;
+    nav.classList.toggle('scrolled', pastHero);
+  }
+
   if (nav) {
-    window.addEventListener('scroll', function () {
-      nav.classList.toggle('scrolled', window.scrollY > 40);
-    }, { passive: true });
+    window.addEventListener('scroll', updateNav, { passive: true });
+    updateNav();
   }
 
   /* ── Nav: mobile hamburger ──────────────────────────────── */
   const toggle = document.getElementById('nav-toggle');
-  const navLinks = nav ? nav.querySelector('.nav-links') : null;
+  const menuClose = document.getElementById('menu-close');
+  const navLinks = nav ? nav.querySelectorAll('.menu-drawer a, .site-header__links--desktop a') : [];
 
   function closeNav() {
     if (nav) nav.classList.remove('nav-open');
     document.body.classList.remove('nav-open');
+    if (toggle) {
+      toggle.setAttribute('aria-expanded', 'false');
+      toggle.removeAttribute('hidden');
+    }
+    if (menuClose) menuClose.hidden = true;
+  }
+
+  function openNav() {
+    if (!nav) return;
+    nav.classList.add('nav-open');
+    document.body.classList.add('nav-open');
+    if (toggle) {
+      toggle.setAttribute('aria-expanded', 'true');
+      toggle.setAttribute('hidden', '');
+    }
+    if (menuClose) menuClose.hidden = false;
   }
 
   if (toggle && nav) {
     toggle.addEventListener('click', function () {
-      const opening = !nav.classList.contains('nav-open');
-      nav.classList.toggle('nav-open');
-      document.body.classList.toggle('nav-open', opening);
+      if (nav.classList.contains('nav-open')) {
+        closeNav();
+      } else {
+        openNav();
+      }
     });
   }
 
-  if (navLinks) {
-    navLinks.querySelectorAll('a').forEach(function (link) {
+  if (menuClose) {
+    menuClose.addEventListener('click', closeNav);
+  }
+
+  if (navLinks.length) {
+    navLinks.forEach(function (link) {
       link.addEventListener('click', closeNav);
     });
   }
@@ -36,14 +68,7 @@
     if (window.innerWidth > 768) closeNav();
   });
 
-  /* ── Nav: mobile services dropdown ─────────────────────── */
-  document.querySelectorAll('.nav-dropdown-toggle').forEach(function (btn) {
-    btn.addEventListener('click', function () {
-      this.closest('li').classList.toggle('mobile-open');
-    });
-  });
-
-  /* ── FAQ tabs (homepage) ────────────────────────────────── */
+  /* ── FAQ tabs ───────────────────────────────────────────── */
   function updateFaqTabSlider(tabs) {
     const slider = tabs.querySelector('.faq-tab-slider');
     const active = tabs.querySelector('.faq-tab.active');
@@ -70,7 +95,7 @@
     tabs.querySelectorAll('.faq-tab').forEach(function (tab) {
       tab.addEventListener('click', function () {
         const panel = tab.dataset.panel;
-        const content = tab.closest('.faq-content');
+        const content = tab.closest('.faq-content') || tab.closest('.faq__layout');
         if (!content) return;
         content.querySelectorAll('.faq-tab').forEach(function (t) {
           t.classList.remove('active');
@@ -102,7 +127,6 @@
   /* ── Reviews filter (reviews.html only) ────────────────── */
   const grid = document.querySelector('.reviews-full-grid');
   if (grid) {
-    /* tag each card by avatar path */
     grid.querySelectorAll('.t-card').forEach(function (card) {
       const img = card.querySelector('.t-avatar');
       card.dataset.cat = (img && img.src.includes('/dads/')) ? 'dad' : 'mum';

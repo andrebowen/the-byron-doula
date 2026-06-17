@@ -1,7 +1,7 @@
 # Stokke-Inspired Design System — site2
 
 **Reference:** [stokke.com](https://www.stokke.com)  
-**Implementation:** `site2/public/css/site.css` — all public pages  
+**Implementation:** `site/public/css/site.css` — all public pages  
 **Status:** Active on homepage + all secondary pages — mobile-first, desktop progressive enhancement
 
 ---
@@ -181,10 +181,10 @@ Brand text + underline tint — `.link-cta`
 
 | File | Role |
 |------|------|
-| `site2/public/css/site.css` | Production stylesheet — homepage + all pages |
-| `site2/public/css/design-system.css` | Legacy reference (not linked on live pages) |
-| `site2/public/design-system.html` | Visual reference |
-| `site2/STOKKE-DESIGN-SYSTEM.md` | This document |
+| `site/public/css/site.css` | Production stylesheet — homepage + all pages |
+| `site/public/css/design-system.css` | Legacy reference (not linked on live pages) |
+| `site/public/design-system.html` | Visual reference |
+| `site/STOKKE-DESIGN-SYSTEM.md` | This document |
 
 ---
 
