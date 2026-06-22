@@ -738,10 +738,9 @@ body.nav-open { overflow: hidden; }
   color: var(--ink-soft);
 }
 
-.editorial__list li::before {
-  content: '—';
-  margin-right: 0.5em;
-  color: var(--brand);
+.editorial__list {
+  list-style: disc;
+  padding-left: 1.25em;
 }
 
 .editorial__actions {
