@@ -1,6 +1,5 @@
-# Stokke-Inspired Design System — site2
+# Design System — site2
 
-**Reference:** [stokke.com](https://www.stokke.com)  
 **Implementation:** `site/public/css/site.css` — all public pages  
 **Status:** Active on homepage + all secondary pages — mobile-first, desktop progressive enhancement
 
@@ -10,7 +9,7 @@
 
 1. **Mobile-first** — design for phone, enhance at 768px+
 2. **Editorial commerce** — full-bleed photography, restrained typography, pill CTAs
-3. **Neutral + brand** — white + warm cream bands, charcoal ink, Stokke orange accent
+3. **Neutral + brand** — white + warm cream bands, charcoal ink, orange accent
 4. **Full bleed** — heroes and images edge-to-edge; content breathes with padding
 5. **iPhone carousels** — horizontal snap scroll, card peek, 16px gaps
 6. **Inverted cards** — light sections use cream card boxes; cream sections use white cards (trust, testimonials)
@@ -19,7 +18,7 @@
 
 ## Colour
 
-### Brand (Stokke Leap)
+### Brand
 
 | Token | Hex | Use |
 |-------|-----|-----|
@@ -39,8 +38,8 @@
 | `--ink-soft` | `#3d3d3d` | Body copy |
 | `--ink-muted` | `#767676` | Meta, captions |
 | `--line` | `#e4e4e4` | Borders, dividers |
-| `--line-subtle` | `rgba(0,0,0,0.1)` | Stokke subtle border |
-| `--line-medium` | `rgba(0,0,0,0.16)` | Stokke medium border |
+| `--line-subtle` | `rgba(0,0,0,0.1)` | Subtle border |
+| `--line-medium` | `rgba(0,0,0,0.16)` | Medium border |
 | `--surface` | `#ffffff` | Light section background |
 | `--surface-subtle` | `#f9f8f5` | Alternating band A |
 | `--surface-02` | `#f2f0eb` | Alternating band B |
@@ -66,9 +65,11 @@
 
 ## Typography
 
-**Font:** [DM Sans](https://fonts.google.com/specimen/DM+Sans) — Stokke Sans stand-in  
+**Font:** [DM Sans](https://fonts.google.com/specimen/DM+Sans)  
 **Fallback:** `-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif`  
-**Apple HIG reference:** [Domains/Notes/Design/apple-hig.md](../../../Domains/Notes/Design/apple-hig.md) — Dynamic Type scale, web translation, minimum-size rationale
+**Platform guidelines:** [Notes/Design/platform-guidelines.md](../../../Notes/Design/platform-guidelines.md) — HIG + MD3 peers; official docs when unsure
+
+**Apple HIG reference:** [Notes/Design/apple-hig.md](../../../Notes/Design/apple-hig.md) — Dynamic Type scale, web translation, minimum-size rationale
 
 | Token | Size | px @ 16px root | Use |
 |-------|------|----------------|-----|
@@ -103,7 +104,7 @@
 
 ---
 
-## Radius & motion (Stokke Leap scale)
+## Radius & motion
 
 | Token | Value | px @ 16px |
 |-------|-------|-----------|
@@ -140,7 +141,7 @@
 - On hero: `.label--light` → white at 78% opacity
 
 ### Buttons (pills)
-Primary fill uses **Stokke orange** (`--brand`). Ghost outline inverts to brand on hover.
+Primary fill uses **brand orange** (`--brand`). Ghost outline inverts to brand on hover.
 
 | Class | Style |
 |-------|-------|
@@ -154,12 +155,12 @@ Brand text + underline tint — `.link-cta`
 
 ### Header (mobile)
 - Grid: hamburger left · logo centred · spacer/close right
-- Hamburger: Stokke 16×16 SVG
+- Hamburger: 16×16 SVG
 - Full-screen drawer: white, chevron rows, section labels
 
 ### Carousel
 - Counter in `--brand-text`
-- Product images: `--image-radius` (8px · Stokke `--leap-radii-s`)
+- Product images: `--image-radius` (8px)
 
 ### FAQ
 - Active tab + slider indicator: brand
@@ -184,8 +185,8 @@ Brand text + underline tint — `.link-cta`
 | `site/public/css/site.css` | Production stylesheet — homepage + all pages |
 | `site/public/css/design-system.css` | Legacy reference (not linked on live pages) |
 | `site/public/design-system.html` | Visual reference |
-| `site/STOKKE-DESIGN-SYSTEM.md` | This document |
+| `site/DESIGN-SYSTEM.md` | This document |
 
 ---
 
-*Updated 2026-06-17 — Stokke Leap brand accent + radii extracted from stokke.com.*
+*Updated 2026-06-17 — brand accent + radii tokens.*

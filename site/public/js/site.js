@@ -209,3 +209,285 @@
   });
 
 })();
+
+/* ── Cookie consent (GDPR / ePrivacy compliant) ───────────────
+   Self-contained, no dependencies. Non-essential cookies/scripts
+   stay blocked until the visitor gives explicit, granular consent.
+   Reopen the chooser anywhere with the footer "Cookie Settings"
+   control or window.cookieConsent.openSettings().
+   ─────────────────────────────────────────────────────────────── */
+(function () {
+  'use strict';
+
+  var STORE_KEY = 'tbd_cookie_consent';
+  var POLICY_VERSION = 1; // bump to re-prompt everyone after a policy change
+
+  // Non-essential categories the visitor can opt into. "necessary" is
+  // implied/always-on and never stored as a choice.
+  var CATEGORIES = [
+    {
+      id: 'analytics',
+      name: 'Analytics',
+      desc: 'Help me understand how the site is used so I can improve it. Set only with your consent.'
+    },
+    {
+      id: 'marketing',
+      name: 'Marketing',
+      desc: 'Used to measure and personalise content from third parties (e.g. social embeds).'
+    }
+  ];
+
+  /* ── persistence ─────────────────────────────────────────── */
+  function readConsent() {
+    try {
+      var raw = window.localStorage.getItem(STORE_KEY);
+      if (!raw) return null;
+      var data = JSON.parse(raw);
+      if (!data || data.v !== POLICY_VERSION) return null;
+      return data;
+    } catch (e) {
+      return null;
+    }
+  }
+
+  function writeConsent(granted) {
+    var data = { v: POLICY_VERSION, ts: new Date().toISOString(), categories: {} };
+    CATEGORIES.forEach(function (cat) {
+      data.categories[cat.id] = !!granted[cat.id];
+    });
+    try {
+      window.localStorage.setItem(STORE_KEY, JSON.stringify(data));
+    } catch (e) { /* storage unavailable — banner will show next visit */ }
+    return data;
+  }
+
+  /* ── apply consent: unblock opted-in scripts, fire event ─── */
+  function applyConsent(data) {
+    // Scripts gated behind consent ship as <script type="text/plain"
+    // data-cc-category="analytics"> and are activated here once allowed.
+    var blocked = document.querySelectorAll('script[type="text/plain"][data-cc-category]');
+    Array.prototype.forEach.call(blocked, function (node) {
+      var cat = node.getAttribute('data-cc-category');
+      if (!data.categories[cat] || node.dataset.ccActivated) return;
+      var active = document.createElement('script');
+      Array.prototype.forEach.call(node.attributes, function (attr) {
+        if (attr.name === 'type' || attr.name === 'data-cc-category') return;
+        active.setAttribute(attr.name, attr.value);
+      });
+      active.type = 'text/javascript';
+      if (node.src) {
+        active.src = node.src;
+      } else {
+        active.textContent = node.textContent;
+      }
+      node.dataset.ccActivated = '1';
+      node.parentNode.insertBefore(active, node.nextSibling);
+    });
+
+    document.dispatchEvent(new CustomEvent('cookieconsent:change', { detail: data }));
+  }
+
+  /* ── UI ──────────────────────────────────────────────────── */
+  var root = null;
+  var lastFocus = null;
+
+  function buildUI() {
+    root = document.createElement('div');
+    root.className = 'cc-root';
+    root.setAttribute('hidden', '');
+
+    var toggles = CATEGORIES.map(function (cat) {
+      return '' +
+        '<div class="cc-cat">' +
+          '<div class="cc-cat__head">' +
+            '<span class="cc-cat__name">' + cat.name + '</span>' +
+            '<label class="cc-switch">' +
+              '<input type="checkbox" data-cc-input="' + cat.id + '">' +
+              '<span class="cc-switch__track" aria-hidden="true"></span>' +
+            '</label>' +
+          '</div>' +
+          '<p class="cc-cat__desc">' + cat.desc + '</p>' +
+        '</div>';
+    }).join('');
+
+    root.innerHTML = '' +
+      '<div class="cc-banner" role="dialog" aria-modal="false" aria-labelledby="cc-title" aria-describedby="cc-desc">' +
+        '<div class="cc-banner__main">' +
+          '<h2 class="cc-banner__title" id="cc-title">Cookies on this site</h2>' +
+          '<p class="cc-banner__text" id="cc-desc">I use essential cookies to make this site work. With your permission I’d also like to set optional cookies to understand how the site is used. You can change your choice any time. See the <a href="cookies.html">Cookie Policy</a> and <a href="privacy-policy.html">Privacy Policy</a>.</p>' +
+        '</div>' +
+        '<div class="cc-banner__actions">' +
+          '<button type="button" class="btn cc-btn cc-btn--ghost" data-cc-action="manage">Manage preferences</button>' +
+          '<button type="button" class="btn cc-btn cc-btn--ghost" data-cc-action="reject">Reject optional</button>' +
+          '<button type="button" class="btn cc-btn cc-btn--solid" data-cc-action="accept">Accept all</button>' +
+        '</div>' +
+      '</div>' +
+      '<div class="cc-modal" role="dialog" aria-modal="true" aria-labelledby="cc-modal-title" hidden>' +
+        '<div class="cc-modal__panel">' +
+          '<div class="cc-modal__head">' +
+            '<h2 class="cc-modal__title" id="cc-modal-title">Cookie preferences</h2>' +
+            '<button type="button" class="cc-modal__close" data-cc-action="close" aria-label="Close cookie preferences">&times;</button>' +
+          '</div>' +
+          '<div class="cc-modal__body">' +
+            '<div class="cc-cat cc-cat--locked">' +
+              '<div class="cc-cat__head">' +
+                '<span class="cc-cat__name">Strictly necessary</span>' +
+                '<span class="cc-cat__always">Always on</span>' +
+              '</div>' +
+              '<p class="cc-cat__desc">Required for the site to function (page navigation, security, your cookie choice). These can’t be switched off.</p>' +
+            '</div>' +
+            toggles +
+          '</div>' +
+          '<div class="cc-modal__actions">' +
+            '<button type="button" class="btn cc-btn cc-btn--ghost" data-cc-action="reject">Reject optional</button>' +
+            '<button type="button" class="btn cc-btn cc-btn--ghost" data-cc-action="accept">Accept all</button>' +
+            '<button type="button" class="btn cc-btn cc-btn--solid" data-cc-action="save">Save my choices</button>' +
+          '</div>' +
+        '</div>' +
+      '</div>';
+
+    document.body.appendChild(root);
+    wireUI();
+  }
+
+  function inputs() {
+    return root.querySelectorAll('[data-cc-input]');
+  }
+
+  function setToggles(values) {
+    Array.prototype.forEach.call(inputs(), function (input) {
+      input.checked = !!(values && values[input.getAttribute('data-cc-input')]);
+    });
+  }
+
+  function collectToggles() {
+    var out = {};
+    Array.prototype.forEach.call(inputs(), function (input) {
+      out[input.getAttribute('data-cc-input')] = input.checked;
+    });
+    return out;
+  }
+
+  function allOf(value) {
+    var out = {};
+    CATEGORIES.forEach(function (cat) { out[cat.id] = value; });
+    return out;
+  }
+
+  function finish(granted) {
+    var data = writeConsent(granted);
+    applyConsent(data);
+    closeBanner();
+    closeModal();
+  }
+
+  function showBanner() {
+    root.querySelector('.cc-banner').hidden = false;
+    root.removeAttribute('hidden');
+    root.classList.add('cc-root--banner');
+  }
+
+  function closeBanner() {
+    root.querySelector('.cc-banner').hidden = true;
+    root.classList.remove('cc-root--banner');
+    if (root.querySelector('.cc-modal').hidden) root.setAttribute('hidden', '');
+  }
+
+  function openModal() {
+    lastFocus = document.activeElement;
+    var saved = readConsent();
+    setToggles(saved ? saved.categories : allOf(false));
+    root.removeAttribute('hidden');
+    var modal = root.querySelector('.cc-modal');
+    modal.hidden = false;
+    root.classList.add('cc-root--modal');
+    var close = modal.querySelector('.cc-modal__close');
+    if (close) close.focus();
+    document.addEventListener('keydown', onModalKey);
+  }
+
+  function closeModal() {
+    var modal = root.querySelector('.cc-modal');
+    modal.hidden = true;
+    root.classList.remove('cc-root--modal');
+    document.removeEventListener('keydown', onModalKey);
+    if (root.querySelector('.cc-banner').hidden) root.setAttribute('hidden', '');
+    if (lastFocus && typeof lastFocus.focus === 'function') lastFocus.focus();
+    lastFocus = null;
+  }
+
+  function onModalKey(event) {
+    var modal = root.querySelector('.cc-modal');
+    if (modal.hidden) return;
+    if (event.key === 'Escape') {
+      event.preventDefault();
+      closeModal();
+      return;
+    }
+    if (event.key !== 'Tab') return;
+    var f = modal.querySelectorAll('a[href], button:not([disabled]), input:not([disabled])');
+    if (!f.length) return;
+    var first = f[0], last = f[f.length - 1];
+    if (event.shiftKey && document.activeElement === first) {
+      event.preventDefault(); last.focus();
+    } else if (!event.shiftKey && document.activeElement === last) {
+      event.preventDefault(); first.focus();
+    }
+  }
+
+  function wireUI() {
+    root.addEventListener('click', function (event) {
+      var trigger = event.target.closest('[data-cc-action]');
+      if (trigger) {
+        switch (trigger.getAttribute('data-cc-action')) {
+          case 'accept': finish(allOf(true)); break;
+          case 'reject': finish(allOf(false)); break;
+          case 'manage': openModal(); break;
+          case 'save':   finish(collectToggles()); break;
+          case 'close':  closeModal(); break;
+        }
+        return;
+      }
+      // Click on the modal backdrop closes it.
+      if (event.target.classList.contains('cc-modal')) closeModal();
+    });
+  }
+
+  /* ── public API ──────────────────────────────────────────── */
+  window.cookieConsent = {
+    get: function () { return readConsent(); },
+    has: function (cat) {
+      var c = readConsent();
+      return !!(c && c.categories[cat]);
+    },
+    openSettings: function () {
+      if (!root) buildUI();
+      openModal();
+    }
+  };
+
+  /* ── footer "Cookie Settings" triggers ───────────────────── */
+  document.addEventListener('click', function (event) {
+    var link = event.target.closest('[data-cc-settings]');
+    if (!link) return;
+    event.preventDefault();
+    window.cookieConsent.openSettings();
+  });
+
+  /* ── boot ────────────────────────────────────────────────── */
+  function init() {
+    buildUI();
+    var saved = readConsent();
+    if (saved) {
+      applyConsent(saved);   // honour a prior choice, unblock scripts
+    } else {
+      showBanner();          // first visit / policy changed
+    }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();

@@ -7,9 +7,9 @@
 
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&display=swap');
 
-/* ── PRIMITIVE TOKENS (Stokke Leap + site2) ─────────────── */
+/* ── PRIMITIVE TOKENS (site2) ─────────────── */
 :root {
-  /* Stokke brand */
+  /* Brand */
   --p-brand:        #b65c02;
   --p-brand-hover:  #a15202;
   --p-brand-active: #d36902;
@@ -748,7 +748,7 @@ p {
 /* Nav CTA - olive nav pill (btn--primary btn--sm) */
 .nav-cta { flex-shrink: 0; min-height: 36px; font-size: var(--text-sm); }
 
-/* Hamburger — Stokke 16px icon */
+/* Hamburger — 16px icon */
 .nav-toggle {
   display: none;
   align-items: center;

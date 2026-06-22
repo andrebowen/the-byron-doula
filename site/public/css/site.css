@@ -1,10 +1,10 @@
 /* ============================================================
    THE BYRON DOULA — site2
-   Mobile-first · Stokke-inspired editorial commerce layout
+   Mobile-first · Editorial commerce layout
    NOT the Byron Doula design system
    ============================================================ */
 
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=Jost:wght@300;400;500&display=swap');
 
 /* ── TOKENS (mobile base) ─────────────────────────────────── */
 :root {
@@ -15,16 +15,19 @@
   --ink-soft:   #3d3d3d;
   --ink-muted:  #767676;
 
-  /* Stokke brand accent */
+  /* Brand accent — Stokke orange */
   --brand:            #b65c02;
-  --brand-hover:      #a15202;
-  --brand-active:     #d36902;
-  --brand-light:      #fff1e4;
-  --brand-text:       #a15202;
-  --brand-text-hover: #884502;
+  --brand-hover:      #a45302;
+  --brand-active:     #c66402;
+  --brand-light:      #fef0e3;
+  --brand-text:       #a45302;
+  --brand-text-hover: #7d3e01;
   --brand-border:     #b65c02;
 
-  /* Surfaces (Stokke section bands) */
+  /* Nav accent */
+  --nav-accent:       #b65c02;
+
+  /* Surfaces (section bands) */
   --surface:        #ffffff;
   --surface-subtle: #f9f8f5;
   --surface-02:     #f2f0eb;
@@ -40,7 +43,7 @@
   --gap:        1.5rem;
   --gap-lg:     3rem;
 
-  /* Stokke radii scale */
+  /* Radii scale */
   --radius-2xs:  0.0625rem;
   --radius-xs:   0.25rem;
   --radius-sm:   0.25rem;
@@ -63,13 +66,13 @@
   --border-md: 2px;
   --border-lg: 4px;
 
-  --text-xs:    0.6875rem;
-  --text-sm:    0.8125rem;
-  --text-base:  1rem;
-  --text-md:    1.125rem;
-  --text-lg:    clamp(1.5rem, 5vw, 2rem);
-  --text-xl:    clamp(2.25rem, 9vw, 3.25rem);
-  --text-hero:  clamp(2.5rem, 11vw, 4rem);
+  --text-xs:    0.75rem;     /* +1px */
+  --text-sm:    0.875rem;    /* +1px */
+  --text-base:  1.0625rem;   /* +1px */
+  --text-md:    1.1875rem;   /* +1px */
+  --text-lg:    clamp(1.5625rem, 5vw, 2.0625rem);   /* +1px */
+  --text-xl:    clamp(2.3125rem, 9vw, 3.3125rem);   /* +1px */
+  --text-hero:  clamp(2.5625rem, 11vw, 4.0625rem);  /* +1px */
 
   --leading:    1.5;
   --leading-tight: 1.08;
@@ -153,7 +156,7 @@ select:focus-visible {
   font-weight: 500;
   letter-spacing: var(--tracking-label);
   text-transform: uppercase;
-  color: var(--brand-text);
+  color: var(--nav-accent);
 }
 
 .label--light { color: rgba(255, 255, 255, 0.78); }
@@ -296,26 +299,6 @@ select:focus-visible {
   color: var(--ink);
 }
 
-.site-header--overlay .site-header__toggle {
-  color: var(--ink);
-}
-
-/* Legacy overlay — same solid bar as default */
-.site-header--overlay {
-  background: transparent;
-}
-
-.site-header--overlay .site-header__logo,
-.site-header--overlay .site-header__links--desktop a {
-  color: var(--ink);
-}
-
-.site-header--overlay .site-header__cta {
-  border-color: var(--ink);
-  background: transparent;
-  color: var(--ink);
-}
-
 .site-header.scrolled .site-header__logo,
 .site-header.scrolled .site-header__links--desktop a,
 .site-header--solid .site-header__logo,
@@ -344,9 +327,10 @@ select:focus-visible {
   grid-column: 2;
   justify-self: center;
   text-align: center;
+  font-family: 'Jost', sans-serif;
   font-size: var(--text-base);
-  font-weight: 600;
-  letter-spacing: 0.08em;
+  font-weight: 400;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
   text-decoration: none;
   white-space: nowrap;
@@ -487,7 +471,7 @@ select:focus-visible {
 
 .menu-drawer__list a.active {
   font-weight: 500;
-  color: var(--brand-text);
+  color: var(--nav-accent);
 }
 
 .menu-drawer__chevron {
@@ -533,10 +517,9 @@ select:focus-visible {
   padding: 0;
 }
 
-.site-header__links--desktop a:hover,
-.site-header__links--desktop a.active {
-  color: var(--brand-text);
-  font-weight: 500;
+.site-header .site-header__links--desktop a:hover,
+.site-header .site-header__links--desktop a.active {
+  color: var(--nav-accent);
 }
 
 body.nav-open { overflow: hidden; }
@@ -548,10 +531,6 @@ body.nav-open { overflow: hidden; }
 .site-header.nav-open .site-header__bar {
   background: var(--surface);
   border-bottom-color: var(--menu-line);
-}
-
-.site-header.nav-open.site-header--overlay {
-  background: transparent;
 }
 
 .site-header.nav-open .site-header__logo {
@@ -578,15 +557,8 @@ body.nav-open { overflow: hidden; }
     z-index: 201;
   }
 
-  .page-home .site-header:not(.scrolled):not(.nav-open) .site-header__bar {
-    background: transparent;
-    border-bottom-color: transparent;
-  }
-
-  .page-home .site-header:not(.scrolled):not(.nav-open) .site-header__logo,
-  .page-home .site-header:not(.scrolled):not(.nav-open) .site-header__toggle {
-    color: #fff;
-  }
+  /* Homepage mobile header is solid white like secondary pages
+     (previously transparent with white logo/toggle over the hero). */
 }
 
 /* ── HERO (full bleed · corner type) — homepage only ─────── */
@@ -712,7 +684,7 @@ body.nav-open { overflow: hidden; }
 
 .stats__stars { letter-spacing: 0.05em; color: inherit; }
 
-/* ── EDITORIAL BLOCKS (Stokke article pattern) ────────────── */
+/* ── EDITORIAL BLOCKS (article pattern) ────────────── */
 .editorial {
   display: flex;
   flex-direction: column;
@@ -752,6 +724,11 @@ body.nav-open { overflow: hidden; }
   margin-bottom: 1.25rem;
 }
 
+.editorial__body p.label {
+  color: var(--nav-accent);
+  margin-bottom: var(--gap);
+}
+
 .editorial__list {
   display: flex;
   flex-direction: column;
@@ -774,7 +751,7 @@ body.nav-open { overflow: hidden; }
   align-items: center;
 }
 
-/* ── CAROUSEL (Stokke product card pattern) ───────────────── */
+/* ── CAROUSEL (product card pattern) ───────────────── */
 .carousel-section {
   padding: var(--gap-lg) 0;
   background: var(--surface-02);
@@ -1331,43 +1308,8 @@ body.nav-open { overflow: hidden; }
     border-bottom: 1px solid var(--line);
   }
 
-  .page-home .site-header:not(.scrolled) {
-    background: transparent;
-    border-bottom-color: transparent;
-  }
-
-  .page-home .site-header:not(.scrolled) .site-header__logo,
-  .page-home .site-header:not(.scrolled) .site-header__links--desktop a {
-    color: #fff;
-  }
-
-  .page-home .site-header:not(.scrolled) .site-header__cta {
-    border-color: rgba(255, 255, 255, 0.55);
-    background: transparent;
-    color: #fff;
-  }
-
-  .page-home .site-header:not(.scrolled) .site-header__cta:hover {
-    background: #fff;
-    border-color: #fff;
-    color: var(--ink);
-  }
-
-  .page-home .site-header.scrolled {
-    background: var(--surface);
-    border-bottom-color: var(--line);
-  }
-
-  .page-home .site-header.scrolled .site-header__logo,
-  .page-home .site-header.scrolled .site-header__links--desktop a {
-    color: var(--ink);
-  }
-
-  .page-home .site-header.scrolled .site-header__cta {
-    border-color: var(--ink);
-    background: transparent;
-    color: var(--ink);
-  }
+  /* Homepage uses the same solid white header as secondary pages —
+     the default .site-header / .scrolled / --solid rules cover every state. */
 
   .site-header__bar {
     display: contents;
@@ -1421,26 +1363,8 @@ body.nav-open { overflow: hidden; }
     pointer-events: auto;
   }
 
-  .site-header--overlay .site-header__links--desktop a {
-    font-size: var(--text-sm);
-    color: var(--ink-soft);
-  }
-
-  .site-header--overlay .site-header__links--desktop a.active {
-    color: var(--brand-text);
-  }
-
-  .site-header .site-header__links--desktop a:hover,
-  .site-header .site-header__links--desktop a.active {
-    color: var(--brand-text);
-  }
-
-  .site-header.scrolled .site-header__links--desktop a:hover,
-  .site-header.scrolled .site-header__links--desktop a.active,
-  .site-header--solid .site-header__links--desktop a:hover,
-  .site-header--solid .site-header__links--desktop a.active {
-    color: var(--brand-text);
-  }
+  /* Nav hover/active colour is handled once by the base rule (--nav-accent);
+     no desktop-specific override needed. */
 
   .hero--br .hero__stage {
     align-items: flex-end;
@@ -1611,7 +1535,7 @@ body.page-inner {
   font-weight: 500;
   letter-spacing: var(--tracking-label);
   text-transform: uppercase;
-  color: var(--brand-text);
+  color: var(--nav-accent);
   margin-bottom: 0.75rem;
 }
 
@@ -1688,7 +1612,6 @@ body.page-inner {
 .page-inner .sec-head h2,
 .page-inner .page-hero h1,
 .page-inner .hero h1,
-.page-inner .hero h1.type-xl,
 .page-inner .db-right h4,
 .page-inner .service-detail-intro h2,
 .page-inner .cta-band h2,
