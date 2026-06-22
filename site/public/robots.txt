@@ -2,22 +2,32 @@ User-agent: *
 Allow: /
 
 # AI crawlers — explicitly welcome
+
+# Anthropic (Claude)
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-User
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+# OpenAI (ChatGPT)
 User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
 Allow: /
 
 User-agent: ChatGPT-User
 Allow: /
 
-User-agent: Claude-Web
-Allow: /
-
-User-agent: anthropic-ai
-Allow: /
-
+# Others
 User-agent: PerplexityBot
 Allow: /
 
-User-agent: Googlebot-Extended
+User-agent: Google-Extended
 Allow: /
 
 User-agent: cohere-ai
