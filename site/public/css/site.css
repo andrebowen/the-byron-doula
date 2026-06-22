@@ -1157,7 +1157,7 @@ body.nav-open { overflow: hidden; }
 }
 
 .contact__trust li::before {
-  content: '—';
+  content: '\2022';
   margin-right: 0.5em;
 }
 
