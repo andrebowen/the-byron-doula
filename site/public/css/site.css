@@ -2495,12 +2495,11 @@ body.page-inner {
 
 .cc-banner {
   position: fixed;
-  left: 1rem;
   right: 1rem;
   bottom: 1rem;
+  left: 1rem;
   z-index: 1000;
-  max-width: 30rem;
-  margin-inline: auto;
+  max-width: 26rem;
   background: var(--surface);
   border: var(--border-sm) solid var(--line);
   border-radius: var(--card-radius);
@@ -2704,6 +2703,6 @@ body.page-inner {
 }
 
 @media (min-width: 768px) {
-  .cc-banner { padding: 1.5rem; }
+  .cc-banner { padding: 1.5rem; left: auto; }
   .cc-btn { flex: 0 1 auto; }
 }
